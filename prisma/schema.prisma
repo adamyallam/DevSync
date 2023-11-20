@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id       Int       @id @default(autoincrement())
+  sections Section[]
+  members  User[]
+  tasks    Task[]
+
+  projectName        String    @db.VarChar(60)
+  projectDescription String?   @db.VarChar(300)
+  status             Status    @default(NOTSTARTED)
+  dueDate            DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  projects Project[]
+  tasks    Task[]
+
+  firstName String   @db.VarChar(40)
+  lastName  String   @db.VarChar(40)
+  username  String   @unique @db.VarChar(20)
+  email     String   @unique
+  password  String
+  role      Role?    @default(DEVELOPER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  projectID Int
+  sectionID Int
+  project   Project  @relation(fields: [projectID], references: [id])
+  section   Section? @relation(fields: [sectionID], references: [id])
+  users     User[]
+
+  name        String    @db.VarChar(60)
+  description String?   @db.VarChar(300)
+  comments    String?   @db.VarChar(300)
+  status      Status?   @default(NOTSTARTED)
+  dueDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Section {
+  id        Int     @id @default(autoincrement())
+  sectionID Int
+  project   Project @relation(fields: [sectionID], references: [id])
+  tasks     Task[]
+
+  name        String   @db.VarChar(60)
+  description String?  @db.VarChar(300)
+  status      Status?  @default(NOTSTARTED)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Role {
+  DEVELOPER
+  MODERATOR
+  ADMIN
+  OWNER
+}
+
+enum Status {
+  NOTSTARTED
+  INPROGRESS
+  COMPLETE
+}
