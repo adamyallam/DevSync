@@ -7,26 +7,24 @@ const prisma = new PrismaClient()
 // task 
 // section
 
-async function main() {
-    // const user = await prisma.user.create({
-    //     data: {
-    //       firstName: 'testFirst',
-    //       lastName: 'testLast',
-    //       username: 'testername',
-    //       email: 'test@sample.com',
-    //       password: 'faketestpassword'
-    //     },
-    //   })
-    //   console.log(user)
-    //   await prisma.user.deleteMany();
+
+
+// method for creating a user when someone signs-up
+export default async function createUser(userData: object) {
+    const user = await prisma.user.create({
+        data: userData
+      })
+      console.log(user)
+      await prisma.user.deleteMany();
+      await prisma.$disconnect()
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+// method for deleting a user when going to 'delete user' page
+// export async function deleteUser() {
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       id: 1 //get users id
+//     }
+//   })
+
+// }
