@@ -9,22 +9,23 @@ const prisma = new PrismaClient()
 
 
 
-// method for creating a user when someone signs-up
-export default async function createUser(userData: object) {
+// method for creating a user
+export async function createUser(userData: object) {
     const user = await prisma.user.create({
         data: userData
       })
       console.log(user)
-      await prisma.user.deleteMany();
+      // await prisma.user.deleteMany();
       await prisma.$disconnect()
 }
 
 // method for deleting a user when going to 'delete user' page
-// export async function deleteUser() {
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id: 1 //get users id
-//     }
-//   })
+export async function deleteUser(userId: object) {
+  const user = await prisma.user.delete({
+    where: userId
+  })
+  console.log(user)
+  await prisma.$disconnect()
+}
 
-// }
+export default {createUser, deleteUser};
