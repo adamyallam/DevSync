@@ -19,7 +19,7 @@ export async function createUser(userData: object) {
       await prisma.$disconnect()
 }
 
-// method for deleting a user when going to 'delete user' page
+// method for deleting a user
 export async function deleteUser(userId: object) {
   const user = await prisma.user.delete({
     where: userId

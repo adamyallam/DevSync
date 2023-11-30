@@ -19,11 +19,12 @@ export const POST = async (req: Request) => {
     }
 }
 
-export const DELETE = async (req: Request) => { //sending delete request invokes post method
+
+export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
     
     try {
-        let userId = { id } //provides propper output but incorrect syntax ... gives: {id: "int"}, needs to be {id: int}
+        let userId = { id }
         deleteUser(userId)
         return NextResponse.json(
             { message: `user ${id} Deleted!` },
