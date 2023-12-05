@@ -8,6 +8,7 @@ const prisma = new PrismaClient()
 // section
 
 
+//All User related methods
 
 // method for creating a user
 export async function createUser(userData: object) {
@@ -21,11 +22,25 @@ export async function createUser(userData: object) {
 
 // method for deleting a user
 export async function deleteUser(userId: object) {
-  const user = await prisma.user.delete({
+  const deletedUser = await prisma.user.delete({
     where: userId
   })
-  console.log(user)
+  console.log(deletedUser)
   await prisma.$disconnect()
 }
 
-export default {createUser, deleteUser};
+//method for updating a user
+export async function updateUser(userId: object, updatedInfo: object) {
+  const updatedUser = await prisma.user.update({
+    where: userId,
+    data: updatedInfo
+  })
+  console.log(updatedUser)
+  await prisma.$disconnect()
+}
+
+//method for reading a user
+// to be implemented
+
+
+export default {createUser, deleteUser, updateUser, /* readUser*/};
