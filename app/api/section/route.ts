@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server"
-import { createUser, deleteUser, updateUser, /* readUser */} from "../../../db-connections/user"
+import { createSection, deleteSection, updateSection, /* readsection */} from "../../../db-connections/section"
 
 
-//API to add or "POST" a user (invokes "createUser")
+//API to add or "POST" a section (invokes "createsection")
 export const POST = async (req: Request) => {
-    const { firstName, lastName, username, email, password } = await req.json();
+    const { name, description } = await req.json();
     
     try {
-        const userData = { firstName, lastName, username, email, password}
-        createUser(userData)
+        const sectionData = { name, description }
+        createSection(sectionData)
         return NextResponse.json(
-            { message: 'New user created!' },
+            { message: 'New section created!' },
             { status: 201 }
         )
     } catch (err) {
@@ -21,15 +21,15 @@ export const POST = async (req: Request) => {
     }
 }
 
-//API to DELETE a user (invokes "deleteUser")
+//API to DELETE a section (invokes "deletesection")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
     
     try {
-        const userId = { id }
-        deleteUser(userId)
+        const sectionId = { id }
+        deleteSection(sectionId)
         return NextResponse.json(
-            { message: `user ${id} Deleted!` },
+            { message: `section ${id} Deleted!` },
             { status: 201 }
         )
     } catch (err) {
@@ -40,16 +40,16 @@ export const DELETE = async (req: Request) => {
     }
 }
 
-//API to UPDATE a user (invokes "updateUser")
+//API to UPDATE a section (invokes "updatesection")
 export const PATCH = async (req: Request) => { 
-    const { id, firstName, lastName, username, email, password } = await req.json();
+    const { id, name, description  } = await req.json();
     
     try {
-        const userId = { id }
-        const updatedInfo = { firstName, lastName, username, email, password }
-        updateUser(userId, updatedInfo)
+        const sectionId = { id }
+        const updatedInfo = { name, description  }
+        updateSection(sectionId, updatedInfo)
         return NextResponse.json(
-            { message: `user ${id} updated!` },
+            { message: `section ${id} updated!` },
             { status: 201 }
         )
     } catch (err) {
@@ -60,5 +60,5 @@ export const PATCH = async (req: Request) => {
     }
 }
 
-//API to READ a user (invokes "readUser")
+//API to READ a section (invokes "readsection")
 // TO BE CREATED

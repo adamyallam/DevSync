@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server"
-import { createUser, deleteUser, updateUser, /* readUser */} from "../../../db-connections/user"
+import { createTask, deleteTask, updateTask /* readtask */} from "../../../db-connections/task"
 
-
-//API to add or "POST" a user (invokes "createUser")
+//API to add or "POST" a task (invokes "createtask")
 export const POST = async (req: Request) => {
-    const { firstName, lastName, username, email, password } = await req.json();
+    const { name, description, comments } = await req.json();
     
     try {
-        const userData = { firstName, lastName, username, email, password}
-        createUser(userData)
+        const taskData = { name, description, comments}
+        createTask(taskData)
         return NextResponse.json(
-            { message: 'New user created!' },
+            { message: 'New task created!' },
             { status: 201 }
         )
     } catch (err) {
@@ -21,15 +20,15 @@ export const POST = async (req: Request) => {
     }
 }
 
-//API to DELETE a user (invokes "deleteUser")
+//API to DELETE a task (invokes "deletetask")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
     
     try {
-        const userId = { id }
-        deleteUser(userId)
+        const taskId = { id }
+        deleteTask(taskId)
         return NextResponse.json(
-            { message: `user ${id} Deleted!` },
+            { message: `task ${id} Deleted!` },
             { status: 201 }
         )
     } catch (err) {
@@ -40,16 +39,16 @@ export const DELETE = async (req: Request) => {
     }
 }
 
-//API to UPDATE a user (invokes "updateUser")
+//API to UPDATE a task (invokes "updatetask")
 export const PATCH = async (req: Request) => { 
-    const { id, firstName, lastName, username, email, password } = await req.json();
+    const { id, name, description} = await req.json();
     
     try {
-        const userId = { id }
-        const updatedInfo = { firstName, lastName, username, email, password }
-        updateUser(userId, updatedInfo)
+        const taskId = { id }
+        const updatedInfo = {  name, description }
+        updateTask(taskId, updatedInfo)
         return NextResponse.json(
-            { message: `user ${id} updated!` },
+            { message: `task ${id} updated!` },
             { status: 201 }
         )
     } catch (err) {
@@ -60,5 +59,5 @@ export const PATCH = async (req: Request) => {
     }
 }
 
-//API to READ a user (invokes "readUser")
+//API to READ a task (invokes "readtask")
 // TO BE CREATED

@@ -21,4 +21,18 @@ export async function createProject(projectData: object) {
     await prisma.$disconnect()
   }
 
-  export default {createProject, deleteProject};
+
+//method for updating a project
+export async function updateProject(projectId: object, updatedInfo: object) {
+  const updatedProject = await prisma.project.update({
+    where: projectId,
+    data: updatedInfo
+  })
+  console.log(updatedProject)
+  await prisma.$disconnect()
+}
+
+//API to READ a task (invokes "readTask")
+// TO BE CREATED
+
+  export default {createProject, deleteProject, updateProject /** readTask */};
