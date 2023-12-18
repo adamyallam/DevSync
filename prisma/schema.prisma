@@ -16,18 +16,19 @@ model Project {
   members  User[]
   tasks    Task[]
 
-  projectName        String    @db.VarChar(60)
-  projectDescription String?   @db.VarChar(300)
-  status             Status    @default(NOTSTARTED)
-  dueDate            DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  name        String    @db.VarChar(60)
+  description String    @db.VarChar(300)
+  status      Status?    @default(NOTSTARTED)
+  dueDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model User {
   id       Int       @id @default(autoincrement())
   projects Project[]
   tasks    Task[]
+  comments Comment[]
 
   firstName String   @db.VarChar(40)
   lastName  String   @db.VarChar(40)
@@ -40,12 +41,13 @@ model User {
 }
 
 model Task {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   projectID Int
-  sectionID Int
-  project   Project  @relation(fields: [projectID], references: [id])
-  section   Section? @relation(fields: [sectionID], references: [id])
+  sectionID Int?
+  project   Project   @relation(fields: [projectID], references: [id])
+  section   Section?  @relation(fields: [sectionID], references: [id])
   users     User[]
+  Comments  Comment[]
 
   name        String    @db.VarChar(60)
   description String?   @db.VarChar(300)
@@ -57,7 +59,7 @@ model Task {
 }
 
 model Section {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   projectID Int
   project   Project @relation(fields: [projectID], references: [id])
   tasks     Task[]
@@ -65,8 +67,21 @@ model Section {
   name        String   @db.VarChar(60)
   description String?  @db.VarChar(300)
   status      Status?  @default(NOTSTARTED)
+  dueDate     DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Comment {
+  id     Int  @id @default(autoincrement())
+  task   Task @relation(fields: [taskId], references: [id])
+  taskId Int
+  author User @relation(fields: [userId], references: [id])
+  userId Int
+
+  title       String
+  description String
+  postedAt    DateTime @default(now())
 }
 
 enum Role {

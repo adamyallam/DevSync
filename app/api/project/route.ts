@@ -1,14 +1,13 @@
-import { NextResponse } from "next/server"
-import { createProject, deleteProject, updateProject } from "../../../db-connections/project"
+import { NextRequest, NextResponse } from "next/server"
+import { createProject, deleteProject, updateProject, readProject, readAllProjects} from "../../../db-connections/project"
 
 
-// TO BE FINISHED LATER (How to connect it to a many-to-many relationship)
 //API to add or "POST" a project (invokes "createProject")
 export const POST = async (req: Request) => {
-    const { projectName, projectDescription /* dueDate */} = await req.json();
+    const { name, description, dueDate} = await req.json();
     
     try {
-        const projectData = { projectName, projectDescription /* dueDate */}
+        const projectData = { name, description, dueDate}
         createProject(projectData)
         return NextResponse.json(
             { message: 'New project created!' },
@@ -43,11 +42,11 @@ export const DELETE = async (req: Request) => {
 
 //API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => { 
-    const { id, projectName, projectDescription } = await req.json();
+    const { id, name, description } = await req.json();
     
     try {
         const projectId = { id }
-        const updatedInfo = { projectName, projectDescription }
+        const updatedInfo = { name, description }
         updateProject(projectId, updatedInfo)
         return NextResponse.json(
             { message: `project ${id} updated!` },
@@ -62,7 +61,39 @@ export const PATCH = async (req: Request) => {
 }
 
 
+//API to READ a project (invokes "readProject")
+export const GET = async (req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
+    const id = parseInt(searchParams.get('id') ?? '-1')
 
+    if(id !== -1){    
+        try {
+            readProject(id)
+            return NextResponse.json(
+                { message: `project READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    } else {
+        try {
+            readAllProjects()
+            return NextResponse.json(
+                { message: `all projects READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    }
+}
 
 
 

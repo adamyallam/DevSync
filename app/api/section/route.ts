@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server"
-import { createSection, deleteSection, updateSection, /* readsection */} from "../../../db-connections/section"
+import { NextRequest, NextResponse } from "next/server"
+import { createSection, deleteSection, updateSection, readSection, readAllSections} from "../../../db-connections/section"
 
 
 //API to add or "POST" a section (invokes "createsection")
 export const POST = async (req: Request) => {
-    const { name, description } = await req.json();
+    const { projectID, name, description, dueDate } = await req.json();
     
     try {
-        const sectionData = { name, description }
+        const sectionData = { projectID, name, description, dueDate}
         createSection(sectionData)
         return NextResponse.json(
             { message: 'New section created!' },
@@ -61,4 +61,35 @@ export const PATCH = async (req: Request) => {
 }
 
 //API to READ a section (invokes "readsection")
-// TO BE CREATED
+export const GET = async (req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
+    const id = parseInt(searchParams.get('id') ?? '-1')
+
+    if(id !== -1){    
+        try {
+            readSection(id)
+            return NextResponse.json(
+                { message: `section READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    } else {
+        try {
+            readAllSections()
+            return NextResponse.json(
+                { message: `all sections READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    }
+}

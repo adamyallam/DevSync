@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server"
-import { createTask, deleteTask, updateTask /* readtask */} from "../../../db-connections/task"
+import { NextRequest, NextResponse } from "next/server"
+import { createTask, deleteTask, updateTask, readTask, readAllTasks} from "../../../db-connections/task"
 
 //API to add or "POST" a task (invokes "createtask")
 export const POST = async (req: Request) => {
-    const { name, description, comments } = await req.json();
+    const { projectID, sectionID, name, description, comments, dueDate} = await req.json();
     
     try {
-        const taskData = { name, description, comments}
+        const taskData = { projectID, sectionID, name, description, comments, dueDate}
         createTask(taskData)
         return NextResponse.json(
             { message: 'New task created!' },
@@ -60,4 +60,35 @@ export const PATCH = async (req: Request) => {
 }
 
 //API to READ a task (invokes "readtask")
-// TO BE CREATED
+export const GET = async (req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
+    const id = parseInt(searchParams.get('id') ?? '-1')
+
+    if(id !== -1){    
+        try {
+            readTask(id)
+            return NextResponse.json(
+                { message: `task READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    } else {
+        try {
+            readAllTasks()
+            return NextResponse.json(
+                { message: `all users READ!` },
+                { status: 201 }
+            )
+            } catch (err) {
+            return NextResponse.json(
+                { message: 'Failed to READ', err}, 
+                { status: 500 }
+            )
+        }
+    }
+}

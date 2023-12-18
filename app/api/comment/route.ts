@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db-connections/user"
+import { createComment, deleteComment, updateComment, readComment, readAllComments } from "../../../db-connections/comment"
 
-
-//API to add or "POST" a user (invokes "createUser")
-export const POST = async (req: NextRequest) => {
-    const { firstName, lastName, username, email, password } = await req.json();
+//API to add or "POST" a project (invokes "createProject")
+export const POST = async (req: Request) => {
+    const { taskId, userId, title, description} = await req.json();
     
     try {
-        const userData = { firstName, lastName, username, email, password}
-        createUser(userData)
+        const commentData = { taskId, userId, title, description}
+        createComment(commentData)
         return NextResponse.json(
-            { message: 'New user created!' },
+            { message: 'New project created!' },
             { status: 201 }
         )
     } catch (err) {
@@ -21,15 +20,15 @@ export const POST = async (req: NextRequest) => {
     }
 }
 
-//API to DELETE a user (invokes "deleteUser")
+//API to DELETE a project (invokes "deleteProject")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
-
+    
     try {
-        const userId = {id}
-        deleteUser(userId)
+        const commentId = { id }
+        deleteComment(commentId)
         return NextResponse.json(
-            { message: `user ${id} Deleted!` },
+            { message: `comment ${id} Deleted!` },
             { status: 201 }
         )
     } catch (err) {
@@ -40,16 +39,16 @@ export const DELETE = async (req: Request) => {
     }
 }
 
-//API to UPDATE a user (invokes "updateUser")
+//API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => { 
-    const { id, firstName, lastName, username, email, password } = await req.json();
+    const { id, title, description} = await req.json();
     
     try {
-        const userId = { id }
-        const updatedInfo = { firstName, lastName, username, email, password }
-        updateUser(userId, updatedInfo)
+        const commentId = { id }
+        const updatedInfo = { title, description }
+        updateComment(commentId, updatedInfo)
         return NextResponse.json(
-            { message: `user ${id} updated!` },
+            { message: `comment ${id} updated!` },
             { status: 201 }
         )
     } catch (err) {
@@ -60,16 +59,16 @@ export const PATCH = async (req: Request) => {
     }
 }
 
-//API to READ a user (invokes "readUser")
+//API to READ a comment (invokes "readComment")
 export const GET = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams
     const id = parseInt(searchParams.get('id') ?? '-1')
 
     if(id !== -1){    
         try {
-            readUser(id)
+            readComment(id)
             return NextResponse.json(
-                { message: `user READ!` },
+                { message: `comment READ!` },
                 { status: 201 }
             )
             } catch (err) {
@@ -80,9 +79,9 @@ export const GET = async (req: NextRequest) => {
         }
     } else {
         try {
-            readAllUsers()
+            readAllComments()
             return NextResponse.json(
-                { message: `all users READ!` },
+                { message: `all comments READ!` },
                 { status: 201 }
             )
             } catch (err) {
@@ -93,14 +92,3 @@ export const GET = async (req: NextRequest) => {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
