@@ -1,0 +1,30 @@
+// import { useRouter } from 'next/navigation'
+import { authOptions } from '../api/auth/[...nextauth]/route'
+import {getServerSession} from 'next-auth'
+
+export default async function dashboard(){
+  const session = await getServerSession(authOptions)
+  // const router = useRouter()
+
+  if (session) {
+    return (
+      <div>
+        <h1>Your Dashboard</h1>
+        <h2>Welcome, {session.user.firstName}</h2>
+        <a href='http://localhost:3000/'> 
+          <button type="button">Home</button> 
+        </a>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <h1>Please signin before accessing your Dashboard</h1>
+      <a href='http://localhost:3000/'> 
+          <button type="button">Home</button> 
+      </a>
+    </div>
+  )
+
+}

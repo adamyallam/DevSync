@@ -1,0 +1,13 @@
+"user client"
+import { useSearchParams } from 'next/navigation'
+
+export default function userDetails(){
+    const searchParams = useSearchParams()
+    const userid = searchParams.get('id')
+    return (
+      <div>
+        <h1>User id: {userid}</h1>
+      </div>
+    )
+  }
+  

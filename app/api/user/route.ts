@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db-connections/user"
-
+import { hash } from 'bcrypt'
 
 //API to add or "POST" a user (invokes "createUser")
 export const POST = async (req: NextRequest) => {
     const { firstName, lastName, username, email, password } = await req.json();
+    const hashedPassword = await hash(password, 10)
     
     try {
-        const userData = { firstName, lastName, username, email, password}
+        const userData = { firstName, lastName, username, email, password: hashedPassword}
+
         createUser(userData)
         return NextResponse.json(
             { message: 'New user created!' },
