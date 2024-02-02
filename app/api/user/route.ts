@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db-connections/user"
+import { db, createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db-connections/user"
 import { hash } from 'bcrypt'
 
 //API to add or "POST" a user (invokes "createUser")
@@ -9,6 +9,31 @@ export const POST = async (req: NextRequest) => {
     
     try {
         const userData = { firstName, lastName, username, email, password: hashedPassword}
+
+        // check if email already exists
+        const existingEmail = await db.user.findUnique({
+            where: {
+                email: email
+            }
+        })
+        if (existingEmail) {
+            return NextResponse.json(
+                {message: 'User with that email already exists!'},
+                {status: 409}
+            )
+        }
+        // check if username already exists
+        const existingUsername = await db.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        if (existingUsername) {
+            return NextResponse.json(
+                {message: 'User with that username already exists!'},
+                {status: 409}
+            )
+        }
 
         createUser(userData)
         return NextResponse.json(
@@ -26,7 +51,7 @@ export const POST = async (req: NextRequest) => {
 //API to DELETE a user (invokes "deleteUser")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
-
+ 
     try {
         const userId = {id}
         deleteUser(userId)
@@ -49,6 +74,32 @@ export const PATCH = async (req: Request) => {
     try {
         const userId = { id }
         const updatedInfo = { firstName, lastName, username, email, password }
+
+        // check if email already exists
+        const existingEmail = await db.user.findUnique({
+            where: {
+                email: email
+            }
+        })
+        if (existingEmail) {
+            return NextResponse.json(
+                {message: 'User with that email already exists!'},
+                {status: 409}
+            )
+        }
+        // check if username already exists
+        const existingUsername = await db.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        if (existingUsername) {
+            return NextResponse.json(
+                {message: 'User with that username already exists!'},
+                {status: 409}
+            )
+        }
+
         updateUser(userId, updatedInfo)
         return NextResponse.json(
             { message: `user ${id} updated!` },

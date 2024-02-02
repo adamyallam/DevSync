@@ -11,7 +11,7 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt'
   },
   pages: {
-    signIn: '/api/user/signin',
+    signIn: '/api/registration/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
