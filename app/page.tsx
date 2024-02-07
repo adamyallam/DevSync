@@ -7,8 +7,8 @@ export default async function HomePage(){
   return (
     <div>
       <h1>Home Page</h1>
-      <button type="button" onClick={() => router.push('/api/user/signin')}>Signin</button>
-      <button type="button" onClick={() => router.push('/api/user/signup')}>Signup</button>
+      <button type="button" onClick={() => router.push('/api/registration/signin')}>Signin</button>
+      <button type="button" onClick={() => router.push('/api/registration/signup')}>Signup</button>
       <button type="button" onClick={() => router.push('/dashboard')}>Dashboard</button>
     </div>
   )

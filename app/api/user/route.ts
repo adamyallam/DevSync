@@ -1,45 +1,51 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db, createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db-connections/user"
 import { hash } from 'bcrypt'
+import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth'
 
 //API to add or "POST" a user (invokes "createUser")
 export const POST = async (req: NextRequest) => {
+    const session = await getServerSession(authOptions)
+
     const { firstName, lastName, username, email, password } = await req.json();
     const hashedPassword = await hash(password, 10)
     
     try {
-        const userData = { firstName, lastName, username, email, password: hashedPassword}
+        if (!session) {
+            const userData = { firstName, lastName, username, email, password: hashedPassword}
 
-        // check if email already exists
-        const existingEmail = await db.user.findUnique({
-            where: {
-                email: email
+            // check if email already exists
+            const existingEmail = await db.user.findUnique({
+                where: {
+                    email: email
+                }
+            })
+            if (existingEmail) {
+                return NextResponse.json(
+                    {message: 'User with that email already exists!'},
+                    {status: 409}
+                )
             }
-        })
-        if (existingEmail) {
+            // check if username already exists
+            const existingUsername = await db.user.findUnique({
+                where: {
+                    username: username
+                }
+            })
+            if (existingUsername) {
+                return NextResponse.json(
+                    {message: 'User with that username already exists!'},
+                    {status: 409}
+                )
+            }
+
+            createUser(userData)
             return NextResponse.json(
-                {message: 'User with that email already exists!'},
-                {status: 409}
+                { message: 'New user created!' },
+                { status: 201 }
             )
         }
-        // check if username already exists
-        const existingUsername = await db.user.findUnique({
-            where: {
-                username: username
-            }
-        })
-        if (existingUsername) {
-            return NextResponse.json(
-                {message: 'User with that username already exists!'},
-                {status: 409}
-            )
-        }
-
-        createUser(userData)
-        return NextResponse.json(
-            { message: 'New user created!' },
-            { status: 201 }
-        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Failed to POST', err}, 
@@ -51,14 +57,18 @@ export const POST = async (req: NextRequest) => {
 //API to DELETE a user (invokes "deleteUser")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
+
+    const session = await getServerSession(authOptions)
  
     try {
         const userId = {id}
-        deleteUser(userId)
-        return NextResponse.json(
-            { message: `user ${id} Deleted!` },
-            { status: 201 }
-        )
+        if (session?.user.id === userId.toString()) { 
+            deleteUser(userId)
+            return NextResponse.json(
+                { message: `user ${id} Deleted!` },
+                { status: 201 }
+            )
+        }
     } catch (err) {
         return NextResponse.json(
             { message: 'Failed to DELETE', err}, 
@@ -70,41 +80,44 @@ export const DELETE = async (req: Request) => {
 //API to UPDATE a user (invokes "updateUser")
 export const PATCH = async (req: Request) => { 
     const { id, firstName, lastName, username, email, password } = await req.json();
-    
+    const session = await getServerSession(authOptions)
+
     try {
-        const userId = { id }
-        const updatedInfo = { firstName, lastName, username, email, password }
+        if (session) {
+            const userId = { id }
+            const updatedInfo = { firstName, lastName, username, email, password }
 
-        // check if email already exists
-        const existingEmail = await db.user.findUnique({
-            where: {
-                email: email
+            // check if email already exists
+            const existingEmail = await db.user.findUnique({
+                where: {
+                    email: email
+                }
+            })
+            if (existingEmail) {
+                return NextResponse.json(
+                    {message: 'User with that email already exists!'},
+                    {status: 409}
+                )
             }
-        })
-        if (existingEmail) {
+            // check if username already exists
+            const existingUsername = await db.user.findUnique({
+                where: {
+                    username: username
+                }
+            })
+            if (existingUsername) {
+                return NextResponse.json(
+                    {message: 'User with that username already exists!'},
+                    {status: 409}
+                )
+            }
+
+            updateUser(userId, updatedInfo)
             return NextResponse.json(
-                {message: 'User with that email already exists!'},
-                {status: 409}
+                { message: `user ${id} updated!` },
+                { status: 201 }
             )
         }
-        // check if username already exists
-        const existingUsername = await db.user.findUnique({
-            where: {
-                username: username
-            }
-        })
-        if (existingUsername) {
-            return NextResponse.json(
-                {message: 'User with that username already exists!'},
-                {status: 409}
-            )
-        }
-
-        updateUser(userId, updatedInfo)
-        return NextResponse.json(
-            { message: `user ${id} updated!` },
-            { status: 201 }
-        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Failed to UPDATE', err}, 
