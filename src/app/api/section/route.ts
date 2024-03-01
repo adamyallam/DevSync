@@ -1,19 +1,21 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createComment, deleteComment, updateComment, readComment, readAllComments } from "../../../db-connections/comment"
+import { createSection, deleteSection, updateSection, readSection, readAllSections} from "../../../db/db-connections/section"
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 
-//API to add or "POST" a project (invokes "createProject")
+
+//API to add or "POST" a section (invokes "createsection")
 export const POST = async (req: Request) => {
-    const { taskId, userId, title, description} = await req.json();
+    const { projectID, name, description, dueDate } = await req.json();
     const session = await getServerSession(authOptions)
     
+
     try {
         if (session) {
-            const commentData = { taskId, userId, title, description}
-            createComment(commentData)
+            const sectionData = { projectID, name, description, dueDate}
+            createSection(sectionData)
             return NextResponse.json(
-                { message: 'New project created!' },
+                { message: 'New section created!' },
                 { status: 201 }
             )
         }
@@ -25,17 +27,17 @@ export const POST = async (req: Request) => {
     }
 }
 
-//API to DELETE a project (invokes "deleteProject")
+//API to DELETE a section (invokes "deletesection")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
     const session = await getServerSession(authOptions)
-    
+
     try {
         if (session) {
-            const commentId = { id }
-            deleteComment(commentId)
+            const sectionId = { id }
+            deleteSection(sectionId)
             return NextResponse.json(
-                { message: `comment ${id} Deleted!` },
+                { message: `section ${id} Deleted!` },
                 { status: 201 }
             )
         }
@@ -47,18 +49,18 @@ export const DELETE = async (req: Request) => {
     }
 }
 
-//API to UPDATE a project (invokes "updateProject")
+//API to UPDATE a section (invokes "updatesection")
 export const PATCH = async (req: Request) => { 
-    const { id, title, description} = await req.json();
+    const { id, name, description  } = await req.json();
     const session = await getServerSession(authOptions)
-
+    
     try {
         if (session) {
-            const commentId = { id }
-            const updatedInfo = { title, description }
-            updateComment(commentId, updatedInfo)
+            const sectionId = { id }
+            const updatedInfo = { name, description  }
+            updateSection(sectionId, updatedInfo)
             return NextResponse.json(
-                { message: `comment ${id} updated!` },
+                { message: `section ${id} updated!` },
                 { status: 201 }
             )
         }
@@ -70,18 +72,18 @@ export const PATCH = async (req: Request) => {
     }
 }
 
-//API to READ a comment (invokes "readComment")
+//API to READ a section (invokes "readsection")
 export const GET = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams
     const id = parseInt(searchParams.get('id') ?? '-1')
     const session = await getServerSession(authOptions)
-    
+
     if (session) {
         if(id !== -1){    
             try {
-                readComment(id)
+                readSection(id)
                 return NextResponse.json(
-                    { message: `comment READ!` },
+                    { message: `section READ!` },
                     { status: 201 }
                 )
                 } catch (err) {
@@ -92,9 +94,9 @@ export const GET = async (req: NextRequest) => {
             }
         } else {
             try {
-                readAllComments()
+                readAllSections()
                 return NextResponse.json(
-                    { message: `all comments READ!` },
+                    { message: `all sections READ!` },
                     { status: 201 }
                 )
                 } catch (err) {

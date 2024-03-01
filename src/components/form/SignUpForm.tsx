@@ -26,7 +26,7 @@ const SignUpForm = () => {
         })
 
         if (res.status === 201) {
-            router.push('/api/registration/signin')
+            router.push('/registration/signin')
         } else {
             console.log('An error occured, please try again later')
             setLoading(false)

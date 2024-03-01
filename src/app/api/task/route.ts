@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createTask, deleteTask, updateTask, readTask, readAllTasks} from "../../../db-connections/task"
+import { createTask, deleteTask, updateTask, readTask, readAllTasks} from "../../../db/db-connections/task"
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 

@@ -1,21 +1,19 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createSection, deleteSection, updateSection, readSection, readAllSections} from "../../../db-connections/section"
+import { createProject, deleteProject, updateProject, readProject, readAllProjects} from "../../../db/db-connections/project"
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 
-
-//API to add or "POST" a section (invokes "createsection")
+//API to add or "POST" a project (invokes "createProject")
 export const POST = async (req: Request) => {
-    const { projectID, name, description, dueDate } = await req.json();
+    const { name, description, dueDate} = await req.json();
     const session = await getServerSession(authOptions)
     
-
     try {
         if (session) {
-            const sectionData = { projectID, name, description, dueDate}
-            createSection(sectionData)
+            const projectData = { name, description, dueDate}
+            createProject(projectData)
             return NextResponse.json(
-                { message: 'New section created!' },
+                { message: 'New project created!' },
                 { status: 201 }
             )
         }
@@ -27,17 +25,17 @@ export const POST = async (req: Request) => {
     }
 }
 
-//API to DELETE a section (invokes "deletesection")
+//API to DELETE a project (invokes "deleteProject")
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
     const session = await getServerSession(authOptions)
-
+    
     try {
         if (session) {
-            const sectionId = { id }
-            deleteSection(sectionId)
+            const projectId = { id }
+            deleteProject(projectId)
             return NextResponse.json(
-                { message: `section ${id} Deleted!` },
+                { message: `project ${id} Deleted!` },
                 { status: 201 }
             )
         }
@@ -49,18 +47,18 @@ export const DELETE = async (req: Request) => {
     }
 }
 
-//API to UPDATE a section (invokes "updatesection")
+//API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => { 
-    const { id, name, description  } = await req.json();
+    const { id, name, description } = await req.json();
     const session = await getServerSession(authOptions)
     
     try {
         if (session) {
-            const sectionId = { id }
-            const updatedInfo = { name, description  }
-            updateSection(sectionId, updatedInfo)
+            const projectId = { id }
+            const updatedInfo = { name, description }
+            updateProject(projectId, updatedInfo)
             return NextResponse.json(
-                { message: `section ${id} updated!` },
+                { message: `project ${id} updated!` },
                 { status: 201 }
             )
         }
@@ -72,7 +70,8 @@ export const PATCH = async (req: Request) => {
     }
 }
 
-//API to READ a section (invokes "readsection")
+
+//API to READ a project (invokes "readProject")
 export const GET = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams
     const id = parseInt(searchParams.get('id') ?? '-1')
@@ -81,9 +80,9 @@ export const GET = async (req: NextRequest) => {
     if (session) {
         if(id !== -1){    
             try {
-                readSection(id)
+                readProject(id)
                 return NextResponse.json(
-                    { message: `section READ!` },
+                    { message: `project READ!` },
                     { status: 201 }
                 )
                 } catch (err) {
@@ -94,9 +93,9 @@ export const GET = async (req: NextRequest) => {
             }
         } else {
             try {
-                readAllSections()
+                readAllProjects()
                 return NextResponse.json(
-                    { message: `all sections READ!` },
+                    { message: `all projects READ!` },
                     { status: 201 }
                 )
                 } catch (err) {
@@ -108,3 +107,19 @@ export const GET = async (req: NextRequest) => {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

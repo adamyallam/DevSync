@@ -1,5 +1,4 @@
-// import { useRouter } from 'next/navigation'
-import { authOptions } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '../../api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
 
 export default async function dashboard(){
@@ -20,7 +19,7 @@ export default async function dashboard(){
 
   return (
     <div>
-      <h1>Please signin before accessing your Dashboard</h1>
+      <h1 className="text-red-700">Please signin before accessing your Dashboard</h1>
       <a href='http://localhost:3000/'> 
           <button type="button">Home</button> 
       </a>

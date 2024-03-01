@@ -32,7 +32,7 @@ const SignInForm = () => {
     return (
       <div>
         <h1>Signin Page</h1>
-        <button type="button" onClick={() => router.push('/api/registration/signup')}>Signup</button>
+        <button type="button" onClick={() => router.push('/registration/signup')}>Signup</button>
         <form onSubmit={handleSubmit}>
         <label>
                 <span>Email:</span>
