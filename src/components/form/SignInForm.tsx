@@ -30,32 +30,30 @@ const SignInForm = () => {
     }
 
     return (
-      <div>
-        <h1>Signin Page</h1>
-        <button type="button" onClick={() => router.push('/registration/signup')}>Signup</button>
+      <div className='flex justify-center bg-gradient-to-tr from-orange-500 to-gray-600 via-secondary items-center h-screen'>
         <form onSubmit={handleSubmit}>
-        <label>
-                <span>Email:</span>
-                <input 
-                    required
-                    type="text"
-                    value={signInData.email}
-                    onChange={(e) => {setSignInData({...signInData, email: e.target.value})}}
-                    />
-            </label>
-            <label>
-                <span>Password:</span>
-                <input 
-                    required
-                    type="text"
-                    value={signInData.password}
-                    onChange={(e) => {setSignInData({...signInData, password: e.target.value})}}
-                    />
-            </label>
-            <button disabled={signingIn}>
-                {signingIn && <span>Signing In</span>}
-                {!signingIn && <span>Sign In</span>}
+          <div className='flex flex-col gap-2 p-16 rounded-lg border-2 border-primary p-15'>
+            <h2 className="flex text-primary text-5xl mb-6 justify-center pb-5 border-b-2 border-primary">Signin</h2>
+              <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
+                required
+                type="text"
+                placeholder='Email'
+                value={signInData.email}
+                onChange={(e) => {setSignInData({...signInData, email: e.target.value})}}
+                />
+              <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
+                required
+                type="text"
+                placeholder='Password'
+                value={signInData.password}
+                onChange={(e) => {setSignInData({...signInData, password: e.target.value})}}
+                />
+            <button className='flex justify-center border-2 p-1 text-primary' disabled={signingIn}>
+              {signingIn && <span>Signing In</span>}
+              {!signingIn && <span>Sign In</span>}
             </button>
+            <p className='flex text-primary justify-center'>Forgot Username or Password?</p>
+          </div>
         </form>
       </div>
     )
