@@ -3,7 +3,6 @@ import {getServerSession} from 'next-auth'
 
 export default async function dashboard(){
   const session = await getServerSession(authOptions)
-  // const router = useRouter()
 
   if (session) {
     return (
