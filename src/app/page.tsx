@@ -1,11 +1,13 @@
-import Home from '../components/home/Home'
+import Slogan from '../components/home/Slogan'
+import GoToDashboard from '../components/home/GoToDashboard'
 import TopBar from '../components/header/navbar/TopBar'
 
 const home = () => {
   return (
       <div>
           <TopBar />
-          <Home />
+          <Slogan />
+          <GoToDashboard />
       </div>
   )
 }
