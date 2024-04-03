@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 
 
-export default async function Slogan(){
+export default function Slogan(){
   const router = useRouter()
 
   return (

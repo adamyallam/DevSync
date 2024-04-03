@@ -1,6 +1,7 @@
 import Slogan from '../components/home/Slogan'
 import GoToDashboard from '../components/home/GoToDashboard'
-import TopBar from '../components/header/navbar/TopBar'
+import TopBar from '../components/navbar/TopBar'
+import GetStartedImages from '../components/home/GetStartedImages'
 
 const home = () => {
   return (
@@ -8,6 +9,7 @@ const home = () => {
           <TopBar />
           <Slogan />
           <GoToDashboard />
+          <GetStartedImages />
       </div>
   )
 }
