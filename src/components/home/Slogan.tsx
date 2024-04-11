@@ -9,13 +9,13 @@ export default function Slogan(){
     <div className=''>
       <div className='grid grid-cols-1 grid-rows-3 gap-2 m-4'>
         <div className='flex justify-center'>
-          <h1>SLOGAN</h1>
+          <h1 className='text-3xl'>SLOGAN</h1>
         </div>
         <div className='flex justify-center'>
           <h1>Brief description of what app does and the usage</h1>
         </div>
         <div className='flex justify-center'>
-          <h1>"get started button"</h1>
+        <button className='border-2 border-black p-1 m-1'>Get Started</button>
         </div>
       </div>
     </div>

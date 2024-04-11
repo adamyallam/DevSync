@@ -15,7 +15,7 @@ export default function GoToDashboard(){
                 <h2>Your workspace all in one place. Create and manage projects, check schedules, message other users and much more!</h2>
             </div>
             <div className='flex justify-start col-span-2'>
-                <button className='ml-6 mb-10'>Go to dashboard</button>
+                <button className='text-xl ml-6 mb-10'>Go to dashboard ➞</button>
             </div>
         </div>
     </div>
