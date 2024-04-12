@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from 'next/navigation'
 
-export default function GoToDashboard(){
+export default function About(){
   const router = useRouter()
 
   return (

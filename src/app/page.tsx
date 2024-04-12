@@ -1,8 +1,8 @@
-import Slogan from '../components/home/Slogan'
+import Slogan from 'src/components/home/Slogan'
 import GoToDashboard from '../components/home/GoToDashboard'
-import TopBar from '../components/navbar/TopBar'
-import GetStartedImages from '../components/home/GetStartedImages'
-import Footer from '../components/footer/Footer'
+import TopBar from 'src/components/navbar/TopBar'
+import GetStartedImages from 'src/components/home/GetStartedImages'
+import Footer from 'src/components/footer/Footer'
 
 
 const home = () => {

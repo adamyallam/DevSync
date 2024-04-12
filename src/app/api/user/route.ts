@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { db, createUser, deleteUser, updateUser, readUser, readAllUsers} from "../../../db/db-connections/user"
+import { db, createUser, deleteUser, updateUser, readUser, readAllUsers} from "src/db/db-connections/user"
 import { hash } from 'bcrypt'
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 
 //API to add or "POST" a user (invokes "createUser")

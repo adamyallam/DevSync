@@ -1,4 +1,4 @@
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
 
 export default async function dashboard(){

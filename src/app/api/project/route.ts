@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createProject, deleteProject, updateProject, readProject, readAllProjects} from "../../../db/db-connections/project"
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { createProject, deleteProject, updateProject, readProject, readAllProjects} from "src/db/db-connections/project"
+import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 
 //API to add or "POST" a project (invokes "createProject")

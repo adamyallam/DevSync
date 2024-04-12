@@ -1,4 +1,4 @@
-import SignInForm from '../../../../components/registration/SignInForm'
+import SignInForm from 'src/components/registration/SignInForm'
 
 const signIn = () => {
     return (

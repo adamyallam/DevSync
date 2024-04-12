@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createSection, deleteSection, updateSection, readSection, readAllSections} from "../../../db/db-connections/section"
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { createSection, deleteSection, updateSection, readSection, readAllSections} from "src/db/db-connections/section"
+import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 
 
