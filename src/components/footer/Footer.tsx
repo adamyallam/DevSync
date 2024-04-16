@@ -13,7 +13,7 @@ export default function GoToDashboard(){
     <div className="flex justify-start items-end ml-5">
       <p className="">Stay Connected</p>
     </div>
-    <div className="flex justify-center items-center row-span-3">
+    <div className="flex justify-center items-start mt-10 row-span-3 sm:items-center">
       <p>LOGO</p>
     </div>
     <div className="flex justify-end items-center mr-11">
