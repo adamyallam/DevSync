@@ -1,73 +1,66 @@
-'use client'
-import { useState } from 'react';
-import { useRouter } from 'next/navigation'
+"use client"
+import React, { useState, useEffect } from 'react';
+import Socials from '../Images/Socials'
 
 export default function DropMenu() {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-    const toggleMenu = () => {
-      setIsOpen(!isOpen);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-      if (!isOpen) {
-        document.body.style.overflow = 'hidden'
-      } else {
-        document.body.style.overflow = 'unset'
-      }
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 0);
     };
 
-    return (
-    <div className='sticky top-0  z-10 bg-white sm:hidden'>
-        <div className='grid grid-cols-3 items-center border-b-2 border-black'>
-          <div className='flex justify-start'>
-            <h1>LOGO</h1>
-          </div>
-          <div className='flex justify-center'>
-            <h1>Get Started</h1>
-          </div>
+    window.addEventListener('scroll', handleScroll);
 
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-          <div className='flex justify-end'>
-            <button className='border-2 border-black m-1 p-1' onClick={(toggleMenu)}>{isOpen ? 'Close' : 'Open'}</button>
-          </div>
-          
+  return (
+    <div className={`sticky top-0 z-10 bg-white sm:hidden ${hasScrolled ? 'shadow-md' : 'border-b-2'}`}>
+      <div className="grid grid-cols-2 items-center border-b-2 border-white">
+        <div className="flex justify-start">
+          <h1>LOGO</h1>
         </div>
-        {isOpen && (
-                <div className="h-screen w-full bg-gray-800 py-2">
-                    
+        <div className="flex justify-end">
+          <button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button>
+          <button className="border-2 border-black m-1 p-1" onClick={toggleMenu}>
+            {isOpen ? 'Close' : 'Open'}
+          </button>
+        </div>
+      </div>
+
+      {isOpen && (
+          <div>
+            <div className="bg-gray-100 h-96">
+              <div className='grid grid-cols-1 gird-rows-3 text-black'>
+                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>Go to dashboard</button>
+                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>About</button>
+                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>Blog</button>
+              </div>
+              <div className='grid grid-cols-1 grid-rows-2 m-2'> 
+                <div className='flex justify-center'>
+                  <button className='border-2 text-lg bg-black text-white p-2 w-11/12'>Get Started</button>
                 </div>
-            )}
-        <div>
-        </div>
+                <div className='flex justify-center'>
+                  <button className='border-2 text-lg bg-black text-white p-2 w-11/12'>Log In</button>
+                </div>
+              </div>
+            </div>
+            <div className='bg-gray-200 h-22 p-2'>
+              <div className='mt-1'>
+              <Socials />
+              </div>
+              <p className='flex justify-center mt-2'>Follow our socials!</p>
+            </div>
+          </div>
+      )}
     </div>
-
-    //   <div className="fixed top-0 left-0 w-full bg-gray-800 text-white flex justify-between items-center px-6 py-4 z-10">
-    //     <div className="flex items-center">
-    //       <h1 className="text-xl font-bold mr-4">LOGO</h1>
-    //       <h1 className="text-xl">Get Started</h1>
-    //     </div>
-    //     <div>
-    //       <button
-    //         onClick={toggleMenu}
-    //         className="text-white font-semibold bg-blue-500 px-4 py-2 rounded-md"
-    //       >
-    //         {isOpen ? 'Close' : 'Open'}
-    //       </button>
-        //   {isOpen && (
-        //     <div className="absolute top-full left-0 w-full bg-gray-800 text-white py-2">
-        //       <ul>
-        //         <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-        //           Menu Item 1
-        //         </li>
-        //         <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-        //           Menu Item 2
-        //         </li>
-        //         <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-        //           Menu Item 3
-        //         </li>
-        //       </ul>
-        //     </div>
-        //   )}
-    //     </div>
-    //   </div>
-    );
-};
+  );
+}

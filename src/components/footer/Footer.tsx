@@ -1,9 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import img1 from 'src/assets/imgs/instagram.png'
-import img2 from 'src/assets/imgs/twitter.webp'
-import img3 from 'src/assets/imgs/linkedin.webp'
+import Socials from '../Images/Socials'
 
 export default function GoToDashboard(){
   const router = useRouter()
@@ -43,9 +40,7 @@ export default function GoToDashboard(){
       <button className="lg:hidden md:block bg-blue-500 text-white ml-4 px-4 py-2 rounded">Sign Up</button>
     </div>
     <div className='flex justify-center row-span-2 items-end'>
-      <Image className="w-14 h-14" src={img1} alt="" />
-      <Image className="w-14 h-14" src={img2} alt="" />
-      <Image className="w-14 h-14" src={img3} alt="" />
+      <Socials />
     </div>
   </div>
   )
