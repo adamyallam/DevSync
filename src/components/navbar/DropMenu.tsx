@@ -47,7 +47,7 @@ export default function DropMenu() {
           <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button>
             
           
-          <div className='bg-gray-100 h-1/3'/>
+          <div className='bg-gray-100 h-1/4'/>
           
           <div className='flex justify-center items-start'>
             <button className='text-lg bg-black text-white p-3 w-11/12'>Get Started</button>
@@ -58,11 +58,14 @@ export default function DropMenu() {
           </div>
         </div>
 
+        <div className='grid grid-cols-1 grid-rows-2'>
+          <div className='row-start-2 bg-gray-100 h-28 mb-16'/>
+        </div>
 
-        <div className='flex justify-center '>
-          <div className='fixed bottom-0 mb-4 '>
+        <div className='flex justify-center'>
+          <div className='fixed bottom-0 mb-2'>
             <Socials />
-            <p className='flex justify-center'>Follow our socials!</p>
+            <p className='flex justify-center text-black'>Follow our socials!</p>
           </div>
         </div>
 
