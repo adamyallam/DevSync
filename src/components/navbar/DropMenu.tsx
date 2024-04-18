@@ -8,6 +8,7 @@ export default function DropMenu() {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    document.body.style.overflow = isOpen ? 'unset' : 'hidden';
   };
 
   useEffect(() => {
@@ -23,9 +24,9 @@ export default function DropMenu() {
   }, []);
 
   return (
-    <div className={`sticky top-0 z-10 bg-white sm:hidden ${hasScrolled ? 'shadow-md' : 'border-b-2'}`}>
+    <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isOpen ? 'bg-gray-100' : 'bg-white'}`}>
       <div className="grid grid-cols-2 items-center border-b-2 border-white">
-        <div className="flex justify-start">
+        <div className="flex justify-start ml-7 text-2xl">
           <h1>LOGO</h1>
         </div>
         <div className="flex justify-end">
@@ -37,29 +38,35 @@ export default function DropMenu() {
       </div>
 
       {isOpen && (
-          <div>
-            <div className="bg-gray-100 h-96">
-              <div className='grid grid-cols-1 gird-rows-3 text-black'>
-                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>Go to dashboard</button>
-                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>About</button>
-                <button className='flex justify-start ml-5 text-lg border-b-2 p-2 w-11/12'>Blog</button>
-              </div>
-              <div className='grid grid-cols-1 grid-rows-2 m-2'> 
-                <div className='flex justify-center'>
-                  <button className='border-2 text-lg bg-black text-white p-2 w-11/12'>Get Started</button>
-                </div>
-                <div className='flex justify-center'>
-                  <button className='border-2 text-lg bg-black text-white p-2 w-11/12'>Log In</button>
-                </div>
-              </div>
-            </div>
-            <div className='bg-gray-200 h-22 p-2'>
-              <div className='mt-1'>
-              <Socials />
-              </div>
-              <p className='flex justify-center mt-2'>Follow our socials!</p>
-            </div>
+      <div className="bg-white h-screen">
+        <div className='grid grid-cols-1 grid-rows-9 text-black'>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12'>dashboard</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button>
+            
+          
+          <div className='bg-gray-100 h-1/3'/>
+          
+          <div className='flex justify-center items-start'>
+            <button className='text-lg bg-black text-white p-3 w-11/12'>Get Started</button>
           </div>
+
+          <div className='flex justify-center mt-1'>
+            <button className='text-lg border-2 border-black text-black w-11/12 '>Log In</button>
+          </div>
+        </div>
+
+
+        <div className='flex justify-center '>
+          <div className='fixed bottom-0 mb-4 '>
+            <Socials />
+            <p className='flex justify-center'>Follow our socials!</p>
+          </div>
+        </div>
+
+      </div>
       )}
     </div>
   );

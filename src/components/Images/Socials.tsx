@@ -8,10 +8,10 @@ import img3 from 'src/assets/imgs/linkedin.webp'
 export default function Socials() {
     
     return (
-    <div className='flex justify-center row-span-2 items-end'>
-        <Image className="w-14 h-14" src={img1} alt="" />
-        <Image className="w-14 h-14" src={img2} alt="" />
-        <Image className="w-14 h-14" src={img3} alt="" />
+    <div className='flex'>
+        <Image className="w-12 h-12" src={img1} alt="" />
+        <Image className="w-12 h-12" src={img2} alt="" />
+        <Image className="w-12 h-12" src={img3} alt="" />
       </div>
     )
 }
