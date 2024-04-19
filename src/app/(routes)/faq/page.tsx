@@ -1,18 +1,18 @@
-import Blog from 'src/components/blog/Blog'
 import TopBar from 'src/components/navbar/TopBar'
 import Footer from 'src/components/footer/Footer'
 import DropMenu from '@/components/navbar/DropMenu'
+import Faq from '@/components/faq/Faq'
 
-const blog = () => {
+const faq = () => {
     return (
         <div>
             <TopBar />
             <DropMenu />
-            <Blog />
+            <Faq />
             <Footer />
         </div>
     )
 
 }
 
-export default blog
+export default faq
