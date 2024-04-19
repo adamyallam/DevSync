@@ -1,5 +1,3 @@
-'use client'
-import {useState} from 'react'
 import Slogan from 'src/components/home/Slogan'
 import GoToDashboard from '../components/home/GoToDashboard'
 import TopBar from 'src/components/navbar/TopBar'
