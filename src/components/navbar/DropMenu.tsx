@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Socials from '../Images/Socials'
+import {Menu} from 'lucide-react'
+import {X} from 'lucide-react'
 
 export default function DropMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +33,8 @@ export default function DropMenu() {
         </div>
         <div className="flex justify-end">
           <button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button>
-          <button className="border-2 border-black m-1 p-1" onClick={toggleMenu}>
-            {isOpen ? 'Close' : 'Open'}
+          <button className="m-1 p-1" onClick={toggleMenu}>
+            {isOpen ? <X /> : <Menu />}
           </button>
         </div>
       </div>
