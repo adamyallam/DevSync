@@ -1,6 +1,8 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Logo from 'src/assets/imgs/DevSyncLogo.png'
 
 
 export default function TopBar() {
@@ -21,12 +23,16 @@ export default function TopBar() {
 
   return (
     <div className={`hidden fixed w-full top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
-      <div className='grid grid-cols-3 items-center'>
-        <div className='flex justify-start'>
-          <h1>LOGO</h1>
-        </div>
-        <div className='flex justify-center'>
-          <h1>HEADER</h1>
+      <div className='grid grid-cols-2 items-center'>
+        <div className='flex justify-start gap-5'>
+          <Image className='w-16 p-2' src={Logo} alt="" />
+          <div className='flex gap-5 ml-10'>
+            <button>Dashboard</button>
+            <button>About</button>
+            <button>Blog</button>
+            <button>Contact</button>
+            <button>FAQ</button>
+          </div>
         </div>
         <div className='flex justify-end'>
           <button className='border-2 border-black m-1 p-1' onClick={() => router.push('/registration/signin')}>Sign in</button>

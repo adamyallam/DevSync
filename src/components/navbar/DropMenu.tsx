@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Socials from '../Images/Socials'
 import {Menu} from 'lucide-react'
 import {X} from 'lucide-react'
+import Image from 'next/image';
+import Logo from 'src/assets/imgs/DevSyncLogo.png'
 
 export default function DropMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +30,8 @@ export default function DropMenu() {
   return (
     <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isOpen ? 'bg-gray-100' : 'bg-white'}`}>
       <div className="grid grid-cols-2 items-center border-b-2 border-white">
-        <div className="flex justify-start ml-7 text-2xl">
-          <h1>LOGO</h1>
+        <div className="flex justify-start ml-1">
+          <Image className='w-16 p-2' src={Logo} alt="" />
         </div>
         <div className="flex justify-end">
           <button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button>
