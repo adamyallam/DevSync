@@ -1,9 +1,9 @@
-"use client"
-import { useRouter } from 'next/navigation'
+'use client'
+import { useRouter } from "next/router"
 
 
 export default function Slogan(){
-  const router = useRouter()
+
 
   return (
     <div className='mt-24'>
