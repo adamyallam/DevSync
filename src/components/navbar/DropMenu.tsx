@@ -45,11 +45,11 @@ export default function DropMenu() {
       {isOpen && (
       <div className="bg-white h-screen overflow-y-auto">
         <div className='grid grid-cols-1 grid-rows-8 text-black'>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-80'>dashboard</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-80'>About</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-80'>Blog</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-80'>Contact</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-80'>FAQ</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12'>dashboard</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button>
+          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button>
           <div className='bg-gray-100 h-4'/>       
           <div className='flex justify-center items-start'>
             <button className='text-lg bg-black text-white p-3 w-80'>Get Started</button>
