@@ -2,7 +2,8 @@
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Logo from 'src/assets/imgs/DevSyncLogo.png'
+import Logo from 'src/assets/imgs/Logo.png'
+import LogoBig from 'src/assets/imgs/LogoBig.png'
 
 
 export default function TopBar() {
@@ -25,8 +26,8 @@ export default function TopBar() {
     <div className={`hidden fixed w-full top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
       <div className='grid grid-cols-2 items-center'>
         <div className='flex justify-start gap-5'>
-          <Image className='w-16 p-2' src={Logo} alt="" />
-          <div className='flex gap-5 ml-10'>
+          <Image className='sm:h-20 p-2 lg:w-28 xl:30' src={LogoBig} alt="" />
+          <div className='flex gap-5 '>
             <button>Dashboard</button>
             <button>About</button>
             <button>Blog</button>
