@@ -3,15 +3,20 @@ import img1 from 'src/assets/imgs/instagram.png'
 import img2 from 'src/assets/imgs/twitter.webp'
 import img3 from 'src/assets/imgs/linkedin.webp'
 
+type SocialsProps = {
+  divClass: string
+  imgClass: string
+}
 
-
-export default function Socials() {
+const Socials = ({divClass, imgClass}: SocialsProps) => {
     
     return (
-    <div className='flex'>
-        <Image className="w-12 h-12" src={img1} alt="" />
-        <Image className="w-12 h-12" src={img2} alt="" />
-        <Image className="w-12 h-12" src={img3} alt="" />
+    <div className={`${divClass}`}>
+        <Image className={`${imgClass}`} src={img1} alt="" />
+        <Image className={`${imgClass}`} src={img2} alt="" />
+        <Image className={`${imgClass}`} src={img3} alt="" />
       </div>
     )
 }
+
+export default Socials
