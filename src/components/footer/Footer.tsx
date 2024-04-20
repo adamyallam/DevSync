@@ -1,40 +1,50 @@
-"use client"
-import { useRouter } from 'next/navigation'
+import Logo from 'src/assets/imgs/Logo.png'
+import LogoBig from 'src/assets/imgs/LogoBig.png'
+import Image from 'next/image';
 import Socials from '../Images/Socials'
 
 export default function GoToDashboard(){
-  const router = useRouter()
 
   return (
-  <div className="grid grid-cols-3 grid-rows-7 gap-1 border-t border-black mt-3">
-      <p className="flex justify-start items-end ml-5">Stay Connected</p>
-      <p className='flex justify-center items-start mt-16 row-span-3 '>LOGO</p>
-      <p className="flex justify-end items-center mr-11">Navigate</p>
-      <p className='flex justify-start items-start ml-5'>Join our newsletter!</p>
-    <div className="flex justify-end row-span-2 items-start mr-7">
-      <ul>
-        <li>Dashboard</li>
-        <li>About</li>
-        <li>Blog</li>
-        <li>Contact</li>
-        <li>FAQ</li>
-      </ul>
-    </div>
-
-    <div className="flex justify-start ml-4">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className="border-2 border-black rounded pl-1 w-36 md:w-56 lg:w-56 h-10"
-      />
-      <button className="hidden lg:block bg-blue-500 text-white px-4 rounded">Sign Up</button>
-    </div>
     <div>
-      <button className="lg:hidden md:block bg-blue-500 text-white ml-4 px-4 py-2 rounded">Sign Up</button>
+      <div className='grid grid-cols-1 grid-rows-3 bg-gray-800 h-64'>
+        <div className='flex justify-center'>
+          <Image className='w-16 h-16 mt-7' src={Logo} alt="" />
+        </div>
+        <div className="flex justify-center text-center text-gray-300 mt-5">
+          <ul>
+            <li>
+              <a href='/Dashboard'>Dashboard</a>
+            </li>
+            <li>
+              <a href='/about'>About</a>
+            </li>
+            <li>
+              <a href='/blog'>Blog</a>
+            </li>
+            <li>
+              <a href='/contact'>Contact</a>
+            </li>
+            <li>
+              <a href='/faq'>FAQ</a>
+            </li>
+          </ul>
+         </div>
+
+      </div>
+      <div className='grid grid-cols-1 grid-rows-4 bg-gray-700'>
+        <p className='flex justify-center text-gray-200 mt-6 mb-3'>Stay in touch by joining our newsletter!</p>
+        <div className="flex justify-center">
+           <input
+             type="email"
+             placeholder="Enter your email"
+             className="border-2 border-black p-1 w-34 h-10"
+           />
+           <button className="bg-black text-white p-1 w-20 h-10">Sign Up</button>
+         </div>
+         <Socials divClass='flex justify-center mt-4' imgClass='h-10 w-10' />
+         <p className='flex justify-center text-gray-200'>Follow our socials!</p>
+      </div>
     </div>
-    <div className='flex justify-center row-span-2 items-end'>
-      <Socials />
-    </div>
-  </div>
   )
 }
