@@ -1,17 +1,17 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
+import Dashboard from 'src/components/dashboard/Dashboard'
+import DashNavBar from '@/components/dashboard/DashNavBar'
+
 
 export default async function dashboard(){
   const session = await getServerSession(authOptions)
 
-  if (session) {
+  if (/*Remove "!" when done testing*/ !session) {
     return (
       <div>
-        <h1>Your Dashboard</h1>
-        <h2>Welcome, {session.user.firstName}</h2>
-        <a href='http://localhost:3000/'> 
-          <button type="button">Home</button> 
-        </a>
+        <DashNavBar />
+        <Dashboard />
       </div>
     )
   }
