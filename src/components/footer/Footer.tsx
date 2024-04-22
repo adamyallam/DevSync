@@ -1,7 +1,9 @@
 import Logo from 'src/assets/imgs/Logo.png'
 import LogoBig from 'src/assets/imgs/LogoBig.png'
 import Image from 'next/image';
-import Socials from '../Images/Socials'
+import {Instagram} from 'lucide-react'
+import {Twitter} from 'lucide-react'
+import {Linkedin} from 'lucide-react'
 
 export default function GoToDashboard(){
 
@@ -12,9 +14,10 @@ export default function GoToDashboard(){
           <Image className='w-16 h-16 mt-7 md:hidden' src={Logo} alt="" />
           <Image className='hidden md:block w-36 h-20 mt-4 border-b-2 border-b-gray-500 xl:w-40 xl:h-24 2xl:ml-20' src={LogoBig} alt="" />
         </div>
-        <Socials divClass='hidden xl:flex col-start-1 row-start-4 justify-center ml-20 2xl:ml-40' imgClass='h-10 w-10' />
-        <div className='hidden md:flex justify-center col-start-1 row-start-2 mt-16 ml-16 w-1/2 lg:justify-end xl:row-start-3 '>
-          <Socials divClass='flex mt-2 lg:mr-1 xl:hidden' imgClass='h-10 w-10' />
+        <div className='hidden md:flex md:justify-center mt-2 gap-2 row-start-3 col-start-1 xl:row-start-4 xl:ml-20 2xl:ml-40'>
+          <Instagram size={32} color="#e5e7eb" strokeWidth={1.5} />
+          <Twitter size={32} color="#e5e7eb" strokeWidth={1.5} />
+          <Linkedin size={32} color="#e5e7eb" strokeWidth={1.5} />
         </div>
         <div className='hidden md:flex items-end text-gray-300 justify-center mt-4'>
          <p>Navigate</p>
@@ -58,8 +61,14 @@ export default function GoToDashboard(){
            />
            <button className="bg-black text-white p-1 w-20 h-10">Sign Up</button>
          </div>
-         <Socials divClass='flex justify-center mt-4' imgClass='h-10 w-10' />
-         <p className='flex justify-center text-gray-200'>Follow our socials!</p>
+         <div>
+          <div className='flex justify-center gap-2 mt-2'>
+            <Instagram size={32} color="#e5e7eb" strokeWidth={1.5} />
+            <Twitter size={32} color="#e5e7eb" strokeWidth={1.5} />
+            <Linkedin size={32} color="#e5e7eb" strokeWidth={1.5} />
+          </div>
+          <p className='flex justify-center text-gray-200'>Follow our socials!</p>
+         </div>
       </div>
     </div>
   )

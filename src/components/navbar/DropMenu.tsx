@@ -1,8 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Socials from '../Images/Socials'
-import {Menu} from 'lucide-react'
+import {MenuIcon} from 'lucide-react'
 import {X} from 'lucide-react'
+import {Instagram} from 'lucide-react'
+import {Twitter} from 'lucide-react'
+import {Linkedin} from 'lucide-react'
 import Image from 'next/image';
 import Logo from 'src/assets/imgs/Logo.png'
 
@@ -37,7 +39,7 @@ export default function DropMenu() {
         <div className="flex justify-end">
           <button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button>
           <button className="m-1 p-1" onClick={toggleMenu}>
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? <X /> : <MenuIcon />}
           </button>
         </div>
       </div>
@@ -59,9 +61,13 @@ export default function DropMenu() {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 grid-rows-3 bg-white'>
-          <Socials divClass='flex justify-center row-span-1' imgClass='w-10 h-10'/>
-          <p className='flex justify-center row-span-1 text-black'>Follow our socials!</p>
+        <div className='flex flex-col items-center bg-white'>
+          <div className='flex gap-2'>
+            <Instagram size={24} color="#000000" strokeWidth={1.5} />
+            <Twitter size={24} color="#000000" strokeWidth={1.5} />
+            <Linkedin size={24} color="#000000" strokeWidth={1.5} />
+          </div>
+          <p className=' text-black'>Follow our socials!</p>
         </div>
       </div>
       )}
