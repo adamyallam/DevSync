@@ -58,17 +58,17 @@ export const POST = async (req: NextRequest) => {
 export const DELETE = async (req: Request) => { 
     const { id } = await req.json();
 
-    const session = await getServerSession(authOptions)
+    // const session = await getServerSession(authOptions)
  
     try {
         const userId = {id}
-        if (session?.user.id === userId.toString()) { 
+        // if (session?.user.id === userId.toString()) { 
             deleteUser(userId)
             return NextResponse.json(
                 { message: `user ${id} Deleted!` },
                 { status: 201 }
             )
-        }
+        // }
     } catch (err) {
         return NextResponse.json(
             { message: 'Failed to DELETE', err}, 
