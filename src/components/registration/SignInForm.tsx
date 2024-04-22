@@ -32,7 +32,7 @@ const SignInForm = () => {
     return (
       <div className='flex justify-center bg-gradient-to-tr from-orange-500 to-gray-600 via-secondary items-center h-screen'>
         <form onSubmit={handleSubmit}>
-          <div className='flex flex-col gap-2 p-16 rounded-lg border-2 border-primary p-15'>
+          <div className='flex flex-col gap-2 p-16 rounded-lg border-2 border-primary'>
             <h2 className="flex text-primary text-5xl mb-6 justify-center pb-5 border-b-2 border-primary">Signin</h2>
               <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
                 required
