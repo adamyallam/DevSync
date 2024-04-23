@@ -36,8 +36,8 @@ export default function NavBar() {
 
       {isOpen && (
         <div className=' h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
-          <div className='grid grid-rows-5'>
-            <div className='flex flex-col mt-7 mb-7 text-gray-200'>
+          <div className='flex flex-col mt-7 text-gray-200'>
+            <div className='mb-7'>
               <button className={`flex items-center h-8 ${page === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
                 onClick={() => selectedPage('Home')}>
                 <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
@@ -57,7 +57,7 @@ export default function NavBar() {
               </button>
             </div>
 
-            <div className=' text-gray-200'>
+            <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
 
               <button className={`flex items-center  h-8 ${page === 'Calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
@@ -67,7 +67,7 @@ export default function NavBar() {
               </button>
             </div>
 
-            <div className=' text-gray-200'>
+            <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
               <button className={`flex items-center h-8 ${page === 'ProjectName' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
@@ -77,7 +77,7 @@ export default function NavBar() {
               </button>
             </div>
 
-            <div className='text-gray-200'>
+            <div className='text-gray-200 '>
               <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
               <button className={`flex items-center h-8 ${page === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
@@ -87,7 +87,7 @@ export default function NavBar() {
               </button>
             </div>
 
-            <div className='border-t-2 mt-9'>
+            <div className='mt-44 border-t-2'>
               <div className='flex justify-center mt-4'>
                 <button className='border-2 w-48 h-10'>Create Project</button>
               </div>
