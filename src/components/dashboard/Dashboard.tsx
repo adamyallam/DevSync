@@ -3,7 +3,7 @@
 export const Dashboard = () => {
     return(
         <div>
-            <p></p>
+            <div className="bg-white h-screen"></div>
         </div>
     )
 }
