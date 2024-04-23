@@ -1,7 +1,7 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
 import Dashboard from 'src/components/dashboard/Dashboard'
-import DashNavBar from '@/components/dashboard/DashNavBar'
+import NavBar from '@/components/dashboard/NavBar'
 
 
 export default async function dashboard(){
@@ -10,7 +10,7 @@ export default async function dashboard(){
   if (/*Remove "!" when done testing*/ !session) {
     return (
       <div>
-        <DashNavBar />
+        <NavBar />
         <Dashboard />
       </div>
     )
