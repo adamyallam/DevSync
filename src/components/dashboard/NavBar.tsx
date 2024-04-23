@@ -1,11 +1,8 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
-import {MenuIcon} from 'lucide-react'
-import {X} from 'lucide-react'
-import {Instagram} from 'lucide-react'
-import {Twitter} from 'lucide-react'
-import {Linkedin} from 'lucide-react'
+import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
+
 
 
 
@@ -52,24 +49,47 @@ export default function DashTopBar() {
           <div className='grid grid-rows-8 h-screen bg-gray-700 w-60'>
 
             <div className='flex flex-col mt-8 text-gray-200'>
-              <button className='text-left ml-8'>Home</button>
-              <button className='text-left ml-8'>My Tasks</button>
-              <button className='text-left ml-8'>Inbox</button>
+              <div className='flex items-center ml-8 mb-1'>
+                <Home size={18} color="#e5e7eb" strokeWidth={1.5}/>
+                <button className='ml-2'>Home</button>
+              </div>
+
+              <div className='flex items-center ml-8 mb-1'>
+                <CircleCheck size={18} color="#e5e7eb" strokeWidth={1.5}/>
+                <button className='ml-2'>My Tasks</button>
+              </div>
+
+              <div className='flex items-center ml-8 mb-1'>
+                <Inbox size={18} color="#e5e7eb" strokeWidth={1.5}/>
+                <button className='ml-2'>Inbox</button>
+              </div>
+            </div>
+
+            <div className='mt-10 text-gray-200'>
+              <h1 className='ml-8 font-bold'>Insights</h1>
+
+              <div className='flex items-center ml-10 mt-1'>
+                <CalendarCheck size={18} color="#e5e7eb" strokeWidth={1.5}/>
+                <button className='ml-2'>Calendar</button>
+              </div>
             </div>
 
             <div className='mt-8 text-gray-200'>
-              <h1 className='ml-8'>Insights</h1>
-              <button className='ml-8'>Calendar</button>
+                <h1 className='ml-8 font-bold'>Projects</h1>
+
+                <div className='flex items-center ml-10 mt-1'>
+                  <div className='border-2 bg-white rounded-md w-4 h-4'></div>
+                  <button className='ml-2'>Project Name</button>
+              </div>
             </div>
 
             <div className='mt-8 text-gray-200'>
-                <h1 className='ml-8'>Projects</h1>
-                <button className='ml-8'>Project Name</button>
-            </div>
+              <h1 className='ml-8 font-bold'>Team</h1>
 
-            <div className='mt-8 text-gray-200'>
-              <h1 className='ml-8'>Team</h1>
-              <button className='ml-8'>My workspace</button>
+              <div className='flex items-center ml-10 mt-1'>
+                <UserRound size={18} color="#e5e7eb" strokeWidth={1.5}/>
+                <button className='ml-2'>My Workspace</button>
+              </div>
             </div>
 
             <div className='border-t-2 row-start-7'>
@@ -83,12 +103,9 @@ export default function DashTopBar() {
                 <Linkedin size={24} color="#e5e7eb" strokeWidth={1.5} />
               </div>
             </div>
-
           </div>
         </div>
-
       )}
-
     </div>
   )
 }
