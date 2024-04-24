@@ -9,14 +9,14 @@ import DropMenu from '@/components/navbar/DropMenu'
 const home = () => {
 
   return (
-      <div>
-          <DropMenu />
-          <TopBar />
-          <Slogan />
-          <GoToDashboard />
-          <GetStartedImages />
-          <Footer />
-      </div>
+    <div>
+      <DropMenu />
+      <TopBar />
+      <Slogan />
+      <GoToDashboard />
+      <GetStartedImages />
+      <Footer />
+    </div>
   )
 }
 
