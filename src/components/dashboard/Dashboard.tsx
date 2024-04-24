@@ -1,11 +1,18 @@
+import Home from './Home'
 
+export const Dashboard = () => { 
 
-export const Dashboard = () => {
-    return(
-        <div>
-            <div className="bg-white h-screen"></div>
-        </div>
+    const page = true;
+    
+    if (page) {
+    return (
+        <Home />
     )
+    } else {
+        return (
+            null
+        )
+    }
 }
 
 export default Dashboard
