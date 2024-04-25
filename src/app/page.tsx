@@ -6,7 +6,7 @@ import Footer from 'src/components/footer/Footer'
 import DropMenu from '@/components/navbar/DropMenu'
 
 
-const home = () => {
+const App = () => {
 
   return (
     <div>
@@ -20,4 +20,4 @@ const home = () => {
   )
 }
 
-export default home
+export default App

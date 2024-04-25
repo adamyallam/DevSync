@@ -1,16 +1,14 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
 import Dashboard from 'src/components/dashboard/Dashboard'
-import NavBar from '@/components/dashboard/NavBar'
 
 
-export default async function dashboard(){
+export default async function App(){
   const session = await getServerSession(authOptions)
 
   if (/*Remove "!" when done testing*/ !session) {
     return (
       <div>
-        <NavBar />
         <Dashboard />
       </div>
     )
