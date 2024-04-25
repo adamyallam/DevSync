@@ -3,16 +3,14 @@ import React, { useState } from 'react';
 import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
 
 interface NavBarProps {
-  setPage: React.Dispatch<React.SetStateAction<string>>
+  setPage: React.Dispatch<React.SetStateAction<string>>;
+  isOpen: boolean;
+  toggleMenu: () => void;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({setPage}) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [selectedPage, setSelectedPage] = useState('Home')
+export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => {
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [selectedPage, setSelectedPage] = useState('Home')
 
   const selectPage = (page: string) => {
     setPage(page)
@@ -71,8 +69,8 @@ export const NavBar: React.FC<NavBarProps> = ({setPage}) => {
             <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
-              <button className={`flex items-center h-8 ${selectedPage === 'ProjectName' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => selectPage('ProjectName')}>
+              <button className={`flex items-center h-8 ${selectedPage === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
+                onClick={() => selectPage('Project')}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
               </button>

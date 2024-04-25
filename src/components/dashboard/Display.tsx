@@ -7,36 +7,37 @@ import Project from './pages/Project';
 import Workspace from './pages/Workspace';
 
 interface DisplayProps {
-    page: string
+    page: string;
+    isOpen: boolean;
 }
 
-export const Display: React.FC<DisplayProps> = ({page}) => {
+export const Display: React.FC<DisplayProps> = ({page, isOpen}) => {
 
     if (page == 'Home') {
         return (
-            <div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}>
                 <Home />
             </div>
         )
     } else if (page == 'Tasks') {
         return (
-            <div><Tasks /></div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}><Tasks /></div>
         )
     } else if (page == 'Inbox') {
         return (
-            <div><Inbox /></div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}><Inbox /></div>
         )
     }else if (page == 'Calendar') {
         return (
-            <div><Calendar /></div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}><Calendar /></div>
         )
     }else if (page == 'Project') {
         return (
-            <div><Project /></div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}><Project /></div>
         )
     }else if (page == 'Workspace') {
         return (
-            <div><Workspace /></div>
+            <div className={`${isOpen ? 'mx-auto w-72' : ''}`}><Workspace /></div>
         )
     }
 
