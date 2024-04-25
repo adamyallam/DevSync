@@ -1,18 +1,18 @@
-import Home from './Home'
+'use client'
+import React, {useState} from 'react'
+import NavBar from './NavBar'
+import Display from './Display'
 
-export const Dashboard = () => { 
 
-    const page = true;
-    
-    if (page) {
+export const Dashboard: React.FC = () => { 
+    const [page, setPage] = useState<string>('Home')
+
     return (
-        <Home />
+        <div>
+            <NavBar setPage={setPage}/>
+            <Display page={page}/>
+        </div>
     )
-    } else {
-        return (
-            null
-        )
-    }
 }
 
 export default Dashboard
