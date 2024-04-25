@@ -4,8 +4,8 @@
 export const Workspace = () => { 
 
     return (
-        <div>
-            <p>Workspace Page</p>
+        <div className="mt-48">
+            <p className="text-2xl">Workspace Page</p>
         </div>
     )
 }

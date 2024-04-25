@@ -4,8 +4,8 @@
 export const Inbox = () => { 
 
     return (
-        <div>
-            <p>Inbox Page</p>
+        <div className="mt-48">
+            <p className="text-2xl">Inbox Page</p>
         </div>
     )
 }

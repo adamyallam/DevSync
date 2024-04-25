@@ -4,8 +4,8 @@
 export const Tasks = () => { 
 
     return (
-        <div>
-            <p>Tasks Page</p>
+        <div className="mt-48">
+            <p className="text-2xl">Tasks Page</p>
         </div>
     )
 }
