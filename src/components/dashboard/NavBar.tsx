@@ -3,18 +3,19 @@ import React, { useState } from 'react';
 import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
 
 interface NavBarProps {
-  setPage: React.Dispatch<React.SetStateAction<string>>;
-  isOpen: boolean;
-  toggleMenu: () => void;
+  setActiveButton: React.Dispatch<string>;
+  activeButton: string;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => {
+export const NavBar: React.FC<NavBarProps> = ({setActiveButton, activeButton}) => {
+  const [isOpen, setIsOpen] = useState(true);
 
-  const [selectedPage, setSelectedPage] = useState('Home')
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  }
 
-  const selectPage = (page: string) => {
-    setPage(page)
-    setSelectedPage(page)
+  const setPage = (page: string) => {
+    setActiveButton(page)
   }
 
   return (
@@ -37,20 +38,20 @@ export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => 
         <div className=' h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
           <div className='flex flex-col mt-7 text-gray-200'>
             <div className='mb-7'>
-              <button className={`flex items-center h-8 ${selectedPage === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => selectPage('Home')}>
+              <button className={`flex items-center h-8 ${activeButton === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
+                onClick={() => setPage('Home')}>
                 <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Home</span>
               </button>
 
-              <button className={`flex items-center h-8 ${selectedPage === 'Tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => selectPage('Tasks')}>
+              <button className={`flex items-center h-8 ${activeButton === 'Tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
+                onClick={() => setPage('Tasks')}>
                 <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Tasks</span>
               </button>
 
-              <button className={`flex items-center h-8 ${selectedPage === 'Inbox' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => selectPage('Inbox')}>
+              <button className={`flex items-center h-8 ${activeButton === 'Inbox' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
+                onClick={() => setPage('Inbox')}>
                 <Inbox size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Inbox</span>
               </button>
@@ -59,8 +60,8 @@ export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => 
             <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
 
-              <button className={`flex items-center  h-8 ${selectedPage === 'Calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => selectPage('Calendar')}>
+              <button className={`flex items-center  h-8 ${activeButton === 'Calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
+                onClick={() => setPage('Calendar')}>
                 <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Calendar</span>
               </button>
@@ -69,8 +70,8 @@ export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => 
             <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
-              <button className={`flex items-center h-8 ${selectedPage === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => selectPage('Project')}>
+              <button className={`flex items-center h-8 ${activeButton === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
+                onClick={() => setPage('Project')}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
               </button>
@@ -79,8 +80,8 @@ export const NavBar: React.FC<NavBarProps> = ({setPage, isOpen, toggleMenu}) => 
             <div className='text-gray-200 '>
               <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
-              <button className={`flex items-center h-8 ${selectedPage === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => selectPage('Workspace')}>
+              <button className={`flex items-center h-8 ${activeButton === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
+                onClick={() => setPage('Workspace')}>
                 <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Workspace</span>
               </button>
