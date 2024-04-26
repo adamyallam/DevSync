@@ -27,7 +27,7 @@ export default function TopBar() {
     <div className={`hidden fixed w-full top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
       <div className='grid grid-cols-2 items-center'>
         <div className='flex justify-start gap-5'>
-          <Image className='sm:h-20 p-2 md:w-32 lg:w-30 xl:w-32' src={LogoBig} alt="" />
+          <Image className='p-2 w-28' src={LogoBig} alt="" />
           <div className='flex gap-5 items-center'>
             <Link href='/dashboard'><button>Dashboard</button></Link>
             <Link href='/about'><button>About</button></Link>
