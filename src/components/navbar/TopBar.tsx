@@ -26,15 +26,13 @@ export default function TopBar() {
   return (
     <div className={`hidden fixed w-full top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
       <div className='grid grid-cols-2 items-center'>
-        <div className='flex justify-start gap-5'>
+        <div className='flex justify-start items-center gap-5'>
           <Image className='p-2 w-28' src={LogoBig} alt="" />
-          <div className='flex gap-5 items-center'>
-            <Link href='/dashboard'><button>Dashboard</button></Link>
-            <Link href='/about'><button>About</button></Link>
-            <Link href='/blog'><button>Blog</button></Link>
-            <Link href='/contact'><button>Contact</button></Link>
-            <Link href='/faq'><button>FAQ</button></Link>
-          </div>
+          <Link href='/dashboard'><button>Dashboard</button></Link>
+          <Link href='/about'><button>About</button></Link>
+          <Link href='/blog'><button>Blog</button></Link>
+          <Link href='/contact'><button>Contact</button></Link>
+          <Link href='/faq'><button>FAQ</button></Link>
         </div>
         <div className='flex justify-end'>
           <button className='border-2 border-black m-1 p-1' onClick={() => router.push('/registration/signin')}>Sign in</button>
