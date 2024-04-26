@@ -24,19 +24,21 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div className={`hidden fixed w-full top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
-      <div className='grid grid-cols-2 items-center'>
-        <div className='flex justify-start items-center gap-5'>
-          <Image className='p-2 w-28' src={LogoBig} alt="" />
-          <Link href='/dashboard'><button>Dashboard</button></Link>
-          <Link href='/about'><button>About</button></Link>
-          <Link href='/blog'><button>Blog</button></Link>
-          <Link href='/contact'><button>Contact</button></Link>
-          <Link href='/faq'><button>FAQ</button></Link>
-        </div>
-        <div className='flex justify-end'>
-          <button className='border-2 border-black m-1 p-1' onClick={() => router.push('/registration/signin')}>Sign in</button>
-          <button className='border-2 border-black m-1 p-1' onClick={() => router.push('/registration/signup')}>Sign up</button>
+    <div className={`hidden fixed w-full h-14 top-0 z-10 bg-white ${hasScrolled ? 'shadow-md' : ''} sm:block`}>
+      <div className='grid grid-cols-2'>
+          <div className='flex items-center'>
+            <Link href='/' className='fixed ml-2 mt-3 w-20 '><Image className='p-2' src={LogoBig} alt="" /></Link>
+            <div className='flex ml-24 gap-5 mt-2'>
+              <Link href='/dashboard'><button>Dashboard</button></Link>
+              <Link href='/about'><button>About</button></Link>
+              <Link href='/blog'><button>Blog</button></Link>
+              <Link href='/contact'><button>Contact</button></Link>
+              <Link href='/faq'><button>FAQ</button></Link>
+            </div>
+          </div>
+        <div className='flex justify-end mt-2 gap-1'>
+          <button className='border-2 border-black  p-1' onClick={() => router.push('/registration/signin')}>Sign in</button>
+          <button className='border-2 border-black  p-1' onClick={() => router.push('/registration/signup')}>Sign up</button>
         </div>
       </div>
     </div>
