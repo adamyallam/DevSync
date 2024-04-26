@@ -1,21 +1,15 @@
 'use client'
+import Link from 'next/link'
 import React, { useState } from 'react';
+import {usePathname} from 'next/navigation'
 import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
 
-interface NavBarProps {
-  setActiveButton: React.Dispatch<string>;
-  activeButton: string;
-}
-
-export const NavBar: React.FC<NavBarProps> = ({setActiveButton, activeButton}) => {
+export const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const pathname = usePathname()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  }
-
-  const setPage = (page: string) => {
-    setActiveButton(page)
   }
 
   return (
@@ -38,53 +32,52 @@ export const NavBar: React.FC<NavBarProps> = ({setActiveButton, activeButton}) =
         <div className=' h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
           <div className='flex flex-col mt-7 text-gray-200'>
             <div className='mb-7'>
-              <button className={`flex items-center h-8 ${activeButton === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => setPage('Home')}>
-                <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Home</span>
-              </button>
+                <Link href='/dashboard/home' className={`flex items-center h-8 ${pathname === '/dashboard/home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
 
-              <button className={`flex items-center h-8 ${activeButton === 'Tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => setPage('Tasks')}>
-                <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Tasks</span>
-              </button>
+                  <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Home</span>
 
-              <button className={`flex items-center h-8 ${activeButton === 'Inbox' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} 
-                onClick={() => setPage('Inbox')}>
-                <Inbox size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Inbox</span>
-              </button>
+                </Link>
+
+              <Link href='/dashboard/tasks' className={`flex items-center h-8 ${pathname === '/dashboard/tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
+                  <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Tasks</span>
+              </Link>
+
+              <Link href='/dashboard/inbox' className={`flex items-center h-8 ${pathname === '/dashboard/inbox' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} >
+                
+                  <Inbox size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Inbox</span>
+
+              </Link>
             </div>
 
             <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
 
-              <button className={`flex items-center  h-8 ${activeButton === 'Calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => setPage('Calendar')}>
-                <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Calendar</span>
-              </button>
+              <Link href='/dashboard/calendar' className={`flex items-center  h-8 ${pathname === '/dashboard/calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+                  <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Calendar</span>
+              </Link>
             </div>
 
             <div className='mb-7 text-gray-200'>
               <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
-              <button className={`flex items-center h-8 ${activeButton === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => setPage('Project')}>
-                <div className='border-2 bg-white rounded-md w-4 h-4' />
-                <span className='ml-2 text-sm'>ProjectName</span>
-              </button>
+              <Link href='/dashboard/project' className={`flex items-center  h-8 ${pathname === '/dashboard/project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+                  <div className='border-2 bg-white rounded-md w-4 h-4' />
+                  <span className='ml-2 text-sm'>ProjectName</span>
+              </Link>
             </div>
 
             <div className='text-gray-200 '>
               <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
-              <button className={`flex items-center h-8 ${activeButton === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`} 
-                onClick={() => setPage('Workspace')}>
-                <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Workspace</span>
-              </button>
+              <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${pathname === '/dashboard/workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+
+                  <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Workspace</span>
+              </Link>
             </div>
 
             <div className='fixed bottom-0 w-60 pb-8 z-10 bg-gray-700 border-t-2'>
