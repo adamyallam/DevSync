@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Logo from 'src/assets/imgs/Logo.png'
 import LogoBig from 'src/assets/imgs/LogoBig.png'
 
 
@@ -30,10 +29,10 @@ export default function TopBar() {
             <Link href='/' className='fixed ml-2 mt-3 w-20 '><Image className='p-2' src={LogoBig} alt="" /></Link>
             <div className='flex ml-24 gap-5 mt-2'>
               <Link href='/dashboard'><button>Dashboard</button></Link>
-              <Link href='/about'><button>About</button></Link>
-              <Link href='/blog'><button>Blog</button></Link>
-              <Link href='/contact'><button>Contact</button></Link>
-              <Link href='/faq'><button>FAQ</button></Link>
+              <Link href='/pages/about'><button>About</button></Link>
+              <Link href='/pages/blog'><button>Blog</button></Link>
+              <Link href='/pages/contact'><button>Contact</button></Link>
+              <Link href='/pages/faq'><button>FAQ</button></Link>
             </div>
           </div>
         <div className='flex justify-end mt-2 gap-1'>

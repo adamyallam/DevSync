@@ -48,11 +48,11 @@ export default function DropMenu() {
       {isOpen && (
       <div className="bg-white h-screen overflow-y-auto">
         <div className='grid grid-cols-1 grid-rows-8 text-black'>
-          <Link href='/dashboard'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12' >dashboard</button></Link>
-          <Link href='/about'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button></Link>
-          <Link href='/blog'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button></Link>
-          <Link href='/contact'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button></Link>
-          <Link href='/faq'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button></Link>
+          <Link href='/pages/dashboard'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12' >dashboard</button></Link>
+          <Link href='/pages/about'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button></Link>
+          <Link href='/pages/blog'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button></Link>
+          <Link href='/pages/contact'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button></Link>
+          <Link href='/pages/faq'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button></Link>
           <div className='bg-gray-100 h-4'/>       
           <div className='flex justify-center items-start'>
             <Link href='/registration/signup'><button className='text-lg bg-black text-white p-3 w-80'>Get Started</button></Link>
