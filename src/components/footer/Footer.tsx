@@ -6,7 +6,7 @@ import {Instagram} from 'lucide-react'
 import {Twitter} from 'lucide-react'
 import {Linkedin} from 'lucide-react'
 
-export default function GoToDashboard(){
+export default function Footer(){
 
   return (
     <div>
