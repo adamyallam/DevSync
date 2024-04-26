@@ -13,7 +13,7 @@ export default function Footer(){
       <div className='grid grid-cols-1 grid-rows-3 bg-gray-800 h-64 md:grid-cols-3 md:grid-rows-4 xl:grid-rows-5'>
         <div className='flex justify-center md:mt-7 xl:ml-20'>
           <Link href='/'><Image className='w-16 h-16 mt-7 md:hidden' src={Logo} alt="" /></Link>
-          <Image className='hidden md:block w-36 h-20 mt-4 border-b-2 border-b-gray-500 xl:w-40 xl:h-24 2xl:ml-20' src={LogoBig} alt="" />
+          <Link href='/'><Image className='hidden md:block w-36 h-20 mt-4 border-b-2 border-b-gray-500 xl:w-40 xl:h-24 2xl:ml-20' src={LogoBig} alt="" /></Link>
         </div>
         <div className='hidden md:flex md:justify-center mt-2 gap-2 row-start-3 col-start-1 xl:row-start-4 xl:ml-20 2xl:ml-40'>
           <Instagram size={32} color="#e5e7eb" strokeWidth={1.5} />

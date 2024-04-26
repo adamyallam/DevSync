@@ -48,10 +48,10 @@ export default function DropMenu() {
       {isOpen && (
       <div className="bg-white h-screen overflow-y-auto">
         <div className='grid grid-cols-1 grid-rows-8 text-black'>
-          <Link href='/dashboard'><button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12'>dashboard</button></Link>
-          <Link href='/about'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button></Link>
-          <Link href='/blog'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button></Link>
-          <Link href='/contact'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button></Link>
+          <Link href='/dashboard'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12' >dashboard</button></Link>
+          <Link href='/about'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button></Link>
+          <Link href='/blog'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button></Link>
+          <Link href='/contact'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button></Link>
           <Link href='/faq'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button></Link>
           <div className='bg-gray-100 h-4'/>       
           <div className='flex justify-center items-start'>
