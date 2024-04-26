@@ -6,10 +6,7 @@ import Contact from '@/components/contact/Contact'
 const contact = () => {
     return (
         <div>
-            <TopBar />
-            <DropMenu />
             <Contact />
-            <Footer />
         </div>
     )
 

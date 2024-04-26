@@ -6,10 +6,7 @@ import DropMenu from '@/components/navbar/DropMenu'
 const blog = () => {
     return (
         <div>
-            <TopBar />
-            <DropMenu />
             <Blog />
-            <Footer />
         </div>
     )
 

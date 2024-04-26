@@ -6,10 +6,7 @@ import Faq from '@/components/faq/Faq'
 const faq = () => {
     return (
         <div>
-            <TopBar />
-            <DropMenu />
             <Faq />
-            <Footer />
         </div>
     )
 

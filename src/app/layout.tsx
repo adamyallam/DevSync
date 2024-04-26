@@ -1,4 +1,7 @@
 import "./globals.css";
+import Footer from 'src/components/footer/Footer'
+import TopBar from 'src/components/navbar/TopBar'
+import DropMenu from 'src/components/navbar/DropMenu'
 
 export const metadata = {
   title: 'Next.js',
@@ -10,7 +13,12 @@ export default async function RootLayout({children}: {
 }) {
   return (
     <html lang="en">
-        <body> {children} </body>
+        <body> 
+          <DropMenu />
+          <TopBar />
+          {children}
+          <Footer /> 
+        </body>
     </html>
   )
 }
