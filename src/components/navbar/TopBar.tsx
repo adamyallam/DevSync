@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -27,12 +28,12 @@ export default function TopBar() {
       <div className='grid grid-cols-2 items-center'>
         <div className='flex justify-start gap-5'>
           <Image className='sm:h-20 p-2 md:w-32 lg:w-30 xl:w-32' src={LogoBig} alt="" />
-          <div className='flex gap-5 '>
-            <button>Dashboard</button>
-            <button>About</button>
-            <button>Blog</button>
-            <button>Contact</button>
-            <button>FAQ</button>
+          <div className='flex gap-5 items-center'>
+            <Link href='/dashboard'><button>Dashboard</button></Link>
+            <Link href='/about'><button>About</button></Link>
+            <Link href='/blog'><button>Blog</button></Link>
+            <Link href='/contact'><button>Contact</button></Link>
+            <Link href='/faq'><button>FAQ</button></Link>
           </div>
         </div>
         <div className='flex justify-end'>

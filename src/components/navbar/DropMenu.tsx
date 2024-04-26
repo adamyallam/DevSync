@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link'
 import React, { useState, useEffect } from 'react';
 import {MenuIcon} from 'lucide-react'
 import {X} from 'lucide-react'
@@ -34,10 +35,10 @@ export default function DropMenu() {
     <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isOpen ? 'bg-gray-100' : 'bg-white'}`}>
       <div className="grid grid-cols-2 items-center border-b-2 border-white">
         <div className="flex justify-start ml-1">
-          <Image className='w-14 sm:w-16 p-2' src={Logo} alt="" />
+          <Link href='/'><Image className='w-14 sm:w-16 p-2' src={Logo} alt="" /></Link>
         </div>
         <div className="flex justify-end">
-          <button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button>
+          <Link href='/registration/signup'><button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button></Link>
           <button className="m-1 p-1" onClick={toggleMenu}>
             {isOpen ? <X /> : <MenuIcon />}
           </button>
@@ -47,17 +48,17 @@ export default function DropMenu() {
       {isOpen && (
       <div className="bg-white h-screen overflow-y-auto">
         <div className='grid grid-cols-1 grid-rows-8 text-black'>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12'>dashboard</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button>
-          <button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button>
+          <Link href='/dashboard'><button className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12'>dashboard</button></Link>
+          <Link href='/about'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>About</button></Link>
+          <Link href='/blog'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Blog</button></Link>
+          <Link href='/contact'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>Contact</button></Link>
+          <Link href='/faq'><button className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button></Link>
           <div className='bg-gray-100 h-4'/>       
           <div className='flex justify-center items-start'>
-            <button className='text-lg bg-black text-white p-3 w-80'>Get Started</button>
+            <Link href='/registration/signup'><button className='text-lg bg-black text-white p-3 w-80'>Get Started</button></Link>
           </div>
           <div className='flex justify-center'>
-            <button className='text-lg border-2 border-black text-black p-1 w-80 mb-5'>Log In</button>
+            <Link href='/registration/signin'><button className='text-lg border-2 border-black text-black p-1 w-80 mb-5'>Log In</button></Link>
           </div>
         </div>
 
