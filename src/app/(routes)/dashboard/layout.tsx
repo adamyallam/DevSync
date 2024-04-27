@@ -1,7 +1,7 @@
 import "src/app/globals.css";
 import NavBar from 'src/components/dashboard/NavBar'
 
-export default async function RootLayout({children}: {
+export default async function DashboardLayout({children}: {
   children: React.ReactNode
 }) {
   return (
