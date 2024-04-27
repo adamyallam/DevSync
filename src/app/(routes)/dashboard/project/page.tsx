@@ -1,6 +1,5 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
-import Dashboard from 'src/components/dashboard/Dashboard'
 
 
 export default async function App(){
@@ -9,7 +8,7 @@ export default async function App(){
   if (/*Remove "!" when done testing*/ !session) {
     return (
       <div>
-        
+        <h1 className='mt-28 ml-64 text-2xl'>Project page</h1>
       </div>
     )
   }

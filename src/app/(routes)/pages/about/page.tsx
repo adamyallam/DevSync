@@ -1,12 +1,9 @@
-import About from 'src/components/about/About'
-import Footer from 'src/components/footer/Footer'
-import TopBar from 'src/components/navbar/TopBar'
-import DropMenu from '@/components/navbar/DropMenu'
+
 
 const about = () => {
     return (
         <div>
-            <About />
+            <h1 className="text-3xl mb-4 p-3 mt-4 border-b-2 border-gray-400 w-2/5 mx-auto">About Us</h1>
         </div>
     )
 }

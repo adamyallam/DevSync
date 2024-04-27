@@ -1,12 +1,9 @@
-import TopBar from 'src/components/navbar/TopBar'
-import Footer from 'src/components/footer/Footer'
-import DropMenu from '@/components/navbar/DropMenu'
-import Faq from '@/components/faq/Faq'
+
 
 const faq = () => {
     return (
         <div>
-            <Faq />
+            <h1 className='flex justify-center text-3xl mb-96 mt-24'>FAQ</h1>
         </div>
     )
 
