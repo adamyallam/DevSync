@@ -1,17 +1,18 @@
-import "src/app/globals.css";
-import Footer from 'src/components/footer/Footer'
-import TopBar from 'src/components/navbar/TopBar'
-import DropMenu from 'src/components/navbar/DropMenu'
+import TopBar from "@/components/navbar/TopBar"
+import DropMenu from "@/components/navbar/DropMenu"
+import Footer from "@/components/footer/Footer"
 
-export default async function PagesLayout({children}: {
-  children: React.ReactNode
-}) {
-  return (
-    <div>
-        <DropMenu />
+export default function pagesLayout({
+    children, 
+  }: {
+    children: React.ReactNode
+  }) {
+    return (
+      <section>
         <TopBar />
+        <DropMenu />
         {children}
-        <Footer /> 
-    </div>
-  )
-}
+        <Footer />
+      </section>
+    )
+  }
