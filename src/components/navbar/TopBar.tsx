@@ -28,11 +28,11 @@ export default function TopBar() {
           <div className='flex items-center'>
             <Link href='/' className='fixed ml-2 mt-3 w-20 '><Image className='p-2' src={LogoBig} alt="" /></Link>
             <div className='flex ml-24 gap-5 mt-2'>
-              <Link href='/dashboard/home'><button>Dashboard</button></Link>
-              <Link href='/pages/about'><button>About</button></Link>
-              <Link href='/pages/blog'><button>Blog</button></Link>
-              <Link href='/pages/contact'><button>Contact</button></Link>
-              <Link href='/pages/faq'><button>FAQ</button></Link>
+              <Link href='/dashboard/home'>Dashboard</Link>
+              <Link href='/pages/about'>About</Link>
+              <Link href='/pages/blog'>Blog</Link>
+              <Link href='/pages/contact'>Contact</Link>
+              <Link href='/pages/faq'>FAQ</Link>
             </div>
           </div>
         <div className='flex justify-end mt-2 gap-1'>
