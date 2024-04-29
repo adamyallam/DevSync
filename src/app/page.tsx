@@ -1,9 +1,9 @@
-import Slogan from 'src/components/home/Slogan'
-import GoToDashboard from '../components/home/GoToDashboard'
-import GetStartedImages from '@/components/home/GetStartedImages'
-import Footer from 'src/components/footer/Footer'
-import TopBar from 'src/components/navbar/TopBar'
-import DropMenu from 'src/components/navbar/DropMenu'
+import Slogan from '@/components/main/home/Slogan'
+import GoToDashboard from '../components/main/home/GoToDashboard'
+import GetStartedImages from '@/components/main/home/GetStartedImages'
+import Footer from '@/components/main/footer/Footer'
+import TopBar from '@/components/main/navbar/TopBar'
+import DropMenu from '@/components/main/navbar/DropMenu'
 
 
 const App = () => {
