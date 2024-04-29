@@ -1,5 +1,6 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
+import Home from 'src/components/dashboard/pages/Home'
 
 
 export default async function App(){
@@ -10,7 +11,7 @@ export default async function App(){
   
     return (
       <div>
-        <h1 className='mt-28 ml-64 text-2xl'>Home page</h1>
+        <Home />
       </div>
     )
 
