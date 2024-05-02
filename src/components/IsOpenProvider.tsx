@@ -1,31 +1,31 @@
 'use client'
-import { OpenContext } from '@/components/OpenContext';
 import { useState } from 'react';
+import { OpenContext } from '@/components/OpenContext';
+
+//Component Imports
 import NavBar from './dashboard/NavBar';
-import Button from './Button';
+import ToggleButton from './ToggleButton';
 
 
 interface Props {
     children: React.ReactNode
 }
 
-export const Organizer: React.FC<Props> = ({ children }) => {
+export const IsOpenProvider: React.FC<Props> = ({ children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(true)
     
     const updateIsOpen = (newState: boolean) => {
         setIsOpen(newState);
     };
 
-    
-
   return (
     <div>
       <OpenContext.Provider value={isOpen}>
-        <NavBar button={<Button updater={updateIsOpen} />}/>
+        <NavBar toggleButton={<ToggleButton updateIsOpen={updateIsOpen} />}/>
         {children}
       </OpenContext.Provider>
     </div>
   );
 }
 
-export default Organizer
+export default IsOpenProvider
