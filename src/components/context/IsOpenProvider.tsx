@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react';
-import { OpenContext } from '@/components/OpenContext';
+import { OpenContext } from '@/components/context/OpenContext';
 
 //Component Imports
-import NavBar from './dashboard/NavBar';
+import NavBar from '../dashboard/NavBar';
 import ToggleButton from './ToggleButton';
 
 

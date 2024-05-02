@@ -1,16 +1,18 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react';
+import React from 'react';
+import { usePathname } from 'next/navigation'
 import { useContext } from 'react';
-import { OpenContext } from '@/components/OpenContext';
-import {usePathname} from 'next/navigation'
-import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
+import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound } from 'lucide-react'
+
+// Component Imports
+import { OpenContext } from '@/components/context/OpenContext';
 
 interface Props {
-  button: React.ReactNode
+  toggleButton: React.ReactNode
 }
 
-export const NavBar: React.FC<Props> = ({button}) => {
+export const NavBar: React.FC<Props> = ({toggleButton}) => {
   const isOpen = useContext(OpenContext);
   const pathname = usePathname()
 
@@ -20,7 +22,7 @@ export const NavBar: React.FC<Props> = ({button}) => {
       <div className='grid grid-cols-3 bg-gray-700 p-3'>
         
         <div className='flex'>
-          {button}
+          {toggleButton}
           <button className='border-2 p-1 bg-white rounded-full w-16 h-8'>Create</button>
         </div>
 

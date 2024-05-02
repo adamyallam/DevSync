@@ -1,3 +1,4 @@
+// Component Imports
 import Slogan from '@/components/main/home/Slogan'
 import GoToDashboard from '../components/main/home/GoToDashboard'
 import GetStartedImages from '@/components/main/home/GetStartedImages'

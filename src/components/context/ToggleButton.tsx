@@ -1,15 +1,16 @@
 import {MenuIcon, X } from 'lucide-react'
 import { useContext } from 'react';
-import { OpenContext } from '@/components/OpenContext';
+import { OpenContext } from '@/components/context/OpenContext';
 
 interface Props {
-    updater: (newIsOpen: boolean) => void
+    updateIsOpen: (newState: boolean) => void
 }
 
-export const Button: React.FC<Props> = ({updater}) => { 
+export const ToggleButton: React.FC<Props> = ({updateIsOpen}) => { 
     const isOpen = useContext(OpenContext)
+
     const toggleMenu = () => {
-        updater(!isOpen);
+        updateIsOpen(!isOpen);
       }
 
     return (
@@ -21,4 +22,4 @@ export const Button: React.FC<Props> = ({updater}) => {
     )
 }
 
-export default Button
+export default ToggleButton

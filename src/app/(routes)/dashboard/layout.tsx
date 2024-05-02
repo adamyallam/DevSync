@@ -1,6 +1,4 @@
-import NavBar from "@/components/dashboard/NavBar"
-import Organizer from "@/components/Organizer"
-import { LevelContext } from "@/components/OpenContext"
+import IsOpenProvider from '@/components/context/IsOpenProvider'
 
 
 interface Props {
@@ -10,7 +8,7 @@ interface Props {
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
       <section>
-        <Organizer children={children} />
+        <IsOpenProvider children={children} />
       </section>
     )
   }
