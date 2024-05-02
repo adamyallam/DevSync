@@ -1,25 +1,26 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { OpenContext } from '@/components/OpenContext';
 import {usePathname} from 'next/navigation'
 import {MenuIcon, X, Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound} from 'lucide-react'
 
-export const NavBar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+interface Props {
+  button: React.ReactNode
+}
+
+export const NavBar: React.FC<Props> = ({button}) => {
+  const isOpen = useContext(OpenContext);
   const pathname = usePathname()
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  }
 
   return (
     <div className='fixed w-full top-0 z-10'>
       <div className='grid grid-cols-3 bg-gray-700 p-3'>
         
         <div className='flex'>
-          <button className='mr-4 ' onClick={toggleMenu}>
-            {isOpen ? <X /> : <MenuIcon />}
-          </button>
+          {button}
           <button className='border-2 p-1 bg-white rounded-full w-16 h-8'>Create</button>
         </div>
 
