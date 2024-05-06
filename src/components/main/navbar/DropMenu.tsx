@@ -35,7 +35,7 @@ export default function DropMenu() {
     <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isOpen ? 'bg-gray-100' : 'bg-white'}`}>
       <div className="grid grid-cols-2 items-center border-b-2 border-white">
         <div className="flex justify-start ml-1">
-          <Link href='/'><Image className='w-14 sm:w-16 p-2' src={Logo} alt="" /></Link>
+          <Link href='/'><Image className='w-14 sm:w-16 p-2' src={Logo} alt="" onClick={toggleMenu}/></Link>
         </div>
         <div className="flex justify-end">
           <Link href='/registration/signup'><button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button></Link>
