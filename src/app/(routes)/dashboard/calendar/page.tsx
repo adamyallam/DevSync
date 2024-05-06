@@ -9,7 +9,7 @@ export default function calendar(){
 
     return (
       <div>
-        <h1 className='mt-28 ml-64 text-2xl'>Calendar page</h1>
+        <Calendar />
       </div>
     )
   }

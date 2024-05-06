@@ -1,6 +1,7 @@
 import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
 import {getServerSession} from 'next-auth'
 
+import Project from '@/components/dashboard/pages/Project'
 
 export default async function App(){
   const session = await getServerSession(authOptions)
@@ -8,7 +9,7 @@ export default async function App(){
   if (/*Remove "!" when done testing*/ !session) {
     return (
       <div>
-        <h1 className='mt-28 ml-64 text-2xl'>Project page</h1>
+        <Project />
       </div>
     )
   }

@@ -9,8 +9,8 @@ export const Inbox = () => {
     const isOpen = useContext(OpenContext);
 
     return (
-        <div className={isOpen ? `flex justify-center text-2xl` : 'flex justify-end text-2xl'}>
-            <h1 className='mt-20 mr-40'>Inbox</h1>
+        <div className={isOpen ? `ml-64` : 'ml-8'}>
+            <h1 className='mt-20 text-2xl'>Inbox</h1>
         </div>
     )
 }
