@@ -1,11 +1,16 @@
+'use client'
+import { useContext } from 'react';
 
+// Component Imports
+import { OpenContext } from '@/components/context/OpenContext';
 
 
 export const Inbox = () => { 
+    const isOpen = useContext(OpenContext);
 
     return (
-        <div className="mt-48">
-            <p className="text-2xl">Inbox Page</p>
+        <div className={isOpen ? `flex justify-center text-2xl` : 'flex justify-end text-2xl'}>
+            <h1 className='mt-20 mr-40'>Inbox</h1>
         </div>
     )
 }
