@@ -25,7 +25,7 @@ const SignInForm = () => {
         console.log(newSignIn.error)
         setSigningIn(false)
       } else {
-        router.push('/dashboard')
+        router.push('/dashboard/home')
       }
     }
 
