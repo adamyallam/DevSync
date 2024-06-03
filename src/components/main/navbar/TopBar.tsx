@@ -36,8 +36,8 @@ export default function TopBar() {
             </div>
           </div>
         <div className='flex justify-end mt-2 gap-1'>
-          <button className='border-2 border-black  p-1' onClick={() => router.push('/registration/signin')}>Sign in</button>
-          <button className='border-2 border-black  p-1' onClick={() => router.push('/registration/signup')}>Sign up</button>
+          <button className='border-2 border-black  p-1' onClick={() => router.push('user/registration/signin')}>Sign in</button>
+          <button className='border-2 border-black  p-1' onClick={() => router.push('user/registration/signup')}>Sign up</button>
         </div>
       </div>
     </div>

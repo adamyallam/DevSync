@@ -55,10 +55,10 @@ export default function DropMenu() {
           <Link href='/pages/faq'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-b-gray-300 p-3 w-11/12'>FAQ</button></Link>
           <div className='bg-gray-100 h-4'/>       
           <div className='flex justify-center items-start'>
-            <Link href='/registration/signup'><button className='text-lg bg-black text-white p-3 w-80'>Get Started</button></Link>
+            <Link href='user/registration/signup'><button className='text-lg bg-black text-white p-3 w-80'>Get Started</button></Link>
           </div>
           <div className='flex justify-center'>
-            <Link href='/registration/signin'><button className='text-lg border-2 border-black text-black p-1 w-80 mb-5'>Log In</button></Link>
+            <Link href='user/registration/signin'><button className='text-lg border-2 border-black text-black p-1 w-80 mb-5'>Log In</button></Link>
           </div>
         </div>
 
