@@ -11,11 +11,6 @@ export default async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        '/dashboard/home', 
-        '/dashboard/tasks',
-        '/dashboard/calendar',
-        '/dashboard/inbox',
-        '/dashboard/project',
-        '/dashboard/workspace'
+        '/dashboard/:path*', 
     ]
 }
