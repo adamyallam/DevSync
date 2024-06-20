@@ -7,7 +7,7 @@ export default async function middleware(req: NextRequest) {
     if (!session && req.nextUrl.pathname.startsWith('/dashboard')) {
         return NextResponse.redirect(new URL('http://localhost:3000/user/registration/signin', req.url))
     } else if (session && req.nextUrl.pathname.startsWith('/user/registration')) {
-        return NextResponse.redirect(new URL('http://localhost:3000/user/logout', req.url))
+        return NextResponse.redirect(new URL('http://localhost:3000/dashboard/home', req.url))
     }
 }
 
