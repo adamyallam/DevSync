@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { OpenContext } from '@/components/context/OpenContext';
 
 export interface Props {
-    name: any;
+    name: React.ReactNode;
   }
 
 export const Home: React.FC<Props> = (props) => { 
