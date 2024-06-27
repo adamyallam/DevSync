@@ -15,9 +15,16 @@ const SignUpForm = () => {
 
     const [loading, setLoading] = useState(false)
 
+    const capitalizeName = (name: string) => {
+        const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        return capitalizedName
+      };
+
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         setLoading(true)
+
+        console.log(userData)
 
         const res = await fetch("http://localhost:3000/api/user", {
             method: "POST",
@@ -43,21 +50,21 @@ const SignUpForm = () => {
                     type="text"
                     placeholder='First Name'
                     value={userData.firstName}
-                     onChange={(e) => {setUserData({...userData, firstName: e.target.value})}}
+                     onChange={(e) => {setUserData({...userData, firstName: capitalizeName(e.target.value)})}}
                      />
                 <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
                     required
                     type="text"
                     placeholder='Last Name'
                     value={userData.lastName}
-                    onChange={(e) => {setUserData({...userData, lastName: e.target.value})}}
+                    onChange={(e) => {setUserData({...userData, lastName: capitalizeName(e.target.value)})}}
                     />
                 <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
                     required
                     type="text"
                     placeholder='Username'
                     value={userData.username}
-                    onChange={(e) => {setUserData({...userData, username: e.target.value})}}
+                    onChange={(e) => {setUserData({...userData, username: e.target.value.toLowerCase()})}}
                     />
                 <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
                     required
