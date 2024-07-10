@@ -4,6 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound } from 'lucide-react'
+import { Transition } from '@headlessui/react'
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
@@ -31,7 +32,15 @@ export const NavBar: React.FC<Props> = ({toggleButton}) => {
         </div>
       </div>
 
-      {isOpen && (
+      <Transition
+      show={isOpen}
+      enter="transform transition duration-300"
+      enterFrom="-translate-x-full"
+      enterTo="translate-x-0"
+      leave="transform transition duration-300"
+      leaveFrom="translate-x-0"
+      leaveTo="-translate-x-full"
+    >
         <div className=' h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
           <div className='flex flex-col mt-7 text-gray-200'>
             <div className='mb-7'>
@@ -96,7 +105,7 @@ export const NavBar: React.FC<Props> = ({toggleButton}) => {
             </div>
           </div>
         </div>
-      )}
+      </Transition>
 
     </div>
   )
