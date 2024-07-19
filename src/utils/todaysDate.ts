@@ -1,3 +1,5 @@
+
+// Gets current date in "day, month date" formatt
 export const getCurrentDate = (): string => {
     const today = new Date();
     
@@ -13,3 +15,18 @@ export const getCurrentDate = (): string => {
     
     return `${dayOfWeek}, ${month} ${date}`;
   };
+
+  // Gets the period of day, returns either "Morning" "Afternoon" or "Evening"
+  export const getDayPeriod = (): string => {
+    const today = new Date()
+    const hours = String(today.getHours()).padStart(2, '0');
+
+
+    if ('12' > hours) {
+        return 'Morning'
+    } else if ('12' < hours && '17' > hours) {
+        return 'Afternoon'
+    } else {
+        return 'Evening'
+    }
+  }
