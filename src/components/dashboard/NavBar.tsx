@@ -92,7 +92,7 @@ export const NavBar: React.FC<Props> = ({toggleButton}) => {
               </Link>
             </div>
 
-            <div className='fixed bottom-0 w-60 pb-8 z-10 bg-gray-700 border-t-2'>
+            <div className='mt-44 bottom-0 w-60 pb-8 z-10 bg-gray-700 border-t-2'>
               <div className='flex justify-center mt-4'>
                 <button className='border-2 w-48 h-10'>Create Project</button>
               </div>
