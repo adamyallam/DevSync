@@ -8,7 +8,7 @@ export interface Props {
     name: React.ReactNode;
   }
 
-export const Home: React.FC<Props> = (props) => { 
+export const UserWelcome: React.FC<Props> = (props) => { 
     
     return (
       <div>
@@ -30,4 +30,4 @@ export const Home: React.FC<Props> = (props) => {
 }
 
 
-export default Home
+export default UserWelcome

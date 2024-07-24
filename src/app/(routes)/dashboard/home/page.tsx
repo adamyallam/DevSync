@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // Component Imports
-import Home from 'src/components/dashboard/pages/Home'
+import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
 import ContentTransition from "@/components/dashboard/ContentTransition";
 
 export default async function home(){
@@ -12,7 +12,7 @@ export default async function home(){
     <div>
       <ContentTransition>
         <h1 className='text-2xl'>Home</h1>
-        <Home name={session?.user.firstName}/>
+        <UserWelcome name={session?.user.firstName}/>
       </ContentTransition>
     </div>
   )
