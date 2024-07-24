@@ -23,10 +23,10 @@ export const getCurrentDate = (): string => {
 
 
     if ('12' > hours) {
-        return 'Morning'
+        return 'morning'
     } else if ('12' < hours && '17' > hours) {
-        return 'Afternoon'
+        return 'afternoon'
     } else {
-        return 'Evening'
+        return 'evening'
     }
   }
