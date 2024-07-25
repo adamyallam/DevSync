@@ -15,8 +15,10 @@ export default async function home(){
       <ContentTransition>
         <h1 className='text-2xl'>Home</h1>
         <UserWelcome name={session?.user.firstName}/>
+        <div className="flex justify-center gap-4 mt-8">
           <TasksCard />
           <ProjectsCard />
+        </div>
       </ContentTransition>
     </div>
   )
