@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // Component Imports
 import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
-import ContentTransition from "@/components/dashboard/ContentTransition";
+import ContentTransition from "@/utils/ContentTransition";
 
 export default async function home(){
   const session = await getServerSession(authOptions)
