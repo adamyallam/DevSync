@@ -2,7 +2,7 @@
 
 // Component Imports
 
-export const TasksCard = () => { 
+export const ProjectsCard = () => { 
     
     return (
       <div>
@@ -14,4 +14,4 @@ export const TasksCard = () => {
 }
 
 
-export default TasksCard
+export default ProjectsCard
