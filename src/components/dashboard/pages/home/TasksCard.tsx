@@ -23,5 +23,3 @@ export const TasksCard = () => {
 
 
 export default TasksCard
-
-// border-b-2 border-black pb-8
