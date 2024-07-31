@@ -5,7 +5,7 @@
 export const ProjectsCard = () => { 
     
     return (
-      <div className="w-5/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
+      <div className="w-4/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
 
       </div>
     )

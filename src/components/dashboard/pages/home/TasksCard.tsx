@@ -5,7 +5,7 @@
 export const TasksCard = () => { 
     
     return (
-      <div className="w-5/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
+      <div className="w-4/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
         <div className="flex items-center p-8 ml-5">
 
           <div className="w-14 h-14 mb-5 border-2 border-black bg-gray-200 rounded-full"></div> {/* Profile Photo Placeholder */}
