@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { OpenContext } from '@/components/context/OpenContext';
 
 //Component Imports
-import NavBar from '../dashboard/NavBar';
+import TopBar from '../dashboard/TopBar';
+import SideBar from '../dashboard/SideBar';
 import ToggleButton from './ToggleButton';
 
 
@@ -21,7 +22,9 @@ export const IsOpenProvider: React.FC<Props> = ({ children }) => {
   return (
     <div>
       <OpenContext.Provider value={isOpen}>
-        <NavBar toggleButton={<ToggleButton updateIsOpen={updateIsOpen} />}/>
+        <TopBar toggleButton={<ToggleButton updateIsOpen={updateIsOpen} />}>
+          <SideBar />
+        </TopBar>
         {children}
       </OpenContext.Provider>
     </div>
