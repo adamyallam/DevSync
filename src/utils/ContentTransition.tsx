@@ -12,7 +12,7 @@ export interface Props {
     const isOpen = useContext(OpenContext);
 
     return (
-        <div className={`transition-all duration-300 mt-10 ${isOpen ? 'translate-x-32' : ''}`}>
+        <div className={`transition-all duration-300 mt-2 ${isOpen ? 'translate-x-32' : ''}`}>
             {props.children}
         </div>
     )

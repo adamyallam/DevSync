@@ -16,12 +16,12 @@ export const SideBar = () => {
       <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
         <div className='flex flex-col mt-7 text-gray-200'>
           <div className='mb-7'>
-              <Link href='/dashboard/home' className={`flex items-center h-8 ${pageTitle() === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
+            <Link href='/dashboard/home' className={`flex items-center h-8 ${pageTitle() === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
 
-                <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Home</span>
+              <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
+              <span className='ml-1 text-sm'>Home</span>
 
-              </Link>
+            </Link>
 
             <Link href='/dashboard/tasks' className={`flex items-center h-8 ${pageTitle() === 'Tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
                 <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
