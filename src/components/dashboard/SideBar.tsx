@@ -14,7 +14,6 @@ export const SideBar = () => {
   return (
     <div className={`transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
       <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
-        <h1 className='fixed ml-64 pl-4 text-2xl mt-6'>{pageTitle()}</h1>
         <div className='flex flex-col mt-7 text-gray-200'>
           <div className='mb-7'>
               <Link href='/dashboard/home' className={`flex items-center h-8 ${pageTitle() === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>

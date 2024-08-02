@@ -15,7 +15,8 @@ export const TopBar: React.FC<Props> = (props) => {
   const isOpen = useContext(OpenContext);
 
   return (
-    <div className='pb-24'>
+    <div>
+      <h1 className={`transition-all duration-300 text-2xl ${isOpen ? 'mt-20 ml-8 translate-x-60' : 'mt-20 ml-8'}`}>{pageTitle()}</h1>
       <div className='fixed w-full top-0 z-10'>
         <div className='grid grid-cols-3 bg-gray-700 p-3'>
           
