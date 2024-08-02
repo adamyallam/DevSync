@@ -13,9 +13,8 @@ export const SideBar = () => {
 
   return (
     <div className={`transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
-      <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600'>
-        <div className='flex flex-col mt-7 text-gray-200'>
-          <div className='mb-7'>
+      <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600 text-gray-200'>
+          <div className='mb-7 mt-6'>
             <Link href='/dashboard/home' className={`flex items-center h-8 ${pageTitle() === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
 
               <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
@@ -66,7 +65,7 @@ export const SideBar = () => {
             </Link>
           </div>
 
-          <div className='text-gray-200 '>
+          <div className='text-gray-200 mb-3'>
             <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
             <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${pageTitle() === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
@@ -76,18 +75,16 @@ export const SideBar = () => {
             </Link>
           </div>
 
-          <div className='mt-44 bottom-0 w-60 pb-8 z-10 bg-gray-700 border-t-2'>
+          <div className='flex flex-col border-t-2'>
             <div className='flex justify-center mt-4'>
-              <button className='border-2 w-48 h-10'>Create Project</button>
+              <button className='border-2 p-2 w-11/12'>Create Project</button>
             </div>
-            
-            <div className='flex justify-center gap-2 mt-3'>
+            <div className='flex justify-center gap-3 mt-2'>
               <Instagram size={24} color="#e5e7eb" strokeWidth={1.5} />
               <Twitter size={24} color="#e5e7eb" strokeWidth={1.5} />
               <Linkedin size={24} color="#e5e7eb" strokeWidth={1.5} />
             </div>
-          </div>
-        </div>
+          </div>       
       </div>
     </div>
   )
