@@ -52,6 +52,18 @@ export const SideBar = () => {
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+                <div className='border-2 bg-white rounded-md w-4 h-4' />
+                <span className='ml-2 text-sm'>ProjectName</span>
+            </Link>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+                <div className='border-2 bg-white rounded-md w-4 h-4' />
+                <span className='ml-2 text-sm'>ProjectName</span>
+            </Link>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+                <div className='border-2 bg-white rounded-md w-4 h-4' />
+                <span className='ml-2 text-sm'>ProjectName</span>
+            </Link>
           </div>
 
           <div className='text-gray-200 '>
