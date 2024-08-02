@@ -1,5 +1,7 @@
 'use client'
 
+import { Plus } from "lucide-react"
+
 // Component Imports
 
 export const TasksCard = () => { 
@@ -34,7 +36,10 @@ export const TasksCard = () => {
         </div>
 
         <div className="border-t-2 border-gray-300"></div> {/* Separator */}
-        <p className="text-sm mt-2 ml-3 pb-3">Create task</p>
+        <div className="flex mt-2 ml-6">
+          <Plus size={20}/>
+          <p className="text-sm pb-3 ml-1">Create task</p>
+        </div>
         <div className="flex flex-col">
           <button className="flex justify-start ml-5 p-1 w-11/12 border-t-2 border-b-2">Task</button>
           <button className="flex justify-start ml-5 p-1 w-11/12 border-b-2">Task</button>
