@@ -7,7 +7,7 @@ interface Props {
 
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
-      <section>
+      <section className='overflow-x-hidden'>
         <IsOpenProvider children={children} />
       </section>
     )
