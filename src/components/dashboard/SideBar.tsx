@@ -12,9 +12,9 @@ export const SideBar = () => {
   const isOpen = useContext(OpenContext);
 
   return (
-    <div className={`transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
-      <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600 text-gray-200'>
-          <div className='mb-7 mt-6'>
+    <div className={`transition-all duration-300 text-gray-200 ${isOpen ? '' : '-translate-x-60'}`}>
+      <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600 overflow-auto'>
+          <div className='mt-4'>
             <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('Home')}`}>
 
               <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
@@ -33,46 +33,38 @@ export const SideBar = () => {
                 <span className='ml-1 text-sm'>Inbox</span>
 
             </Link>
+            <div className='border-t-2 border-gray-600 mb-4 mt-4'/>
           </div>
 
-          <div className='mb-7 text-gray-200'>
-            <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
+          <div className=''>
+            <div className='mb-7 text-gray-200'>
+              <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
 
-            <Link href='/dashboard/calendar' className={`flex items-center  h-8 ${applySidebarClass('Calendar')}`}>
-                <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Calendar</span>
-            </Link>
-          </div>
+              <Link href='/dashboard/calendar' className={`flex items-center  h-8 ${applySidebarClass('Calendar')}`}>
+                  <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Calendar</span>
+              </Link>
+            </div>
 
-          <div className='mb-7 text-gray-200'>
-            <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
+            <div className='mb-7 text-gray-200'>
+              <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
-                <div className='border-2 bg-white rounded-md w-4 h-4' />
-                <span className='ml-2 text-sm'>ProjectName</span>
-            </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
-                <div className='border-2 bg-white rounded-md w-4 h-4' />
-                <span className='ml-2 text-sm'>ProjectName</span>
-            </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
-                <div className='border-2 bg-white rounded-md w-4 h-4' />
-                <span className='ml-2 text-sm'>ProjectName</span>
-            </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
-                <div className='border-2 bg-white rounded-md w-4 h-4' />
-                <span className='ml-2 text-sm'>ProjectName</span>
-            </Link>
-          </div>
+              <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
+                  <div className='border-2 bg-white rounded-md w-4 h-4' />
+                  <span className='ml-2 text-sm'>ProjectName</span>
+              </Link>
 
-          <div className='text-gray-200 mb-3'>
-            <h1 className='ml-8 mb-1 font-bold'>Team</h1>
+            </div>
 
-            <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${applySidebarClass('Workspace')}`}>
+            <div className='text-gray-200 mb-3'>
+              <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
-                <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Workspace</span>
-            </Link>
+              <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${applySidebarClass('Workspace')}`}>
+
+                  <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
+                  <span className='ml-1 text-sm'>Workspace</span>
+              </Link>
+            </div>
           </div>
 
           <div className='flex flex-col border-t-2'>
@@ -84,6 +76,7 @@ export const SideBar = () => {
               <Twitter size={24} color="#e5e7eb" strokeWidth={1.5} />
               <Linkedin size={24} color="#e5e7eb" strokeWidth={1.5} />
             </div>
+            <div className='mb-12' />
           </div>       
       </div>
     </div>
