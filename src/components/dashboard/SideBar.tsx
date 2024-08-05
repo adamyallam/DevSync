@@ -6,7 +6,7 @@ import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, 
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
-import { pageTitle } from '@/utils/pageTitle';
+import { applySidebarClass } from '@/utils/getPageTitle';
 
 export const SideBar = () => {
   const isOpen = useContext(OpenContext);
@@ -15,19 +15,19 @@ export const SideBar = () => {
     <div className={`transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
       <div className='h-screen bg-gray-700 w-60 border-t-2 border-gray-600 text-gray-200'>
           <div className='mb-7 mt-6'>
-            <Link href='/dashboard/home' className={`flex items-center h-8 ${pageTitle() === 'Home' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
+            <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('Home')}`}>
 
               <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
               <span className='ml-1 text-sm'>Home</span>
 
             </Link>
 
-            <Link href='/dashboard/tasks' className={`flex items-center h-8 ${pageTitle() === 'Tasks' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`}>
+            <Link href='/dashboard/tasks' className={`flex items-center h-8 ${applySidebarClass('Tasks')}`}>
                 <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Tasks</span>
             </Link>
 
-            <Link href='/dashboard/inbox' className={`flex items-center h-8 ${pageTitle() === 'Inbox' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4' : 'ml-8 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-4 hover:pl-4'}`} >
+            <Link href='/dashboard/inbox' className={`flex items-center h-8 ${applySidebarClass('Inbox')}`} >
               
                 <Inbox size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Inbox</span>
@@ -38,7 +38,7 @@ export const SideBar = () => {
           <div className='mb-7 text-gray-200'>
             <h1 className='ml-8 mb-1 font-bold'>Insights</h1>
 
-            <Link href='/dashboard/calendar' className={`flex items-center  h-8 ${pageTitle() === 'Calendar' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/calendar' className={`flex items-center  h-8 ${applySidebarClass('Calendar')}`}>
                 <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Calendar</span>
             </Link>
@@ -47,19 +47,19 @@ export const SideBar = () => {
           <div className='mb-7 text-gray-200'>
             <h1 className='ml-8 mb-1 font-bold'>Projects</h1>
 
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
-            <Link href='/dashboard/project' className={`flex items-center  h-8 ${pageTitle() === 'Project' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/project' className={`flex items-center  h-8 ${applySidebarClass('Project')}`}>
                 <div className='border-2 bg-white rounded-md w-4 h-4' />
                 <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
@@ -68,7 +68,7 @@ export const SideBar = () => {
           <div className='text-gray-200 mb-3'>
             <h1 className='ml-8 mb-1 font-bold'>Team</h1>
 
-            <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${pageTitle() === 'Workspace' ? 'bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-5 pl-5' : 'ml-10 hover:bg-gray-800 hover:bg-opacity-60 hover:rounded-lg hover:w-52 hover:h-8 hover:ml-5 hover:pl-5'}`}>
+            <Link href='/dashboard/workspace' className={`flex items-center  h-8 ${applySidebarClass('Workspace')}`}>
 
                 <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
                 <span className='ml-1 text-sm'>Workspace</span>

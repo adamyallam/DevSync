@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .sidebar-selected {
+    @apply bg-black bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4
+  }
+
+  .sidebar-highlighted {
+    @apply ml-8 
+  }
+
+  .sidebar-highlighted:hover {
+    @apply bg-gray-800 bg-opacity-60 rounded-lg w-52 h-8 ml-4 pl-4
+  }
+}
