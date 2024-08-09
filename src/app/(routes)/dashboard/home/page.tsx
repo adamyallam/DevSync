@@ -18,7 +18,6 @@ export default async function home(){
           <TasksCard />
           <ProjectsCard />
         </div>
-        <h1 className="ml-32 mt-96">Just to make some space</h1>
       </ContentTransition>
     </div>
   )
