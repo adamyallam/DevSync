@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound } from 'lucide-react'
 
 // Component Imports
@@ -10,6 +10,24 @@ import { applySidebarClass } from '@/utils/getPageTitle';
 
 export const SideBar = () => {
   const isOpen = useContext(OpenContext);
+  const [isFixed, setIsFixed] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight <= 510 ) {
+        setIsFixed(false)
+      } else {
+        setIsFixed(true)
+      }
+    };
+
+    window.addEventListener('resize', handleScroll);
+    handleScroll(); // Check on mount
+
+    return () => {
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   return (
     <div className={`flex flex-col h-screen transition-all duration-300 text-gray-200 ${isOpen ? '' : '-translate-x-60'}`}>
@@ -30,8 +48,7 @@ export const SideBar = () => {
         </div>
       </div>
 
-      
-      <div className='bg-gray-700 w-60 flex-grow'>
+      <div className='bg-gray-700 w-60 flex-grow pb-[50px] overflow-y-scroll overflow-x-hidden'>
         <div className='mb-5 pt-3'>
           <h1 className='ml-8 font-bold'>Insights</h1>
           <Link href='/dashboard/calendar' className={`flex items-center h-8 ${applySidebarClass('Calendar')}`}>
@@ -39,7 +56,7 @@ export const SideBar = () => {
             <span className='ml-1 text-sm'>Calendar</span>
           </Link>
         </div>
-
+        
         <div className='mb-5'>
           <h1 className='ml-8 font-bold'>Projects</h1>
           <Link href='/dashboard/project' className={`flex items-center h-8 ${applySidebarClass('Project')}`}>
@@ -55,9 +72,9 @@ export const SideBar = () => {
             <span className='ml-1 text-sm'>Workspace</span>
           </Link>
         </div>
-      </div> 
- 
-      <div className='bg-gray-700 w-60 h-40'>
+      </div>
+
+      <div className={`bg-gray-700 w-60 ${isFixed ? 'fixed bottom-0' : 'fixed top-[405px]'}`}>
         <div className='flex flex-col items-center border-t-2 pb-3'>
           <button className='border-2 p-2 w-11/12 mt-4'>Create Project</button>
           <div className='flex mt-2 gap-2'>
