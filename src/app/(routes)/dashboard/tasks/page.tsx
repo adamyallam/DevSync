@@ -1,12 +1,15 @@
 
 // Component Imports
-import Tasks from '@/components/dashboard/pages/Tasks'
+import Header from '@/components/dashboard/pages/tasks/Header'
+import ContentTransition from '@/utils/ContentTransition'
 
 export default async function tasks() {
 
   return (
     <div>
-      <Tasks />
+      <ContentTransition>
+        <Header />
+      </ContentTransition>
     </div>
   )
 
