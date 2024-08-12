@@ -4,7 +4,6 @@ import { useContext } from 'react';
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
-import { getPageTitle } from '@/utils/getPageTitle';
 
 interface Props {
   toggleButton: React.ReactNode,
@@ -16,7 +15,6 @@ export const TopBar: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <h1 className={`transition-all duration-300 text-2xl mt-20 ml-8 ${isOpen ? 'translate-x-60' : ''}`}>{getPageTitle()}</h1>
       <div className='fixed w-full top-0 z-10'>
         <div className='grid grid-cols-3 bg-gray-700 p-2'>
           

@@ -13,7 +13,9 @@ export default async function home(){
   return (
     <div>
       <ContentTransition>
-        <UserWelcome name={session?.user.firstName}/>
+        <div className="mt-32">
+          <UserWelcome name={session?.user.firstName}/>
+        </div>
         <div className="flex justify-center gap-4 mt-12">
           <TasksCard />
           <ProjectsCard />
