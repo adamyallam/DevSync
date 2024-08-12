@@ -7,7 +7,7 @@ import { ChevronDown, Plus } from "lucide-react"
 export const ProjectsCard = () => { 
     
     return (
-      <div className="w-4/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
+      <div className="w-w-550 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
         <div className="flex items-center mt-6 ml-10">
           <h1 className="text-2xl">Projects</h1>
           <p className="text-xs mt-1 ml-2">Recents</p>

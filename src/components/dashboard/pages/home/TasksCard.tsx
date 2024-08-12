@@ -7,7 +7,7 @@ import { Plus } from "lucide-react"
 export const TasksCard = () => { 
     
     return (
-      <div className="w-4/12 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
+      <div className="w-w-550 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
 
         <div className="flex items-center mt-8 ml-12">
           <div className="w-14 h-14 mb-5 border-2 border-gray-600 bg-gray-200 rounded-full"></div> {/* Profile Photo Placeholder */}
