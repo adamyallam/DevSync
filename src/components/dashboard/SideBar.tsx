@@ -48,7 +48,7 @@ export const SideBar = () => {
         </div>
       </div>
 
-      <div className='bg-gray-700 w-60 flex-grow pb-[50px] overflow-y-scroll overflow-x-hidden'>
+      <div className='bg-gray-700 w-60 flex-grow pb-[50px]'>{/*overflow-y-scroll overflow-x-hidden*/}
         <div className='mb-5 pt-3'>
           <h1 className='ml-8 font-bold'>Insights</h1>
           <Link href='/dashboard/calendar' className={`flex items-center h-8 ${applySidebarClass('Calendar')}`}>
