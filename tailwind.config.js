@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      width: {
+        "w-550" : '550px',
+      },
       colors: {
         'primary': '#363636',
         'secondary': '#ff9147',
