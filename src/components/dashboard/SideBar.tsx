@@ -39,7 +39,6 @@ export const SideBar = () => {
 
   return (
     <div className='grid'>
-      <h1 className={`transition-all duration-300 text-2xl mt-8 ml-8 ${isOpen ? 'translate-x-60' : ''}`}>{getPageTitle()}</h1>
       <div className={`flex flex-col fixed h-screen transition-all duration-300 text-gray-200 ${isOpen ? '' : '-translate-x-60'}`}>
         <div className= 'bg-gray-700 w-60'> 
           <div className='border-t-2 border-b-2 border-gray-600 pt-4 pb-4'>
