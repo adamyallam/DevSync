@@ -8,11 +8,3 @@ export function getPageTitle() {
   const lastSegment = segments[segments.length - 1];
   return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
 };
-
-export function applySidebarClass(pageTitle: string) {
-  if (getPageTitle() === pageTitle) {
-    return 'sidebar-selected'
-  } else {
-    return 'sidebar-highlighted'
-  }
-}

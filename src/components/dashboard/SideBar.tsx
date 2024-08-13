@@ -7,11 +7,18 @@ import { getPageTitle } from '@/utils/getPageTitle';
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
-import { applySidebarClass } from '@/utils/getPageTitle';
 
 export const SideBar = () => {
   const isOpen = useContext(OpenContext);
   const [isFixed, setIsFixed] = useState(true)
+
+  function applySidebarClass(pageTitle: string) {
+    if (getPageTitle() === pageTitle) {
+      return 'sidebar-selected'
+    } else {
+      return 'sidebar-highlighted'
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
