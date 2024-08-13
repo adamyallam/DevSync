@@ -1,6 +1,6 @@
 'use client'
-import { getCurrentDate } from '@/utils/todaysDate';
-import { getDayPeriod } from '@/utils/todaysDate';
+import { getCurrentDate } from '@/utils/getDate';
+import { getDayPeriod } from '@/utils/getDate';
 
 // Component Imports
 
