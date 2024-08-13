@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // Component Imports
 import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
-import ContentTransition from "@/utils/ContentTransition";
+import ContentTransition from "@/components/dashboard/ContentTransition";
 import TasksCard from "@/components/dashboard/pages/home/TasksCard";
 import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
 
