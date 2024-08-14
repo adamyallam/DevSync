@@ -30,7 +30,7 @@ export const SideBar = () => {
     };
 
     window.addEventListener('resize', handleScroll);
-    handleScroll(); // Check on mount
+    handleScroll();
 
     return () => {
       window.removeEventListener('resize', handleScroll);
