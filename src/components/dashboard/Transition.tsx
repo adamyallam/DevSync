@@ -6,16 +6,17 @@ import { OpenContext } from '@/components/context/OpenContext';
 
 export interface Props {
     children: React.ReactNode;
+    transition: string
   }
 
-  export const ContentTransition: React.FC<Props> = (props) => { 
+  export const Transition: React.FC<Props> = (props) => { 
     const isOpen = useContext(OpenContext);
 
     return (
-        <div className={`transition-all duration-300 mt-2 ${isOpen ? 'translate-x-32' : ''}`}>
+        <div className={`transition-all duration-300 ${isOpen ? `${props.transition}` : ''}`}>
             {props.children}
         </div>
     )
 }
 
-export default ContentTransition
+export default Transition

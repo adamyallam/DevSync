@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // Component Imports
 import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
-import ContentTransition from "@/components/dashboard/ContentTransition";
+import Transition from "@/components/dashboard/Transition";
 import TasksCard from "@/components/dashboard/pages/home/TasksCard";
 import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
 import { PageTitle } from "@/components/dashboard/PageTitle";
@@ -13,8 +13,10 @@ export default async function home(){
 
   return (
     <div>
-      <PageTitle />
-      <ContentTransition>
+      <Transition transition='translate-x-60'>
+        <PageTitle />
+      </Transition>
+      <Transition transition="translate-x-32">
         <div className="mt-5">
           <UserWelcome name={session?.user.firstName}/>
         </div>
@@ -22,7 +24,7 @@ export default async function home(){
           <TasksCard />
           <ProjectsCard />
         </div>
-      </ContentTransition>
+      </Transition>
     </div>
   )
 

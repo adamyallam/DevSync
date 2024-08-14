@@ -10,7 +10,7 @@ export const PageTitle = () => {
 
   return (
     <div>
-      <h1 className={`transition-all duration-300 text-2xl mt-20 ml-8 ${isOpen ? 'translate-x-60' : ''}`}>{getPageTitle()}</h1>
+      <h1 className='text-2xl mt-20 ml-8'>{getPageTitle()}</h1>
     </div>
   )
 }
