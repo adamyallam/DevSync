@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       width: {
         "w-550" : '550px',
+        "w-22" : '88px'
       },
       colors: {
         'primary': '#363636',
