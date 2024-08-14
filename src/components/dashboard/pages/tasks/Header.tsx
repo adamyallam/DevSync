@@ -1,13 +1,28 @@
 'use client'
+import { ChevronDown } from "lucide-react"
+
 // Component Imports
 
 
 export const Header = () => { 
 
     return (
-        <div className="">
-            <div className="w-14 h-14 mb-5 border-2 border-gray-600 bg-gray-200 rounded-full"></div>
+      <div className="border-b-2">
+        <div className="flex items-center mb-2"> 
+          <div className="w-12 h-12 ml-8 border-2 border-gray-600 bg-gray-200 rounded-full"></div>
+          <div className="ml-4">
+            <div className="flex items-center gap-1">
+              <h1 className="text-xl">My Tasks</h1>
+              <ChevronDown size={20} strokeWidth={2} className="mt-1"/>
+            </div>
+            <div className="flex gap-5">
+              <button>List</button>
+              <button>Calendar</button>
+              <button>Files</button>
+            </div>
+          </div>
         </div>
+      </div>
     )
 }
 
