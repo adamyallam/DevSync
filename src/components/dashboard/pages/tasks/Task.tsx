@@ -4,9 +4,11 @@ import { useContext, useState } from "react";
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
+import Transition from '@/components/dashboard/Transition'
 
 interface Props {
   showTopBorder: boolean;
+  showAddTask: boolean;
 }
 
 export const Task: React.FC<Props> = (props) => { 
@@ -17,7 +19,7 @@ export const Task: React.FC<Props> = (props) => {
   return (
     <div>
         <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-gray-300 ml-8 h-10 transition-all duration-300 ${props.showTopBorder ? 'border-t-2' : ''} ${isOpen ? 'mr-72' : 'mr-8'}`}>
-          <div className={`flex col-span-4 ml-2 border-r-2 border-gray-300}`}>
+          <div className={`flex col-span-4 ml-2 border-r-2`}>
             <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
             <input 
               type="text" 
@@ -51,6 +53,10 @@ export const Task: React.FC<Props> = (props) => {
             <button className="w-full pl-2"><UserRoundSearch size={22}/></button>
             <button className="pr-2"><Plus size={18}/></button>
           </div>
+        </div>
+
+        <div className={props.showAddTask ? '' : 'hidden'}>
+          <button className="ml-20 mt-2 text-sm">Add task...</button>
         </div>
     </div>
   )
