@@ -18,8 +18,11 @@ export default async function tasks() {
       <TaskManagement />
       <Transition transition='translate-x-60'>
         <MyTasks />
+        <Task showTopBorder={true}/>
+        <Task showTopBorder={false}/>
+        <Task showTopBorder={false}/>
+        <Task showTopBorder={false}/>
       </Transition>
-      <Task />
       <h1 className='mt-20'>Making space</h1>
     </div>
   )
