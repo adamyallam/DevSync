@@ -1,12 +1,12 @@
 
 // Component Imports
-import Project from '@/components/dashboard/pages/Project'
+import Header from "@/components/dashboard/pages/projects/Header"
 
 export default async function project() {
 
   return (
     <div>
-      <Project />
+      <Header />
     </div>
   )
 
