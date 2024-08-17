@@ -10,7 +10,7 @@ export const PageTitle = () => {
 
   return (
     <div>
-      <h1 className='text-2xl mt-20 ml-8'>{getPageTitle()}</h1>
+      <h1 className='text-2xl ml-8'>{getPageTitle()}</h1>
     </div>
   )
 }

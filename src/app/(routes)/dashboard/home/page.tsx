@@ -14,7 +14,9 @@ export default async function home(){
   return (
     <div>
       <Transition transition='translate-x-60'>
-        <PageTitle />
+        <div className="mt-20">
+          <PageTitle />
+        </div>
       </Transition>
       <Transition transition="translate-x-32">
         <div className="mt-5">
