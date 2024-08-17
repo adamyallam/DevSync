@@ -68,7 +68,7 @@ export const SideBar = () => {
           
           <div className='mb-5'>
             <h1 className='ml-8 font-bold'>Projects</h1>
-            <Link href='/dashboard/project' className={`flex items-center h-8 ${applySidebarClass('Project')}`}>
+            <Link href='/dashboard/projects' className={`flex items-center h-8 ${applySidebarClass('Projects')}`}>
               <div className='border-2 bg-white rounded-md w-4 h-4' />
               <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
