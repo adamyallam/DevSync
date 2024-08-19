@@ -47,20 +47,20 @@ export const Header = () => {
         <div className="flex gap-2 items-center justify-end mt-16 mr-8">
           <button className="flex">
             <div className="border rounded-full border-red-600 bg-red-400 w-7 h-7 translate-x-1.5 outline outline-2 outline-white"/>
-            <div className="flex items-center justify-center border rounded-full border-gray-300 bg-gray-100 w-7 h-7"><Ellipsis className="" color="#6b6b6b" size={17} strokeWidth={3} /></div>
+            <div className="flex items-center justify-center border rounded-full border-gray-300 bg-gray-100 w-7 h-7"><Ellipsis color="#6b6b6b" size={17} strokeWidth={3} /></div>
           </button>
 
           <button className="border border-gray-300 w-14 h-8 bg-blue-500 rounded-md text-white text-sm">Share</button>
         </div>
       </div>
 
-        <div>
+        <div className="overflow-hidden">
           <div className="flex gap-4 ml-8 mt-2">
-            <button className="">Overview <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button className="">List <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button className="">Board <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button className="">Calendar <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button className="">Files <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button>Overview <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button>List <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button>Board <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button>Calendar <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button>Files <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
           </div>
 
           <div className="border-b-2 border-gray-300 -mt-0.5"/>
