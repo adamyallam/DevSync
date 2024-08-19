@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef} from "react"
-import { ChevronDown, Star } from "lucide-react"
+import { ChevronDown, Star, Ellipsis } from "lucide-react"
 
 // Component Imports
 
@@ -19,26 +19,37 @@ export const Header = () => {
 
   return (
     <div>
-      <div className="flex gap-2 mt-16">
-        <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
-        <input 
-        type='text'
-        placeholder="Name"
-        value={projectName}
-        onChange={(e) => setProjectName(e.target.value)}
-        ref={inputRef}
-        className={`border border-gray-300 rounded px-2 py-1`}
-        style={{ width: '125px'}}
-        />
-        <span
-          ref={spanRef}
-          className="absolute top-0 left-0 invisible whitespace-pre pr-5"
-        >
-          {projectName}
-        </span>
-        <button><ChevronDown strokeWidth={2} size={20}/></button>
-        <button><Star strokeWidth={1} size={20}/></button>
-        <button className="flex items-center gap-1 ml-3"><div className="border rounded-full border-black w-3 h-3"/>Set Status<ChevronDown strokeWidth={2} size={20}/></button>
+      <div className="flex">
+        <div className="flex gap-2 mt-16 w-full">
+          <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
+          <input 
+          type='text'
+          placeholder="Name"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+          ref={inputRef}
+          className={`border border-gray-300 rounded px-2 py-1`}
+          style={{ width: '125px'}}
+          />
+          <span
+            ref={spanRef}
+            className="absolute top-0 left-0 invisible whitespace-pre pr-5"
+          >
+            {projectName}
+          </span>
+          <button><ChevronDown strokeWidth={2} size={20}/></button>
+          <button><Star strokeWidth={1} size={20}/></button>
+          <button className="flex items-center gap-1 ml-3"><div className="border rounded-full border-black w-3 h-3"/>Set Status<ChevronDown strokeWidth={2} size={20}/></button>
+        </div>
+
+        <div className="flex gap-2 items-center justify-end mt-16 mr-8">
+          <button className="flex">
+            <div className="border rounded-full border-red-600 bg-red-400 w-7 h-7 translate-x-1.5 outline outline-2 outline-white"/>
+            <div className="flex items-center justify-center border rounded-full border-gray-300 bg-gray-100 w-7 h-7"><Ellipsis className="" color="#6b6b6b" size={17} strokeWidth={3} /></div>
+          </button>
+
+          <button className="border border-gray-300 w-14 h-8 bg-blue-500 rounded-md text-white text-sm">Share</button>
+        </div>
       </div>
 
       <div>
