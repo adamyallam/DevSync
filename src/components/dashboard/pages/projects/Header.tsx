@@ -31,12 +31,14 @@ export const Header = () => {
           className={`border border-gray-300 rounded px-2 py-1`}
           style={{ width: '125px'}}
           />
+
           <span
             ref={spanRef}
             className="absolute top-0 left-0 invisible whitespace-pre pr-5"
           >
             {projectName}
           </span>
+
           <button><ChevronDown strokeWidth={2} size={20}/></button>
           <button><Star strokeWidth={1} size={20}/></button>
           <button className="flex items-center gap-1 ml-3"><div className="border rounded-full border-black w-3 h-3"/>Set Status<ChevronDown strokeWidth={2} size={20}/></button>
@@ -51,7 +53,6 @@ export const Header = () => {
           <button className="border border-gray-300 w-14 h-8 bg-blue-500 rounded-md text-white text-sm">Share</button>
         </div>
       </div>
-      
 
         <div>
           <div className="flex gap-4 ml-8 mt-2">
@@ -61,10 +62,9 @@ export const Header = () => {
             <button className="">Calendar <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
             <button className="">Files <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
           </div>
-          <div className="border-b-2 border-gray-300 -mt-0.5"/>
-        </div>
-        
 
+          <div className="border-b-2 border-gray-300 -mt-0.5"/>
+      </div>
     </div>
   )
 }
