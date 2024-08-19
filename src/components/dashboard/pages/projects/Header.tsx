@@ -51,10 +51,20 @@ export const Header = () => {
           <button className="border border-gray-300 w-14 h-8 bg-blue-500 rounded-md text-white text-sm">Share</button>
         </div>
       </div>
+      
 
-      <div>
+        <div>
+          <div className="flex gap-4 ml-8 mt-2">
+            <button className="">Overview <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button className="">List <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button className="">Board <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button className="">Calendar <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+            <button className="">Files <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
+          </div>
+          <div className="border-b-2 border-gray-300 -mt-0.5"/>
+        </div>
         
-      </div>
+
     </div>
   )
 }
