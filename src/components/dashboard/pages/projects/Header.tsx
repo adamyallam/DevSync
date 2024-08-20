@@ -54,17 +54,18 @@ export const Header = () => {
         </div>
       </div>
 
-        <div className="overflow-hidden">
-          <div className="flex gap-4 ml-8 mt-2">
-            <button>Overview <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button>List <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button>Board <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button>Calendar <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-            <button>Files <div className="border-b-2 border-black mt-0.5 outline outline-2 outline-black" /></button>
-          </div>
+      <div className="overflow-hidden">
+        <div className="flex gap-4 ml-10 mt-2">
+          <button className="z-10">Overview <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10">List <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10">Board <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10">Calendar <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10">Files <div className="bg-black w-full h-[2.5px]"/></button>
+        </div>
 
-          <div className="border-b-2 border-gray-300 -mt-0.5"/>
+        <div className="bg-gray-300 w-full h-[1.5px] -translate-y-[1.5px] z-0" />
       </div>
+
     </div>
   )
 }
