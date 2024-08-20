@@ -7,9 +7,7 @@ export default async function project() {
 
   return (
     <div>
-      <Transition transition="translate-x-60">
         <Header />
-      </Transition>
     </div>
   )
 

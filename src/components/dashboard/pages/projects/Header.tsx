@@ -3,6 +3,7 @@ import { useState, useEffect, useRef} from "react"
 import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
 
 // Component Imports
+import Transition from "../../Transition"
 
 export const Header = () => { 
   const [projectName, setProjectName] = useState('')
@@ -20,7 +21,7 @@ export const Header = () => {
   return (
     <div>
       <div className="flex">
-        <div className="flex gap-2 mt-16 w-full">
+        <Transition classes='flex gap-2 mt-16 w-full' transition="translate-x-60">
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
           <input 
           type='text'
@@ -42,7 +43,7 @@ export const Header = () => {
           <button><ChevronDown strokeWidth={2} size={20}/></button>
           <button><Star strokeWidth={1} size={20}/></button>
           <button className="flex items-center gap-1 ml-3"><div className="border rounded-full border-black w-3 h-3"/>Set Status<ChevronDown strokeWidth={2} size={20}/></button>
-        </div>
+        </Transition>
 
         <div className="flex gap-2 items-center justify-end mt-16 mr-8">
           <button className="flex">
@@ -54,7 +55,7 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden">
+      <Transition transition="translate-x-60">
         <div className="flex gap-4 ml-10 mt-2">
           <button className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14}/>Overview</div> <div className="bg-black w-full h-[2.5px]"/></button>
           <button className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16}/>List</div> <div className="bg-black w-full h-[2.5px]"/></button>
@@ -64,7 +65,7 @@ export const Header = () => {
         </div>
 
         <div className="bg-gray-300 w-full h-[1.5px] -translate-y-[1.5px] z-0" />
-      </div>
+      </Transition>
 
     </div>
   )
