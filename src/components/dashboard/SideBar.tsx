@@ -46,7 +46,7 @@ export const SideBar = () => {
               <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
               <span className='ml-1 text-sm'>Home</span>
             </Link>
-            <Link href='/dashboard/tasks' className={`flex items-center h-8 ${applySidebarClass('Tasks')}`}>
+            <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('List')}`}>
               <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
               <span className='ml-1 text-sm'>Tasks</span>
             </Link>
