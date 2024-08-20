@@ -15,7 +15,7 @@ export const TopBar: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <div className='fixed w-full top-0 z-10'>
+      <div className='fixed w-full top-0 z-20'>
         <div className='grid grid-cols-3 bg-gray-700 p-2'>
           
           <div className='flex items-center ml-2'>
