@@ -1,5 +1,6 @@
 'use client'
 import { ChevronDown } from "lucide-react"
+import Link from "next/link"
 
 // Component Imports
 
@@ -16,7 +17,7 @@ export const Header = () => {
               <ChevronDown size={20} strokeWidth={2} className="mt-1"/>
             </div>
             <div className="flex gap-5">
-              <button className="z-10">List<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></button>
+              <Link href='/dashboard/tasks/list' className="z-10">List<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
               <button className="z-10">Calendar<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></button>
               <button className="z-10">Files<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></button>
             </div>
