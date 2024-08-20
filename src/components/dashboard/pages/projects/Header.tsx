@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef} from "react"
-import { ChevronDown, Star, Ellipsis } from "lucide-react"
+import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
 
 // Component Imports
 
@@ -56,11 +56,11 @@ export const Header = () => {
 
       <div className="overflow-hidden">
         <div className="flex gap-4 ml-10 mt-2">
-          <button className="z-10">Overview <div className="bg-black w-full h-[2.5px]"/></button>
-          <button className="z-10">List <div className="bg-black w-full h-[2.5px]"/></button>
-          <button className="z-10">Board <div className="bg-black w-full h-[2.5px]"/></button>
-          <button className="z-10">Calendar <div className="bg-black w-full h-[2.5px]"/></button>
-          <button className="z-10">Files <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14}/>Overview</div> <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16}/>List</div> <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10"><div className="flex items-center gap-1"><SquareKanban size={14}/>Board</div> <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10"><div className="flex items-center gap-1"><Calendar size={14}/>Calendar</div> <div className="bg-black w-full h-[2.5px]"/></button>
+          <button className="z-10"><div className="flex items-center gap-1"><Upload size={14}/>Files</div> <div className="bg-black w-full h-[2.5px]"/></button>
         </div>
 
         <div className="bg-gray-300 w-full h-[1.5px] -translate-y-[1.5px] z-0" />
