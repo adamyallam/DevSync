@@ -7,7 +7,7 @@ export default async function project() {
 
   return (
     <div>
-        <Header />
+      
     </div>
   )
 
