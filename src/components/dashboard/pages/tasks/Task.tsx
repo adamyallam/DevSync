@@ -1,10 +1,10 @@
 'use client'
 import { Plus, BadgeCheck, CalendarClock, Lock, UserRoundSearch } from "lucide-react"
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
-import Transition from '@/components/dashboard/Transition'
 
 interface Props {
   showTopBorder: boolean;
@@ -15,10 +15,12 @@ export const Task: React.FC<Props> = (props) => {
   const isOpen = useContext(OpenContext);
   const [taskName, setTaskName] = useState('');
   const [projectSearch, setProjectSearch] = useState('')
+  const screenWidth = useScreenWidth()
 
   return (
     <div>
-        <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-gray-300 ml-8 h-10 transition-all duration-300 ${props.showTopBorder ? 'border-t-2' : ''} ${isOpen ? 'mr-72' : 'mr-8'}`}>
+        <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-gray-300 ml-8 h-10 transition-all duration-300 ${props.showTopBorder ? 'border-t-2' : ''}`} 
+        style={{width: isOpen ? `${screenWidth - 304}px` : `${screenWidth - 64}px`}}>
           <div className={`flex col-span-4 ml-2 border-r-2`}>
             <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
             <input 

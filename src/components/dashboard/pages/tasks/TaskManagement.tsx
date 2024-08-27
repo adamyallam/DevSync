@@ -1,6 +1,7 @@
 'use client'
 import { Plus, Filter, ArrowUpDown, ChevronDown } from "lucide-react"
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
 import { OpenContext } from '@/components/context/OpenContext';
@@ -8,6 +9,7 @@ import Transition from "../../Transition"
 
 export const TaskManagement = () => { 
   const isOpen = useContext(OpenContext);
+  const screenWidth = useScreenWidth()
 
   return (
     <div>
@@ -25,7 +27,7 @@ export const TaskManagement = () => {
       </div>
 
       <Transition transition="translate-x-60">
-        <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-t-2 border-gray-300 gap-2 ml-8 mt-4 h-10 transition-all duration-300 ${isOpen ? 'mr-72' : 'mr-8'}`}>
+        <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-t-2 border-gray-300 gap-2 ml-8 mt-4 h-10 transition-all duration-300`} style={{width: isOpen ? `${screenWidth - 304}px` : `${screenWidth - 64}px`}}>
           <div className={`flex justify-between col-span-4 ml-2 border-r-2 border-gray-300}`}>
             <button className="text-xs">Task name</button>
             <button className="mr-2"><ChevronDown size={16} className="mt-1"/></button>
