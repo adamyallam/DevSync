@@ -1,13 +1,13 @@
 
 // Component Imports
-import ProjectGreeting from "@/components/dashboard/pages/projects/overview/ProjectGreeting"
+import ProjectOverview from "@/components/dashboard/pages/projects/overview/ProjectOverview"
 import Transition from "@/components/dashboard/Transition"
 
 export default async function overview() {
 
   return (
     <div>
-      <ProjectGreeting />
+      <ProjectOverview />
       <div className="mt-56">making space</div>
     </div>
   )
