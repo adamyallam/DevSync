@@ -13,8 +13,8 @@ export const ProjectGreeting = () => {
       <Transition classes='flex flex-col ml-20 mt-12' transition="translate-x-60">
         <AutoResizingInput initialWidth={200} placeholder="Project Greeting..." className="text-xl px-1 py-1" initialState="Project Greeting..."/>
         <textarea
-        className="border-2 border-gray-300 rounded w-1/2" 
-        rows={5}
+        className="border-2 border-gray-300 rounded w-1/2 resize-none" 
+        rows={7}
         placeholder="Type your description, welcome message, or project info here!"
         />
       </Transition>
