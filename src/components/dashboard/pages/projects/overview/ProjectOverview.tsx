@@ -24,7 +24,7 @@ export const ProjectOverview = () => {
           <div className="flex gap-16 ml-5">
             <button className="flex items-center gap-3">
               <div className="flex justify-center items-center border-2 border-dashed rounded-full border-gray-300 w-9 h-9 mt-6">
-                <Plus color="gray" size={24} strokeWidth={2}/>
+                <Plus color="gray" size={18} strokeWidth={2}/>
               </div>
               <span className="mt-6">Add Member</span>
             </button>
