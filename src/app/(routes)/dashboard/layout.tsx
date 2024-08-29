@@ -1,6 +1,6 @@
 
 //Component Imports
-import IsOpenProvider from '@/components/context/IsOpenProvider'
+import SidebarUIProvider from "@/components/context/SidebarUIProvider"
 
 interface Props {
   children: React.ReactNode
@@ -9,7 +9,7 @@ interface Props {
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='overflow-x-hidden'>
-        <IsOpenProvider children={children} />
+        <SidebarUIProvider children={children} />
       </section>
     )
   }

@@ -2,15 +2,18 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { OpenContext } from '@/components/context/OpenContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIContext';
+import Transition from '../Transition';
 
 
 export const Calendar = () => { 
-    const isOpen = useContext(OpenContext);
+    const isOpen = useContext(SidebarUIContext);
 
     return (
-        <div className={isOpen ? `ml-64` : 'ml-8'}>
-            <h1 className='mt-20 text-2xl'>Calendar</h1>
+        <div>
+            <Transition transition='translate-x-60' classes='mt-20 ml-8'>
+                <h1 className='text-2xl'>Calendar</h1>
+            </Transition>
         </div>
     )
 }

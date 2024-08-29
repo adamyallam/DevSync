@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
-import { OpenContext } from '@/components/context/OpenContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIContext';
 
 interface Props {
   showTopBorder: boolean;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Task: React.FC<Props> = (props) => { 
-  const isOpen = useContext(OpenContext);
+  const isOpen = useContext(SidebarUIContext);
   const [taskName, setTaskName] = useState('');
   const [projectSearch, setProjectSearch] = useState('')
   const screenWidth = useScreenWidth()

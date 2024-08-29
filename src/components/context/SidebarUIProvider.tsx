@@ -2,17 +2,16 @@
 import { useState } from 'react';
 
 //Component Imports
-import { OpenContext } from '@/components/context/OpenContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIContext';
 import TopBar from '../dashboard/TopBar';
 import SideBar from '../dashboard/SideBar';
-import ToggleButton from './ToggleButton';
 
 
 interface Props {
     children: React.ReactNode
 }
 
-export const IsOpenProvider: React.FC<Props> = ({ children }) => {
+export const SidebarUIProvider: React.FC<Props> = ({ children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(true)
     
     const updateIsOpen = (newState: boolean) => {
@@ -21,14 +20,14 @@ export const IsOpenProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <div>
-      <OpenContext.Provider value={isOpen}>
-        <TopBar toggleButton={<ToggleButton updateIsOpen={updateIsOpen} />}>
+      <SidebarUIContext.Provider value={isOpen}>
+        <TopBar updateIsOpen={updateIsOpen}>
           <SideBar />
         </TopBar>
         {children}
-      </OpenContext.Provider>
+      </SidebarUIContext.Provider>
     </div>
   );
 }
 
-export default IsOpenProvider
+export default SidebarUIProvider

@@ -6,10 +6,10 @@ import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, 
 import { getPathSegments } from '@/utils/getPathSegments';
 
 // Component Imports
-import { OpenContext } from '@/components/context/OpenContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIContext';
 
 export const SideBar = () => {
-  const isOpen = useContext(OpenContext);
+  const isOpen = useContext(SidebarUIContext);
   const [isFixed, setIsFixed] = useState(true)
 
   function applySidebarClass(...pagePaths: string[]) {

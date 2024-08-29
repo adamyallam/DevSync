@@ -2,11 +2,11 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { OpenContext } from '@/components/context/OpenContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIContext';
 
 
 export const Workspace = () => { 
-    const isOpen = useContext(OpenContext);
+    const isOpen = useContext(SidebarUIContext);
 
     return (
         <div className={isOpen ? `ml-64` : 'ml-8'}>
