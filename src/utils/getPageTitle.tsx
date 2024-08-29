@@ -5,6 +5,6 @@ export function getPageTitle() {
   const path = usePathname()
   const segments = path.split('/').filter(segment => segment);
 
-  const lastSegment = segments[segments.length - 1];
-  return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  const secondSegment = segments[1];
+  return secondSegment.charAt(0).toUpperCase() + secondSegment.slice(1);
 };
