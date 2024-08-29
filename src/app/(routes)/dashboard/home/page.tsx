@@ -6,7 +6,7 @@ import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
 import Transition from "@/components/dashboard/Transition";
 import TasksCard from "@/components/dashboard/pages/home/TasksCard";
 import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
-import { PageTitle } from "@/components/dashboard/PageTitle";
+import PageTitle from "@/components/styledElements/PageTitle";
 
 export default async function home(){
   const session = await getServerSession(authOptions)

@@ -1,6 +1,5 @@
 
 // Component Imports
-import Header from '@/components/dashboard/pages/tasks/Header'
 import Transition from '@/components/dashboard/Transition'
 import TaskManagement from '@/components/dashboard/pages/tasks/TaskManagement'
 import MyTasks from '@/components/dashboard/pages/tasks/MyTasks'

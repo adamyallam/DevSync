@@ -1,5 +1,4 @@
 import Header from "@/components/dashboard/pages/inbox/Header"
-import Transition from "@/components/dashboard/Transition"
 
 
 interface Props {

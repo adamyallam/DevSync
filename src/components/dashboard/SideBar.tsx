@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound } from 'lucide-react'
-import { getPageTitle } from '@/utils/getPageTitle';
 import { getPathSegments } from '@/utils/getPathSegments';
 
 // Component Imports

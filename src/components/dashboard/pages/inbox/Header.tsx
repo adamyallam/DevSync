@@ -4,7 +4,7 @@ import { Filter, Ellipsis } from "lucide-react"
 
 // Component Imports
 import Transition from "../../Transition"
-import { PageTitle } from "../../PageTitle"
+import PageTitle from "@/components/styledElements/PageTitle"
 
 
 export const Header = () => { 
