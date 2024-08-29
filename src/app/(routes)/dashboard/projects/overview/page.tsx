@@ -8,7 +8,6 @@ export default async function overview() {
   return (
     <div>
       <ProjectOverview />
-      <div className="mt-56">making space</div>
     </div>
   )
 
