@@ -1,16 +1,17 @@
 'use client'
 import { getPageTitle } from "@/utils/getPageTitle"
-import { useContext } from "react";
 
-//component imports
-import { OpenContext } from '@/components/context/OpenContext';
+interface PageTitleProps {
+  classes?: string;
+};
 
-export const PageTitle = () => {
-  const isOpen = useContext(OpenContext);
+export const PageTitle: React.FC<PageTitleProps> = ({classes}) => {
 
   return (
     <div>
-      <h1 className='text-2xl ml-8'>{getPageTitle()}</h1>
+      <h1 className={classes || 'text-2xl ml-8'}>{getPageTitle()}</h1>
     </div>
-  )
-}
+  );
+};
+
+export default PageTitle
