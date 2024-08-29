@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-interface AutoResizeInputWidthProps {
+interface AutoResizingInputProps {
   initialWidth: number;
   placeholder?: string;
   initialState?: string;
   className?: string;
 }
 
-const AutoResizingInput: React.FC<AutoResizeInputWidthProps> = ({initialWidth, placeholder, className, initialState}) => {
+const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth, placeholder, className, initialState}) => {
   const [text, setText] = useState(`${initialState || ''}`)
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
