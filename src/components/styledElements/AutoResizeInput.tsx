@@ -7,7 +7,7 @@ interface AutoResizingInputProps {
   className?: string;
 }
 
-const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth, placeholder, className, initialState}) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth, placeholder, className, initialState}) => {
   const [text, setText] = useState(`${initialState || ''}`)
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
