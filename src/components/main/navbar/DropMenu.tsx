@@ -1,11 +1,7 @@
 "use client"
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react';
-import {MenuIcon} from 'lucide-react'
-import {X} from 'lucide-react'
-import {Instagram} from 'lucide-react'
-import {Twitter} from 'lucide-react'
-import {Linkedin} from 'lucide-react'
+import {MenuIcon, X, Instagram, Twitter, Linkedin} from 'lucide-react'
 import Image from 'next/image';
 import Logo from 'src/assets/imgs/Logo.png'
 

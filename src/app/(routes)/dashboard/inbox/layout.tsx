@@ -1,5 +1,6 @@
-import Header from "@/components/dashboard/pages/inbox/Header"
 
+//Component Imports
+import Header from "@/components/dashboard/pages/inbox/Header"
 
 interface Props {
   children: React.ReactNode

@@ -17,7 +17,6 @@ export default async function list() {
         <Task showTopBorder={false} showAddTask={false}/>
         <Task showTopBorder={false} showAddTask={true}/>
       </Transition>
-      <h1 className='mt-20'>Making space</h1>
     </div>
   )
 

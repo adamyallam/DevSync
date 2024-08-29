@@ -2,9 +2,7 @@ import Link from 'next/link'
 import Logo from 'src/assets/imgs/Logo.png'
 import LogoBig from 'src/assets/imgs/LogoBig.png'
 import Image from 'next/image';
-import {Instagram} from 'lucide-react'
-import {Twitter} from 'lucide-react'
-import {Linkedin} from 'lucide-react'
+import {Instagram, Twitter, Linkedin} from 'lucide-react'
 
 export default function Footer(){
 

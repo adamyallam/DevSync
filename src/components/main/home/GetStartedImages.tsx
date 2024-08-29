@@ -1,13 +1,11 @@
 "use client"
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import img1 from 'src/assets/imgs/img1.jpg'
 import img2 from 'src/assets/imgs/img2.jpg'
 import img3 from 'src/assets/imgs/img3.jpg'
 
 
 export default function GetStartedImages(){
-  const router = useRouter()
 
   return (
     <div className=''>

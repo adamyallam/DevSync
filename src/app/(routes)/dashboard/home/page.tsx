@@ -14,14 +14,10 @@ export default async function home(){
   return (
     <div>
       <Transition transition='translate-x-60'>
-        <div className="mt-20">
-          <PageTitle />
-        </div>
+        <PageTitle classes="text-2xl ml-8 mt-20"/>
       </Transition>
-      <Transition transition="translate-x-32">
-        <div className="mt-5">
-          <UserWelcome name={session?.user.firstName}/>
-        </div>
+      <Transition transition="translate-x-32" classes="mt-5">
+        <UserWelcome name={session?.user.firstName}/>
         <div className="flex justify-center gap-4 mt-12">
           <TasksCard />
           <ProjectsCard />

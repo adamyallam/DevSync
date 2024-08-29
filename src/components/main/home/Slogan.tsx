@@ -1,8 +1,6 @@
 'use client'
 
-
 export default function Slogan(){
-
 
   return (
     <div className='mt-24'>
