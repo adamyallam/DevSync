@@ -24,7 +24,7 @@ export const getDayPeriod = (): string => {
 
   if ('12' > hours) {
       return 'morning'
-  } else if ('12' < hours && '17' > hours) {
+  } else if ('12' <= hours && '17' > hours) {
       return 'afternoon'
   } else {
       return 'evening'
