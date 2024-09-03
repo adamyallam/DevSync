@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+//Retrieves a user's screen width and stores it in a useState hook
+
 const useScreenWidth = () => {
   const [screenWidth, setScreenWidth] = useState<number>(0);
 

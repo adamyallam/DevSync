@@ -7,6 +7,8 @@ interface AutoResizingInputProps {
   className?: string;
 }
 
+//Input field that grows in size if characters do not fit within it's "Initial Width"
+
 export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth, placeholder, className, initialState}) => {
   const [text, setText] = useState(`${initialState || ''}`)
   const inputRef = useRef<HTMLInputElement>(null);

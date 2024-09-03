@@ -4,7 +4,7 @@ import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, 
 
 // Component Imports
 import Transition from "../../Transition"
-import AutoResizingInput from "@/components/styledElements/AutoResizeInput"
+import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 export const Header = () => { 
 

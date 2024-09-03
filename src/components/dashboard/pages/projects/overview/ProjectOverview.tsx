@@ -2,7 +2,7 @@
 import { Plus } from "lucide-react";
 
 //Component imports
-import AutoResizingInput from "@/components/styledElements/AutoResizeInput";
+import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 
 
 export const ProjectOverview = () => {

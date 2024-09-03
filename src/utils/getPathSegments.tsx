@@ -1,5 +1,7 @@
 import { usePathname } from 'next/navigation';
 
+//Takes a number and returns that number of path segments starting from right to left
+
 export function getPathSegments(numberOfSegments: number) {
   const path = usePathname();
   const pathSegments = path.split('/').filter(pathSegment => pathSegment);
