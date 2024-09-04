@@ -49,6 +49,9 @@ export const StatusLog = () => {
           </div>
         </div>
       </div>
+      <div className="pt-96">
+        <p>Making space</p>
+      </div>
     </div>
   )
 }
