@@ -38,6 +38,16 @@ export const StatusLog = () => {
             <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
           </div>
         </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <ClipboardPlus size={20} color="gray"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Project Created</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
       </div>
     </div>
   )
