@@ -23,7 +23,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
   }, [text]);
 
   return (
-    <div className="relative">
+    <div>
       <input
         type="text"
         placeholder={placeholder}
