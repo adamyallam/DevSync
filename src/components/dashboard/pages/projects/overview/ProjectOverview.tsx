@@ -36,9 +36,6 @@ export const ProjectOverview = () => {
           </button>
         </div>
       </div>
-      <div className="pt-96">
-        <p>making space</p>
-      </div>
     </div>
   )
 }
