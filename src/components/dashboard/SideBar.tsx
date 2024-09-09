@@ -6,10 +6,10 @@ import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, 
 import { getPathSegments } from '@/utils/getPathSegments';
 
 // Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
 
-export const SideBar = () => {
-  const isOpen = useContext(SidebarUIContext);
+export const Sidebar = () => {
+  const isSidebarOpen = useContext(SidebarUIContext);
   const [isFixed, setIsFixed] = useState(true)
 
   function applySidebarClass(...pagePaths: string[]) {
@@ -41,7 +41,7 @@ export const SideBar = () => {
 
   return (
     <div>
-      <div className={`flex flex-col fixed h-screen text-gray-200 transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
+      <div className={`flex flex-col fixed h-screen text-gray-200 transition-all duration-300 ${isSidebarOpen ? '' : '-translate-x-60'}`}>
         <div className={`bg-gray-700 w-60`}> 
           <div className='border-t-2 border-b-2 border-gray-600 pt-4 pb-4'>
             <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
@@ -86,7 +86,7 @@ export const SideBar = () => {
         </div>
       </div>
       
-      <div className={`bg-gray-700 w-60 text-gray-200 ${isFixed ? 'fixed bottom-0' : 'fixed top-[405px]'} transition-all duration-300 ${isOpen ? '' : '-translate-x-60'}`}>
+      <div className={`bg-gray-700 w-60 text-gray-200 ${isFixed ? 'fixed bottom-0' : 'fixed top-[405px]'} transition-all duration-300 ${isSidebarOpen ? '' : '-translate-x-60'}`}>
         <div className='flex flex-col items-center border-t-2 pb-3'>
           <button className='border-2 p-2 w-11/12 mt-4'>Create Project</button>
           <div className='flex mt-2 gap-2'>
@@ -100,4 +100,4 @@ export const SideBar = () => {
   )
 }
 
-export default SideBar
+export default Sidebar

@@ -1,6 +1,6 @@
 
 //Component Imports
-import TopBar from "@/components/main/navbar/TopBar"
+import Topbar from "@/components/main/navbar/Topbar"
 import DropMenu from "@/components/main/navbar/DropMenu"
 import Footer from "@/components/main/footer/Footer"
 
@@ -11,7 +11,7 @@ export default function pagesLayout({
   }) {
     return (
       <section>
-        <TopBar />
+        <Topbar />
         <DropMenu />
         {children}
         <Footer />

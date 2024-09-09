@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
 
 export interface Props {
     children: React.ReactNode;
@@ -11,10 +11,10 @@ export interface Props {
 }
 
 export const Transition: React.FC<Props> = (props) => { 
-  const isOpen = useContext(SidebarUIContext);
+  const isSidebarOpen = useContext(SidebarUIContext);
 
   return (
-    <div className={`transition-all duration-300 ${props.classes} ${isOpen ? `${props.transition}` : ''}`}>
+    <div className={`transition-all duration-300 ${props.classes} ${isSidebarOpen ? `${props.transition}` : ''}`}>
         {props.children}
     </div>
   )

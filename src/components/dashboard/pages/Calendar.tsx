@@ -2,12 +2,12 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIContext';
+import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
 import Transition from '../Transition';
 
 
 export const Calendar = () => { 
-    const isOpen = useContext(SidebarUIContext);
+    const isSidebarOpen = useContext(SidebarUIContext);
 
     return (
         <div>

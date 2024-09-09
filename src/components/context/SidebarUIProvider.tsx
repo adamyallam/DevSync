@@ -1,29 +1,28 @@
 'use client'
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 
 //Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIContext';
-import TopBar from '../dashboard/TopBar';
-import SideBar from '../dashboard/SideBar';
+import Topbar from '../dashboard/Topbar';
+import Sidebar from '../dashboard/Sidebar';
 
+export const SidebarUIContext = createContext(true);
 
 interface Props {
     children: React.ReactNode
 }
 
 export const SidebarUIProvider: React.FC<Props> = ({ children }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(true)
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true)
     
-    const updateIsOpen = (newState: boolean) => {
-        setIsOpen(newState);
+    const toggleSidebar = (newState: boolean) => {
+        setIsSidebarOpen(newState);
     };
 
   return (
     <div>
-      <SidebarUIContext.Provider value={isOpen}>
-        <TopBar updateIsOpen={updateIsOpen}>
-          <SideBar />
-        </TopBar>
+      <SidebarUIContext.Provider value={isSidebarOpen}>
+        <Topbar toggleSidebar={toggleSidebar} />
+        <Sidebar />
         {children}
       </SidebarUIContext.Provider>
     </div>

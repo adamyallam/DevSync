@@ -7,12 +7,12 @@ import Logo from 'src/assets/imgs/Logo.png'
 
 
 export default function DropMenu() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setisSidebarOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.style.overflow = isOpen ? 'unset' : 'hidden';
+    setisSidebarOpen(!isSidebarOpen);
+    document.body.style.overflow = isSidebarOpen ? 'unset' : 'hidden';
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function DropMenu() {
   }, []);
 
   return (
-    <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isOpen ? 'bg-gray-100' : 'bg-white'}`}>
+    <div className={`fixed w-full top-0 z-10 sm:hidden ${hasScrolled ? 'shadow-md' : ''} ${isSidebarOpen ? 'bg-gray-100' : 'bg-white'}`}>
       <div className="grid grid-cols-2 items-center border-b-2 border-white">
         <div className="flex justify-start ml-1">
           <Link href='/'><Image className='w-14 sm:w-16 p-2' src={Logo} alt="" onClick={toggleMenu}/></Link>
@@ -36,12 +36,12 @@ export default function DropMenu() {
         <div className="flex justify-end">
           <Link href='/registration/signup'><button className="border-2 text-white border-black bg-black m-1 p-1">Get Started</button></Link>
           <button className="m-1 p-1" onClick={toggleMenu}>
-            {isOpen ? <X /> : <MenuIcon />}
+            {isSidebarOpen ? <X /> : <MenuIcon />}
           </button>
         </div>
       </div>
 
-      {isOpen && (
+      {isSidebarOpen && (
       <div className="bg-white h-screen overflow-y-auto">
         <div className='grid grid-cols-1 grid-rows-8 text-black'>
           <Link href='/dashboard/home'><button onClick={toggleMenu} className='flex justify-start ml-5 text-lg border-b-2 border-t-2 border-b-gray-300 border-t-gray-300 p-3 w-11/12' >dashboard</button></Link>

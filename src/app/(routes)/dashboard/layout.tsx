@@ -8,9 +8,9 @@ interface Props {
 
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
-      <section className='overflow-x-hidden'>
-        <SidebarUIProvider children={children} />
-      </section>
+        <SidebarUIProvider>
+          {children}
+        </SidebarUIProvider>
     )
   }
 

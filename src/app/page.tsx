@@ -3,7 +3,7 @@ import Slogan from '@/components/main/home/Slogan'
 import GoToDashboard from '../components/main/home/GoToDashboard'
 import GetStartedImages from '@/components/main/home/GetStartedImages'
 import Footer from '@/components/main/footer/Footer'
-import TopBar from '@/components/main/navbar/TopBar'
+import Topbar from '@/components/main/navbar/Topbar'
 import DropMenu from '@/components/main/navbar/DropMenu'
 
 
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div>
       <DropMenu />
-      <TopBar />
+      <Topbar />
       <Slogan />
       <GoToDashboard />
       <GetStartedImages />
