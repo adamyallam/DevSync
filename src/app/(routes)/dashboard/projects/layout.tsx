@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const dashboardLayout: React.FC<Props> = ({children}) => {
+export const ProjectsLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='flex flex-col h-full w-full'>
           <Header />
@@ -18,4 +18,4 @@ export const dashboardLayout: React.FC<Props> = ({children}) => {
     )
   }
 
-  export default dashboardLayout
+  export default ProjectsLayout
