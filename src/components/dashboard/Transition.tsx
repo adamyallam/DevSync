@@ -11,7 +11,13 @@ export interface Props {
 }
 
 export const Transition: React.FC<Props> = (props) => { 
-  const isSidebarOpen = useContext(SidebarUIContext);
+  const sidebarContext = useContext(SidebarUIContext);
+
+  if (!sidebarContext) {
+    throw new Error('SidebarUIContext must be used within a SidebarUIProvider');
+  }
+  
+  const { isSidebarOpen } = sidebarContext;
 
   return (
     <div className={`transition-all duration-300 ${props.classes} ${isSidebarOpen ? `${props.transition}` : ''}`}>
