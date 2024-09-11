@@ -5,7 +5,7 @@ import { Calendar, Ellipsis, Users, ClipboardPlus } from "lucide-react"
 export const StatusLog = () => {
 
   return (
-    <div className="h-screen border-2 border-gray-200 bg-gray-100 p-4 -mt-[3px]">
+    <div className=" border-2 border-gray-200 bg-gray-100 p-4 -mt-[3px]">
       <div className="ml-5">
         <h1 className="text-xl mb-4">Project status:</h1>
 
