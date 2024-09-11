@@ -8,7 +8,7 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 export const ProjectOverview = () => {
 
   return (
-    <div className="h-screen flex flex-col ml-20 mt-12">
+    <div className="flex flex-col ml-20 mt-12">
       <AutoResizingInput initialWidth={200} placeholder="Project Description..." className="text-xl px-1 py-1" initialState="Project Description..."/>
       <textarea
       className="flex-shrink-0 border-2 border-gray-300 rounded w-1/2 resize-none px-2 mt-1" 
