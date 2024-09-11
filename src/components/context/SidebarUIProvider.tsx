@@ -5,7 +5,12 @@ import { useState, createContext } from 'react';
 import Topbar from '../dashboard/TopBar';
 import Sidebar from '../dashboard/SideBar';
 
-export const SidebarUIContext = createContext(true);
+interface SidebarUIContextProps {
+  isSidebarOpen: boolean;
+  toggleSidebar: (newState: boolean) => void;
+}
+
+export const SidebarUIContext = createContext<SidebarUIContextProps | undefined>(undefined);
 
 interface Props {
     children: React.ReactNode
@@ -20,9 +25,7 @@ export const SidebarUIProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <div>
-      <SidebarUIContext.Provider value={isSidebarOpen}>
-        <Topbar toggleSidebar={toggleSidebar} />
-        <Sidebar />
+      <SidebarUIContext.Provider value={{isSidebarOpen, toggleSidebar}}>
         {children}
       </SidebarUIContext.Provider>
     </div>
