@@ -2,20 +2,28 @@
 import Link from 'next/link'
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon } from 'lucide-react'
+import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
 import { getPathSegments } from '@/utils/getPathSegments'
 
 //component imports
 import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
 
 export const Navbar = () => {
-  const [isFixed, setIsFixed] = useState(true)
+  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
+  const toggleProjectsTab = () => {
+    setIsProjectsCollapsed(!isProjectsCollapsed)
+  }
+
   const sidebarContext = useContext(SidebarUIContext);
 
   if (!sidebarContext) {
     throw new Error('SidebarUIContext must be used within a SidebarUIProvider');
   }
+
   const { isSidebarOpen, toggleSidebar } = sidebarContext;
+  const toggleMenu = () => {
+    toggleSidebar(!isSidebarOpen);
+  }
 
   function applySidebarClass(...pagePaths: string[]) {
     const currentPath = getPathSegments(2);
@@ -27,30 +35,9 @@ export const Navbar = () => {
     }
   }
 
-  const toggleMenu = () => {
-    toggleSidebar(!isSidebarOpen);
-  }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight <= 510 ) {
-        setIsFixed(false)
-      } else {
-        setIsFixed(true)
-      }
-    };
-
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-
   return (
     <div className='fixed top-0 left-0 right-0 z-20 bg-gray-700'>
+      {/* Topbar */}
       <div className='flex items-center justify-between h-12'>
         <div className='flex items-center gap-3'>
           <button className='pl-3' onClick={toggleMenu}>
@@ -62,8 +49,9 @@ export const Navbar = () => {
           <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
       </div>
 
-      <div className={`fixed left-0 bottom-0 top-12 text-gray-300 bg-gray-700 w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-60'} overflow-x-hidden overflow-y-hidden hover:overflow-y-auto`}>
-        <div className='border-t-2 border-b-2 border-gray-600 pt-4 pb-4'>
+      {/* Sidebar */}
+      <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-gray-700 text-gray-300 w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-60'} overflow-x-hidden overflow-y-auto`}>
+        <div className='bg-gray-700 border-t-2 border-b-2 border-gray-600 pt-4 pb-4'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
             <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
             <span className='ml-1 text-sm'>Home</span>
@@ -83,6 +71,7 @@ export const Navbar = () => {
         <div>
           <div className='pb-3 pt-3'>
             <h1 className='ml-8 font-bold'>Insights</h1>
+
             <Link href='/dashboard/calendar' className={`flex items-center h-8 ${applySidebarClass('dashboard/calendar')}`}>
               <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
               <span className='ml-1 text-sm'>Calendar</span>
@@ -90,26 +79,47 @@ export const Navbar = () => {
           </div>
           
           <div className='pb-3'>
-            <h1 className='ml-8 font-bold'>Projects</h1>
-            <Link href='/dashboard/projects/overview' className={`flex items-center h-8 mb-1 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
+            <div className='flex items-center ml-3'>
+              <button className='flex items-center justify-center border border-gray-100 rounded-xl w-3 h-3' onClick={toggleProjectsTab}>
+                {isProjectsCollapsed ? <ChevronDown size={13} strokeWidth={3}/> : <ChevronUp size={13} strokeWidth={3} />}
+              </button>
+
+              <h1 className='font-bold pl-2'>Projects</h1>
+            </div>
+
+            <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
               <div className='border-2 bg-white rounded-md w-4 h-4' />
               <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
+            
+            {!isProjectsCollapsed && (
+              <div className=''>
+                <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('')}`}>
+                  <div className='border-2 bg-white rounded-md w-4 h-4' />
+                  <span className='ml-2 text-sm'>ProjectName</span>
+                </Link>
+
+                <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('')}`}>
+                  <div className='border-2 bg-white rounded-md w-4 h-4' />
+                  <span className='ml-2 text-sm'>ProjectName</span>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className='pb-3'>
             <h1 className='ml-8 font-bold'>Team</h1>
+
             <Link href='/dashboard/workspace' className={`flex items-center h-8 ${applySidebarClass('dashboard/workspace')}`}>
               <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
               <span className='ml-1 text-sm'>Workspace</span>
             </Link>
           </div>
         </div>
-      </div>
 
-      <div className={`bg-gray-700 w-60 text-gray-200 ${isFixed ? 'fixed bottom-0' : 'fixed top-[405px]'} transition-all duration-300 ${isSidebarOpen ? '' : '-translate-x-60'}`}>
-        <div className='flex flex-col items-center border-t-2 pb-3'>
+        <div className='w-full flex flex-col mt-auto items-center border-t-2 pb-4'>
           <button className='border-2 p-2 w-11/12 mt-4'>Create Project</button>
+
           <div className='flex mt-2 gap-2'>
             <Instagram size={24} color="#e5e7eb" strokeWidth={1.5} />
             <Twitter size={24} color="#e5e7eb" strokeWidth={1.5} />
