@@ -2,8 +2,8 @@
 import { useState, createContext } from 'react';
 
 //Component Imports
-import Topbar from '../dashboard/Topbar';
-import Sidebar from '../dashboard/Sidebar';
+import Topbar from '../dashboard/TopBar';
+import Sidebar from '../dashboard/SideBar';
 
 export const SidebarUIContext = createContext(true);
 
