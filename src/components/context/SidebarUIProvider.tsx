@@ -1,10 +1,6 @@
 'use client'
 import { useState, createContext } from 'react';
 
-//Component Imports
-import Topbar from '../dashboard/TopBar';
-import Sidebar from '../dashboard/SideBar';
-
 interface SidebarUIContextProps {
   isSidebarOpen: boolean;
   toggleSidebar: (newState: boolean) => void;
