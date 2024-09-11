@@ -9,10 +9,11 @@ interface Props {
 
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
-      <section className='overflow-x-hidden'>
-        <Navbar />
-        <Header />
-        {children}
+      <section className='flex flex-col h-full w-full'>
+          <Header />
+          <div className="flex overflow-hidden">
+            {children}
+          </div>
       </section>
     )
   }

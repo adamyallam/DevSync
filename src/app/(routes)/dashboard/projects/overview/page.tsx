@@ -7,12 +7,16 @@ import StatusLog from "@/components/dashboard/pages/projects/overview/StatusLog"
 export default async function overview() {
 
   return (
-    <div className="grid grid-cols-4">
-        <Transition classes="col-span-3" transition="translate-x-60">
-          <ProjectOverview />
-        </Transition>
+    <div className="flex flex-grow">
+        <div className="flex-grow overflow-y-auto overflow-x-hidden">
+          <Transition transition="translate-x-60">
+            <ProjectOverview />
+          </Transition>
+        </div>
 
-        <StatusLog />
+        <div>
+          <StatusLog />
+        </div>
     </div>
   )
 

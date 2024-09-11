@@ -5,7 +5,7 @@ import { Calendar, Ellipsis, Users, ClipboardPlus } from "lucide-react"
 export const StatusLog = () => {
 
   return (
-    <div className=" border-2 border-gray-200 bg-gray-100 p-4 -mt-[3px]">
+    <div className="border-2 border-gray-200 bg-gray-100 p-4 h-full overflow-y-auto">
       <div className="ml-5">
         <h1 className="text-xl mb-4">Project status:</h1>
 
@@ -27,6 +27,105 @@ export const StatusLog = () => {
 
         <div className="ml-[13px] mt-1 border border-gray-300 border-dashed w-0 h-12"/>
 
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <Users size={20} color="gray"/>
+            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-black font-medium">Some random text log</span>
+            <span>x days ago</span>
+            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
+          </div>
+        </div>
         <div className="flex gap-2 ml-1 mt-1">
           <div className="flex flex-col">
             <Users size={20} color="gray"/>

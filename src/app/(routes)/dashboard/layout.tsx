@@ -1,6 +1,7 @@
 
 //Component Imports
 import SidebarUIProvider from "@/components/context/SidebarUIProvider"
+import Navbar from "@/components/dashboard/Navbar"
 
 interface Props {
   children: React.ReactNode
@@ -9,7 +10,10 @@ interface Props {
 export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
         <SidebarUIProvider>
-          {children}
+          <div className="h-screen w-screen overflow-x-hidden">
+            <Navbar />
+            {children}
+          </div>
         </SidebarUIProvider>
     )
   }
