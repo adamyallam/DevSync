@@ -8,15 +8,11 @@ export default async function overview() {
 
   return (
     <div className="grid grid-cols-4">
-      <div className="col-span-3">
-        <Transition transition="translate-x-60">
+        <Transition classes="col-span-3" transition="translate-x-60">
           <ProjectOverview />
         </Transition>
-      </div>
 
-      <div className="col-span-1">
         <StatusLog />
-      </div>
     </div>
   )
 
