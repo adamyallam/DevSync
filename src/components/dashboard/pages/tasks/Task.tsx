@@ -13,7 +13,12 @@ interface Props {
 }
 
 export const Task: React.FC<Props> = (props) => { 
-  const isSidebarOpen = useContext(NavbarUIContext);
+  const sidebarContext = useContext(NavbarUIContext);
+  if (!sidebarContext) {
+    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
+  }
+  const { isSidebarOpen } = sidebarContext;
+
   const [taskName, setTaskName] = useState('');
   const [projectSearch, setProjectSearch] = useState('')
   const screenWidth = useScreenWidth()

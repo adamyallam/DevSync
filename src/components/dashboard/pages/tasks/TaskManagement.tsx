@@ -8,11 +8,16 @@ import { NavbarUIContext } from '@/components/dashboard/context/NavbarUIProvider
 import Transition from "../../Transition"
 
 export const TaskManagement = () => { 
-  const isSidebarOpen = useContext(NavbarUIContext);
+  const sidebarContext = useContext(NavbarUIContext);
+  if (!sidebarContext) {
+    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
+  }
+  const { isSidebarOpen } = sidebarContext;
+
   const screenWidth = useScreenWidth()
 
   return (
-    <div>
+    <div className="w-full">
       <div className="grid grid-cols-2">
         <div className="ml-8 mt-4">
           <Transition transition="translate-x-60">

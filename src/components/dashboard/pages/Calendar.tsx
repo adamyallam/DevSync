@@ -7,7 +7,11 @@ import Transition from '../Transition';
 
 
 export const Calendar = () => { 
-    const isSidebarOpen = useContext(NavbarUIContext);
+    const sidebarContext = useContext(NavbarUIContext);
+    if (!sidebarContext) {
+     throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
+    }
+    const { isSidebarOpen } = sidebarContext;
 
     return (
         <div>

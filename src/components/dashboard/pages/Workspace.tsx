@@ -6,7 +6,11 @@ import { NavbarUIContext } from '@/components/dashboard/context/NavbarUIProvider
 
 
 export const Workspace = () => { 
-    const isSidebarOpen = useContext(NavbarUIContext);
+    const sidebarContext = useContext(NavbarUIContext);
+    if (!sidebarContext) {
+        throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
+    }
+    const { isSidebarOpen } = sidebarContext;;
 
     return (
         <div className={isSidebarOpen ? `ml-64` : 'ml-8'}>
