@@ -79,13 +79,7 @@ export const Navbar = () => {
           </div>
           
           <div className='pb-3'>
-            <div className='flex items-center ml-3'>
-              <button className='flex items-center justify-center border border-gray-100 rounded-xl w-3 h-3' onClick={toggleProjectsTab}>
-                {isProjectsCollapsed ? <ChevronDown size={13} strokeWidth={3}/> : <ChevronUp size={13} strokeWidth={3} />}
-              </button>
-
-              <h1 className='font-bold pl-2'>Projects</h1>
-            </div>
+            <h1 className='font-bold pl-2 ml-3'>Projects</h1>
 
             <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
               <div className='border-2 bg-white rounded-md w-4 h-4' />
@@ -105,6 +99,12 @@ export const Navbar = () => {
                 </Link>
               </div>
             )}
+
+            <div className='border-t-2 border-gray-600 mt-1 ml-7 pl-1 w-3/4'>
+              <button className={`flex items-center justify-center rounded-sm mt-1 w-3.5 h-3.5 ${isProjectsCollapsed ? 'hover:bg-gray-800' : 'bg-gray-800'}`} onClick={toggleProjectsTab}>
+                {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4}/> : <ChevronUp size={16} strokeWidth={4} />}
+              </button>
+            </div>
           </div>
 
           <div className='pb-3'>
