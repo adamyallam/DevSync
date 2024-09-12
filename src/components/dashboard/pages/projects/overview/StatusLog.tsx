@@ -32,115 +32,19 @@ export const StatusLog = () => {
             <Users size={20} color="gray"/>
             <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
           </div>
+
           <div className="flex flex-col">
             <span className="text-black font-medium">Some random text log</span>
             <span>x days ago</span>
             <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
           </div>
         </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
-        <div className="flex gap-2 ml-1 mt-1">
-          <div className="flex flex-col">
-            <Users size={20} color="gray"/>
-            <div className="ml-[9px] mt-1 border border-gray-300 w-0 h-24"/>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-black font-medium">Some random text log</span>
-            <span>x days ago</span>
-            <div className="border border-red-600 bg-red-400 rounded-full w-7 h-7 mt-2"/>
-          </div>
-        </div>
+
         <div className="flex gap-2 ml-1 mt-1">
           <div className="flex flex-col">
             <ClipboardPlus size={20} color="gray"/>
           </div>
+          
           <div className="flex flex-col">
             <span className="text-black font-medium">Project Created</span>
             <span>x days ago</span>

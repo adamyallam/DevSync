@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
+import { NavbarUIContext } from './context/NavbarUIProvider';
 
 export interface Props {
     children: React.ReactNode;
@@ -11,10 +11,10 @@ export interface Props {
 }
 
 export const Transition: React.FC<Props> = (props) => { 
-  const sidebarContext = useContext(SidebarUIContext);
+  const sidebarContext = useContext(NavbarUIContext);
 
   if (!sidebarContext) {
-    throw new Error('SidebarUIContext must be used within a SidebarUIProvider');
+    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
   }
   
   const { isSidebarOpen } = sidebarContext;

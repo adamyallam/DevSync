@@ -12,7 +12,7 @@ export const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='overflow-x-hidden'>
         <Transition classes="mt-16" transition='translate-x-60'>
-            <Header />
+          <Header />
         </Transition>
         {children}
       </section>

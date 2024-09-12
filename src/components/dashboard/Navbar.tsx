@@ -1,12 +1,12 @@
 'use client'
 import Link from 'next/link'
 import React from 'react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
 import { getPathSegments } from '@/utils/getPathSegments'
 
 //component imports
-import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
+import { NavbarUIContext } from './context/NavbarUIProvider';
 
 export const Navbar = () => {
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
@@ -14,10 +14,10 @@ export const Navbar = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
   }
 
-  const sidebarContext = useContext(SidebarUIContext);
+  const sidebarContext = useContext(NavbarUIContext);
 
   if (!sidebarContext) {
-    throw new Error('SidebarUIContext must be used within a SidebarUIProvider');
+    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
   }
 
   const { isSidebarOpen, toggleSidebar } = sidebarContext;

@@ -1,18 +1,18 @@
 'use client'
 import { useState, createContext } from 'react';
 
-interface SidebarUIContextProps {
+interface NavbarUIContextProps {
   isSidebarOpen: boolean;
   toggleSidebar: (newState: boolean) => void;
 }
 
-export const SidebarUIContext = createContext<SidebarUIContextProps | undefined>(undefined);
+export const NavbarUIContext = createContext<NavbarUIContextProps | undefined>(undefined);
 
 interface Props {
     children: React.ReactNode
 }
 
-export const SidebarUIProvider: React.FC<Props> = ({ children }) => {
+export const NavbarUIProvider: React.FC<Props> = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true)
     
     const toggleSidebar = (newState: boolean) => {
@@ -21,11 +21,11 @@ export const SidebarUIProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <div>
-      <SidebarUIContext.Provider value={{isSidebarOpen, toggleSidebar}}>
+      <NavbarUIContext.Provider value={{isSidebarOpen, toggleSidebar}}>
         {children}
-      </SidebarUIContext.Provider>
+      </NavbarUIContext.Provider>
     </div>
   );
 }
 
-export default SidebarUIProvider
+export default NavbarUIProvider

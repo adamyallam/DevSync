@@ -2,11 +2,11 @@
 import { useContext } from 'react';
 
 // Component Imports
-import { SidebarUIContext } from '@/components/context/SidebarUIProvider';
+import { NavbarUIContext } from '@/components/dashboard/context/NavbarUIProvider';
 
 
 export const Workspace = () => { 
-    const isSidebarOpen = useContext(SidebarUIContext);
+    const isSidebarOpen = useContext(NavbarUIContext);
 
     return (
         <div className={isSidebarOpen ? `ml-64` : 'ml-8'}>
