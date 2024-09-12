@@ -2,9 +2,9 @@
 import { Plus, BadgeCheck, CalendarClock, Lock, UserRoundSearch } from "lucide-react"
 import { useContext, useState } from "react";
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
+import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 
 // Component Imports
-import { NavbarUIContext } from "@/components/dashboard/context/NavbarUIProvider"
 
 
 interface Props {
@@ -13,11 +13,7 @@ interface Props {
 }
 
 export const Task: React.FC<Props> = (props) => { 
-  const sidebarContext = useContext(NavbarUIContext);
-  if (!sidebarContext) {
-    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
-  }
-  const { isSidebarOpen } = sidebarContext;
+  const { isSidebarOpen } = useNavbarUIContext();
 
   const [taskName, setTaskName] = useState('');
   const [projectSearch, setProjectSearch] = useState('')

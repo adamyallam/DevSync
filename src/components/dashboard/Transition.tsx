@@ -1,8 +1,8 @@
 'use client'
-import { useContext } from 'react';
+
+import useNavbarUIContext from '@/utils/hooks/useNavbarUIContext';
 
 // Component Imports
-import { NavbarUIContext } from './context/NavbarUIProvider';
 
 export interface Props {
     children: React.ReactNode;
@@ -11,13 +11,7 @@ export interface Props {
 }
 
 export const Transition: React.FC<Props> = (props) => { 
-  const sidebarContext = useContext(NavbarUIContext);
-
-  if (!sidebarContext) {
-    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
-  }
-  
-  const { isSidebarOpen } = sidebarContext;
+  const { isSidebarOpen } = useNavbarUIContext();
 
   return (
     <div className={`transition-all duration-300 ${props.classes} ${isSidebarOpen ? `${props.transition}` : ''}`}>

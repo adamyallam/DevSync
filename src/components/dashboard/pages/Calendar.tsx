@@ -1,17 +1,13 @@
 'use client'
-import { useContext } from 'react';
+
+import useNavbarUIContext from '@/utils/hooks/useNavbarUIContext';
 
 // Component Imports
-import { NavbarUIContext } from '../context/NavbarUIProvider';
 import Transition from '../Transition';
 
 
 export const Calendar = () => { 
-    const sidebarContext = useContext(NavbarUIContext);
-    if (!sidebarContext) {
-     throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
-    }
-    const { isSidebarOpen } = sidebarContext;
+    const { isSidebarOpen } = useNavbarUIContext();
 
     return (
         <div>

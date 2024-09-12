@@ -4,15 +4,11 @@ import { useContext } from "react";
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
-import { NavbarUIContext } from '@/components/dashboard/context/NavbarUIProvider';
+import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 import Transition from "../../Transition"
 
 export const TaskManagement = () => { 
-  const sidebarContext = useContext(NavbarUIContext);
-  if (!sidebarContext) {
-    throw new Error('NavbarUIContext must be used within a SidebarUIProvider');
-  }
-  const { isSidebarOpen } = sidebarContext;
+const { isSidebarOpen } = useNavbarUIContext();
 
   const screenWidth = useScreenWidth()
 
