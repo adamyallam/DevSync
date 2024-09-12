@@ -8,7 +8,7 @@ import Link from "next/link"
 export const Header = () => { 
 
     return (
-      <div>
+      <div className="mt-16">
         <div className="flex items-center mb-2"> 
           <div className="w-12 h-12 ml-8 border-2 border-gray-600 bg-gray-200 rounded-full" />
           <div className="ml-4">
