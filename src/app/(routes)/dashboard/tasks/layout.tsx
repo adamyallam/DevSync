@@ -1,7 +1,6 @@
 
 //Component Imports
 import Header from "@/components/dashboard/pages/tasks/Header"
-import Transition from "@/components/dashboard/Transition"
 
 
 interface Props {
@@ -11,9 +10,9 @@ interface Props {
 export const TasksLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='flex flex-col h-full w-full'>
-        <Transition transition='translate-x-60'>
+        <div>
           <Header />
-        </Transition>
+        </div>
         <div className="overflow-hidden">
           {children}
         </div>

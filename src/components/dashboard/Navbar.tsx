@@ -44,7 +44,7 @@ export const Navbar = () => {
       </div>
 
       {/* Sidebar */}
-      <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-gray-700 text-gray-300 w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-60'} overflow-x-hidden overflow-y-auto`}>
+      <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-gray-700 text-gray-300 w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
         <div className='bg-gray-700 border-t-2 border-b-2 border-gray-600 pt-4 pb-4'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
             <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>

@@ -14,7 +14,7 @@ export const Transition: React.FC<Props> = (props) => {
   const { isSidebarOpen } = useNavbarUIContext();
 
   return (
-    <div className={`transition-all duration-300 ${props.classes} ${isSidebarOpen ? `${props.transition}` : ''}`}>
+    <div className={`transition-all duration-300 ${props.classes} ${isSidebarOpen ? `${props.transition}` : 'ml-0'}`}>
         {props.children}
     </div>
   )
