@@ -1,12 +1,12 @@
 
 // Component Imports
+import ListManagement from "@/components/dashboard/pages/projects/list/ListManagement"
 
-export default async function overview() {
+export default async function list() {
 
   return (
     <div>
-      
-      <div className="mt-56">making space</div>
+      <ListManagement />
     </div>
   )
 
