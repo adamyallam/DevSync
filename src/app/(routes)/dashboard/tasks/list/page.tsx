@@ -3,20 +3,17 @@
 import Transition from '@/components/dashboard/Transition'
 import TaskManagement from '@/components/dashboard/pages/tasks/TaskManagement'
 import MyTasks from '@/components/dashboard/pages/tasks/MyTasks'
-import Task from '@/components/dashboard/pages/tasks/Task'
 
 export default async function list() {
 
   return (
-    <div>
-      <TaskManagement />
-      <Transition transition='translate-x-60'>
-        <MyTasks />
-        <Task showTopBorder={true} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={true}/>
-      </Transition>
+    <div className='flex flex-col h-full'>
+        <TaskManagement />
+      <div className='overflow-x-hidden overflow-y-auto'>
+        <Transition transition='translate-x-60'>
+          <MyTasks />
+        </Transition>
+      </div>
     </div>
   )
 

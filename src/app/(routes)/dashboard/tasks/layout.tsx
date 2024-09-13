@@ -10,11 +10,11 @@ interface Props {
 
 export const TasksLayout: React.FC<Props> = ({children}) => {
     return (
-      <section className=''>
+      <section className='flex flex-col h-full w-full'>
         <Transition transition='translate-x-60'>
           <Header />
         </Transition>
-        <div>
+        <div className="overflow-hidden">
           {children}
         </div>
       </section>
