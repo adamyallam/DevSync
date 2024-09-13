@@ -9,7 +9,7 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 export const Header = () => { 
 
   return (
-    <div className='mt-16'>
+    <div className='mt-16 w-full'>
       <div className="flex">
         <Transition classes='flex gap-2 w-full' transition="translate-x-60">
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
@@ -30,7 +30,7 @@ export const Header = () => {
       </div>
 
       <Transition transition="translate-x-60">
-        <div className="flex gap-4 mt-2 ml-10 text-sm border-b-2 border-gray-300">
+        <div className="flex gap-4 mt-2 pl-10 text-sm border-b-2 border-gray-300">
           <Link href={'/dashboard/projects/overview'} className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14}/>Overview</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
           <Link href={'/dashboard/projects/list'} className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16}/>List</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
           <Link href={'/dashboard/projects/board'} className="z-10"><div className="flex items-center gap-1"><SquareKanban size={14}/>Board</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
