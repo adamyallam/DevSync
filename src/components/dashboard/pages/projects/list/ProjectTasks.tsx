@@ -3,14 +3,15 @@ import { ChevronDown, Plus } from "lucide-react"
 
 //component imports
 import Task from '@/components/dashboard/pages/projects/list/Task'
+import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 export const ProjectTasks = () => {
 
   return (
     <div className="h-full">
-      <div className="flex gap-2 ml-8 mt-4 mb-4">
+      <div className="flex gap-2 ml-8 mt-2 mb-2">
         <button><ChevronDown size={16} className=""/></button>
-        <h1>Project Tasks</h1>
+        <AutoResizingInput placeholder="Untitled Section"/>
         <button className=""><Plus size={16}/></button>
       </div>
 
