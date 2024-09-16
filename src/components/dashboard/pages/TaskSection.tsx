@@ -2,7 +2,7 @@
 import { ChevronDown, Plus } from "lucide-react"
 
 //component imports
-import Task from '@/components/dashboard/pages/projects/list/Task'
+import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 export const TaskSection = () => {
@@ -16,20 +16,20 @@ export const TaskSection = () => {
       </div>
 
       <div className="pb-10">
-        <Task showTopBorder={true} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={false}/>
-        <Task showTopBorder={false} showAddTask={true}/>
+        <ProjectTask showTopBorder={true} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={false}/>
+        <ProjectTask showTopBorder={false} showAddTask={true}/>
       </div>
     </div>
   )

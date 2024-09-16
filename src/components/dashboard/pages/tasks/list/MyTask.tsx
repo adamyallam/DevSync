@@ -12,7 +12,7 @@ interface Props {
   showAddTask: boolean;
 }
 
-export const Task: React.FC<Props> = (props) => { 
+export const MyTask: React.FC<Props> = (props) => { 
   const { isSidebarOpen } = useNavbarUIContext();
 
   const [taskName, setTaskName] = useState('');
@@ -66,4 +66,4 @@ export const Task: React.FC<Props> = (props) => {
   )
 }
 
-export default Task
+export default MyTask
