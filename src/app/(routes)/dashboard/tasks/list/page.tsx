@@ -1,15 +1,15 @@
 
 // Component Imports
-import TaskManagement from '@/components/dashboard/pages/tasks/TaskManagement'
-import MyTasks from '@/components/dashboard/pages/tasks/MyTasks'
+import MyTasksManager from '@/components/dashboard/pages/tasks/list/MyTasksManager'
+import TaskSection from '@/components/dashboard/pages/TaskSection'
 
 export default async function list() {
 
   return (
     <div className='flex flex-col h-full'>
-      <TaskManagement />
+      <MyTasksManager />
       <div className='overflow-x-hidden overflow-y-auto'>
-        <MyTasks />
+        <TaskSection />
       </div>
     </div>
   )
