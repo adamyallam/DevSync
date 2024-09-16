@@ -1,12 +1,12 @@
 
 // Component Imports
+import AddTaskButton from "@/components/styledElements/AddTaskButton"
 
 export default async function board() {
 
   return (
-    <div>
-
-      <h1 className='mt-20'>Temp</h1>
+    <div className="w-full h-full">
+      <AddTaskButton />
     </div>
   )
 
