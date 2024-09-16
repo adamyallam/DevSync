@@ -4,7 +4,7 @@ import { Filter, ArrowUpDown, Plus } from "lucide-react";
 export const AddTaskButton = () => {
 
   return (
-    <div>
+    <div className="mb-4">
       <div className="grid grid-cols-2">
         <div className="ml-8 mt-4">
           <div>
