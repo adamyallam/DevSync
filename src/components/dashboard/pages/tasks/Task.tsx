@@ -1,6 +1,6 @@
 'use client'
 import { Plus, BadgeCheck, CalendarClock, Lock, UserRoundSearch } from "lucide-react"
-import { useContext, useState } from "react";
+import { useState } from "react";
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
 import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 

@@ -7,11 +7,9 @@ export default async function list() {
 
   return (
     <div className='flex flex-col h-full'>
-        <TaskManagement />
+      <TaskManagement />
       <div className='overflow-x-hidden overflow-y-auto'>
-        <div>
-          <MyTasks />
-        </div>
+        <MyTasks />
       </div>
     </div>
   )

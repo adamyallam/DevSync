@@ -13,6 +13,7 @@ export const MyTasks = () => {
         <h1>My Tasks</h1>
         <button className=""><Plus size={16}/></button>
       </div>
+      
       <div className="pb-10">
         <Task showTopBorder={true} showAddTask={false}/>
         <Task showTopBorder={false} showAddTask={false}/>
