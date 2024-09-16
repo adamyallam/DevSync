@@ -1,12 +1,12 @@
 'use client'
-import { Plus, Filter, ArrowUpDown, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
 import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 import AddTaskButton from "@/components/styledElements/AddTaskButton";
 
-export const TaskManagement = () => { 
+export const ProjectTasksManager = () => { 
 const { isSidebarOpen } = useNavbarUIContext();
 
   const screenWidth = useScreenWidth()
@@ -40,4 +40,4 @@ const { isSidebarOpen } = useNavbarUIContext();
   )
 }
 
-export default TaskManagement
+export default ProjectTasksManager

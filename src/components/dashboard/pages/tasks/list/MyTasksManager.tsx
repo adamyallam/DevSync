@@ -6,7 +6,7 @@ import useScreenWidth from "@/utils/hooks/useScreenWidth";
 import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 import AddTaskButton from "@/components/styledElements/AddTaskButton";
 
-export const TaskManagement = () => { 
+export const MyTasksManager = () => { 
 const { isSidebarOpen } = useNavbarUIContext();
 
   const screenWidth = useScreenWidth()
@@ -46,4 +46,4 @@ const { isSidebarOpen } = useNavbarUIContext();
   )
 }
 
-export default TaskManagement
+export default MyTasksManager
