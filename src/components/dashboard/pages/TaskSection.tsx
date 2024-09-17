@@ -17,21 +17,21 @@ export const TaskSection = () => {
 
       <div>
         <ProjectTask showTopBorder={true} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false} />
-        <ProjectTask showTopBorder={false}/>
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask />
+        <ProjectTask/>
       </div>
-      
+
       <button className="ml-12 mt-2 text-sm">Add task...</button>
     </div>
   )

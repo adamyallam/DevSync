@@ -6,12 +6,11 @@ import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 
 // Component Imports
 
-
 interface Props {
-  showTopBorder: boolean;
+  showTopBorder?: boolean
 }
 
-export const MyTask: React.FC<Props> = (props) => { 
+export const MyTask: React.FC<Props> = ({showTopBorder}) => { 
   const { isSidebarOpen } = useNavbarUIContext();
 
   const [taskName, setTaskName] = useState('');
@@ -19,8 +18,8 @@ export const MyTask: React.FC<Props> = (props) => {
   const screenWidth = useScreenWidth()
 
   return (
-    <div>
-      <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-gray-300 ml-8 h-10 transition-all duration-300 ${props.showTopBorder ? 'border-t-2' : ''}`} 
+    <div className="ml-8">
+      <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-gray-300 h-10 transition-all duration-300 ${showTopBorder ? 'border-t-2' : ''}`} 
       style={{width: isSidebarOpen ? `${screenWidth - 304}px` : `${screenWidth - 64}px`}}>
         <div className={`flex col-span-4 ml-2 border-r-2`}>
           <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
