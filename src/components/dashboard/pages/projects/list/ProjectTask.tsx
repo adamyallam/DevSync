@@ -10,7 +10,7 @@ interface Props {
   showTopBorder?: boolean;
 }
 
-export const ProjectTask: React.FC<Props> = ({showTopBorder}) => { 
+export const ProjectTask: React.FC<Props> = ({showTopBorder = false}) => { 
   const { isSidebarOpen } = useNavbarUIContext();
 
   const [taskName, setTaskName] = useState('');
