@@ -9,14 +9,12 @@ import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 
 interface Props {
   showTopBorder: boolean;
-  showAddTask: boolean;
 }
 
 export const Task: React.FC<Props> = (props) => { 
   const { isSidebarOpen } = useNavbarUIContext();
 
   const [taskName, setTaskName] = useState('');
-  const [projectSearch, setProjectSearch] = useState('')
   const screenWidth = useScreenWidth()
 
   return (
@@ -46,10 +44,6 @@ export const Task: React.FC<Props> = (props) => {
         <div className="self-center col-span-2">
           <button className="flex items-center gap-1"><div className="border rounded-full bg-red-500 w-3 h-3 ml-1 mr-1"/>High<ChevronDown size={13} className="mt-1"/></button>
         </div>
-      </div>
-
-      <div className={props.showAddTask ? '' : 'hidden'}>
-        <button className="ml-12 mt-2 text-sm">Add task...</button>
       </div>
     </div>
   )

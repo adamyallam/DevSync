@@ -9,7 +9,6 @@ import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
 
 interface Props {
   showTopBorder: boolean;
-  showAddTask: boolean;
 }
 
 export const MyTask: React.FC<Props> = (props) => { 
@@ -57,10 +56,6 @@ export const MyTask: React.FC<Props> = (props) => {
           <button className="w-full pl-2"><UserRoundSearch size={22}/></button>
           <button className="pr-2"><Plus size={18}/></button>
         </div>
-      </div>
-
-      <div className={props.showAddTask ? '' : 'hidden'}>
-        <button className="ml-20 mt-2 text-sm">Add task...</button>
       </div>
     </div>
   )
