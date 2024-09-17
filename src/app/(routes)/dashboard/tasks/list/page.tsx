@@ -10,7 +10,6 @@ export default async function list() {
       <MyTasksManager />
       <div className='overflow-x-hidden overflow-y-auto pb-10'>
         <TaskSection />
-        <TaskSection />
       </div>
     </div>
   )
