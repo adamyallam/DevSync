@@ -35,7 +35,7 @@ export const TaskSection = () => {
 
   return (
     <div className="mt-6">
-      <div className="flex gap-2 ml-8 mt-2 mb-2">
+      <div className="flex gap-1 ml-8 mt-2 mb-2">
         <button><ChevronDown size={16} className=""/></button>
         <AutoResizingInput placeholder="Untitled Section"/>
         <button className=""><Plus size={16}/></button>

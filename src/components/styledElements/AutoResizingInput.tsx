@@ -34,7 +34,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
         style={{ width: `${initialWidth}px` }}>
       </input>
 
-      <span ref={spanRef} className={`${className ? `absolute top-0 left-0 invisible whitespace-pre pr-2 ${className}` : 'absolute top-0 left-0 invisible whitespace-pre pr-5 text-md'}`}>
+      <span ref={spanRef} className={`${className ? `absolute top-0 left-0 invisible whitespace-pre pr-2 ${className}` : 'absolute top-0 left-0 invisible whitespace-pre pr-2 text-md'}`}>
         {text}
       </span>
     </div>
