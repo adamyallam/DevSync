@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react';
 import { useContext, useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
-import { getPathSegments } from '@/utils/getPathSegments'
+import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/useNavbarUIContext';
 
 //component imports
@@ -19,8 +19,8 @@ export const Navbar = () => {
     toggleSidebar(!isSidebarOpen);
   }
 
+  const currentPath = usePathSegments(2);
   function applySidebarClass(...pagePaths: string[]) {
-    const currentPath = getPathSegments(2);
   
     if (pagePaths.includes(currentPath)) {
       return 'sidebar-selected';
