@@ -16,21 +16,23 @@ export const TaskSection = () => {
       </div>
 
       <div>
-        <ProjectTask showTopBorder={true} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={false}/>
-        <ProjectTask showTopBorder={false} showAddTask={true}/>
+        <ProjectTask showTopBorder={true} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false} />
+        <ProjectTask showTopBorder={false}/>
       </div>
+      
+      <button className="ml-12 mt-2 text-sm">Add task...</button>
     </div>
   )
 }
