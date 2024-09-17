@@ -1,7 +1,7 @@
 'use client'
 import { ChevronDown, Plus } from "lucide-react"
 import { usePathSegments } from "@/utils/hooks/usePathSegments"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 //component imports
 import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
