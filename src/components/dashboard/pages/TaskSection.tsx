@@ -8,16 +8,20 @@ import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
 import MyTask from "./tasks/list/MyTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
-export const TaskSection = () => {
+interface Props {
+  hasInitialTask: boolean;
+}
+
+export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
   const currentPath = usePathSegments(2);
   const [isFirstTask, setIsFirstTask] = useState<boolean>(true)
   const [tasks, setTasks] = useState<JSX.Element[]>([])
 
   useEffect(() => {
-      setTasks(() => {
-    return [newTask()]
-  })
-  }, [])
+    if (hasInitialTask) {
+      setTasks([newTask()]);
+    }
+  }, [hasInitialTask]);
   
   useEffect(() => {
     setIsFirstTask(tasks.length === 0)
@@ -25,9 +29,9 @@ export const TaskSection = () => {
 
   function newTask() {
     if (currentPath === 'projects/list') {
-      return <ProjectTask key={tasks.length} showTopBorder={isFirstTask} />
+      return <ProjectTask key={tasks.length + 1} showTopBorder={isFirstTask} />
     } else if (currentPath === 'tasks/list') {
-      return <MyTask key={tasks.length} showTopBorder={isFirstTask} />
+      return <MyTask key={tasks.length + 1} showTopBorder={isFirstTask} />
     } else {
       throw new Error('Invalid path for adding a task.')
     }
