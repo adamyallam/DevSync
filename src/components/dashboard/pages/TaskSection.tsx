@@ -14,18 +14,24 @@ interface Props {
 
 export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
   const currentPath = usePathSegments(2);
-  const [isFirstTask, setIsFirstTask] = useState<boolean>(true)
-  const [tasks, setTasks] = useState<JSX.Element[]>([])
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const [isFirstTask, setIsFirstTask] = useState<boolean>(true);
+  const [tasks, setTasks] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     if (hasInitialTask) {
       setTasks([newTask()]);
+      setInitialized(true);
+    } else {
+      setInitialized(true);
     }
   }, [hasInitialTask]);
-  
+
   useEffect(() => {
-    setIsFirstTask(tasks.length === 0)
-  }, [tasks])
+    if (initialized) {
+      setIsFirstTask(tasks.length === 0);
+    }
+  }, [tasks, initialized]);
 
   function newTask() {
     if (currentPath === 'projects/list') {
@@ -41,6 +47,10 @@ export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
     setTasks((prevTasks) => {
       return [...prevTasks, newTask()]
     })
+  }
+
+  if (!initialized) {
+    return null
   }
 
   return (
