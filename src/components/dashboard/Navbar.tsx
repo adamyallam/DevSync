@@ -51,7 +51,7 @@ export const Navbar = () => {
             <span className='ml-1 text-sm'>Home</span>
           </Link>
           
-          <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/calendar', 'tasks/files')}`}>
+          <Link href='/dashboard/tasks/board' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/calendar', 'tasks/files')}`}>
             <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
             <span className='ml-1 text-sm'>Tasks</span>
           </Link>
@@ -75,7 +75,7 @@ export const Navbar = () => {
           <div className='pb-3'>
             <h1 className='font-bold pl-2 ml-6'>Projects</h1>
 
-            <Link href='/dashboard/projects/list' className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
+            <Link href='/dashboard/projects/board' className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
               <div className='border-2 bg-white rounded-md w-4 h-4' />
               <span className='ml-2 text-sm'>ProjectName</span>
             </Link>
