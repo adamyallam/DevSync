@@ -7,7 +7,7 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 export const ProjectBoardTask = () => {
   
   return (
-    <div>
+    <div className="pb-2">
       <div className="flex flex-col justify-evenly border border-gray-200 bg-white rounded-lg w-60 h-24">
         <div className="flex items-center gap-1 ml-2">
           <BadgeCheck size={18} color="green"/>
