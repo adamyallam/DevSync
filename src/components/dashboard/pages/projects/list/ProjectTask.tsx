@@ -27,7 +27,7 @@ export const ProjectTask: React.FC<Props> = ({showTopBorder = false}) => {
             placeholder="Name"
             value={taskName} 
             onChange={(e) => setTaskName(e.target.value)} 
-            className="text-sm w-full"
+            className="text-sm w-full px-2"
           />
         </div>
 
