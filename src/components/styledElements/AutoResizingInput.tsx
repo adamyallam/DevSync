@@ -5,11 +5,12 @@ interface AutoResizingInputProps {
   placeholder?: string;
   initialState?: string;
   className?: string;
+  maxGrowthWidth?: number;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, placeholder, className, initialState}) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, placeholder, className, initialState, maxGrowthWidth}) => {
   const [text, setText] = useState(`${initialState || ''}`)
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -17,9 +18,11 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
   useEffect(() => {
     if (inputRef.current && spanRef.current && spanRef.current.offsetWidth >= initialWidth) {
       inputRef.current.style.width = `${spanRef.current.offsetWidth + 2}px`;
-    } else if (inputRef.current) {
-      inputRef.current.style.width = `${initialWidth}px`;
-    }
+
+      if (maxGrowthWidth) {
+        inputRef.current.style.maxWidth = `${maxGrowthWidth + 2}px`;
+      }
+    } 
   }, [text]);
 
   return (
