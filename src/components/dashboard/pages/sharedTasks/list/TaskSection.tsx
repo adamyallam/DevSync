@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 
 //component imports
 import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
-import MyTask from "./tasks/list/MyTask"
+import MyTask from "@/components/dashboard/pages/tasks/list/MyTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {

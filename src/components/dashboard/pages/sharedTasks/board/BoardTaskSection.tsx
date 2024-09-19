@@ -3,7 +3,7 @@ import { Plus, Ellipsis } from "lucide-react"
 import { useState, useEffect } from "react"
 
 //component imports
-import ProjectBoardTask from "./projects/board/ProjectBoardTask"
+import ProjectBoardTask from "./BoardTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {

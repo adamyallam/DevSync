@@ -3,7 +3,7 @@ import { Plus } from "lucide-react"
 import { useState } from "react"
 
 //component imports
-import BoardTaskSection from "./BoardTaskSection"
+import BoardTaskSection from "../../sharedTasks/board/BoardTaskSection"
 
 export const CreateBoardSection = () => {
   const [boardSections, setBoardSections] = useState<JSX.Element[]>([])
