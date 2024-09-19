@@ -9,10 +9,10 @@ import MyTask from "@/components/dashboard/pages/tasks/list/MyTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
-  hasInitialTask: boolean;
+  hasInitialTask?: boolean;
 }
 
-export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
+export const TaskSection: React.FC<Props> = ({hasInitialTask = false}) => {
   const currentPath = usePathSegments(2);
   const [initialized, setInitialized] = useState<boolean>(false);
   const [isFirstTask, setIsFirstTask] = useState<boolean>(true);

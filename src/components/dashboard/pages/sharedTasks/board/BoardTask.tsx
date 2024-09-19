@@ -4,7 +4,7 @@ import { BadgeCheck, User, CalendarClock } from "lucide-react"
 //component imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
-export const ProjectBoardTask = () => {
+export const BoardTask = () => {
   
   return (
     <div className="pb-2">
@@ -27,4 +27,4 @@ export const ProjectBoardTask = () => {
   )
 }
 
-export default ProjectBoardTask
+export default BoardTask

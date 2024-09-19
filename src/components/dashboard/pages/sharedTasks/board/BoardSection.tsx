@@ -3,33 +3,33 @@ import { Plus, Ellipsis } from "lucide-react"
 import { useState, useEffect } from "react"
 
 //component imports
-import ProjectBoardTask from "./BoardTask"
+import BoardTask from "./BoardTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
   hasInitialTask: boolean;
+  isFirstSection: Boolean;
 }
 
-export const BoardTaskSection: React.FC<Props> = ({hasInitialTask}) => {
+export const BoardSection: React.FC<Props> = ({hasInitialTask = false, isFirstSection}) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [boardTasks, setBoardTasks] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     if (hasInitialTask) {
-      setBoardTasks([newBoardTask()]);
-      setInitialized(true);
-    } else {
-      setInitialized(true);
+      setBoardTasks([newTask()])
     }
+
+    setInitialized(true);
   }, [hasInitialTask]);
 
-  function newBoardTask() {
-    return <ProjectBoardTask key={boardTasks.length + 1} />
-  };
+  function newTask() {
+    return <BoardTask key={boardTasks.length + 1} />
+  }
 
   function addBoardTask() {
     setBoardTasks((prevTasks) => {
-      return [...prevTasks, newBoardTask()]
+      return [...prevTasks, newTask()]
     })
   }
 
@@ -38,8 +38,8 @@ export const BoardTaskSection: React.FC<Props> = ({hasInitialTask}) => {
   }
 
   return (
-    <div className="flex flex-col ml-8 mt-5 border rounded-lg border-gray-400 w-[270px] h-[calc(100%-40px)]">
-      <div className="flex justify-between ml-2 mb-3 mt-2 mr-2">
+    <div className={`flex flex-col mt-5 border rounded-lg border-gray-400 w-[270px] h-[calc(100%-40px)] ${isFirstSection ? 'ml-8' : 'ml-2'}`}>
+      <div className="flex justify-between ml-3 mb-3 mt-2 mr-3">
         <AutoResizingInput maxGrowthWidth={200} placeholder="Untitled Section"/>
 
         <div className="flex gap-2">
@@ -55,4 +55,4 @@ export const BoardTaskSection: React.FC<Props> = ({hasInitialTask}) => {
   )
 }
 
-export default BoardTaskSection
+export default BoardSection
