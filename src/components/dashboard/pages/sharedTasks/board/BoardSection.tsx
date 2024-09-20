@@ -35,7 +35,7 @@ export const BoardSection: React.FC<Props> = ({hasInitialTask, isFirstSection}) 
   }
 
   return (
-    <div className={`flex flex-col mt-5 border rounded-lg border-gray-400 w-[270px] h-[calc(100%-40px)] ${isFirstSection ? 'ml-8' : 'ml-2'}`}>
+    <div className={`flex flex-col mt-5 border rounded-lg border-gray-400 min-w-[270px] h-[calc(100%-40px)] ${isFirstSection ? 'ml-8' : 'ml-2'}`}>
       <div className="flex justify-between ml-3 mb-3 mt-2 mr-3">
         <AutoResizingInput maxGrowthWidth={200} placeholder="Untitled Section"/>
 
