@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const dashboardLayout: React.FC<Props> = ({children}) => {
+const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
         <NavbarUIProvider>
           <div className="flex h-screen w-screen overflow-x-hidden">

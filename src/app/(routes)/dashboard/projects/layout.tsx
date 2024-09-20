@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const ProjectsLayout: React.FC<Props> = ({children}) => {
+const ProjectsLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='flex flex-col h-full w-full'>
         <div>

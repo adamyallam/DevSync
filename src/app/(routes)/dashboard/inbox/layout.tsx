@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const dashboardLayout: React.FC<Props> = ({children}) => {
+const dashboardLayout: React.FC<Props> = ({children}) => {
     return (
       <section className='overflow-x-hidden'>
         <Header />
