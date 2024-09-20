@@ -20,7 +20,7 @@ export const CreateBoardSection = () => {
     if (isFirstSection) {
       addBoardSection()
     }
-  }, []);
+  }, [isFirstSection]);
 
   useEffect(() => {
       setIsFirstSection(boardSections.length === 0);
