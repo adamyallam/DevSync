@@ -45,8 +45,14 @@ export const BoardSection: React.FC<Props> = ({hasInitialTask, isFirstSection}) 
         </div>
       </div>
 
-      <div className="self-center overflow-auto">
+      <div className="flex flex-col items-center w-full self-center overflow-auto">
         {boardTasks}
+        <button onClick={() =>addBoardTask()} className="font-semibold opacity-60 hover:opacity-100">
+          <div className="flex items-center gap-1 pb-2">
+            <Plus size={18}/>
+            Add Section
+          </div>
+        </button>
       </div>
     </div>
   )
