@@ -27,15 +27,19 @@ export const CreateBoardSection = () => {
   }, [boardSections]);
 
   return (
-      <div className="flex h-full">
+      <div className="flex w-full h-full whitespace-nowrap">
         {boardSections}
         
-        <button onClick={() => addBoardSection()} className="self-start font-semibold opacity-60 hover:opacity-100 mt-8 ml-5">
-        <div className="flex items-center gap-1">
-          <Plus size={18}/>
-          Add Section
+        <div className="pr-12">
+          <div className="ml-2 mt-5 h-[calc(100%-40px)] min-w-[270px] bg-gray-100 rounded-lg">
+            <button onClick={() => addBoardSection()} className="self-start font-semibold opacity-60 hover:opacity-100 mt-3 ml-5">
+            <div className="flex items-center gap-1">
+              <Plus size={18}/>
+              Add Section
+            </div>
+            </button>
+          </div>
         </div>
-        </button>
       </div>
   )
 }
