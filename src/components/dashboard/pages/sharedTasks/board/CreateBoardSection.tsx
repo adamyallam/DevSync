@@ -9,25 +9,22 @@ export const CreateBoardSection = () => {
   const [boardSections, setBoardSections] = useState<JSX.Element[]>([])
   const [isFirstSection, setIsFirstSection] = useState<boolean>(true);
 
-  useEffect(() => {
-      setIsFirstSection(boardSections.length === 0);
-  }, [boardSections]);
+  function addBoardSection() {
+    const newBoardSection = <BoardSection key={boardSections.length + 1} hasInitialTask={isFirstSection} isFirstSection={isFirstSection} />
+    setBoardSections((prevSections) => {
+     return [...prevSections, newBoardSection]
+    })
+  }
 
   useEffect(() => {
     if (isFirstSection) {
-      setBoardSections([newBoardSection()])
+      addBoardSection()
     }
   }, []);
 
-  function newBoardSection() {
-    return <BoardSection key={boardSections.length + 1} hasInitialTask={isFirstSection} isFirstSection={isFirstSection} />
-  }
-
-  function addBoardSection() {
-    setBoardSections((prevSections) => {
-     return [...prevSections, newBoardSection()]
-    })
-  }
+  useEffect(() => {
+      setIsFirstSection(boardSections.length === 0);
+  }, [boardSections]);
 
   return (
       <div className="flex h-full">

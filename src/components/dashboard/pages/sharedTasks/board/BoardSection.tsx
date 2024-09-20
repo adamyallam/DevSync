@@ -15,23 +15,20 @@ export const BoardSection: React.FC<Props> = ({hasInitialTask = false, isFirstSe
   const [initialized, setInitialized] = useState<boolean>(false);
   const [boardTasks, setBoardTasks] = useState<JSX.Element[]>([]);
 
+  function addBoardTask() {
+    const newTask = <BoardTask key={boardTasks.length + 1} />
+    setBoardTasks((prevTasks) => {
+      return [...prevTasks, newTask]
+    })
+  }
+
   useEffect(() => {
     if (hasInitialTask) {
-      setBoardTasks([newTask()])
+      addBoardTask()
     }
 
     setInitialized(true);
   }, [hasInitialTask]);
-
-  function newTask() {
-    return <BoardTask key={boardTasks.length + 1} />
-  }
-
-  function addBoardTask() {
-    setBoardTasks((prevTasks) => {
-      return [...prevTasks, newTask()]
-    })
-  }
 
   if (!initialized) {
     return null
