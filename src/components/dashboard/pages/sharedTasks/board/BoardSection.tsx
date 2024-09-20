@@ -11,7 +11,7 @@ interface Props {
   isFirstSection: Boolean;
 }
 
-export const BoardSection: React.FC<Props> = ({hasInitialTask = false, isFirstSection}) => {
+export const BoardSection: React.FC<Props> = ({hasInitialTask, isFirstSection}) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [boardTasks, setBoardTasks] = useState<JSX.Element[]>([]);
 
