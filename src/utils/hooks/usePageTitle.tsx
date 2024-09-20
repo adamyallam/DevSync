@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation'
 
 // Gets title of current page using the Pathname
-export function getPageTitle() {
+export function usePageTitle() {
   const path = usePathname()
   const segments = path.split('/').filter(segment => segment);
 

@@ -1,5 +1,5 @@
 'use client'
-import { getPageTitle } from "@/utils/getPageTitle"
+import { usePageTitle } from "@/utils/hooks/usePageTitle";
 
 interface PageTitleProps {
   classes?: string;
@@ -7,9 +7,11 @@ interface PageTitleProps {
 
 export const PageTitle: React.FC<PageTitleProps> = ({classes}) => {
 
+  const title = usePageTitle()
+
   return (
     <div>
-      <h1 className={classes || 'text-2xl ml-8'}>{getPageTitle()}</h1>
+      <h1 className={classes || 'text-2xl ml-8'}>{title}</h1>
     </div>
   );
 };
