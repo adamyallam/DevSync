@@ -13,7 +13,7 @@ const TasksLayout: React.FC<Props> = ({children}) => {
         <div>
           <Header />
         </div>
-        <div className="overflow-hidden">
+        <div className="overflow-hidden flex-grow">
           {children}
         </div>
       </section>
