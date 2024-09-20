@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createComment, deleteComment, updateComment, readComment, readAllComments } from "src/db/db-connections/comment"
-import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
+import authOptions from "../auth/[...nextauth]/authOptions"
 import { getServerSession } from 'next-auth'
 
 //API to add or "POST" a project (invokes "createProject")

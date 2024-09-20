@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createTask, deleteTask, updateTask, readTask, readAllTasks} from "src/db/db-connections/task"
-import { authOptions } from 'src/app/api/auth/[...nextauth]/route'
+import authOptions from "../auth/[...nextauth]/authOptions"
 import { getServerSession } from 'next-auth'
 
 
