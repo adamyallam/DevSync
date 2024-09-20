@@ -9,29 +9,14 @@ import MyTask from "@/components/dashboard/pages/tasks/list/MyTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
-  hasInitialTask?: boolean;
+  hasInitialTask: boolean;
 }
 
-export const TaskSection: React.FC<Props> = ({hasInitialTask = false}) => {
+export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
   const currentPath = usePathSegments(2);
   const [initialized, setInitialized] = useState<boolean>(false);
   const [isFirstTask, setIsFirstTask] = useState<boolean>(true);
   const [tasks, setTasks] = useState<JSX.Element[]>([]);
-
-  useEffect(() => {
-    if (hasInitialTask) {
-      setTasks([newTask()]);
-      setInitialized(true);
-    } else {
-      setInitialized(true);
-    }
-  }, [hasInitialTask]);
-
-  useEffect(() => {
-    if (initialized) {
-      setIsFirstTask(tasks.length === 0);
-    }
-  }, [tasks, initialized]);
 
   function newTask() {
     if (currentPath === 'projects/list') {
@@ -49,6 +34,24 @@ export const TaskSection: React.FC<Props> = ({hasInitialTask = false}) => {
     })
   }
 
+
+  useEffect(() => {
+    if (hasInitialTask) {
+      addTask()
+      setInitialized(true);
+    } else {
+      setInitialized(true);
+    }
+  }, [hasInitialTask]);
+
+
+  useEffect(() => {
+    if (initialized) {
+      setIsFirstTask(tasks.length === 0);
+    }
+  }, [tasks, initialized]);
+
+  
   if (!initialized) {
     return null
   }
