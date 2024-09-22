@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 
 //component imports
 import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
-import MyTask from "@/components/dashboard/pages/tasks/list/MyTask"
+import UserTask from "@/components/dashboard/pages/tasks/list/UserTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
@@ -22,7 +22,7 @@ export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
     if (currentPath === 'projects/list') {
       return <ProjectTask key={tasks.length + 1} showTopBorder={isFirstTask} />
     } else if (currentPath === 'tasks/list') {
-      return <MyTask key={tasks.length + 1} showTopBorder={isFirstTask} />
+      return <UserTask key={tasks.length + 1} showTopBorder={isFirstTask} />
     } else {
       throw new Error('Invalid path for adding a task.')
     }
