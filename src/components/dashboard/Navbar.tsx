@@ -64,14 +64,14 @@ export const Navbar = () => {
 
         <div>
           <div className='pb-3 pt-3'>
-            <h1 className='ml-8 font-bold'>Insights</h1>
+            <h1 className='ml-8 font-bold'>Team</h1>
 
-            <Link href='/dashboard/calendar' className={`flex items-center h-8 ${applySidebarClass('dashboard/calendar')}`}>
-              <CalendarCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
-              <span className='ml-1 text-sm'>Calendar</span>
+            <Link href='/dashboard/workspace' className={`flex items-center h-8 ${applySidebarClass('dashboard/workspace')}`}>
+              <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
+              <span className='ml-1 text-sm'>Workspace</span>
             </Link>
           </div>
-          
+
           <div className='pb-3'>
             <h1 className='font-bold pl-2 ml-6'>Projects</h1>
 
@@ -99,15 +99,6 @@ export const Navbar = () => {
                 {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4}/> : <ChevronUp size={16} strokeWidth={4} />}
               </button>
             </div>
-          </div>
-
-          <div className='pb-3'>
-            <h1 className='ml-8 font-bold'>Team</h1>
-
-            <Link href='/dashboard/workspace' className={`flex items-center h-8 ${applySidebarClass('dashboard/workspace')}`}>
-              <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
-              <span className='ml-1 text-sm'>Workspace</span>
-            </Link>
           </div>
         </div>
 
