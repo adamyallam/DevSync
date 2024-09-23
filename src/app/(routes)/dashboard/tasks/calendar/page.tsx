@@ -1,12 +1,12 @@
 
 // Component Imports
+import MyCalendar from "@/components/dashboard/pages/calendar/MyCalendar"
 
 export default async function calendar() {
 
   return (
-    <div>
-
-      <h1 className='mt-20'>Temp</h1>
+    <div className="h-full w-full">
+      <MyCalendar />
     </div>
   )
 
