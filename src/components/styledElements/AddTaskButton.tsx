@@ -8,7 +8,7 @@ export const AddTaskButton = () => {
       <div className="grid grid-cols-2">
         <div className="ml-8 ">
           <div>
-            <button className="flex items-center gap-1 border-2 bg-blue-500 w-w-22 h-9 rounded-md p-1 text-sm text-white"><Plus size={16}/>Add task</button>
+            <button className="flex items-center gap-1 border-2 bg-blue-500 w-22 h-9 rounded-md p-1 text-sm text-white"><Plus size={16}/>Add task</button>
           </div>
         </div>
 
