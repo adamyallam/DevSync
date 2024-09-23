@@ -63,7 +63,7 @@ const MyCalendar: React.FC = () => {
         </div>
       </div>
       
-      <div className='flex-grow overflow-auto'>
+      <div className='overflow-auto'>
         <FullCalendar
           ref={calendarRef}
           plugins={[ dayGridPlugin ]}
