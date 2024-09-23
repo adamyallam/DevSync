@@ -1,46 +1,81 @@
 'use client'
-import React, { useState } from 'react';
-import { Calendar, momentLocalizer, Event } from 'react-big-calendar';
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import React, { useState, useRef, useEffect} from 'react';
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+
 
 //Component imports
 
-const localizer = momentLocalizer(moment);
-
-
 const MyCalendar: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const calendarRef = useRef<FullCalendar | null>(null);
+  const [calendarTitle, setCalendarTitle] = useState<string>(''); 
 
-  const handleSelectEvent = (event: Event) => {
-    alert(event.title);
-  };
-
-  const handleSelectSlot = (slotInfo: any) => {
-    const title = window.prompt('New Event name');
-    if (title) {
-      const newEvent = {
-        start: slotInfo.start,
-        end: slotInfo.end,
-        title,
-      };
-      setEvents((prevEvents) => [...prevEvents, newEvent]);
+  const updateCalendarTitle = () => {
+    if (calendarRef.current) {
+      const title = calendarRef.current.getApi().view.title;
+      setCalendarTitle(title);
     }
   };
 
+  const goToPrev = () => {
+    calendarRef.current?.getApi().prev()
+    updateCalendarTitle()
+  }
+
+  const goToNext = () => {
+    calendarRef.current?.getApi().next();
+    updateCalendarTitle()
+  };
+
+  const goToToday = () => {
+    calendarRef.current?.getApi().today();
+    updateCalendarTitle()
+  };
+
+  const changeToMonthLayout = () => {
+    calendarRef.current?.getApi().changeView('dayGridMonth');
+    updateCalendarTitle()
+  };
+
+  const changeToWeekLayout = () => {
+    calendarRef.current?.getApi().changeView('dayGridWeek');
+    updateCalendarTitle()
+  };
+
+  useEffect(() => {
+    updateCalendarTitle()
+  }, [])
+
   return (
-      <div className='h-full w-full p-3'>
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: '100%', width: '100%' }}
-          selectable
-          onSelectEvent={handleSelectEvent}
-          onSelectSlot={handleSelectSlot}
+    <div className='flex flex-col h-full w-full'>
+      <div className='flex justify-between items-center pl-8 pr-8 pb-3 pt-3 border-b-2 border-gray-300'>
+        <div className='flex'>
+          <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={goToToday}>Today</button>
+          <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={goToPrev}>Prev</button>
+          <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={goToNext}>Next</button>
+        </div>
+
+        <h1 className='text-xl font-semibold mr-16'>{calendarTitle}</h1>
+
+        <div className='flex'>
+          <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={changeToWeekLayout}>Week</button>
+          <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={changeToMonthLayout}>Month</button>
+        </div>
+      </div>
+      
+      <div className='flex-grow overflow-auto'>
+        <FullCalendar
+          ref={calendarRef}
+          plugins={[ dayGridPlugin ]}
+          initialView="dayGridWeek"
+          headerToolbar={{
+            left: '',
+            center: '',
+            right: ''
+          }}
         />
       </div>
+    </div>
   );
 };
 
