@@ -11,27 +11,44 @@ const MyCalendar: React.FC = () => {
   const [calendarTitle, setCalendarTitle] = useState<string>(''); 
 
   const dayHeaderContent = (arg: { date: Date }) => {
+    const currentView = calendarRef.current?.getApi().view.type
     const options = { weekday: 'short', day: 'numeric' } as const;
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(arg.date);
     const [day, number] = formattedDate.split(' '); 
 
+    if (currentView === 'dayGridWeek') {
+      return (
+        <div className="flex flex-col items-start h-14 w-48">
+          <span className='mt-1 text-sm font-bold text-gray-600'>{number}</span>
+          <span className='text-xl font-normal'>{day}</span>
+        </div>
+      )
+    }
     return (
-      <div className="flex flex-col items-start h-16 font-normal w-full">
-        <span className='ml-3 mt-1'>{number}</span>
-        <span className='ml-3 text-2xl'>{day}</span>
+      <div className="flex flex-col items-start h-5 w-48">
+        <span className='text-sm font-bold text-gray-600'>{number}</span>
       </div>
     );
   };
 
   const dayCellContent = (arg: { date: Date }) => {
+    const currentView = calendarRef.current?.getApi().view.type
     const options = { day: 'numeric' } as const;
     const dayNumber = new Intl.DateTimeFormat('en-US', options).format(arg.date);
-    
+
+    if (currentView === 'dayGridMonth') {
+      return (
+        <div className='w-52'>
+          <span className='text-md ml-2'>{dayNumber}</span>
+        </div>
+      );
+    } 
+
     return (
-      <div className="">
-        <span className=''>{dayNumber}</span>
+      <div>
+        <span> </span>
       </div>
-    );
+    )
   };
 
   const calendarActions = {  
@@ -74,7 +91,7 @@ const MyCalendar: React.FC = () => {
 
   return (
     <div className='flex flex-col h-full w-full'>
-      <div className='flex justify-between items-center pl-8 pr-8 pb-3 pt-3 border-b-2 border-gray-300'>
+      <div className='flex justify-between items-center pl-8 pr-8 pt-3 pb-3'>
         <div className='flex'>
           <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={calendarActions.goToToday}>Today</button>
           <button className='border-2 bg-blue-500 w-14 h-9 rounded-md p-1 text-sm text-white' onClick={calendarActions.goToPrev}>Prev</button>
@@ -104,6 +121,9 @@ const MyCalendar: React.FC = () => {
           }
           dayHeaderContent={dayHeaderContent}
           dayCellContent={dayCellContent}
+          dayCellClassNames={[
+            'bg-gray-100'
+          ]}
         />
       </div>
     </div>
