@@ -19,7 +19,7 @@ export const Header = () => {
             <div className="flex gap-4">
               <Link href='/dashboard/tasks/list' className="z-10">List<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
               <Link href={'/dashboard/tasks/board'} className="z-10">Board<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
-              <Link href={'/dashboard/tasks/calendar'} className="z-10">Calendar<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
+              <Link href={'/dashboard/tasks/calendar/week'} className="z-10">Calendar<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
               <Link href={'/dashboard/tasks/files'} className="z-10">Files<div className="bg-black w-full h-[2.5px] translate-y-[9.5px]"/></Link>
             </div>
           </div>
