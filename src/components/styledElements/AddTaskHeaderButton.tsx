@@ -9,7 +9,7 @@ export const AddTaskHeaderButton: React.FC<Props> = ({showFilterSort = true}) =>
 
   return (
     <div className="mb-2 mt-2">
-      <div className="grid grid-cols-2">
+      <div className="flex justify-between">
         <div className="ml-8 ">
           <div>
             <button className="flex items-center gap-1 border-2 bg-blue-500 w-22 h-9 rounded-md p-1 text-sm text-white"><Plus size={16}/>Add task</button>
@@ -17,7 +17,7 @@ export const AddTaskHeaderButton: React.FC<Props> = ({showFilterSort = true}) =>
         </div>
         
         {showFilterSort && (
-          <div className="flex justify-end gap-5  mr-10">
+          <div className="flex justify-end gap-5 mr-10">
             <button className="flex items-center gap-1"><Filter size={16}/>Filter</button>
             <button className="flex items-center gap-1"><ArrowUpDown size={16}/>Sort</button>
           </div>
