@@ -5,7 +5,6 @@ import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
 import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
 import TasksCard from "@/components/dashboard/pages/home/TasksCard";
 import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
-import PageTitle from "@/components/styledElements/PageTitle";
 
 export default async function home(){
   const session = await getServerSession(authOptions)
@@ -13,7 +12,7 @@ export default async function home(){
   return (
     <div>
       <div>
-        <PageTitle classes="text-2xl ml-8 mt-20"/>
+        <h1 className="text-2xl ml-8 mt-20">Home</h1>
       </div>
       
       <div className="mt-5">
