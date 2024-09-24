@@ -29,7 +29,7 @@ const CalendarManager = () => {
         <span className="ml-2 text-lg">Temp Date</span>
       </div>
       
-      <div className="relative self-center mr-8">
+      <div className="relative self-center mr-14">
         <button onClick={() => setIsOpen(!isOpen)} className="flex items-center border border-gray-400 rounded-md h-7">
           <span className="pl-2 pr-2">{selectedOption}</span>
           <div className="place-content-center pt-1 pl-1 pr-1 border-l border-gray-400 h-7">
@@ -38,20 +38,20 @@ const CalendarManager = () => {
         </button>
 
         {isOpen && (
-          <div className="absolute mt-1 w-30 bg-white border border-gray-300 rounded-md shadow-md z-10">
+          <div className="absolute mt-1 w-28 bg-white border border-gray-300 rounded-md shadow-md z-10">
             <Link href={'/dashboard/tasks/calendar/week'} onClick={() => handleOptionClick('Weeks')} 
             className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedOption === 'Weeks' ? 'bg-gray-100' : ''}`}>
               <div className="flex items-center gap-1">
-                {selectedOption === 'Weeks' && ( <Check className="mt-1" size={14} strokeWidth={3}/> )}
-                Weeks
+                <div className="w-4 h-4"><Check className={`${selectedOption === 'Weeks' ? '' : 'hidden'}`} size={16}/></div>
+                <div>Weeks</div>
               </div>
             </Link>
 
             <Link href={'/dashboard/tasks/calendar/month'} onClick={() => handleOptionClick('Months')} 
             className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedOption === 'Months' ? 'bg-gray-100' : ''}`}>
               <div className="flex items-center gap-1">
-                {selectedOption === 'Months' && ( <Check className="mt-1" size={14} strokeWidth={3}/> )}
-                Months
+                <div className="w-4 h-4"><Check className={`${selectedOption === 'Months' ? '' : 'hidden'}`} size={16}/></div>
+                <div>Months</div>
               </div>
             </Link>
           </div>
