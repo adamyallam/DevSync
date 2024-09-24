@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect} from 'react';
+import { Plus } from 'lucide-react';
 import useWeekDates from '@/utils/hooks/useWeekDates';
 
 
@@ -7,6 +8,18 @@ import useWeekDates from '@/utils/hooks/useWeekDates';
 
 const MyCalendar = () => {
   const weeks = useWeekDates()
+
+  const addTaskButton = (index: number) => {
+    if(index !== 0 && index !== 6) {
+      return (
+        <button className="flex items-center gap-1 pb-2 font-semibold opacity-60 hover:opacity-100">
+          <Plus size={18}/>
+          Add Task
+        </button>
+      )
+    }
+    return null
+  }
 
   return (
     <div className="h-full w-full flex border-t border-l">
@@ -18,8 +31,8 @@ const MyCalendar = () => {
             <div className="text-lg">{week.date}</div>
           </div>
 
-          <div className="flex-grow bg-gray-100">
-            {/* This is the column extending to the bottom */}
+          <div className="flex flex-grow items-start justify-center bg-gray-100 pt-4">
+            {addTaskButton(index)}
           </div>
         </div>
       ))}
