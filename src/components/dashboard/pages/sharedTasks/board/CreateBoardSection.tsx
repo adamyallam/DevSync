@@ -32,11 +32,9 @@ export const CreateBoardSection = () => {
         
         <div className="pr-12">
           <div className="ml-2 mt-5 h-[calc(100%-40px)] min-w-[270px] bg-gray-100 rounded-lg">
-            <button onClick={() => addBoardSection()} className="flex w-full font-semibold opacity-60 hover:opacity-100">
-            <div className="flex items-center justify-center w-full gap-1 mt-3">
+            <button onClick={() => addBoardSection()} className="flex items-center justify-center gap-1 pt-3 w-full font-semibold opacity-60 hover:opacity-100">
               <Plus size={18}/>
               Add Section
-            </div>
             </button>
           </div>
         </div>
