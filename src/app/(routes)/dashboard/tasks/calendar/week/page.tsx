@@ -1,6 +1,6 @@
 
 // Component Imports
-import WeekCalendar from "@/components/dashboard/pages/calendar/weekCalendar"
+import WeekCalendar from "@/components/dashboard/pages/calendar/WeekCalendar"
 
 export default async function calendar() {
 
