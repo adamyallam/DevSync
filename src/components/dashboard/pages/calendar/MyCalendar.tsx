@@ -8,6 +8,8 @@ import useWeekDates from '@/utils/hooks/useWeekDates';
 
 const MyCalendar = () => {
   const weeks = useWeekDates()
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
 
   const addTaskButton = (index: number) => {
     if(index !== 0 && index !== 6) {
@@ -26,9 +28,9 @@ const MyCalendar = () => {
       {weeks.map((week, index) => (
         <div key={index} className={`border-r border-b flex flex-col ${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}>
 
-          <div className="p-2 border-b text-start">
+          <div className="h-[4.5rem] p-2 border-b text-start">
             <div className="text-sm font-semibold text-gray-600">{week.day}</div>
-            <div className="text-lg">{week.date}</div>
+            <div className={`text-lg mt-1 ${currentDay === week.date ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{week.date}</div>
           </div>
 
           <div className="flex flex-grow items-start justify-center bg-gray-100 pt-4">
