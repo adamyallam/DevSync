@@ -9,7 +9,7 @@ export const Header = () => {
 
     return (
       <div className="mt-16">
-        <div className="flex items-center mb-2"> 
+        <div className="flex items-center"> 
           <div className="border-b-2 border-gray-300 w-full">
             <div className="flex ml-8 items-center gap-1">
               <div className="w-8 h-8 border-2 border-gray-600 bg-gray-200 rounded-full mr-2" />
