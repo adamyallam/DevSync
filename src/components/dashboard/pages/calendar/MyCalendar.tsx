@@ -1,20 +1,47 @@
 'use client'
 import React, { useState, useRef, useEffect} from 'react';
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+// import FullCalendar from '@fullcalendar/react'
+// import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 
 
 //Component imports
 
+interface Day {
+  name: string;
+  date: number
+}
+
 const MyCalendar = () => {
 
 
-  return (
-    <div>
+  const days: Day[] = [
+    { name: 'SUN', date: 17 },
+    { name: 'MON', date: 18 },
+    { name: 'TUE', date: 19 },
+    { name: 'WED', date: 20 },
+    { name: 'THU', date: 21 },
+    { name: 'FRI', date: 22 },
+    { name: 'SAT', date: 23 },
+  ];
 
+  return (
+    <div className="h-full w-full flex border-t border-l">
+      {days.map((day, index) => (
+        <div key={index} className={`border-r border-b flex flex-col ${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}>
+
+          <div className="p-2 border-b text-start">
+            <div className="text-sm font-semibold text-gray-600">{day.name}</div>
+            <div className="text-lg">{day.date}</div>
+          </div>
+
+          <div className="flex-grow bg-gray-100">
+            {/* This is the column extending to the bottom */}
+          </div>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default MyCalendar
 
