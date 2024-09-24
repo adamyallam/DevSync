@@ -4,7 +4,7 @@ import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
 import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
-import AddTaskButton from "@/components/styledElements/AddTaskButton";
+import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton";
 
 export const UserTasksManager = () => { 
 const { isSidebarOpen } = useNavbarUIContext();
@@ -13,7 +13,7 @@ const { isSidebarOpen } = useNavbarUIContext();
 
   return (
     <div className="w-full">
-      <AddTaskButton />
+      <AddTaskHeaderButton />
       <div>
         <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-t-2 border-gray-300 ml-8 h-10 transition-all duration-300`} style={{width: isSidebarOpen ? `${screenWidth - 304}px` : `${screenWidth - 64}px`}}>
           <div className={`flex justify-between col-span-4 ml-2 border-r-2 border-gray-300}`}>
