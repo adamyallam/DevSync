@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
 
@@ -7,11 +7,12 @@ import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton"
 
 const CalendarManager = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Weeks');
+  const [isWeekendShowing, setIsWeekendShowing] = useState<Boolean>(false)
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [weekOrMonth, setWeekOrMonth] = useState<String>('Weeks');
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+    setWeekOrMonth(option);
     setIsOpen(false);
   };
 
@@ -29,33 +30,39 @@ const CalendarManager = () => {
         <span className="ml-2 text-lg">Temp Date</span>
       </div>
       
-      <div className="relative self-center mr-14">
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center border border-gray-400 rounded-md h-7">
-          <span className="pl-2 pr-2">{selectedOption}</span>
-          <div className="place-content-center pt-1 pl-1 pr-1 border-l border-gray-400 h-7">
-            <ChevronDown size={16} />
+      <div className="flex mr-8 gap-5">
+        <div className="relative gap-4 self-center">
+          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center border border-gray-400 rounded-md h-7">
+            <span className="pl-2 pr-2">{weekOrMonth}</span>
+            <div className="place-content-center pt-1 pl-1 pr-1 border-l border-gray-400 h-7">
+              <ChevronDown size={16} />
+            </div>
+          </button>
+          {isOpen && (
+            <div className="absolute mt-1 w-28 bg-white border border-gray-300 rounded-md shadow-md z-10">
+              <Link href={'/dashboard/tasks/calendar/week'} onClick={() => handleOptionClick('Weeks')}
+              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Weeks' ? 'bg-gray-100' : ''}`}>
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Weeks' ? '' : 'hidden'}`} size={16}/></div>
+                  <div>Weeks</div>
+                </div>
+              </Link>
+              <Link href={'/dashboard/tasks/calendar/month'} onClick={() => handleOptionClick('Months')}
+              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Months' ? 'bg-gray-100' : ''}`}>
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Months' ? '' : 'hidden'}`} size={16}/></div>
+                  <div>Months</div>
+                </div>
+              </Link>
+            </div>
+          )}
+        </div>
+        <button onClick={() => {setIsWeekendShowing(!isWeekendShowing)}} className={`group text-sm`}>
+          Weekends
+          <div className={`bg-red-600 h-[3px] w-full`}>
+            <div className={`bg-green-500 w-0 h-[3px] transition-all duration-300 ${isWeekendShowing ? 'w-full group-hover:w-3/4' : 'group-hover:w-1/4'}`} />
           </div>
         </button>
-
-        {isOpen && (
-          <div className="absolute mt-1 w-28 bg-white border border-gray-300 rounded-md shadow-md z-10">
-            <Link href={'/dashboard/tasks/calendar/week'} onClick={() => handleOptionClick('Weeks')} 
-            className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedOption === 'Weeks' ? 'bg-gray-100' : ''}`}>
-              <div className="flex items-center gap-1">
-                <div className="w-4 h-4"><Check className={`${selectedOption === 'Weeks' ? '' : 'hidden'}`} size={16}/></div>
-                <div>Weeks</div>
-              </div>
-            </Link>
-
-            <Link href={'/dashboard/tasks/calendar/month'} onClick={() => handleOptionClick('Months')} 
-            className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedOption === 'Months' ? 'bg-gray-100' : ''}`}>
-              <div className="flex items-center gap-1">
-                <div className="w-4 h-4"><Check className={`${selectedOption === 'Months' ? '' : 'hidden'}`} size={16}/></div>
-                <div>Months</div>
-              </div>
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   )
