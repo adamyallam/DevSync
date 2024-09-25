@@ -1,6 +1,7 @@
 
 //Component Imports
 import CalendarManager from "@/components/dashboard/pages/calendar/CalendarManager"
+import CalendarUIProvider from "@/components/dashboard/context/CalendarUIProvider"
 
 interface Props {
   children: React.ReactNode
@@ -8,13 +9,15 @@ interface Props {
 
 const CalendarLayout: React.FC<Props> = ({children}) => {
     return (
-      <section className="flex flex-col h-full w-full">
-        <CalendarManager />
+      <CalendarUIProvider>
+        <div className="flex flex-col h-full w-full">
+          <CalendarManager />
         
           <div className="flex-grow">
             {children}
           </div>
-      </section>
+        </div>
+      </CalendarUIProvider>
     )
   }
 
