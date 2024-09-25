@@ -27,19 +27,31 @@ const WeekCalendar = () => {
 
   return (
     <div className="h-full w-full flex border-t border-l">
-      {weeks.map((week, index) => (
-        <div key={index} className={`border-r border-b flex flex-col ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
+      {weekOrMonth === 'Weeks' ? (
 
-          <div className="h-[4.5rem] p-2 border-b text-start">
-            <div className="text-sm font-semibold text-gray-600">{week.day}</div>
-            <div className={`text-lg mt-1 ${currentDay === week.date ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{week.date}</div>
+        weeks.map((week, index) => (
+          <div key={index} className={`border-r border-b flex flex-col ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
+
+            <div className="h-[4.5rem] p-2 border-b text-start">
+              <div className="text-sm font-semibold text-gray-600">{week.day}</div>
+              <div className={`text-lg mt-1 ${currentDay === week.date ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{week.date}</div>
+            </div>
+
+            <div className="flex flex-col items-center flex-grow bg-gray-100 pt-4">
+              {addTaskButton(index)}
+            </div>
+          </div>
+        ))
+
+        ) : (
+
+          <div>
+            <div>
+              <h1>random text</h1>
+            </div>
           </div>
 
-          <div className="flex flex-grow items-start justify-center bg-gray-100 pt-4">
-            {addTaskButton(index)}
-          </div>
-        </div>
-      ))}
+          )}
     </div>
   );
 };
