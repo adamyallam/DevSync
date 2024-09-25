@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect} from 'react';
 import { Plus } from 'lucide-react';
 import useWeekDates from '@/utils/hooks/useWeekDates';
-
+import useCalendarUIContext from '@/utils/hooks/useCalendarUIContext';
 
 //Component imports
 
@@ -10,6 +10,8 @@ const WeekCalendar = () => {
   const weeks = useWeekDates()
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
+
+  const { isWeekendShowing, weekOrMonth } = useCalendarUIContext();
 
   const addTaskButton = (index: number) => {
     if(index !== 0 && index !== 6) {

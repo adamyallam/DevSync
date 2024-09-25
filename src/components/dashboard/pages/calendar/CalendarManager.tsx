@@ -2,14 +2,14 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
+import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext"
 
 //component imports
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton"
 
 const CalendarManager = () => {
-  const [isWeekendShowing, setIsWeekendShowing] = useState<Boolean>(false)
   const [isOpen, setIsOpen] = useState<Boolean>(false);
-  const [weekOrMonth, setWeekOrMonth] = useState<String>('Weeks');
+  const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth } = useCalendarUIContext();
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);
