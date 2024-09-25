@@ -14,7 +14,7 @@ const WeekCalendar = () => {
   const { isWeekendShowing, weekOrMonth } = useCalendarUIContext();
 
   const addTaskButton = (index: number) => {
-    if(index !== 0 && index !== 6) {
+    if(index !== 0 && index !== 6 || isWeekendShowing) {
       return (
         <button className="flex items-center gap-1 pb-2 font-semibold opacity-60 hover:opacity-100">
           <Plus size={18}/>
@@ -28,7 +28,7 @@ const WeekCalendar = () => {
   return (
     <div className="h-full w-full flex border-t border-l">
       {weeks.map((week, index) => (
-        <div key={index} className={`border-r border-b flex flex-col ${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}>
+        <div key={index} className={`border-r border-b flex flex-col ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
 
           <div className="h-[4.5rem] p-2 border-b text-start">
             <div className="text-sm font-semibold text-gray-600">{week.day}</div>
