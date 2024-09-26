@@ -25,11 +25,11 @@ const WeekCalendar = () => {
   }, [isWeekendShowing])
 
   useEffect(() => {
-    setCalendarTasks((prevTasks) =>
-      prevTasks.map((tasksForIndex, index) => {
-        if (!tasksForIndex) return [];
-        return tasksForIndex.map((_, taskIndex) => (
-          <div className='pb-2' key={taskIndex}>
+    setCalendarTasks((parentArray) =>
+      parentArray.map((childArray, _) => {
+        if (!childArray) return [];
+        return childArray.map((_, taskIndex) => (
+          <div key={taskIndex} className='pb-2'>
             <AutoResizingInput initialWidth={initialWidth} maxGrowthWidth={initialWidth} />
           </div>
         ));
@@ -40,8 +40,8 @@ const WeekCalendar = () => {
   const addTask = (index: number) => {
     const calendarTask = <div key={calendarTasks[index]?.length || 0} className='pb-2'><AutoResizingInput initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
 
-    setCalendarTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
+    setCalendarTasks((prevArrays) => {
+      const updatedTasks = [...prevArrays];
       
       if (!updatedTasks[index]) {
         updatedTasks[index] = [];
