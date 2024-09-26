@@ -65,6 +65,13 @@ const WeekCalendar = () => {
     return null
   }
 
+  const getTaskCount = (index: number) => (
+    <div className='flex flex-col items-center'>
+      <span>{calendarTasks[index]?.length || 0}</span>
+      <span>Tasks</span>
+    </div>
+  );
+
   return (
     <div className="h-full w-full flex border-t border-l">
       {weekOrMonth === 'Weeks' ? (
@@ -78,7 +85,15 @@ const WeekCalendar = () => {
             </div>
 
             <div className="flex flex-col items-center flex-grow bg-gray-100 pt-4">
-                {calendarTasks[index]?.map((task) => task)}
+              {isWeekendShowing ? 
+                ( calendarTasks[index]?.map((task) => task) ) 
+                : 
+                ( index === 0 || index === 6 ? 
+                  (getTaskCount(index))
+                  : 
+                  (calendarTasks[index]?.map((task) => task)) 
+                )
+              }
 
               {addTaskButton(index)}
             </div>
