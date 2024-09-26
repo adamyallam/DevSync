@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-function useWeekDates() {
-  const [weekDates, setWeekDates] = useState<{ day: string; date: number }[]>([]);
+function useWeekDays() {
+  const [weekDays, setWeekDays] = useState<{ day: string; date: number }[]>([]);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -22,10 +22,10 @@ function useWeekDates() {
       };
     });
 
-    setWeekDates(week);
+    setWeekDays(week);
   }, []);
 
-  return weekDates;
+  return weekDays;
 }
 
-export default useWeekDates;
+export default useWeekDays;
