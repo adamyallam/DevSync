@@ -1,9 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react';
 
-const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-
 function useWeekDays() {
+  const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   const [weekDays, setWeekDays] = useState<{ day: string; date: number }[]>([]);
 
   useEffect(() => {
