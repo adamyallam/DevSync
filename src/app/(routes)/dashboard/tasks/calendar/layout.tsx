@@ -13,7 +13,7 @@ const CalendarLayout: React.FC<Props> = ({children}) => {
         <div className="flex flex-col h-full w-full">
           <CalendarManager />
         
-          <div className="flex-grow">
+          <div className="flex-grow overflow-y-auto">
             {children}
           </div>
         </div>

@@ -21,7 +21,7 @@ const WeekCalendar = () => {
   );
 
   useEffect(() => {
-    setInitialWidth(isWeekendShowing ? 200 : 250)
+    setInitialWidth(isWeekendShowing ? 185 : 250)
   }, [isWeekendShowing])
 
   useEffect(() => {
@@ -66,9 +66,8 @@ const WeekCalendar = () => {
   }
 
   const getTaskCount = (index: number) => (
-    <div className='flex flex-col items-center'>
-      <span>{calendarTasks[index]?.length || 0}</span>
-      <span>Tasks</span>
+    <div className='flex justify-center text-white text-sm items-center bg-blue-500 rounded-full h-6 w-6'>
+      <span className='mb-0.5'>{calendarTasks[index]?.length || 0}</span>
     </div>
   );
 
@@ -77,14 +76,14 @@ const WeekCalendar = () => {
       {weekOrMonth === 'Weeks' ? (
 
         week.map((week, index) => (
-          <div key={index} className={`border-r border-b flex flex-col ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
+          <div key={index} className={`border-r border-b flex flex-col h-full ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
 
-            <div className="h-[4.5rem] p-2 border-b text-start">
+            <div className="min-h-[4.5rem] p-2 border-b text-start">
               <div className="text-sm font-semibold text-gray-600">{week.day}</div>
               <div className={`text-lg mt-1 ${currentDay === week.date ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{week.date}</div>
             </div>
 
-            <div className="flex flex-col items-center flex-grow bg-gray-100 pt-4">
+            <div className="flex flex-col overflow-y-auto items-center flex-grow bg-gray-100 pt-4 pb-2">
               {isWeekendShowing ? 
                 ( calendarTasks[index]?.map((task) => task) ) 
                 : 
