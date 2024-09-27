@@ -5,10 +5,9 @@ import useWeekDays from '@/utils/hooks/useWeekDays';
 import useCalendarUIContext from '@/utils/hooks/useCalendarUIContext';
 
 //Component imports
-import MonthCalendar from './MonthCalendar';
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
 
-const WeekCalendar = () => {
+const Calendar = () => {
   const { isWeekendShowing, weekOrMonth } = useCalendarUIContext();
 
   const week = useWeekDays()
@@ -74,7 +73,6 @@ const WeekCalendar = () => {
   return (
     <div className="h-full w-full flex border-t border-l">
       {weekOrMonth === 'Weeks' ? (
-
         week.map((week, index) => (
           <div key={index} className={`border-r border-b flex flex-col h-full ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
 
@@ -100,12 +98,23 @@ const WeekCalendar = () => {
         ))
 
         ) : (
-
-          <MonthCalendar />
-
-          )}
+          <div className='h-full w-full flex'>
+            {week.map((week, index) => (
+              <div key={index} className='flex flex-col h-full w-full'>
+                <div className='flex justify-evenly w-full border'>
+                  <span className='text-sm'>{week.day}</span>
+                </div>
+                  
+                <div className='grid grid-cols-7 grid-rows-5 border'>
+                  <span className='ml-3'>{week.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      }
     </div>
   );
 };
 
-export default WeekCalendar
+export default Calendar
