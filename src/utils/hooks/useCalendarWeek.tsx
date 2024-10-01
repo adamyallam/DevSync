@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
 
-function useWeekDays() {
+function useCalendarWeek(startDate?: Date) {
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   const [weekDays, setWeekDays] = useState<{ day: string; date: number }[]>([]);
 
   useEffect(() => {
-    const currentDate = new Date();
+    const currentDate = startDate || new Date();
     const currentDay = currentDate.getDay();
 
     const sunday = new Date(currentDate);
@@ -22,9 +22,9 @@ function useWeekDays() {
     });
 
     setWeekDays(week);
-  }, []);
+  }, [startDate]);
 
   return weekDays;
 }
 
-export default useWeekDays;
+export default useCalendarWeek;
