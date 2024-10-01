@@ -40,18 +40,18 @@ const CalendarManager = () => {
           </button>
           {isOpen && (
             <div className="absolute mt-1 w-28 bg-white border border-gray-300 rounded-md shadow-md z-10">
-              <button onClick={() => handleOptionClick('Weeks')}
-              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Weeks' ? 'bg-gray-100' : ''}`}>
+              <button onClick={() => handleOptionClick('Week')}
+              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Week' ? 'bg-gray-100' : ''}`}>
                 <div className="flex items-center gap-1">
-                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Weeks' ? '' : 'hidden'}`} size={16}/></div>
-                  <div>Weeks</div>
+                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Week' ? '' : 'hidden'}`} size={16}/></div>
+                  <div>Week</div>
                 </div>
               </button>
-              <button onClick={() => handleOptionClick('Months')}
-              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Months' ? 'bg-gray-100' : ''}`}>
+              <button onClick={() => handleOptionClick('Month')}
+              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Month' ? 'bg-gray-100' : ''}`}>
                 <div className="flex items-center gap-1">
-                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Months' ? '' : 'hidden'}`} size={16}/></div>
-                  <div>Months</div>
+                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Month' ? '' : 'hidden'}`} size={16}/></div>
+                  <div>Month</div>
                 </div>
               </button>
             </div>
