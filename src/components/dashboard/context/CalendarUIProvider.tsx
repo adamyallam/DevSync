@@ -16,7 +16,7 @@ interface Props {
 
 export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [isWeekendShowing, setIsWeekendShowing] = useState<boolean>(false);
-  const [weekOrMonth, setWeekOrMonth] = useState<string>('Weeks');
+  const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
 
   return (
       <CalendarUIContext.Provider value={{ isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth }}>
