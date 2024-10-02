@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
-export const getDaysInMonth = (year?: number, month?: number) => {
-  const currentDate = new Date();
-  const currentYear = year ?? currentDate.getFullYear();
-  const currentMonth = month ?? currentDate.getMonth(); 
+export const getDaysInMonth = (inputDate?: Date) => {
+  const currentDate = inputDate || new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth(); 
   return new Date(currentYear, currentMonth + 1, 0).getDate();
 };
 
-export const getStartDayOfMonth = (year?: number, month?: number) => {
-  const currentDate = new Date();
-  const currentYear = year ?? currentDate.getFullYear();
-  const currentMonth = month ?? currentDate.getMonth(); 
+export const getStartDayOfMonth = (inputDate?: Date) => {
+  const currentDate = inputDate || new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth(); 
   return new Date(currentYear, currentMonth, 1).getDay();
 };
 
@@ -19,14 +19,14 @@ const useCalendarMonth = (inputDate?: Date) => {
 
   useEffect(() => {
     const currentDate = inputDate || new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
 
     const generateCalendar = () => {
-      const daysInCurrentMonth = getDaysInMonth(year, month);
-      const startDay = getStartDayOfMonth(year, month);
+      const daysInCurrentMonth = getDaysInMonth(currentDate);
+      const startDay = getStartDayOfMonth(currentDate);
 
-      const daysInPrevMonth = getDaysInMonth(year, month === 0 ? 11 : month - 1);
+      const prevMonthInputDate = new Date(currentDate)
+      prevMonthInputDate.setMonth(currentDate.getMonth() - 1)
+      const daysInPrevMonth = getDaysInMonth(prevMonthInputDate);
       const prevMonthDays = [...Array(startDay)].map((_, i) => daysInPrevMonth - startDay + i + 1);
 
       const currentMonthDays = [...Array(daysInCurrentMonth)].map((_, i) => i + 1);
