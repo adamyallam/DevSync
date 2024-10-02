@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
-const getDaysInMonth = (year: number, month: number) => {
+export const getDaysInMonth = (year?: number, month?: number) => {
   const currentDate = new Date();
   const currentYear = year ?? currentDate.getFullYear();
   const currentMonth = month ?? currentDate.getMonth(); 
   return new Date(currentYear, currentMonth + 1, 0).getDate();
 };
 
-const getStartDayOfMonth = (year: number, month: number) => {
+export const getStartDayOfMonth = (year?: number, month?: number) => {
   const currentDate = new Date();
   const currentYear = year ?? currentDate.getFullYear();
   const currentMonth = month ?? currentDate.getMonth(); 
