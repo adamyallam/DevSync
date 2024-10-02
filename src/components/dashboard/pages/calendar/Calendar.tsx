@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect} from 'react';
 import { Plus } from 'lucide-react';
 import useCalendarWeek from '@/utils/hooks/useCalendarWeek';
 import useCalendarMonth from '@/utils/hooks/useCalendarMonth';
+import { getDaysInMonth, getStartDayOfMonth } from '@/utils/hooks/useCalendarMonth';
 import useCalendarUIContext from '@/utils/hooks/useCalendarUIContext';
 
 //Component imports
@@ -113,8 +114,11 @@ const Calendar = () => {
                 const columnIndex = index % 7;
                 const isWeekend = columnIndex === 0 || columnIndex === 6;
 
+                const isPrevMonthDay = index < getStartDayOfMonth();
+                const isNextMonthDay = index >= (getDaysInMonth() + getStartDayOfMonth());
+
                 return (
-                  <div key={index} className={`pl-2 pt-1 border ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>{day}</div>
+                  <div key={index} className={`pl-2 pt-1 border ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>{day}</div>
                 );
               })}
             </div>
