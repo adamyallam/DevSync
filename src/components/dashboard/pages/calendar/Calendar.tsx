@@ -109,7 +109,7 @@ const Calendar = () => {
               ))}
             </div>
 
-            <div className={`grid grid-rows-5 pt-1 h-full w-full ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'}`}>
+            <div className={`grid grid-rows-5 pt-1 h-full w-full overflow-y-auto ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'}`}>
               {month.map((day, index) => {
                 const columnIndex = index % 7;
                 const isWeekend = columnIndex === 0 || columnIndex === 6;
