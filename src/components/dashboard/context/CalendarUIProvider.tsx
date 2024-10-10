@@ -1,23 +1,21 @@
 'use client'
 import { useState, createContext, useEffect } from 'react';
-import useCalendarMonth from '@/utils/hooks/useCalendarMonth';
-import useCalendarWeek from '@/utils/hooks/useCalendarWeek';
 import { Plus } from 'lucide-react';
+import useCalendar from '@/utils/hooks/useCalendar';
 
 //Component Imports
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
 
 type CalendarUIContextProps = {
-  week: { day: string; date: number }[],
-  month: number[],
+  fullCalendar: {date: Date, day: String}[],
   calendarTasks: JSX.Element[][]; 
   isWeekendShowing: boolean;
   setIsWeekendShowing: React.Dispatch<React.SetStateAction<boolean>>;
   weekOrMonth: string;
   setWeekOrMonth: React.Dispatch<React.SetStateAction<string>>;
   getTaskCount: (index: number) => JSX.Element;
-  addTask: (index: number) => void;
-  addTaskButton: (index: number) => JSX.Element;
+  addTask: (date: Date) => void;
+  addTaskButton: (date: Date) => JSX.Element;
 };
 
 export const CalendarUIContext = createContext<CalendarUIContextProps | undefined>(undefined);
@@ -29,17 +27,20 @@ interface Props {
 export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [isWeekendShowing, setIsWeekendShowing] = useState<boolean>(false);
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
-
-  const week = useCalendarWeek()
-  const month = useCalendarMonth()
-
   const [initialWidth, setInitialWidth] = useState<number>(240)
+
+  const randomDate = new Date(2024, 5, 2)
+  const fullCalendar = useCalendar()
+
+  const [calendarTasks, setCalendarTasks] = useState<JSX.Element[][]>(
+    Array.from({ length: fullCalendar.length }, () => [])
+  );
 
   useEffect(() => {
     setInitialWidth(isWeekendShowing ? 175 : 240)
   }, [isWeekendShowing])
 
-  useEffect(() => {
+  useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
     setCalendarTasks((parentArray) =>
       parentArray.map((childArray, _) => {
         if (!childArray) return [];
@@ -52,32 +53,32 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     );
   }, [initialWidth, weekOrMonth]);
 
-  const [calendarTasks, setCalendarTasks] = useState<JSX.Element[][]>(
-    Array.from({ length: week.length }, () => [])
-  );
-
-  const addTask = (index: number) => {
-    const calendarTask = <div key={calendarTasks[index]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}><AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-100'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
+  // Adds a task to the calendarTasks array at the appropriate index
+  const addTask = (date: Date) => {
+    const calendarIndex = fullCalendar.findIndex(calendarDate => calendarDate.date === date);
+    const calendarTask = <div key={calendarTasks[calendarIndex]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}><AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-100'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
 
     setCalendarTasks((prevArrays) => {
       const updatedTasks = [...prevArrays];
-      if (!updatedTasks[index]) {
-        updatedTasks[index] = [];
+      if (!updatedTasks[calendarIndex]) {
+        updatedTasks[calendarIndex] = [];
       }
-      updatedTasks[index].push(calendarTask)
+      updatedTasks[calendarIndex].push(calendarTask)
       return updatedTasks;
     });
   };
 
-  const addTaskButton = (index: number) => {
+  //Function to display the addTaskButton
+  const addTaskButton = (date: Date) => {
     return (
-      <button onClick={() => {addTask(index)}} className={`flex items-center pb-2 font-semibold opacity-80 hover:opacity-100 ${weekOrMonth === 'Month' ? 'text-xs' : ''}`}>
+      <button onClick={() => {addTask(date)}} className={`flex items-center pb-2 font-semibold opacity-80 hover:opacity-100 ${weekOrMonth === 'Month' ? 'text-xs' : ''}`}>
         <Plus size={weekOrMonth === 'Week' ? 18 : 14}/>
         Add Task
       </button>
     )
   }
 
+  //Gets a task count for number of tasks within a date
   const getTaskCount = (index: number) => (
     <div className='flex justify-center text-white text-xs items-center bg-blue-800 rounded-full h-4 w-4'>
       <span className='mb-0.5'>{calendarTasks[index]?.length || 0}</span>
@@ -85,7 +86,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   );
 
   return (
-      <CalendarUIContext.Provider value={{ week, month, calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, getTaskCount, addTask, addTaskButton }}>
+      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, getTaskCount, addTask, addTaskButton, fullCalendar }}>
         {children}
       </CalendarUIContext.Provider>
   );
