@@ -1,49 +1,52 @@
 'use client'
 import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext";
-import { getDaysInMonth, getStartDayOfMonth } from "@/utils/hooks/useCalendarMonth";
+import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/hooks/useCalendar";
 import { Plus } from "lucide-react";
 
 export const MonthlyCalendar = () => {
-  const { isWeekendShowing, week, month, calendarTasks, getTaskCount, addTask, addTaskButton } = useCalendarUIContext();
+  // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
+  const { isWeekendShowing, fullCalendar, calendarTasks, getTaskCount, addTask, addTaskButton } = useCalendarUIContext();
 
   return (
     <div className='flex flex-col h-full w-full'>
       <div className='flex w-full border'>
-        {week.map((week, index) => (                
+        {fullCalendar.slice(0, 7).map((date, index) => ( //maps through the first 7 items of the fullCalendar array to display sun - sat               
           <div className={`${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/5' : 'w-full'}`}`}>
 
             <div className={`p-1 pl-2 text-start font-semibold text-gray-600 text-xs w-full ${(index === 0 || index === 5 || index === 6) ? (isWeekendShowing ? 'border-r' : '') : 'border-r'}`}>
-                {!isWeekendShowing && (index === 0 || index === 6) ? <div /> : week.day}
+                {!isWeekendShowing && (index === 0 || index === 6) ? <div /> : date.day}
             </div>
 
           </div>
         ))}
       </div>
 
-      <div className={`grid grid-rows-5 pt-1 h-full w-full overflow-y-auto overflow-x-hidden ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'}`}>
-        {month.map((day, index) => {
+      <div className={`grid grid-rows-5 pt-1 h-full w-full overflow-y-auto overflow-x-hidden ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'}`}> 
+        {fullCalendar.map((date, index) => {
           const currentDate = new Date();
           const currentDay = currentDate.getDate();
-          const columnIndex = index % 7;
+          const columnIndex = index % 7; 
           const isWeekend = columnIndex === 0 || columnIndex === 6;
-          const isPrevMonthDay = index < getStartDayOfMonth();
-          const isNextMonthDay = index >= (getDaysInMonth() + getStartDayOfMonth());
+          const isPrevMonthDay = index < getFirstDayOfMonth();
+          const isNextMonthDay = index >= (getDaysInMonth() + getFirstDayOfMonth());
 
-          const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(index)} size={14} strokeWidth={2}/></button>
+          const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(date.date)} size={14} strokeWidth={2}/></button>
 
           return (
-            <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>
+            <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>
               <div className={`flex items-center justify-between mr-2`}>
-                <div className={`flex mb-2 ${currentDay === day ? 'items-center justify-center border bg-blue-500 w-6 h-7 rounded-md text-white' : ''}`}>
-                  {day}
+                <div className={`flex mb-2 ${currentDay === date.date.getDate() ? 'items-center justify-center border bg-blue-500 w-6 h-7 rounded-md text-white' : ''}`}>
+                  {date.date.getDate()}
                 </div>
 
-                  {currentDay === day ? (!isWeekend ? addTaskButton(index) : (isWeekendShowing ? addTaskButton(index) : null)) 
+                  {/*Determines when and if an addTaskButton or plusTaskButton should display*/}
+                  {currentDay === date.date.getDate() ? (!isWeekend ? addTaskButton(date.date) : (isWeekendShowing ? addTaskButton(date.date) : null)) 
                   : 
                   (!isWeekend ? plusTaskButton : (isWeekendShowing ? plusTaskButton : null)) }
               </div>
 
               <div className="flex flex-col items-center text-xs">
+                {/*Determines if the tasks or a task count should display*/}
                 {isWeekendShowing ?
                   ( calendarTasks[index]?.map((task) => task) )
                   :
