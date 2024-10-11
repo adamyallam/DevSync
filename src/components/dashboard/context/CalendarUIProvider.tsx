@@ -29,7 +29,6 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
   const [initialWidth, setInitialWidth] = useState<number>(240)
 
-  const randomDate = new Date(2024, 5, 2)
   const fullCalendar = useCalendar()
 
   const [calendarTasks, setCalendarTasks] = useState<JSX.Element[][]>(
@@ -72,7 +71,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const addTaskButton = (date: Date) => {
     return (
       <button onClick={() => {addTask(date)}} className={`flex items-center pb-2 font-semibold opacity-80 hover:opacity-100 ${weekOrMonth === 'Month' ? 'text-xs' : ''}`}>
-        <Plus size={weekOrMonth === 'Week' ? 18 : 14}/>
+        <Plus size={weekOrMonth === 'Week' ? 17 : 12} strokeWidth={2.5}/>
         Add Task
       </button>
     )
