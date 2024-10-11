@@ -13,6 +13,8 @@ type CalendarUIContextProps = {
   setIsWeekendShowing: React.Dispatch<React.SetStateAction<boolean>>;
   weekOrMonth: string;
   setWeekOrMonth: React.Dispatch<React.SetStateAction<string>>;
+  calendarDate: Date;
+  setCalendarDate: React.Dispatch<React.SetStateAction<Date>>;
   getTaskCount: (index: number) => JSX.Element;
   addTask: (date: Date) => void;
   addTaskButton: (date: Date) => JSX.Element;
@@ -28,6 +30,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [isWeekendShowing, setIsWeekendShowing] = useState<boolean>(false);
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
   const [initialWidth, setInitialWidth] = useState<number>(240)
+  const [calendarDate, setCalendarDate] = useState<Date>(new Date());
 
   const fullCalendar = useCalendar()
 
@@ -54,7 +57,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
 
   // Adds a task to the calendarTasks array at the appropriate index
   const addTask = (date: Date) => {
-    const calendarIndex = fullCalendar.findIndex(calendarDate => calendarDate.date === date);
+    const calendarIndex = fullCalendar.findIndex(calendarIndex => calendarIndex.date === date);
     const calendarTask = <div key={calendarTasks[calendarIndex]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}><AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
 
     setCalendarTasks((prevArrays) => {
@@ -85,7 +88,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   );
 
   return (
-      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, getTaskCount, addTask, addTaskButton, fullCalendar }}>
+      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar }}>
         {children}
       </CalendarUIContext.Provider>
   );
