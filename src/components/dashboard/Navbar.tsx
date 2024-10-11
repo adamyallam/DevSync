@@ -51,7 +51,7 @@ export const Navbar = () => {
             <span className='ml-1 text-sm'>Home</span>
           </Link>
           
-          <Link href='/dashboard/tasks/board' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/calendar', 'tasks/files')}`}>
+          <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/board', 'tasks/calendar', 'tasks/files')}`}>
             <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
             <span className='ml-1 text-sm'>Tasks</span>
           </Link>
