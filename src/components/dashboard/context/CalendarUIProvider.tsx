@@ -55,7 +55,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   // Adds a task to the calendarTasks array at the appropriate index
   const addTask = (date: Date) => {
     const calendarIndex = fullCalendar.findIndex(calendarDate => calendarDate.date === date);
-    const calendarTask = <div key={calendarTasks[calendarIndex]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}><AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-100'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
+    const calendarTask = <div key={calendarTasks[calendarIndex]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}><AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} /></div>
 
     setCalendarTasks((prevArrays) => {
       const updatedTasks = [...prevArrays];
