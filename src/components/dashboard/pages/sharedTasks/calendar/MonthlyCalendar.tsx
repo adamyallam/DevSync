@@ -21,7 +21,7 @@ export const MonthlyCalendar = () => {
         ))}
       </div>
 
-      <div className={`grid grid-rows-5 pt-1 h-full w-full overflow-y-auto overflow-x-hidden ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'}`}> 
+      <div className={`grid ${fullCalendar.length === 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
         {fullCalendar.map((date, index) => {
           const currentDate = new Date();
           const currentDay = currentDate.getDate();
@@ -57,6 +57,7 @@ export const MonthlyCalendar = () => {
             </div>
           )
         })}
+        <div className={`bg-gray-100 w-screen ${fullCalendar.length === 36 ? '' : 'hidden'}`}/>
       </div>
     </div>
   )
