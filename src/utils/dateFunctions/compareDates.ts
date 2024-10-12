@@ -7,3 +7,5 @@ export const areDatesEqual = (date1: Date, date2: Date) => {
     date1.getDate() === date2.getDate()
   );
 };
+
+export default areDatesEqual;
