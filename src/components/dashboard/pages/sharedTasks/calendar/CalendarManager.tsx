@@ -18,6 +18,7 @@ const CalendarManager = () => {
     setIsOpen(false);
   };
 
+  // Moves the calendar date forward by a week or month depending on the weekOrMonth state
   const moveCalendarDateFoward = () => {
     if (weekOrMonth === 'Month') {
       const nextDate = new Date(calendarDate);
@@ -34,6 +35,7 @@ const CalendarManager = () => {
     }
   }
 
+  // Moves the calendar date back by a week or month depending on the weekOrMonth state
   const moveCalendarDateBack = () => {
     if (weekOrMonth === 'Month') {
       const previousDate = new Date(calendarDate);

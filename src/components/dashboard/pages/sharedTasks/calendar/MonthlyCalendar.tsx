@@ -10,7 +10,7 @@ export const MonthlyCalendar = () => {
   return (
     <div className='flex flex-col h-full w-full'>
       <div className='flex w-full border'>
-        {fullCalendar.slice(0, 7).map((date, index) => ( //maps through the first 7 items of the fullCalendar array to display sun - sat               
+        {fullCalendar.slice(0, 7).map((date, index) => ( // Maps through the first week of the fullCalendar array     
           <div className={`${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/5' : 'w-full'}`}`}>
 
             <div className={`p-1 pl-2 text-start font-semibold text-gray-600 text-xs w-full ${(index === 0 || index === 5 || index === 6) ? (isWeekendShowing ? 'border-r' : '') : 'border-r'}`}>
@@ -22,7 +22,7 @@ export const MonthlyCalendar = () => {
       </div>
 
       <div className={`grid ${fullCalendar.length === 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
-        {fullCalendar.map((date, index) => {
+        {fullCalendar.map((date, index) => { // Maps through the fullCalendar array
           const currentDate = calendarDate;
           const currentDay = currentDate.getDate();
           const columnIndex = index % 7; 
@@ -32,8 +32,6 @@ export const MonthlyCalendar = () => {
           
 
           const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(date.date)} size={14} strokeWidth={3}/></button>
-
-          console.log(date.date)
 
           return (
             <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>

@@ -6,7 +6,7 @@ export const WeeklyCalendar = () => {
   const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton, weekStartEnd} = useCalendarUIContext();
 
   return (
-    // Maps through a single week of the fullCalendar array
+    // Maps through a week of the fullCalendar array
     fullCalendar.slice( weekStartEnd.start, weekStartEnd.end ).map((date, index) => {
       const currentDate = calendarDate
       const currentDay = currentDate.getDate();
@@ -22,7 +22,7 @@ export const WeeklyCalendar = () => {
           </div>
 
           <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center flex-grow bg-gray-100 pt-4 pb-2">
-            {isWeekendShowing ? // Checks to see if the tasks or a task count should display
+            {isWeekendShowing ? // Determines if the tasks or a task count should display
               ( calendarTasks[calendarIndex]?.map((task) => task) ) 
               : 
               ( index === 0 || index === 6 ? ( getTaskCount(calendarIndex) ) : ( calendarTasks[calendarIndex]?.map((task) => task) ) )
