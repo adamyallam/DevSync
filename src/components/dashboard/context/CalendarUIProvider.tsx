@@ -3,6 +3,7 @@ import { useState, createContext, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import useCalendar from '@/utils/hooks/useCalendar';
 import {getStartOfWeek} from '@/utils/dateFunctions/getDateFunctions';
+import compareDates from '@/utils/dateFunctions/compareDates';
 
 //Component Imports
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
@@ -37,11 +38,11 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
 
   const fullCalendar = useCalendar(calendarDate)
 
-  useEffect(() => {
+  useEffect(() => { // Sets the start and end index of the week in the fullCalendar array so that the WeeklyCalendar component can map through the correct week
     const startOfWeek = getStartOfWeek(calendarDate);
 
     fullCalendar.some((calendarDate, index) => {
-      const calendarIndex = fullCalendar.findIndex(calendarItem => calendarItem.date.getDate() === startOfWeek.getDate());
+      const calendarIndex = fullCalendar.findIndex(calendarItem => compareDates(calendarItem.date, startOfWeek));
     
       if (calendarIndex === index) {
         setWeekStartEnd({ start: calendarIndex, end: calendarIndex + 7 });
