@@ -1,7 +1,8 @@
 'use client'
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
-import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext"
+import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext"
+import { monthsOfYear } from "@/utils/dateFunctions/getDateFunctions"
 
 //component imports
 
@@ -11,7 +12,6 @@ const CalendarManager = () => {
   const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
   
   const [isOpen, setIsOpen] = useState<Boolean>(false);
-  const monthsOfYear = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);

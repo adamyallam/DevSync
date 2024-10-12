@@ -2,6 +2,7 @@
 import { useState, createContext, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import useCalendar from '@/utils/hooks/useCalendar';
+import {getStartOfWeek} from '@/utils/dateFunctions/getDateFunctions';
 
 //Component Imports
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
@@ -36,15 +37,8 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
 
   const fullCalendar = useCalendar(calendarDate)
 
-  const getStartOfWeek = () => {
-    const dayOfWeek = calendarDate.getDay();
-    const startOfWeek = new Date(calendarDate);
-    startOfWeek.setDate(calendarDate.getDate() - dayOfWeek);
-    return startOfWeek;
-  };
-
   useEffect(() => {
-    const startOfWeek = getStartOfWeek();
+    const startOfWeek = getStartOfWeek(calendarDate);
 
     fullCalendar.some((calendarDate, index) => {
       const calendarIndex = fullCalendar.findIndex(calendarItem => calendarItem.date.getDate() === startOfWeek.getDate());

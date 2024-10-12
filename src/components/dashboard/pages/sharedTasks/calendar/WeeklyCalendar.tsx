@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
-import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext";
+import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 
 export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext

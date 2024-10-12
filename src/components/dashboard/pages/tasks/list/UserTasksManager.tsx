@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react"
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
 
 // Component Imports
-import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
+import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton";
 
 export const UserTasksManager = () => { 

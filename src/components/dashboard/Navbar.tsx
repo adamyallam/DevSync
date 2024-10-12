@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
-import useNavbarUIContext from '@/utils/hooks/useNavbarUIContext';
+import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 
 //component imports
 

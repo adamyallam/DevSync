@@ -1,6 +1,6 @@
 'use client'
-import { getCurrentDate } from '@/utils/getCurrentDate';
-import { getDayPeriod } from '@/utils/getCurrentDate';
+import { getCurrentDateDisplay } from '@/utils/dateFunctions/getDateFunctions';
+import { getDayPeriod } from '@/utils/dateFunctions/getDayPeriod';
 
 // Component Imports
 
@@ -13,7 +13,7 @@ export const UserWelcome: React.FC<Props> = (props) => {
     return (
       <div>
         <div className='flex flex-col'>
-          <p className='text-center text-lg'>{getCurrentDate()}</p>
+          <p className='text-center text-lg'>{getCurrentDateDisplay()}</p>
           <h1 className='text-center mt-2 text-3xl'>Good {getDayPeriod()}, {props.name}</h1>
         </div>
         <div className='flex justify-center'>

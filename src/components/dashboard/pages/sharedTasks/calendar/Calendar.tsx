@@ -1,5 +1,5 @@
 'use client'
-import useCalendarUIContext from '@/utils/hooks/useCalendarUIContext';
+import useCalendarUIContext from '@/utils/hooks/context/useCalendarUIContext';
 
 //Component imports
 import WeeklyCalendar from './WeeklyCalendar';

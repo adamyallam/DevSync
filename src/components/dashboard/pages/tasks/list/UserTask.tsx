@@ -2,7 +2,7 @@
 import { Plus, BadgeCheck, CalendarClock, Lock, UserRoundSearch } from "lucide-react"
 import { useState } from "react";
 import useScreenWidth from "@/utils/hooks/useScreenWidth";
-import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
+import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 // Component Imports
 

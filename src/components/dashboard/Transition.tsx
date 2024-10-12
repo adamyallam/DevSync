@@ -1,6 +1,6 @@
 'use client'
 
-import useNavbarUIContext from '@/utils/hooks/useNavbarUIContext';
+import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 
 // Component Imports
 

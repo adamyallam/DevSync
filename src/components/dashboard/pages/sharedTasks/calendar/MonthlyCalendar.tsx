@@ -1,6 +1,6 @@
 'use client'
-import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext";
-import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/hooks/useCalendar";
+import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
+import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/dateFunctions/getDateFunctions";
 import { Plus } from "lucide-react";
 
 export const MonthlyCalendar = () => {
@@ -32,6 +32,8 @@ export const MonthlyCalendar = () => {
           
 
           const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(date.date)} size={14} strokeWidth={3}/></button>
+
+          console.log(date.date)
 
           return (
             <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>

@@ -1,17 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-
-// Returns the number of days in a month
-export const getDaysInMonth = (inputDate?: Date) => {
-  const currentDate = inputDate || new Date();
-  return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-};
-
-// Returns the first day of the month
-export const getFirstDayOfMonth = (inputDate?: Date) => {
-  const currentDate = inputDate || new Date();
-  return new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-};
+import { getDaysInMonth, getFirstDayOfMonth } from '../dateFunctions/getDateFunctions';
 
 // Returns an array of 35 objects that represent each date/day in the current month. Extra array items the current month doesn't fill are filled with the last or first days of the previous or next months
 const useCalendar = (inputDate?: Date) => {

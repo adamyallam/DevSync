@@ -2,7 +2,7 @@
 
 
 // Component Imports
-import useNavbarUIContext from "@/utils/hooks/useNavbarUIContext";
+import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 
 export const Workspace = () => { 
