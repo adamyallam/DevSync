@@ -7,26 +7,66 @@ import useCalendarUIContext from "@/utils/hooks/useCalendarUIContext"
 
 
 const CalendarManager = () => {
+  // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
+  const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
+  
   const [isOpen, setIsOpen] = useState<Boolean>(false);
-  const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth } = useCalendarUIContext();
+  const monthsOfYear = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);
     setIsOpen(false);
   };
 
+  const moveCalendarDateFoward = () => {
+    if (weekOrMonth === 'Month') {
+      const nextDate = new Date(calendarDate);
+      nextDate.setDate(1);
+      nextDate.setMonth(nextDate.getMonth() + 1);
+      nextDate.setDate(nextDate.getDate() + 7);
+
+      setCalendarDate(nextDate);
+    } else {
+      const nextDate = new Date(calendarDate);
+      nextDate.setDate(nextDate.getDate() + 7);
+
+      setCalendarDate(nextDate);
+    }
+  }
+
+  const moveCalendarDateBack = () => {
+    if (weekOrMonth === 'Month') {
+      const previousDate = new Date(calendarDate);
+      previousDate.setDate(1);
+      previousDate.setMonth(previousDate.getMonth() - 1);
+      previousDate.setDate(previousDate.getDate() - 7);
+
+      setCalendarDate(previousDate);
+    } else {
+      const previousDate = new Date(calendarDate);
+      previousDate.setDate(previousDate.getDate() - 7);
+
+      setCalendarDate(previousDate);
+    }
+  }
+
+
+  const moveCalendarDateToday = () => { 
+    setCalendarDate(new Date());
+  }
+
   return (
     <div className="pt-3 pb-3 flex justify-between">
       <div className="flex items-center ml-8">
 
-        <button className="border border-gray-400 text-sm w-12 h-7 rounded-md">Today</button>
+        <button onClick={() => moveCalendarDateToday()} className="border border-gray-400 text-sm w-12 h-7 rounded-md">Today</button>
 
         <div className="flex items-center gap-2 ml-3">
-          <button><ChevronLeft strokeWidth={1.5}/></button>
-          <button><ChevronRight strokeWidth={1.5}/></button>
+          <button onClick={() => moveCalendarDateBack()} className="hover:bg-gray-100 hover:rounded-md"><ChevronLeft strokeWidth={1.5}/></button>
+          <button onClick={() => moveCalendarDateFoward()} className="hover:bg-gray-100 hover:rounded-md"><ChevronRight strokeWidth={1.5}/></button>
         </div>
 
-        <span className="ml-2 text-lg">Temp Date</span>
+        <span className="ml-2 text-lg">{monthsOfYear[calendarDate.getMonth()]} {calendarDate.getFullYear()}</span>
       </div>
       
       <div className="flex mr-8 gap-5">

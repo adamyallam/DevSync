@@ -1,6 +1,6 @@
 'use client'
 import { useState, createContext, useEffect } from 'react';
-import { Plus } from 'lucide-react';
+import { Calendar, Plus } from 'lucide-react';
 import useCalendar from '@/utils/hooks/useCalendar';
 
 //Component Imports
@@ -15,6 +15,7 @@ type CalendarUIContextProps = {
   setWeekOrMonth: React.Dispatch<React.SetStateAction<string>>;
   calendarDate: Date;
   setCalendarDate: React.Dispatch<React.SetStateAction<Date>>;
+  weekStartEnd: {start: number, end: number};
   getTaskCount: (index: number) => JSX.Element;
   addTask: (date: Date) => void;
   addTaskButton: (date: Date) => JSX.Element;
@@ -31,8 +32,32 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
   const [initialWidth, setInitialWidth] = useState<number>(240)
   const [calendarDate, setCalendarDate] = useState<Date>(new Date());
+  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 7})
 
-  const fullCalendar = useCalendar()
+  const fullCalendar = useCalendar(calendarDate)
+
+  const getStartOfWeek = () => {
+    const dayOfWeek = calendarDate.getDay();
+    const startOfWeek = new Date(calendarDate);
+    startOfWeek.setDate(calendarDate.getDate() - dayOfWeek);
+    return startOfWeek;
+  };
+
+  useEffect(() => {
+    const startOfWeek = getStartOfWeek();
+
+    fullCalendar.some((calendarDate, index) => {
+      const calendarIndex = fullCalendar.findIndex(calendarItem => calendarItem.date.getDate() === startOfWeek.getDate());
+    
+      if (calendarIndex === index) {
+        setWeekStartEnd({ start: calendarIndex, end: calendarIndex + 7 });
+        return true;
+      }
+      
+      return false;
+    });
+
+  }, [calendarDate, fullCalendar]);
 
   const [calendarTasks, setCalendarTasks] = useState<JSX.Element[][]>(
     Array.from({ length: fullCalendar.length }, () => [])
@@ -88,7 +113,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   );
 
   return (
-      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar }}>
+      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar, weekStartEnd }}>
         {children}
       </CalendarUIContext.Provider>
   );

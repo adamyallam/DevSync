@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 
 export const MonthlyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
-  const { isWeekendShowing, fullCalendar, calendarTasks, getTaskCount, addTask, addTaskButton } = useCalendarUIContext();
+  const { isWeekendShowing, fullCalendar, calendarTasks, calendarDate, getTaskCount, addTask, addTaskButton } = useCalendarUIContext();
 
   return (
     <div className='flex flex-col h-full w-full'>
@@ -23,12 +23,12 @@ export const MonthlyCalendar = () => {
 
       <div className={`grid ${fullCalendar.length === 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
         {fullCalendar.map((date, index) => {
-          const currentDate = new Date();
+          const currentDate = calendarDate;
           const currentDay = currentDate.getDate();
           const columnIndex = index % 7; 
           const isWeekend = columnIndex === 0 || columnIndex === 6;
-          const isPrevMonthDay = index < getFirstDayOfMonth();
-          const isNextMonthDay = index >= (getDaysInMonth() + getFirstDayOfMonth());
+          const isPrevMonthDay = index < getFirstDayOfMonth(calendarDate);
+          const isNextMonthDay = index >= (getDaysInMonth(calendarDate) + getFirstDayOfMonth(calendarDate));
           
 
           const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(date.date)} size={14} strokeWidth={3}/></button>
