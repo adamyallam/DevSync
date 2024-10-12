@@ -1,6 +1,6 @@
 'use client'
 import { useState, createContext, useEffect } from 'react';
-import { Calendar, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import useCalendar from '@/utils/hooks/useCalendar';
 
 //Component Imports
@@ -53,7 +53,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
         setWeekStartEnd({ start: calendarIndex, end: calendarIndex + 7 });
         return true;
       }
-      
+
       return false;
     });
 

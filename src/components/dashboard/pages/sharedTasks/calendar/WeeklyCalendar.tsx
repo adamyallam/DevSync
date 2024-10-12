@@ -6,9 +6,6 @@ export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton, weekStartEnd} = useCalendarUIContext();
 
-
-
-
   return (
     // Maps through a single week of the fullCalendar array
     fullCalendar.slice( weekStartEnd.start, weekStartEnd.end ).map((date, index) => {
