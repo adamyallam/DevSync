@@ -11,7 +11,8 @@ export const WeeklyCalendar = () => {
     fullCalendar.slice( weekStartEnd.start, weekStartEnd.end ).map((date, index) => {
       const currentDate = new Date();
       const currentDay = areDatesEqual(currentDate, date.date)
-      const calendarIndex = fullCalendar.findIndex(calendarItem => calendarItem.date === date.date); // Gets the index the current date is at in the fullCalendar array
+      const dateString = date.date.toISOString().split('T')[0]
+      const tasksForDate = calendarTasks[dateString] || [];
 
       return (
         <div key={index} className={`border flex flex-col h-full ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
@@ -24,12 +25,12 @@ export const WeeklyCalendar = () => {
 
           <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center flex-grow bg-gray-100 pt-4 pb-2">
             {isWeekendShowing ? // Determines if the tasks or a task count should display
-              ( calendarTasks[calendarIndex]?.map((task) => task) ) 
+              ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) 
               : 
-              ( index === 0 || index === 6 ? ( getTaskCount(calendarIndex) ) : ( calendarTasks[calendarIndex]?.map((task) => task) ) )
+              ( index === 0 || index === 6 ? ( getTaskCount(dateString) ) : ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) )
             }
             
-            {(index !== 0 && index !== 6) || isWeekendShowing ? addTaskButton(date.date) : null}
+            {(index !== 0 && index !== 6) || isWeekendShowing ? addTaskButton(dateString) : null}
           </div>
         </div>
       )
