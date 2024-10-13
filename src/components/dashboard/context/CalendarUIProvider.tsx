@@ -3,7 +3,7 @@ import { useState, createContext, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import useCalendar from '@/utils/hooks/useCalendar';
 import {getStartOfWeek} from '@/utils/dateFunctions/getDateFunctions';
-import compareDates from '@/utils/dateFunctions/compareDates';
+import compareDates from '@/utils/dateFunctions/areDatesEqual';
 
 //Component Imports
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
