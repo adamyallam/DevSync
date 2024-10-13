@@ -1,6 +1,7 @@
 'use client'
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/dateFunctions/getDateFunctions";
+import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
 import { Plus } from "lucide-react";
 
 export const MonthlyCalendar = () => {
@@ -23,8 +24,8 @@ export const MonthlyCalendar = () => {
 
       <div className={`grid ${fullCalendar.length === 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
         {fullCalendar.map((date, index) => { // Maps through the fullCalendar array
-          const currentDate = calendarDate;
-          const currentDay = currentDate.getDate();
+          const currentDate = new Date();
+          const currentDay = areDatesEqual(currentDate, date.date);
           const columnIndex = index % 7; 
           const isWeekend = columnIndex === 0 || columnIndex === 6;
           const isPrevMonthDay = index < getFirstDayOfMonth(calendarDate);
@@ -36,12 +37,12 @@ export const MonthlyCalendar = () => {
           return (
             <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>
               <div className={`flex items-center justify-between mr-2`}>
-                <div className={`flex mb-2 ${currentDay === date.date.getDate() ? 'items-center justify-center border bg-blue-500 w-6 h-7 rounded-md text-white' : ''}`}>
+                <div className={`flex mb-2 ${currentDay ? 'items-center justify-center border bg-blue-500 w-6 h-7 rounded-md text-white' : ''}`}>
                   {date.date.getDate()}
                 </div>
 
                   {/*Determines when and if an addTaskButton or plusTaskButton should display*/}
-                  {currentDay === date.date.getDate() ? (!isWeekend ? addTaskButton(date.date) : (isWeekendShowing ? addTaskButton(date.date) : null)) 
+                  {currentDay ? (!isWeekend ? addTaskButton(date.date) : (isWeekendShowing ? addTaskButton(date.date) : null)) 
                   : 
                   (!isWeekend ? plusTaskButton : (isWeekendShowing ? plusTaskButton : null)) }
               </div>
