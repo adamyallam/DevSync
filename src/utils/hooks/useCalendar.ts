@@ -6,7 +6,7 @@ import { getDaysInMonth, getFirstDayOfMonth } from '../dateFunctions/getDateFunc
 // Returns an array of 35 objects that represent each date/day in the current month.
 // Extra array items the current month doesn't fill are filled with the last or first days of the previous or next months
 const useCalendar = (inputDate?: Date) => {
-  const [calendar, setCalendar] = useState<{[dateString: string]: { date: Date; day: string }}>({});
+  const [calendar, setCalendar] = useState<string[]>([]);
 
   useEffect(() => {
     const currentDate = inputDate || new Date();
@@ -38,13 +38,7 @@ const useCalendar = (inputDate?: Date) => {
       // Combine all days into a single array
       const days = [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
 
-      // Format each day object to include the date and the day of the week
-      const formattedDays: { [dateString: string]: { date: Date; day: string } } = {};
-      days.forEach(date => {
-        const dateString = date.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-        const day = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-        formattedDays[dateString] = { date, day };
-      });
+      const formattedDays: string[] = days.map(date => date.toISOString().split('T')[0]);
 
       setCalendar(formattedDays);
     };

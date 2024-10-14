@@ -1,37 +1,38 @@
 'use client'
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
+import { daysOfWeek } from "@/utils/dateFunctions/getDateFunctions";
+import {parseISO} from 'date-fns/parseISO';
 
 export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton, weekStartEnd} = useCalendarUIContext();
 
-  const calendarEntries = Object.entries(fullCalendar);
 
   return (
     // Maps through a week of the fullCalendar array
-    calendarEntries.slice( weekStartEnd.start, weekStartEnd.end ).map(([key, value], index) => {
+    fullCalendar.slice(weekStartEnd.start, weekStartEnd.end).map((dateString, index) => {
       const currentDate = new Date();
-      const currentDay = areDatesEqual(currentDate, value.date)
-      const tasksForDate = calendarTasks[key] || [];
+      const currentDay = areDatesEqual(currentDate, parseISO(dateString))
+      const tasksForDate = calendarTasks[dateString] || [];
 
       return (
         <div key={index} className={`border flex flex-col h-full ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
 
           <div className="min-h-[4.75rem] p-2 border-b text-start">
-            <div className="text-sm font-semibold text-gray-600">{value.day}</div>
+            <div className="text-sm font-semibold text-gray-600">{daysOfWeek[parseISO(dateString).getDay()].slice(0, 3).toUpperCase()}</div>
 
-            <div className={`text-lg mt-1 ${currentDay ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{value.date.getDate()}</div>
+            <div className={`text-lg mt-1 ${currentDay ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{parseISO(dateString).getDate()}</div>
           </div>
 
           <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center flex-grow bg-gray-100 pt-4 pb-2">
             {isWeekendShowing ? // Determines if the tasks or a task count should display
               ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) 
               : 
-              ( index === 0 || index === 6 ? ( getTaskCount(key) ) : ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) )
+              ( index === 0 || index === 6 ? ( getTaskCount(dateString) ) : ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) )
             }
             
-            {(index !== 0 && index !== 6) || isWeekendShowing ? addTaskButton(key) : null}
+            {(index !== 0 && index !== 6) || isWeekendShowing ? addTaskButton(dateString) : null}
           </div>
         </div>
       )

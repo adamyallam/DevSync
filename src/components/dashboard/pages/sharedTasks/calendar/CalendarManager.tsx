@@ -3,6 +3,7 @@ import { useState } from "react"
 import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext"
 import { monthsOfYear } from "@/utils/dateFunctions/getDateFunctions"
+import { getStartOfWeek } from "@/utils/dateFunctions/getDateFunctions"
 
 //component imports
 
@@ -12,6 +13,7 @@ const CalendarManager = () => {
   const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
   
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const startOfWeek = getStartOfWeek();
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);
@@ -22,8 +24,13 @@ const CalendarManager = () => {
   const moveCalendarDateFoward = () => {
     if (weekOrMonth === 'Month') {
       const nextDate = new Date(calendarDate);
-      nextDate.setDate(1);
       nextDate.setMonth(nextDate.getMonth() + 1);
+
+      if (nextDate.getMonth() === new Date().getMonth()) {
+        nextDate.setDate(startOfWeek.getDate());
+      } else {
+        nextDate.setDate(7)
+      }
 
       setCalendarDate(nextDate);
     } else {
@@ -38,8 +45,13 @@ const CalendarManager = () => {
   const moveCalendarDateBack = () => {
     if (weekOrMonth === 'Month') {
       const previousDate = new Date(calendarDate);
-      previousDate.setDate(1);
       previousDate.setMonth(previousDate.getMonth() - 1);
+
+      if (previousDate.getMonth() === new Date().getMonth()) {
+        previousDate.setDate(startOfWeek.getDate());
+      } else {
+        previousDate.setDate(7)
+      }
 
       setCalendarDate(previousDate);
     } else {
@@ -50,7 +62,7 @@ const CalendarManager = () => {
     }
   }
 
-
+  // Moves the calendar date to the current date
   const moveCalendarDateToday = () => { 
     setCalendarDate(new Date());
   }
