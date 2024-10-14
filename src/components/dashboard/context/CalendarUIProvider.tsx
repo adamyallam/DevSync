@@ -9,7 +9,7 @@ import compareDates, { areDatesEqual } from '@/utils/dateFunctions/areDatesEqual
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
 
 type CalendarUIContextProps = {
-  fullCalendar: {date: Date, day: String}[],
+  fullCalendar: { [dateString: string]: { date: Date; day: string } };
   calendarTasks: { [dateString: string]: JSX.Element[] };
   isWeekendShowing: boolean;
   setIsWeekendShowing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -80,11 +80,12 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => { // Sets the start and end index of the week in the fullCalendar array so that the WeeklyCalendar component can map through the correct week
     const startOfWeek = getStartOfWeek(calendarDate);
 
-    fullCalendar.some((calendarDate, index) => {
-      const calendarIndex = fullCalendar.findIndex(calendarItem => compareDates(calendarItem.date, startOfWeek));
+    const calendarEntries = Object.entries(fullCalendar);
+
+    calendarEntries.some(([key, value], index) => {
     
-      if (calendarIndex === index) {
-        setWeekStartEnd({ start: calendarIndex, end: calendarIndex + 7 });
+      if (areDatesEqual(startOfWeek, value.date)) {
+        setWeekStartEnd({ start: index, end: index + 7 });
         return true;
       }
 
@@ -97,18 +98,18 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     setInitialWidth(isWeekendShowing ? 175 : 240)
   }, [isWeekendShowing])
 
-  // useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
-  //   setCalendarTasks((parentArray) =>
-  //     parentArray.map((childArray, _) => {
-  //       if (!childArray) return [];
-  //       return childArray.map((_, taskIndex) => (
-  //         <div key={taskIndex} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-  //           <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-100'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} />
-  //         </div>
-  //       ));
-  //     })
-  //   );
-  // }, [initialWidth, weekOrMonth]);
+  useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
+    setCalendarTasks((parentArray) =>
+      Object.fromEntries(
+        Object.entries(parentArray).map(([key, value]) => [
+          key,
+          value.map((task) => (
+            <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
+              <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} />
+            </div>
+          )),
+    ]))); 
+  }, [initialWidth, weekOrMonth]);
 
 
   return (

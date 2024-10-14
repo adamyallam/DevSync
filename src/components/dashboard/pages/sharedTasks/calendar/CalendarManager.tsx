@@ -24,7 +24,6 @@ const CalendarManager = () => {
       const nextDate = new Date(calendarDate);
       nextDate.setDate(1);
       nextDate.setMonth(nextDate.getMonth() + 1);
-      nextDate.setDate(nextDate.getDate() + 7);
 
       setCalendarDate(nextDate);
     } else {
@@ -41,7 +40,6 @@ const CalendarManager = () => {
       const previousDate = new Date(calendarDate);
       previousDate.setDate(1);
       previousDate.setMonth(previousDate.getMonth() - 1);
-      previousDate.setDate(previousDate.getDate() - 7);
 
       setCalendarDate(previousDate);
     } else {
