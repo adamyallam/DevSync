@@ -14,7 +14,7 @@ export const CalendarTask: React.FC<AutoResizingInputProps> = ({ parentClassName
   const [text, setText] = useState(`${initialState || ''}`)
 
   return (
-    <div className={`${parentClassName ? parentClassName : 'w-[85%] pb-2'}`}>
+    <div className={`${parentClassName ? parentClassName : 'w-full pb-2'}`}>
       <input
         type="text"
         placeholder={placeholder}
