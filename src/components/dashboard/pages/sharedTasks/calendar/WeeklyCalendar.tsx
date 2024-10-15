@@ -10,7 +10,7 @@ export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton} = useCalendarUIContext();
 
-  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 7})
+  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 0})
 
   useEffect(() => { // Sets which week is displayed in the calendar
     const startOfWeek = getStartOfWeek(calendarDate);
@@ -27,7 +27,7 @@ export const WeeklyCalendar = () => {
 
 
   }, [calendarDate, fullCalendar]);
-
+  
   return (
     // Maps through a week of the fullCalendar array
     fullCalendar.slice(weekStartEnd.start, weekStartEnd.end).map((dateString, index) => {
