@@ -24,10 +24,9 @@ export const MonthlyCalendar = () => {
         ))}
       </div>
 
-      <div className={`grid ${fullCalendar.length === 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
+      <div className={`grid ${fullCalendar.length >= 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
         {fullCalendar.map((dateString, index) => { // Maps through the fullCalendar array
-          const currentDate = new Date();
-          const currentDay = areDatesEqual(currentDate, parseISO(dateString));
+          const currentDay = areDatesEqual(new Date(), parseISO(dateString));
           const columnIndex = index % 7; 
           const isWeekend = columnIndex === 0 || columnIndex === 6;
           const isPrevMonthDay = index < getFirstDayOfMonth(calendarDate);
@@ -60,7 +59,7 @@ export const MonthlyCalendar = () => {
             </div>
           )
         })}
-        <div className={`bg-gray-100 w-screen ${fullCalendar.length === 36 ? '' : 'hidden'}`}/>
+        <div className={`bg-gray-100 w-screen ${fullCalendar.length >= 36 ? '' : 'hidden'}`}/>
       </div>
     </div>
   )

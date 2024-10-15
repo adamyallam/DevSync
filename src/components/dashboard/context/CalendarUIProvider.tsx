@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react';
 
 import useCalendar from '@/utils/hooks/useCalendar';
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
+import CalendarTask from '../pages/sharedTasks/calendar/CalendarTask';
 
 type CalendarUIContextProps = {
   fullCalendar: string[];
@@ -48,9 +49,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const addTask = (date: string) => {
   
     const calendarTask = (
-      <div key={calendarTasks[date]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-        <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={isWeekendShowing ? 175 : 240} maxGrowthWidth={isWeekendShowing ? 175 : 240} />
-      </div>
+      <CalendarTask key={calendarTasks[date]?.length || 0} />
     );
   
     setCalendarTasks((prevTasks) => ({
@@ -70,18 +69,18 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     );
   };
 
-  useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
-    setCalendarTasks((parentArray) =>
-      Object.fromEntries(
-        Object.entries(parentArray).map(([key, value]) => [
-          key,
-          value.map((task) => (
-            <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-              <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={isWeekendShowing ? 175 : 240} maxGrowthWidth={isWeekendShowing ? 175 : 240} />
-            </div>
-          )),
-    ]))); 
-  }, [isWeekendShowing, weekOrMonth]);
+  // useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
+  //   setCalendarTasks((parentArray) =>
+  //     Object.fromEntries(
+  //       Object.entries(parentArray).map(([key, value]) => [
+  //         key,
+  //         value.map((task) => (
+  //           <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
+  //             <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} />
+  //           </div>
+  //         )),
+  //   ]))); 
+  // }, [isWeekendShowing, weekOrMonth]);
 
 
   return (
