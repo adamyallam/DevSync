@@ -3,7 +3,6 @@ import { createContext, useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 
 import useCalendar from '@/utils/hooks/useCalendar';
-import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
 import CalendarTask from '../pages/sharedTasks/calendar/CalendarTask';
 
 type CalendarUIContextProps = {
