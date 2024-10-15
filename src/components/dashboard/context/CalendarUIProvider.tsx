@@ -30,10 +30,9 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [isWeekendShowing, setIsWeekendShowing] = useState<boolean>(false);
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
   const [calendarDate, setCalendarDate] = useState<Date>(new Date());
+  const [calendarTasks, setCalendarTasks] = useState<{ [dateString: string]: JSX.Element[] }>({});
 
   const fullCalendar = useCalendar(calendarDate)
-
-  const [calendarTasks, setCalendarTasks] = useState<{ [dateString: string]: JSX.Element[] }>({});
 
   //Function to display the addTaskButton
   const addTaskButton = (date: string) => {

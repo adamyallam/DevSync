@@ -9,7 +9,6 @@ interface AutoResizingInputProps {
   maxGrowth?: number;
 }
 
-//Input field that grows in size if characters do not fit within it's "Initial Width"
 
 export const CalendarTask: React.FC<AutoResizingInputProps> = ({ parentClassName, inputClassName, spanClassName, placeholder, initialState }) => {
   const [text, setText] = useState(`${initialState || ''}`)
