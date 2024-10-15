@@ -48,7 +48,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const addTask = (date: string) => {
   
     const calendarTask = (
-      <CalendarTask key={calendarTasks[date]?.length || 0} />
+      <CalendarTask key={calendarTasks[date]?.length || 0} parentClassName='w-[85%] pb-1.5' inputClassName='px-1 py-1 text-md w-full border border-gray-300 rounded-md drop-shadow-sm'/>
     );
   
     setCalendarTasks((prevTasks) => ({
@@ -67,20 +67,6 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
       </div>
     );
   };
-
-  // useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
-  //   setCalendarTasks((parentArray) =>
-  //     Object.fromEntries(
-  //       Object.entries(parentArray).map(([key, value]) => [
-  //         key,
-  //         value.map((task) => (
-  //           <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-  //             <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} />
-  //           </div>
-  //         )),
-  //   ]))); 
-  // }, [isWeekendShowing, weekOrMonth]);
-
 
   return (
       <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar }}>
