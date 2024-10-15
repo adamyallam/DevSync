@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
+
 import { getDaysInMonth, getFirstDayOfMonth } from '../dateFunctions/getDateFunctions';
 
 // Custom hook to generate a calendar for the given month

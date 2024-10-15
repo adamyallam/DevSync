@@ -1,10 +1,10 @@
 'use client'
-import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
-import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/dateFunctions/getDateFunctions";
-import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
-import { daysOfWeek } from "@/utils/dateFunctions/getDateFunctions";
-import { Plus } from "lucide-react";
 import { parseISO } from 'date-fns';
+import { Plus } from "lucide-react";
+
+import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
+import { getDaysInMonth, getFirstDayOfMonth, daysOfWeek } from "@/utils/dateFunctions/getDateFunctions";
+import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
 
 export const MonthlyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext

@@ -1,13 +1,32 @@
 'use client'
+import { useEffect, useState } from "react";
+import { parseISO } from 'date-fns';
+
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
-import { daysOfWeek } from "@/utils/dateFunctions/getDateFunctions";
-import {parseISO} from 'date-fns/parseISO';
+import { daysOfWeek, getStartOfWeek } from "@/utils/dateFunctions/getDateFunctions";
 
 export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
-  const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton, weekStartEnd} = useCalendarUIContext();
+  const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton} = useCalendarUIContext();
 
+  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 7})
+
+  useEffect(() => { // Sets which week is displayed in the calendar
+    const startOfWeek = getStartOfWeek(calendarDate);
+
+    fullCalendar.some((dateString, index) => {
+    
+      if ( areDatesEqual( startOfWeek, parseISO(dateString) ) ) {
+        setWeekStartEnd({ start: index, end: index + 7 });
+        return true;
+      }
+
+      return false;
+    });
+
+
+  }, [calendarDate, fullCalendar]);
 
   return (
     // Maps through a week of the fullCalendar array
@@ -25,7 +44,7 @@ export const WeeklyCalendar = () => {
             <div className={`text-lg mt-1 ${currentDay ? 'flex items-center justify-center border bg-blue-500 w-9 h-8 rounded-md text-white' : ''}`}>{parseISO(dateString).getDate()}</div>
           </div>
 
-          <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center flex-grow bg-gray-100 pt-4 pb-2">
+          <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center w-full h-full bg-gray-100 pt-4 pb-2">
             {isWeekendShowing ? // Determines if the tasks or a task count should display
               ( tasksForDate.map((task, taskIndex) => <div key={taskIndex}>{task}</div>) ) 
               : 

@@ -1,12 +1,9 @@
 'use client'
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, ChevronDown, Check } from "lucide-react"
-import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext"
-import { monthsOfYear } from "@/utils/dateFunctions/getDateFunctions"
-import { getStartOfWeek } from "@/utils/dateFunctions/getDateFunctions"
+import { useState } from "react";
+import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
-//component imports
-
+import { getStartOfWeek, monthsOfYear } from "@/utils/dateFunctions/getDateFunctions";
+import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 
 const CalendarManager = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext

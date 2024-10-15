@@ -1,14 +1,9 @@
 'use client'
-import { useState, createContext, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
-import useCalendar from '@/utils/hooks/useCalendar';
-import {getStartOfWeek} from '@/utils/dateFunctions/getDateFunctions';
-import compareDates, { areDatesEqual } from '@/utils/dateFunctions/areDatesEqual';
-import { parseISO } from 'date-fns';
 
-//Component Imports
+import useCalendar from '@/utils/hooks/useCalendar';
 import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
-import { parse } from 'path';
 
 type CalendarUIContextProps = {
   fullCalendar: string[];
@@ -19,7 +14,6 @@ type CalendarUIContextProps = {
   setWeekOrMonth: React.Dispatch<React.SetStateAction<string>>;
   calendarDate: Date;
   setCalendarDate: React.Dispatch<React.SetStateAction<Date>>;
-  weekStartEnd: {start: number, end: number};
   getTaskCount: (date: string) => JSX.Element;
   addTask: (date: string) => void;
   addTaskButton: (date: string) => JSX.Element;
@@ -34,9 +28,7 @@ interface Props {
 export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const [isWeekendShowing, setIsWeekendShowing] = useState<boolean>(false);
   const [weekOrMonth, setWeekOrMonth] = useState<string>('Week');
-  const [initialWidth, setInitialWidth] = useState<number>(240)
   const [calendarDate, setCalendarDate] = useState<Date>(new Date());
-  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 7})
 
   const fullCalendar = useCalendar(calendarDate)
 
@@ -52,12 +44,12 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     )
   }
 
-  // Adds a task to the calendarTasks array at the appropriate index
+  // Function to add a task to the calendarTasks object
   const addTask = (date: string) => {
   
     const calendarTask = (
       <div key={calendarTasks[date]?.length || 0} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-        <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} />
+        <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={isWeekendShowing ? 175 : 240} maxGrowthWidth={isWeekendShowing ? 175 : 240} />
       </div>
     );
   
@@ -67,7 +59,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     }));
   };
 
-  //Gets a task count for number of tasks within a date
+  // Gets a task count for number of tasks within a date
   const getTaskCount = (date: string) => {
     const taskCount = calendarTasks[date]?.length || 0;
   
@@ -78,44 +70,22 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     );
   };
 
-
-  useEffect(() => { // Sets the start and end index of the week in the fullCalendar array so that the WeeklyCalendar component can map through the correct week
-    const startOfWeek = getStartOfWeek(calendarDate);
-
-    fullCalendar.some((dateString, index) => {
-    
-      if ( areDatesEqual( startOfWeek, parseISO(dateString) ) ) {
-        setWeekStartEnd({ start: index, end: index + 7 });
-        return true;
-      }
-
-      console.log('ran')
-      return false;
-    });
-
-
-  }, [calendarDate]);
-
-  useEffect(() => {
-    setInitialWidth(isWeekendShowing ? 175 : 240)
-  }, [isWeekendShowing])
-
-  // useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
-  //   setCalendarTasks((parentArray) =>
-  //     Object.fromEntries(
-  //       Object.entries(parentArray).map(([key, value]) => [
-  //         key,
-  //         value.map((task) => (
-  //           <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
-  //             <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={initialWidth} maxGrowthWidth={initialWidth} />
-  //           </div>
-  //         )),
-  //   ]))); 
-  // }, [initialWidth, weekOrMonth]);
+  useEffect(() => { // Updates the size of the AutoResizingInput and/or the styling whenever initialWidth or weekOrMonth changes. 
+    setCalendarTasks((parentArray) =>
+      Object.fromEntries(
+        Object.entries(parentArray).map(([key, value]) => [
+          key,
+          value.map((task) => (
+            <div key={task.key} className={weekOrMonth === 'Week' ? 'pb-2' : 'pb-1 text-xs'}>
+              <AutoResizingInput className={weekOrMonth === 'Week' ? '' : 'bg-gray-200'} initialWidth={isWeekendShowing ? 175 : 240} maxGrowthWidth={isWeekendShowing ? 175 : 240} />
+            </div>
+          )),
+    ]))); 
+  }, [isWeekendShowing, weekOrMonth]);
 
 
   return (
-      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar, weekStartEnd }}>
+      <CalendarUIContext.Provider value={{ calendarTasks, isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate, getTaskCount, addTask, addTaskButton, fullCalendar }}>
         {children}
       </CalendarUIContext.Provider>
   );
