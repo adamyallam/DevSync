@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-interface AutoResizingInputProps {
+interface CalendarTaskProps {
   parentClassName?: string;
   inputClassName?: string;
   spanClassName?: string;
@@ -10,7 +10,7 @@ interface AutoResizingInputProps {
 }
 
 
-export const CalendarTask: React.FC<AutoResizingInputProps> = ({ parentClassName, inputClassName, spanClassName, placeholder, initialState }) => {
+export const CalendarTask: React.FC<CalendarTaskProps> = ({ parentClassName, inputClassName, spanClassName, placeholder, initialState }) => {
   const [text, setText] = useState(`${initialState || ''}`)
 
   return (

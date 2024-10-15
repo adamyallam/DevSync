@@ -11,7 +11,7 @@ export const BoardTask = () => {
       <div className="flex flex-col justify-evenly border border-gray-200 bg-white rounded-lg w-60 h-24">
         <div className="flex items-center gap-1 ml-2">
           <BadgeCheck size={18} color="green"/>
-          <AutoResizingInput placeholder="Untitled Task" className="text-md"/>
+          <AutoResizingInput placeholder="Untitled Task"/>
         </div>
 
         <div className="flex gap-2 ml-2">
