@@ -12,7 +12,7 @@ export const Header = () => {
       <div className="flex">
           <div className='flex gap-2 w-full'>
             <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
-            <AutoResizingInput className="border border-gray-300 rounded px-2 py-1" initialWidth={125} initialState="Project Name" />
+            <AutoResizingInput className="border border-gray-300 rounded px-2 py-1" initialWidth={125} initialState="Project Name" maxGrowthWidth={750}/>
             <button><ChevronDown strokeWidth={2} size={20}/></button>
             <button><Star strokeWidth={1} size={20}/></button>
             <button className="flex items-center gap-1 ml-3 mt-1 text-sm border rounded-full h-6 p-1 px-2"><div className="border rounded-full border-black w-2 h-2"/>Set Status<ChevronDown strokeWidth={2} size={16}/></button>
