@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from "react";
 import { parseISO } from 'date-fns';
 
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
@@ -10,24 +9,25 @@ export const WeeklyCalendar = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton} = useCalendarUIContext();
 
-  const [weekStartEnd, setWeekStartEnd] = useState<{start: number, end: number}>({start: 0, end: 0})
+  const weekStartEnd = {start: 0, end: 0}
 
-  useEffect(() => { // Sets which week is displayed in the calendar
+  function setWeekStartEnd() {
     const startOfWeek = getStartOfWeek(calendarDate);
 
     fullCalendar.some((dateString, index) => {
     
       if ( areDatesEqual( startOfWeek, parseISO(dateString) ) ) {
-        setWeekStartEnd({ start: index, end: index + 7 });
+        weekStartEnd.start = index
+        weekStartEnd.end = index + 7
         return true;
       }
 
       return false;
     });
-
-
-  }, [calendarDate, fullCalendar]);
+  }
   
+  setWeekStartEnd();
+
   return (
     // Maps through a week of the fullCalendar array
     fullCalendar.slice(weekStartEnd.start, weekStartEnd.end).map((dateString, index) => {
