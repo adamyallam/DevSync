@@ -1,7 +1,7 @@
 
 // Component Imports
-import Calendar from "@/components/dashboard/pages/sharedTasks/calendar/Calendar"
-import CalendarManager from "@/components/dashboard/pages/sharedTasks/calendar/CalendarManager"
+import Calendar from "@/components/dashboard/pages/sharedComponents/calendar/Calendar"
+import CalendarManager from "@/components/dashboard/pages/sharedComponents/calendar/CalendarManager"
 import CalendarUIProvider from "@/components/dashboard/context/CalendarUIProvider"
 
 export default async function calendar() {

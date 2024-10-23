@@ -1,7 +1,7 @@
 
 // Component Imports
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton"
-import CreateBoardSection from "@/components/dashboard/pages/sharedTasks/board/CreateBoardSection"
+import CreateBoardSection from "@/components/dashboard/pages/sharedComponents/board/CreateBoardSection"
 
 export default async function board() {
 

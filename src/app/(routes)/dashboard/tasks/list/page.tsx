@@ -1,7 +1,7 @@
 
 // Component Imports
 import UserTasksManager from '@/components/dashboard/pages/tasks/list/UserTasksManager'
-import CreateTaskSection from '@/components/dashboard/pages/sharedTasks/list/CreateTaskSection'
+import CreateTaskSection from '@/components/dashboard/pages/sharedComponents/list/CreateTaskSection'
 
 export default async function list() {
 

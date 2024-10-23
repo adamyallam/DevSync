@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 
 import useCalendar from '@/utils/hooks/useCalendar';
-import CalendarTask from '../pages/sharedTasks/calendar/CalendarTask';
+import CalendarTask from '../pages/sharedComponents/calendar/CalendarTask';
 
 type CalendarUIContextProps = {
   fullCalendar: string[];
