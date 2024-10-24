@@ -1,13 +1,20 @@
-
 // Component Imports
+import Calendar from "@/components/dashboard/pages/sharedComponents/calendar/Calendar"
+import CalendarManager from "@/components/dashboard/pages/sharedComponents/calendar/CalendarManager"
+import CalendarUIProvider from "@/components/dashboard/context/CalendarUIProvider"
 
 export default async function calendar() {
 
   return (
-    <div>
-
-      <h1 className='mt-20'>Temp</h1>
-    </div>
+    <CalendarUIProvider>
+      <div className="flex flex-col h-full w-full">
+        <CalendarManager />
+      
+        <div className="h-full w-full flex-grow overflow-y-auto">
+            <Calendar />
+        </div>
+      </div>
+    </CalendarUIProvider>
   )
 
 }
