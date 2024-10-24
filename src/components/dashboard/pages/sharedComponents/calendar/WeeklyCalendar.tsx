@@ -13,17 +13,15 @@ export const WeeklyCalendar = () => {
 
   function setWeekStartEnd() {
     const startOfWeek = getStartOfWeek(calendarDate);
-
-    fullCalendar.some((dateString, index) => {
     
-      if ( areDatesEqual( startOfWeek, parseISO(dateString) ) ) {
-        weekStartEnd.start = index
-        weekStartEnd.end = index + 7
-        return true;
-      }
-
-      return false;
-    });
+    const matchingIndex = fullCalendar.findIndex(dateString => 
+      areDatesEqual(startOfWeek, parseISO(dateString))
+    );
+    
+    if (matchingIndex !== -1) {
+      weekStartEnd.start = matchingIndex;
+      weekStartEnd.end = matchingIndex + 7;
+    }
   }
   
   setWeekStartEnd();
