@@ -7,7 +7,7 @@ import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton";
 
 export const ProjectTasksManager = () => { 
-const { isSidebarOpen } = useNavbarUIContext();
+  const { isSidebarOpen } = useNavbarUIContext();
 
   const screenWidth = useScreenWidth()
 
