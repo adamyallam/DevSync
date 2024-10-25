@@ -7,28 +7,22 @@ import BoardSection from "./BoardSection"
 
 export const CreateBoardSection = () => {
   const [boardSections, setBoardSections] = useState<JSX.Element[]>([])
-  const [isFirstSection, setIsFirstSection] = useState<boolean>(true);
 
-  function addBoardSection() {
-    const newBoardSection = <BoardSection key={boardSections.length + 1} hasInitialTask={isFirstSection} isFirstSection={isFirstSection} />
+  function addBoardSection(isFirstSection: boolean = false) {
     setBoardSections((prevSections) => {
-     return [...prevSections, newBoardSection]
+     return [...prevSections, <BoardSection key={boardSections.length} isFirstSection={isFirstSection}/>]
     })
   }
 
-  useEffect(() => {
-    if (isFirstSection) {
-      addBoardSection()
-    }
-  }, [isFirstSection]);
-
-  useEffect(() => {
-      setIsFirstSection(boardSections.length === 0);
-  }, [boardSections]);
+  if (boardSections.length === 0) { 
+    addBoardSection(true)
+  }
 
   return (
       <div className="flex w-full h-full whitespace-nowrap">
-        {boardSections}
+        <div className="flex ml-6">
+          {boardSections}
+        </div>
         
         <div className="pr-12">
           <div className="ml-2 mt-5 h-[calc(100%-40px)] min-w-[270px] bg-gray-100 rounded-lg">

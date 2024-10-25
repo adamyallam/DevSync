@@ -7,35 +7,24 @@ import BoardTask from "./BoardTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
-  hasInitialTask: boolean;
-  isFirstSection: Boolean;
+  isFirstSection: boolean;
 }
 
-export const BoardSection: React.FC<Props> = ({hasInitialTask, isFirstSection}) => {
-  const [initialized, setInitialized] = useState<boolean>(false);
+export const BoardSection: React.FC<Props> = ({isFirstSection = false}) => {
   const [boardTasks, setBoardTasks] = useState<JSX.Element[]>([]);
 
   function addBoardTask() {
-    const newTask = <BoardTask key={boardTasks.length + 1} />
     setBoardTasks((prevTasks) => {
-      return [...prevTasks, newTask]
+      return [...prevTasks, <BoardTask key={boardTasks.length} />]
     })
   }
 
-  useEffect(() => {
-    if (hasInitialTask) {
-      addBoardTask()
-    }
-
-    setInitialized(true);
-  }, [hasInitialTask]);
-
-  if (!initialized) {
-    return null
+  if (boardTasks.length === 0 && isFirstSection) {
+    addBoardTask()
   }
 
   return (
-    <div className={`flex flex-col mt-5 border rounded-lg border-gray-400 min-w-[270px] h-[calc(100%-40px)] ${isFirstSection ? 'ml-8' : 'ml-2'}`}>
+    <div className={`flex flex-col mt-5 ml-2 border rounded-lg border-gray-400 min-w-[270px] h-[calc(100%-40px)]`}>
       <div className="flex justify-between ml-3 mb-3 mt-2 mr-3">
         <AutoResizingInput maxGrowthWidth={200} placeholder="Untitled Section"/>
 
