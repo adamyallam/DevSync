@@ -8,7 +8,7 @@ export const UserTasksManager = () => {
 
   return (
     <div className="w-full">
-      <AddTaskHeaderButton />
+
       <div>
         <div className={`grid grid-cols-12 grid-rows-1 border-b-2 border-t-2 border-gray-300 ml-8 h-10 w-[95%] pr-[1px] transition-all duration-300`} >
           <div className={`flex justify-between col-span-4 ml-2 border-r-2 border-gray-300}`}>
