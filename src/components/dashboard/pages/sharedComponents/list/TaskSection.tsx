@@ -1,7 +1,7 @@
 'use client'
 import { ChevronDown, Plus } from "lucide-react"
 import { usePathSegments } from "@/utils/hooks/usePathSegments"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 //component imports
 import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
@@ -9,62 +9,33 @@ import UserTask from "@/components/dashboard/pages/tasks/list/UserTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
-  hasInitialTask: boolean;
+  isFirstSection: boolean
 }
 
-export const TaskSection: React.FC<Props> = ({hasInitialTask}) => {
+export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
   const currentPath = usePathSegments(2);
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [isFirstTask, setIsFirstTask] = useState<boolean>(true);
   const [tasks, setTasks] = useState<JSX.Element[]>([]);
 
-  function newTask() {
-    if (currentPath === 'projects/list') {
-      return <ProjectTask key={tasks.length + 1} showTopBorder={isFirstTask} />
-    } else if (currentPath === 'tasks/list') {
-      return <UserTask key={tasks.length + 1} showTopBorder={isFirstTask} />
-    } else {
-      throw new Error('Invalid path for adding a task.')
-    }
-  };
-
   function addTask() {
+    const newTask = currentPath === 'projects/list' ? <ProjectTask key={tasks.length} /> : <UserTask key={tasks.length} />;
     setTasks((prevTasks) => {
-      return [...prevTasks, newTask()]
+      return [...prevTasks, newTask]
     })
   }
 
-
-  useEffect(() => {
-    if (hasInitialTask) {
-      addTask()
-      setInitialized(true);
-    } else {
-      setInitialized(true);
-    }
-  }, [hasInitialTask]);
-
-
-  useEffect(() => {
-    if (initialized) {
-      setIsFirstTask(tasks.length === 0);
-    }
-  }, [tasks, initialized]);
-
-  
-  if (!initialized) {
-    return null
+  if (tasks.length === 0 && isFirstSection) { 
+    addTask();
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 w-full">
       <div className="flex gap-1 ml-8 mt-2 mb-2">
         <button><ChevronDown size={16} className=""/></button>
         <AutoResizingInput placeholder="Untitled Section"/>
         <button className=""><Plus size={16}/></button>
       </div>
 
-      <div>
+      <div className="w-[96%] ml-8 border-gray-300 border-t-2">
         {tasks}
       </div>
 

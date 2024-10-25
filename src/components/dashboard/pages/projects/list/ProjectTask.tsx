@@ -1,25 +1,15 @@
 'use client'
 import { Plus, BadgeCheck, CalendarClock, ChevronDown, UserRoundSearch } from "lucide-react"
 import { useState } from "react";
-import useScreenWidth from "@/utils/hooks/useScreenWidth";
-import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 // Component Imports
 
-interface Props {
-  showTopBorder?: boolean;
-}
-
-export const ProjectTask: React.FC<Props> = ({showTopBorder = false}) => { 
-  const { isSidebarOpen } = useNavbarUIContext();
-
+export const ProjectTask = () => { 
   const [taskName, setTaskName] = useState('');
-  const screenWidth = useScreenWidth()
 
   return (
-    <div className="ml-8">
-      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-gray-300 gap-2 h-10 transition-all duration-300 ${showTopBorder ? 'border-t-2' : ''}`} 
-      style={{width: isSidebarOpen ? `${screenWidth - 304}px` : `${screenWidth - 64}px`}}>
+    <div className="w-full">
+      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-gray-300 gap-2 h-10 transition-all duration-300`}>
         <div className={`flex col-span-4 border-r-2`}>
           <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
           <input 

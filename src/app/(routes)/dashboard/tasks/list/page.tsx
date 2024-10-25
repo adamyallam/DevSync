@@ -6,9 +6,10 @@ import CreateTaskSection from '@/components/dashboard/pages/sharedComponents/lis
 export default async function list() {
 
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-full w-full'>
       <UserTasksManager />
-      <div className='overflow-x-hidden overflow-y-auto pb-10'>
+      
+      <div className='overflow-x-hidden overflow-y-auto pb-10 h-full' style={{ scrollbarGutter: 'stable' }}>
         <CreateTaskSection />
       </div>
     </div>
