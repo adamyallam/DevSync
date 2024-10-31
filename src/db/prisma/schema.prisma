@@ -27,6 +27,7 @@ model Project {
 model User {
   id       Int       @id @default(autoincrement())
   projects Project[]
+  sections Section[]
   tasks    Task[]
   comments Comment[]
 
@@ -61,6 +62,8 @@ model Task {
 model Section {
   id        Int      @id @default(autoincrement())
   projectID Int
+  userID    Int
+  users     User    @relation(fields: [userID], references: [id])
   project   Project @relation(fields: [projectID], references: [id])
   tasks     Task[]
 
