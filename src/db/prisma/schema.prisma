@@ -12,24 +12,27 @@ datasource db {
 
 model Project {
   id       Int       @id @default(autoincrement())
+  ownerID  Int
+  owner    User      @relation("ProjectOwner", fields: [ownerID], references: [id], onDelete: Cascade)
   sections Section[]
-  members  User[]
+  members  User[]    @relation("ProjectMembers")
   tasks    Task[]
 
   name        String    @db.VarChar(60)
   description String    @db.VarChar(300)
-  status      Status?    @default(NOTSTARTED)
+  status      Status?   @default(NOTSTARTED)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  projects Project[]
-  sections Section[]
-  tasks    Task[]
-  comments Comment[]
+  id            Int       @id @default(autoincrement())
+  ownedProjects Project[] @relation("ProjectOwner") 
+  projects      Project[] @relation("ProjectMembers")
+  sections      Section[]
+  tasks         Task[]
+  comments      Comment[]
 
   firstName String   @db.VarChar(40)
   lastName  String   @db.VarChar(40)
@@ -60,19 +63,19 @@ model Task {
 }
 
 model Section {
-  id        Int      @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   projectID Int
   userID    Int
   users     User    @relation(fields: [userID], references: [id])
   project   Project @relation(fields: [projectID], references: [id])
   tasks     Task[]
 
-  name        String   @db.VarChar(60)
-  description String?  @db.VarChar(300)
-  status      Status?  @default(NOTSTARTED)
+  name        String    @db.VarChar(60)
+  description String?   @db.VarChar(300)
+  status      Status?   @default(NOTSTARTED)
   dueDate     DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Comment {
