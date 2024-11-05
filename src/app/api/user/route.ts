@@ -6,53 +6,39 @@ import { getServerSession } from 'next-auth'
 
 //API to add or "POST" a user (invokes "createUser")
 export const POST = async (req: NextRequest) => {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions);
 
     const { firstName, lastName, username, email, password } = await req.json();
-    const hashedPassword = await hash(password, 10)
-    
+    const hashedPassword = await hash(password, 10);
+
     try {
         if (!session) {
-            const userData = { firstName, lastName, username, email, password: hashedPassword}
+            const userData = { firstName, lastName, username, email, password: hashedPassword };
 
-            // check if email already exists
+            // Check if email already exists
             const existingEmail = await db.user.findUnique({
-                where: {
-                    email: email
-                }
-            })
+                where: { email }
+            });
             if (existingEmail) {
-                return NextResponse.json(
-                    {message: 'User with that email already exists!'},
-                    {status: 409}
-                )
-            }
-            // check if username already exists
-            const existingUsername = await db.user.findUnique({
-                where: {
-                    username: username
-                }
-            })
-            if (existingUsername) {
-                return NextResponse.json(
-                    {message: 'User with that username already exists!'},
-                    {status: 409}
-                )
+                return NextResponse.json({ message: 'User with that email already exists!' }, { status: 409 });
             }
 
-            createUser(userData)
-            return NextResponse.json(
-                { message: 'New user created!' },
-                { status: 201 }
-            )
+            // Check if username already exists
+            const existingUsername = await db.user.findUnique({
+                where: { username }
+            });
+            if (existingUsername) {
+                return NextResponse.json({ message: 'User with that username already exists!' }, { status: 409 });
+            }
+
+            // Create the user with an associated project
+            await createUser(userData);
+            return NextResponse.json({ message: 'New user created with an initial project!' }, { status: 201 });
         }
     } catch (err) {
-        return NextResponse.json(
-            { message: 'Failed to POST', err}, 
-            { status: 500 }
-        )
+        return NextResponse.json({ message: 'Failed to POST', err }, { status: 500 });
     }
-}
+};
 
 //API to DELETE a user (invokes "deleteUser")
 export const DELETE = async (req: Request) => { 
