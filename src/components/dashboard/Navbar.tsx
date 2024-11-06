@@ -2,19 +2,21 @@
 import Link from 'next/link'
 import React from 'react';
 import { useState } from 'react';
-import { Instagram, Twitter, Linkedin, Home, CircleCheck, Inbox, CalendarCheck, UserRound, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
+import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 
 //component imports
 
 export const Navbar = () => {
+  const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
+
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
+
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
   }
 
-  const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
   const toggleMenu = () => {
     toggleSidebar(!isSidebarOpen);
   }
