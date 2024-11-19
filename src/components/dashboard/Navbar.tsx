@@ -7,6 +7,7 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 
 //component imports
+import ProjectLink from '../styledElements/ProjectLink';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
@@ -79,22 +80,11 @@ export const Navbar = () => {
           <div className='pb-3 pt-3'>
             <h1 className='font-bold pl-2 ml-6'>Projects</h1>
 
-            <Link href='/dashboard/projects/board' className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
-              <div className='border-2 bg-white rounded-md w-4 h-4' />
-              <span className='ml-2 text-sm'>ProjectName</span>
-            </Link>
+            <ProjectLink name='ProjectName' />
             
             {!isProjectsCollapsed && (
               <div className=''>
-                <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('')}`}>
-                  <div className='border-2 bg-white rounded-md w-4 h-4' />
-                  <span className='ml-2 text-sm'>ProjectName</span>
-                </Link>
 
-                <Link href='/dashboard/projects/overview' className={`flex items-center h-8 ${applySidebarClass('')}`}>
-                  <div className='border-2 bg-white rounded-md w-4 h-4' />
-                  <span className='ml-2 text-sm'>ProjectName</span>
-                </Link>
               </div>
             )}
 
