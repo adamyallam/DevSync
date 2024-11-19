@@ -3,6 +3,43 @@ import { createProject, deleteProject, updateProject, readProject, readAllProjec
 import authOptions from "../auth/[...nextauth]/authOptions"
 import { getServerSession } from 'next-auth'
 
+//API to READ a project (invokes "readProject")
+export const GET = async (req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
+    const id = parseInt(searchParams.get('id') ?? '-1')
+    const session = await getServerSession(authOptions)
+
+    if (session) {
+        if(id !== -1){    
+            try {
+                readProject(id)
+                return NextResponse.json(
+                    { message: `project READ!` },
+                    { status: 201 }
+                )
+                } catch (err) {
+                return NextResponse.json(
+                    { message: 'Failed to READ', err}, 
+                    { status: 500 }
+                )
+            }
+        } else {
+            try {
+                readAllProjects()
+                return NextResponse.json(
+                    { message: `all projects READ!` },
+                    { status: 201 }
+                )
+                } catch (err) {
+                return NextResponse.json(
+                    { message: 'Failed to READ', err}, 
+                    { status: 500 }
+                )
+            }
+        }
+    }
+}
+
 //API to add or "POST" a project (invokes "createProject")
 export const POST = async (req: Request) => {
     const { name, description, dueDate} = await req.json();
@@ -67,44 +104,6 @@ export const PATCH = async (req: Request) => {
             { message: 'Failed to UPDATE', err}, 
             { status: 500 }
         )
-    }
-}
-
-
-//API to READ a project (invokes "readProject")
-export const GET = async (req: NextRequest) => {
-    const searchParams = req.nextUrl.searchParams
-    const id = parseInt(searchParams.get('id') ?? '-1')
-    const session = await getServerSession(authOptions)
-
-    if (session) {
-        if(id !== -1){    
-            try {
-                readProject(id)
-                return NextResponse.json(
-                    { message: `project READ!` },
-                    { status: 201 }
-                )
-                } catch (err) {
-                return NextResponse.json(
-                    { message: 'Failed to READ', err}, 
-                    { status: 500 }
-                )
-            }
-        } else {
-            try {
-                readAllProjects()
-                return NextResponse.json(
-                    { message: `all projects READ!` },
-                    { status: 201 }
-                )
-                } catch (err) {
-                return NextResponse.json(
-                    { message: 'Failed to READ', err}, 
-                    { status: 500 }
-                )
-            }
-        }
     }
 }
 
