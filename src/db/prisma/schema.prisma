@@ -28,7 +28,7 @@ model Project {
 
 model User {
   id            Int       @id @default(autoincrement())
-  ownedProjects Project[] @relation("ProjectOwner") 
+  ownedProjects Project[] @relation("ProjectOwner")
   projects      Project[] @relation("ProjectMembers")
   sections      Section[]
   tasks         Task[]

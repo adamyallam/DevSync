@@ -9,6 +9,10 @@ import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
 export default async function home(){
   const session = await getServerSession(authOptions)
 
+  if (!session) {
+    return new Error('Failed to retrieve session')
+  }
+
   return (
     <div>
       <div>
@@ -16,7 +20,7 @@ export default async function home(){
       </div>
       
       <div className="mt-5">
-        <UserWelcome name={session?.user.firstName}/>
+        <UserWelcome name={session.firstName}/>
         <div className="flex justify-center gap-4 mt-12">
           <TasksCard />
           <ProjectsCard />

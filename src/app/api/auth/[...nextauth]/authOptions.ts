@@ -1,4 +1,4 @@
-import {type NextAuthOptions} from "next-auth"
+import { type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from 'bcrypt'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
 
       credentials: {
         email: { label: "Email", type: "text", placeholder: "jsmith@example.com" },
-        password: { label: "Password", type: "password"}
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
 
@@ -28,54 +28,54 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        const existingUser = await db.user.findUnique({
+        const user = await db.user.findUnique({
           where: { email: credentials?.email }
         })
 
-        if (!existingUser) {
+
+        if (!user) {
           return null
         }
 
-        const validPassword = await bcrypt.compare(credentials.password, existingUser.password)
+        const validPassword = await bcrypt.compare(credentials.password, user.password)
 
         if (!validPassword) {
           return null
         }
-        
+
+
         return {
-          id: `${existingUser.id}`,
-          firstName: existingUser.firstName,
-          lastName: existingUser.lastName,
-          username: existingUser.username,
-          email: existingUser.email,
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
+          email: user.email,
         }
-      }})
+      }
+    })
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        return {
-          ...token,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          username: user.username
-        }
+        token.id = Number(user.id),
+        token.firstName = user.firstName,
+        token.lastName = user.lastName,
+        token.username = user.username,
+        token.email = user.email
       }
       return token
     },
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          firstName: token.firstName,
-          lastName: token.lastName,
-          username: token.username
-        }
+      if (token) {
+        session.id = token.id,
+        session.firstName = token.firstName,
+        session.lastName = token.lastName,
+        session.username = token.username,
+        session.email = token.email
       }
       return session
     }
-  } 
+  }
 }
 
 export default authOptions
