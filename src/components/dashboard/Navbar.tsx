@@ -5,13 +5,14 @@ import { useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
+import { useSession } from 'next-auth/react';
 
 //component imports
 import ProjectLink from '../styledElements/ProjectLink';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
-
+  const {data: session, status} = useSession()
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
 
   const toggleProjectsTab = () => {
@@ -31,6 +32,34 @@ export const Navbar = () => {
       return 'sidebar-highlighted';
     }
   }
+
+  const createProject = async () => {
+    const projectData = {
+      name: "New Project 3",
+      description: "This is a test project for development purposes",
+      dueDate: "2024-12-31T00:00:00.000Z"
+    };
+  
+    try {
+      const res = await fetch("http://localhost:3000/api/project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(projectData)
+      });
+  
+      const result = await res.json();
+
+      if (res.status === 201) {
+        console.log("Project Created:", result.project);
+    } else {
+        console.log('An error occured, please try again later')
+    }
+    } catch (error) {
+      console.error("Error creating project:", error);
+    }
+  };
 
   return (
     <div className='fixed top-0 left-0 right-0 z-20 bg-gray-700'>
@@ -97,7 +126,7 @@ export const Navbar = () => {
         </div>
 
         <div className='w-full flex flex-col mt-auto items-center border-t-2 pb-4'>
-          <button className='border-2 p-2 w-11/12 mt-4'>Create Project</button>
+          <button onClick={createProject} className='border-2 p-2 w-11/12 mt-4'>Create Project</button>
 
           <div className='flex mt-2 gap-2'>
             <Instagram size={24} color="#e5e7eb" strokeWidth={1.5} />
