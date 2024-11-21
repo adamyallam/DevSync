@@ -4,22 +4,22 @@ const prisma = new PrismaClient()
 
 // function for creating a project
 export async function createProject(projectData: object) {
-    const project = await prisma.project.create({
-        data: projectData
-      })
-      console.log("New project was created!", project)
-      // await prisma.project.deleteMany();
-      await prisma.$disconnect()
-  }
+  const project = await prisma.project.create({
+    data: projectData
+  })
+  console.log("New project was created!", project)
+  // await prisma.project.deleteMany();
+  await prisma.$disconnect()
+}
 
 // function for deleting a project
-  export async function deleteProject(projectId: object) {
-    const deletedProject = await prisma.project.delete({
-      where: projectId
-    })
-    console.log("Project was deleted!", deletedProject)
-    await prisma.$disconnect()
-  }
+export async function deleteProject(projectId: object) {
+  const deletedProject = await prisma.project.delete({
+    where: projectId
+  })
+  console.log("Project was deleted!", deletedProject)
+  await prisma.$disconnect()
+}
 
 
 //function for updating a project
@@ -53,4 +53,4 @@ export async function readAllProjects() {
   await prisma.$disconnect()
 }
 
-  export default {createProject, deleteProject, updateProject, readProject, readAllProjects};
+export default { createProject, deleteProject, updateProject, readProject, readAllProjects };
