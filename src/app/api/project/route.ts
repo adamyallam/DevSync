@@ -43,22 +43,30 @@ export const GET = async (req: NextRequest) => {
 //API to add or "POST" a project (invokes "createProject")
 export const POST = async (req: Request) => {
   const { name, description, dueDate } = await req.json();
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   try {
     if (session) {
-      const projectData = { name, description, dueDate }
-      createProject(projectData)
+      const userId = session.id
+      const projectData = { name, description, dueDate };
+
+      const newProject = await createProject(userId, projectData);
+
       return NextResponse.json(
-        { message: 'New project created!' },
+        { message: 'New project created!', project: newProject },
         { status: 201 }
-      )
+      );
+    } else {
+      return NextResponse.json(
+        { message: 'Unauthorized' },
+        { status: 401 }
+      );
     }
   } catch (err) {
     return NextResponse.json(
       { message: 'Failed to POST', err },
       { status: 500 }
-    )
+    );
   }
 }
 
