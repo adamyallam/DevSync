@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React from 'react';
 import { useState } from 'react';
-import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp} from 'lucide-react'
+import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp } from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import { useSession } from 'next-auth/react';
@@ -12,7 +12,7 @@ import ProjectLink from '../styledElements/ProjectLink';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
-  const {data: session, status} = useSession()
+  const { data: session, status } = useSession()
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
 
   const toggleProjectsTab = () => {
@@ -25,7 +25,7 @@ export const Navbar = () => {
 
   const currentPath = usePathSegments(2);
   function applySidebarClass(...pagePaths: string[]) {
-  
+
     if (pagePaths.includes(currentPath)) {
       return 'sidebar-selected';
     } else {
@@ -39,7 +39,7 @@ export const Navbar = () => {
       description: "This is a test project for development purposes",
       dueDate: "2024-12-31T00:00:00.000Z"
     };
-  
+
     try {
       const res = await fetch("http://localhost:3000/api/project", {
         method: "POST",
@@ -48,14 +48,14 @@ export const Navbar = () => {
         },
         body: JSON.stringify(projectData)
       });
-  
+
       const result = await res.json();
 
       if (res.status === 201) {
         console.log("Project Created:", result.project);
-    } else {
+      } else {
         console.log('An error occured, please try again later')
-    }
+      }
     } catch (error) {
       console.error("Error creating project:", error);
     }
@@ -71,20 +71,20 @@ export const Navbar = () => {
           </button>
           <button className='border bg-white rounded-full w-16 h-7'>Create</button>
         </div>
-        
-          <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
+
+        <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
       </div>
 
       {/* Sidebar */}
       <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-gray-700 text-gray-300 w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
         <div className='bg-gray-700 border-t-2 border-b-2 border-gray-600 pt-2 pb-2'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
-            <Home size={20} color="#e5e7eb" strokeWidth={1.5}/>
+            <Home size={20} color="#e5e7eb" strokeWidth={1.5} />
             <span className='ml-1 text-sm'>Home</span>
           </Link>
-          
+
           <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/board', 'tasks/calendar', 'tasks/files')}`}>
-            <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5}/>
+            <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5} />
             <span className='ml-1 text-sm'>Tasks</span>
           </Link>
 
@@ -110,7 +110,7 @@ export const Navbar = () => {
             <h1 className='font-bold pl-2 ml-6'>Projects</h1>
 
             <ProjectLink name='ProjectName' />
-            
+
             {!isProjectsCollapsed && (
               <div className=''>
 
@@ -119,7 +119,7 @@ export const Navbar = () => {
 
             <div className='border-t-2 border-gray-600 mt-1 ml-7 pl-1 w-3/4'>
               <button className={`flex items-center justify-center rounded-sm mt-1 w-3.5 h-3.5 ${isProjectsCollapsed ? 'hover:bg-gray-800' : 'bg-gray-800'}`} onClick={toggleProjectsTab}>
-                {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4}/> : <ChevronUp size={16} strokeWidth={4} />}
+                {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4} /> : <ChevronUp size={16} strokeWidth={4} />}
               </button>
             </div>
           </div>

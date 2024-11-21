@@ -42,8 +42,8 @@ export const GET = async (req: NextRequest) => {
 
 //API to add or "POST" a project (invokes "createProject")
 export const POST = async (req: Request) => {
-  const { name, description, dueDate } = await req.json();
   const session = await getServerSession(authOptions);
+  const { name, description, dueDate } = await req.json();
 
   try {
     if (session) {
