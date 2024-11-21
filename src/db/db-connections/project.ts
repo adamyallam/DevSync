@@ -3,13 +3,28 @@ const prisma = new PrismaClient()
 
 
 // function for creating a project
-export async function createProject(projectData: object) {
-  const project = await prisma.project.create({
-    data: projectData
-  })
-  console.log("New project was created!", project)
-  // await prisma.project.deleteMany();
-  await prisma.$disconnect()
+export async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string }) {
+  try {
+    const project = await prisma.project.create({
+      data: {
+        ...projectData,
+        ownerID: userId,
+        members: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
+    console.log("New project was created:", project);
+    return project;
+  } catch (error) {
+    console.error("Error in createProject function:", error);
+    throw new Error("Failed to create project in database.");
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 // function for deleting a project
