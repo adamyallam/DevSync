@@ -5,38 +5,22 @@ import { getServerSession } from 'next-auth'
 
 //API to READ a project (invokes "readProject")
 export const GET = async (req: NextRequest) => {
-  const searchParams = req.nextUrl.searchParams
-  const id = parseInt(searchParams.get('id') ?? '-1')
   const session = await getServerSession(authOptions)
 
   if (session) {
-    if (id !== -1) {
-      try {
-        readProject(id)
-        return NextResponse.json(
-          { message: `project READ!` },
-          { status: 201 }
-        )
-      } catch (err) {
-        return NextResponse.json(
-          { message: 'Failed to READ', err },
-          { status: 500 }
-        )
-      }
-    } else {
-      try {
-        readAllProjects()
-        return NextResponse.json(
-          { message: `all projects READ!` },
-          { status: 201 }
-        )
-      } catch (err) {
-        return NextResponse.json(
-          { message: 'Failed to READ', err },
-          { status: 500 }
-        )
-      }
+    try {
+      const projects = await readAllProjects(session.id)
+      return NextResponse.json(
+        { message: `all projects READ!`, projects },
+        { status: 201 }
+      )
+    } catch (err) {
+      return NextResponse.json(
+        { message: 'Failed to READ', err },
+        { status: 500 }
+      )
     }
+
   }
 }
 

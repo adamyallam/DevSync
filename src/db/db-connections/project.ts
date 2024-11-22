@@ -62,10 +62,15 @@ export async function readProject(id: number) {
 }
 
 //function for reading all projects
-export async function readAllProjects() {
-  const projects = await prisma.project.findMany()
+export async function readAllProjects(id: number) {
+  const projects = await prisma.project.findMany({
+    where: {
+      ownerID: id
+    },
+  });
   console.log("All projects were read!", projects)
   await prisma.$disconnect()
+  return projects
 }
 
 export default { createProject, deleteProject, updateProject, readProject, readAllProjects };
