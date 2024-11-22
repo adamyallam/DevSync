@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const NavbarUIProvider: React.FC<Props> = ({ children }) => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true)
     
     const toggleSidebar = (newState: boolean) => {
         setIsSidebarOpen(newState);
