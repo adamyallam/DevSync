@@ -8,9 +8,11 @@ import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 
 //component imports
 import ProjectLink from '../styledElements/ProjectLink';
+import { BouncingDots } from '../styledElements/LoadingElements';
 
 interface Project {
-  name: string
+  name: string;
+  id: number;
 }
 
 export const Navbar = () => {
@@ -36,7 +38,6 @@ export const Navbar = () => {
 
     fetchProjects();
   }, [])
-
 
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
@@ -132,11 +133,19 @@ export const Navbar = () => {
           <div className='pb-3 pt-3'>
             <h1 className='font-bold pl-2 ml-6'>Projects</h1>
 
-            <ProjectLink name='ProjectName' />
+            {projects?.length ? (
+              <div>
+                <ProjectLink key={projects[0].id} id={projects[0].id} name={projects[0].name} />
 
-            {!isProjectsCollapsed && (
-              <div className=''>
-
+                {!isProjectsCollapsed &&
+                  projects.slice(1).map((project) => (
+                    <ProjectLink key={project.id} id={project.id} name={project.name} />
+                  ))
+                }
+              </div>
+            ) : (
+              <div className='ml-10 mt-3 mb-2'>
+                <BouncingDots />
               </div>
             )}
 
