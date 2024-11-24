@@ -122,7 +122,7 @@ export const Navbar = () => {
               </div>
             ) : (
               <div className='ml-10 mt-3 mb-2'>
-                <BouncingDots />
+                <BouncingDots color={'white'} />
               </div>
             )}
 
