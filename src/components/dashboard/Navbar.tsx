@@ -135,11 +135,11 @@ export const Navbar = () => {
 
             {projects?.length ? (
               <div>
-                <ProjectLink key={projects[0].id} id={projects[0].id} name={projects[0].name} />
+                <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} />
 
                 {!isProjectsCollapsed &&
                   projects.slice(1).map((project) => (
-                    <ProjectLink key={project.id} id={project.id} name={project.name} />
+                    <ProjectLink key={project.id} projectID={project.id} name={project.name} />
                   ))
                 }
               </div>

@@ -1,11 +1,14 @@
 'use client'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
 
 // Component Imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 export const Header = () => { 
+
+  const { id } = useParams()
 
   return (
     <div className='mt-16 w-full'>
@@ -30,11 +33,10 @@ export const Header = () => {
 
       <div>
         <div className="flex gap-4 mt-2 pl-10 text-sm border-b-2 border-gray-300">
-          <Link href={'/dashboard/projects/overview'} className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14}/>Overview</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
-          <Link href={'/dashboard/projects/list'} className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16}/>List</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
-          <Link href={'/dashboard/projects/board'} className="z-10"><div className="flex items-center gap-1"><SquareKanban size={14}/>Board</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
-          <Link href={'/dashboard/projects/calendar'} className="z-10"><div className="flex items-center gap-1"><Calendar size={14}/>Calendar</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
-          <Link href={'/dashboard/projects/files'} className="z-10"><div className="flex items-center gap-1"><Upload size={14}/>Files</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
+          <Link href={`/dashboard/projects/${id}/overview`} className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14}/>Overview</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
+          <Link href={`/dashboard/projects/${id}/list`} className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16}/>List</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
+          <Link href={`/dashboard/projects/${id}/board`} className="z-10"><div className="flex items-center gap-1"><SquareKanban size={14}/>Board</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
+          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10"><div className="flex items-center gap-1"><Calendar size={14}/>Calendar</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]"/></Link>
         </div>
       </div>
 

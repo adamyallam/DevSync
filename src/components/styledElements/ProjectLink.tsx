@@ -4,12 +4,13 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments';
 
 interface Props {
   name: React.ReactNode;
-  id: number
+  projectID: number
 }
 
-export const ProjectLink: React.FC<Props> = ({ name, id }) => {
+export const ProjectLink: React.FC<Props> = ({ name, projectID }) => {
 
-  const currentPath = usePathSegments(2);
+  const currentPath = usePathSegments(3);
+
   function applySidebarClass(...pagePaths: string[]) {
 
     if (pagePaths.includes(currentPath)) {
@@ -21,7 +22,7 @@ export const ProjectLink: React.FC<Props> = ({ name, id }) => {
 
   return (
     <>
-      <Link href={`/dashboard/projects/${id}/list`} className={`flex items-center h-8 ${applySidebarClass('projects/overview', 'projects/list', 'projects/board', 'projects/calendar', 'projects/files')}`}>
+      <Link href={`/dashboard/projects/${projectID}/list`} className={`flex items-center h-8 ${applySidebarClass(`projects/${projectID}/overview`, `projects/${projectID}/list`, `projects/${projectID}/board`, `projects/${projectID}/calendar`, `projects/${projectID}/files`)}`}>
         <div className='border-2 bg-white rounded-md w-4 h-4' />
         <span className='ml-2 text-sm'>{name}</span>
       </Link>
