@@ -36,7 +36,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={ {projects}}>
+    <ProjectsDataContext.Provider value={{ projects }}>
       {children}
     </ProjectsDataContext.Provider>
   );

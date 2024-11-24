@@ -14,7 +14,7 @@ import { BouncingDots } from '../styledElements/LoadingElements';
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
-  const {projects} = useProjectsDataContext()
+  const { projects } = useProjectsDataContext()
 
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
