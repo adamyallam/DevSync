@@ -1,6 +1,3 @@
-import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
-
 // Component Imports
 import UserWelcome from "@/components/dashboard/pages/home/UserWelcome";
 import TasksCard from "@/components/dashboard/pages/home/TasksCard";
