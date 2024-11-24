@@ -5,39 +5,16 @@ import { useState, useEffect } from 'react';
 import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp } from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
 
 //component imports
 import ProjectLink from '../styledElements/ProjectLink';
 import { BouncingDots } from '../styledElements/LoadingElements';
 
-interface Project {
-  name: string;
-  id: number;
-}
-
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
-  const [projects, setProjects] = useState<Project[]>()
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/project");
-        const data = await res.json();
-
-        if (data.projects) {
-          setProjects(data.projects);
-        } else {
-          console.error('No projects found')
-        }
-      } catch (err) {
-        return { message: 'failed to get projects', err }
-      }
-    }
-
-    fetchProjects();
-  }, [])
+  const {projects} = useProjectsDataContext()
 
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
