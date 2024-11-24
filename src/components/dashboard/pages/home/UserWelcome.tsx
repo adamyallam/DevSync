@@ -1,20 +1,20 @@
 'use client'
 import { getCurrentDateDisplay } from '@/utils/dateFunctions/getDateFunctions';
 import { getDayPeriod } from '@/utils/dateFunctions/getDayPeriod';
+import { useSession } from 'next-auth/react';
 
 // Component Imports
 
-export interface Props {
-    name: React.ReactNode;
-  }
 
-export const UserWelcome: React.FC<Props> = (props) => { 
+export const UserWelcome = () => { 
+
+  const {data: session, status} = useSession()
     
     return (
       <div>
         <div className='flex flex-col'>
           <p className='text-center text-lg'>{getCurrentDateDisplay()}</p>
-          <h1 className='text-center mt-2 text-3xl'>Good {getDayPeriod()}, {props.name}</h1>
+          <h1 className='text-center mt-2 text-3xl'>Good {getDayPeriod()}, {session?.firstName}</h1>
         </div>
         <div className='flex justify-center'>
           <div className='p-4 mt-4 w-[500px] bg-gray-100 rounded-full'>
