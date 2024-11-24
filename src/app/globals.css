@@ -40,3 +40,12 @@
     transform: translateY(-4px); /* Move up by 4px */
   }
 }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-custom {
+  animation: spin 2s linear infinite;
+}
