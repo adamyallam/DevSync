@@ -1,11 +1,9 @@
 'use client'
 import { ChevronDown, Plus } from "lucide-react"
-import { usePathSegments } from "@/utils/hooks/usePathSegments"
 import { useState } from "react"
 
 //component imports
 import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
-import UserTask from "@/components/dashboard/pages/tasks/list/UserTask"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
@@ -13,7 +11,6 @@ interface Props {
 }
 
 export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
-  const currentPath = usePathSegments(2);
   const [tasks, setTasks] = useState<JSX.Element[]>([]);
 
   function addTask() {
