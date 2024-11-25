@@ -4,7 +4,7 @@ import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider
 
 // Component Imports
 import ProjectBoxLink from "@/components/styledElements/ProjectBoxLink"
-import { RotatingCircle } from "@/components/styledElements/LoadingElements"
+import { BouncingDots } from "@/components/styledElements/LoadingElements"
 
 export const ProjectsCard = () => {
 
@@ -34,7 +34,7 @@ export const ProjectsCard = () => {
           </>
         ) : (
           <div className="flex justify-center items-center col-span-2 row-span-10">
-            <RotatingCircle />
+            <BouncingDots color="#374151" size={15} />
           </div>
         )}
 
