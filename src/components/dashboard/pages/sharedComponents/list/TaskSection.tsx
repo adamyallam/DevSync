@@ -17,7 +17,7 @@ export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
   const [tasks, setTasks] = useState<JSX.Element[]>([]);
 
   function addTask() {
-    const newTask = currentPath === 'projects/list' ? <ProjectTask key={tasks.length} /> : <UserTask key={tasks.length} />;
+    const newTask = <ProjectTask key={tasks.length} />
     setTasks((prevTasks) => {
       return [...prevTasks, newTask]
     })

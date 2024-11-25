@@ -84,10 +84,11 @@ export const Navbar = () => {
             <span className='ml-1 text-sm'>Home</span>
           </Link>
 
+          {/* Code to add My Tasks if necessary 
           <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/board', 'tasks/calendar', 'tasks/files')}`}>
             <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5} />
             <span className='ml-1 text-sm'>Tasks</span>
-          </Link>
+          </Link> */}
 
           {/* Code to add Inbox if necassary
           <Link href='/dashboard/inbox/activity' className={`flex items-center h-8 ${applySidebarClass('inbox/activity', 'inbox/archive')}`} >
