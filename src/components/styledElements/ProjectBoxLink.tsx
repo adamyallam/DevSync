@@ -11,7 +11,7 @@ export const ProjectBoxLink: React.FC<Props> = ({ name, projectID }) => {
   return (
     <>
       <Link href={`/dashboard/projects/${projectID}/list`} className={'flex items-center h-8'}>
-        <div className="flex items-center">
+        <div className="flex items-center hover:font-bold">
           <div className={`border-2 border-black bg-gray-600 w-10 h-10 rounded-xl`} />
           <p className="ml-3">{name}</p>
         </div>
