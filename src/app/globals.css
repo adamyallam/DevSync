@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* #1b1717 PRIMARY COLOR, #f3f4f6 TEXT COLOR, #403939 UNDERTONE COLOR, #383333 SELECTED COLOR, #262222 HIGHLIGHTED COLOR */
+
 @layer components {
   .sidebar-selected {
-    @apply bg-black bg-opacity-60 rounded-lg w-5/6 h-8 ml-4 pl-4
+    @apply bg-[#383333] rounded-lg w-5/6 h-8 ml-4 pl-4
   }
 
   .sidebar-highlighted {
@@ -12,7 +14,7 @@
   }
 
   .sidebar-highlighted:hover {
-    @apply bg-gray-800 bg-opacity-60 rounded-lg w-5/6 h-8 ml-4 pl-4
+    @apply bg-[#262222] rounded-lg w-5/6 h-8 ml-4 pl-4
   }
 }
 
