@@ -24,7 +24,7 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID }) => {
     <>
       <Link href={`/dashboard/projects/${projectID}/list`} className={`flex items-center h-8 ${applySidebarClass(`projects/${projectID}/overview`, `projects/${projectID}/list`, `projects/${projectID}/board`, `projects/${projectID}/calendar`, `projects/${projectID}/files`)}`}>
         <div className='border-2 bg-white rounded-md w-4 h-4' />
-        <span className='ml-2 text-sm'>{name}</span>
+        <span className='ml-2 text-sm text-[#f3f4f6]'>{name}</span>
       </Link>
     </>
   );

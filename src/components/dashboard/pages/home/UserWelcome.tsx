@@ -14,11 +14,11 @@ export const UserWelcome = () => {
     <div>
       <div className='flex flex-col'>
         <p className='text-center text-lg'>{getCurrentDateDisplay()}</p>
-        <h1 className='text-center mt-2 text-3xl'>Good {getDayPeriod()}, {session?.firstName}</h1>
+        <h1 className='text-center mt-2 text-3xl text-[#1b1717]'>Good {getDayPeriod()}, {session?.firstName}</h1>
       </div>
       <div className='flex justify-center'>
-        <div className='p-4 mt-4 w-[500px] bg-gray-100 rounded-full'>
-          <div className='grid grid-rows-1 grid-cols-3 justify-center divide-x divide-black'>
+        <div className='p-4 mt-4 w-[500px] bg-[#403939] rounded-full text-gray-100'>
+          <div className='grid grid-rows-1 grid-cols-3 justify-center divide-x divide-[#f3f4f6]'>
             <p className='flex justify-center text-sm'>My Week</p>
             <p className='flex justify-center text-sm'>Tasks Completed</p>
             <p className='flex justify-center text-sm'>Collaborators</p>
