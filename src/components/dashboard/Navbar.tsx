@@ -73,7 +73,7 @@ export const Navbar = () => {
         {/* Topbar */}
         <div className='flex items-center justify-between h-12'>
           <div className='flex items-center gap-3'>
-            <button className='pl-3 text-[#f3f4f6]' onClick={toggleMenu}>
+            <button className='pl-3 text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-110 transition-transform' onClick={toggleMenu}>
               {isSidebarOpen ? <X /> : <MenuIcon />}
             </button>
             <button className='border bg-white rounded-full w-16 h-7'>Create</button>
@@ -131,11 +131,11 @@ export const Navbar = () => {
             </div>
           </div>
           <div className='w-full flex flex-col mt-auto items-center border-t-2 border-[#403939] pb-4'>
-            <button onClick={toggleCreateProject} className='text-[#f3f4f6] border-2 border-gray-300 p-2 w-10/12 mt-4 hover:font-semibold hover:scale-105 transition-all'>Create Project</button>
+            <button onClick={toggleCreateProject} className='text-[#f3f4f6] border-2 border-gray-300 p-2 w-10/12 mt-4 hover:font-semibold hover:text-[#bdb6b6] hover:border-[#bdb6b6] hover:scale-105 transition-transform'>Create Project</button>
             <div className='flex mt-2 gap-2'>
-              <button><Instagram strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#383333]'/></button>
-              <button><Twitter strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#383333]'/></button>
-              <button><Linkedin strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#383333]'/></button>
+              <button><Instagram strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-105 transition-transform'/></button>
+              <button><Twitter strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-105 transition-transform'/></button>
+              <button><Linkedin strokeWidth={1.5} className='h-6 text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-105 transition-transform'/></button>
             </div>
           </div>
         </div>
