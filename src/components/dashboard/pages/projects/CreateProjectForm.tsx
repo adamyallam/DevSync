@@ -24,6 +24,8 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
             <button className='flex text-[#888] hover:text-[#bdb6b6] self-start ml-9 gap-3'><Calendar />Due Date</button>
 
             <input className='pl-1 p-4 h-7 w-4/5 border-b-4 border-[#262222] bg-[#1b1717] focus:border-b-4 focus:border-[#383333] outline-none' placeholder='Add members?' />
+
+            <button className='border-4 text-lg w-4/5 h-12 font-semibold border-[#383333]'>Submit</button>
           </div>
 
           <div className='flex w-full h-full justify-center items-center'>
