@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Calendar } from 'lucide-react';
+import { X, Calendar, Search } from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
@@ -19,17 +19,28 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
         <form className='flex w-full h-full'>
           <div className='flex flex-col gap-10 justify-center items-center w-full h-full'>
-            <input className='pl-1 p-4 h-7 w-4/5 border-b-4 border-[#262222] bg-[#1b1717] focus:border-b-4 focus:border-[#383333] outline-none' placeholder='Project name' />
 
-            <button className='flex text-[#888] hover:text-[#bdb6b6] self-start ml-9 gap-3'><Calendar />Due Date</button>
+            <div className='flex flex-col self-start w-full ml-9'>
+              <span className='text-xs ml-1 font-semibold'>Project Name:</span>
+              <input className='pl-1 p-4 h-7 w-4/5 border-b-4 border-[#262222] bg-[#1b1717] focus:border-b-4 focus:border-[#bdb6b6] hover:border-[#bdb6b6] outline-none' placeholder='Name' />
+            </div>
 
-            <input className='pl-1 p-4 h-7 w-4/5 border-b-4 border-[#262222] bg-[#1b1717] focus:border-b-4 focus:border-[#383333] outline-none' placeholder='Add members?' />
+            <button className='flex text-[#888] hover:text-[#f3f4f6] self-start ml-9 gap-3'><Calendar />Due Date</button>
 
-            <button className='border-4 text-lg w-4/5 h-12 font-semibold border-[#383333]'>Submit</button>
+            <div className='flex flex-col self-start ml-9 gap-2 w-full'>
+              <span className='text-xs ml-1 font-semibold'>Add members?</span>
+
+              <div className='flex gap-2 w-4/5 text-[#403939] border-[#262222] border-b-4 hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
+                <Search size={20}/>
+                <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
+              </div>
+            </div>
+
+            <button className='text-[#f3f4f6] border-2 border-gray-300 w-4/5 h-12 hover:font-semibold hover:text-[#bdb6b6] hover:border-[#bdb6b6] hover:scale-105 transition-transform'>Submit</button>
           </div>
 
           <div className='flex w-full h-full justify-center items-center'>
-            <textarea className='w-3/4 h-3/4 p-1 pl-2 border-4 border-[#262222] focus:border-[#383333] bg-[#1b1717] resize-none outline-none text-sm  ' placeholder='Description...' />
+            <textarea className='w-3/4 h-3/4 p-1 pl-2 border-4 border-[#262222] focus:border-[#bdb6b6] hover:border-[#bdb6b6] bg-[#1b1717] resize-none outline-none text-sm  ' placeholder='Description...' />
           </div>
         </form>
 
