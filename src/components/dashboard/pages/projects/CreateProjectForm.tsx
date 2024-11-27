@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import { X, Calendar, Search } from 'lucide-react';
+import DatePickerField from '@/components/styledElements/DatePickerField';
 
 interface Props {
   isOpen: boolean;
@@ -7,6 +9,10 @@ interface Props {
 }
 
 const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [projectName, setProjectName] = useState("");
+  const [description, setDescription] = useState("");
+
   if (!isOpen) return null;
 
   return (
@@ -22,16 +28,27 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
             <div className='flex flex-col self-start w-full ml-9'>
               <span className='text-xs ml-1 font-semibold'>Project Name:</span>
-              <input className='pl-1 p-4 h-7 w-4/5 border-b-4 border-[#262222] bg-[#1b1717] focus:border-b-4 focus:border-[#bdb6b6] hover:border-[#bdb6b6] outline-none' placeholder='Name' />
+              <input className={`pl-1 p-4 h-7 w-4/5 border-b-4 bg-[#1b1717] outline-none ${projectName ? 'border-[#bdb6b6]' : 'border-[#262222]'} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`} 
+                placeholder='Name'
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+              />
             </div>
 
-            <button className='flex text-[#888] hover:text-[#f3f4f6] self-start ml-9 gap-3'><Calendar />Due Date</button>
+            <div className='flex flex-col self-start ml-9 gap-2 w-full'>
+              <span className='text-xs ml-1 font-semibold'>Due Date:</span>
+
+              <div className={`group flex gap-2 w-4/5 text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${selectedDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
+                <Calendar className={`group-focus-within:text-[#bdb6b6] ${selectedDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
+                <DatePickerField datePickerStyles={`bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${selectedDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={selectedDate} onDateChange={setSelectedDate} />
+              </div>
+            </div>
 
             <div className='flex flex-col self-start ml-9 gap-2 w-full'>
               <span className='text-xs ml-1 font-semibold'>Add members?</span>
 
-              <div className='flex gap-2 w-4/5 text-[#403939] border-[#262222] border-b-4 hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
-                <Search size={20}/>
+              <div className='group flex gap-2 w-4/5 text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
+                <Search size={20} className='group-focus-within:text-[#bdb6b6]' />
                 <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
               </div>
             </div>
@@ -40,7 +57,11 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
           </div>
 
           <div className='flex w-full h-full justify-center items-center'>
-            <textarea className='w-3/4 h-3/4 p-1 pl-2 border-4 border-[#262222] focus:border-[#bdb6b6] hover:border-[#bdb6b6] bg-[#1b1717] resize-none outline-none text-sm  ' placeholder='Description...' />
+            <textarea className={`w-3/4 h-3/4 p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${description ? 'border-[#bdb6b6]' : 'border-[#262222]'} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+            placeholder='Description...' 
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
         </form>
 
