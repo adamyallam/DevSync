@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "react-datepicker/dist/react-datepicker.css";
 
 /* #1b1717 PRIMARY COLOR, 
 #f3f4f6 PRIMARY TEXT COLOR,
