@@ -14,7 +14,7 @@ import CreateProjectForm from './pages/projects/CreateProjectForm';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar } = useNavbarUIContext();
-  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(true)
+  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
   const [isCreateProjectOpen, setCreateProjectOpen] = useState(false)
   const { projects } = useProjectsDataContext()
 
@@ -123,9 +123,10 @@ export const Navbar = () => {
                   <BouncingDots color={'#f3f4f6'} />
                 </div>
               )}
+
               <div className='border-t-2 border-[#403939] mt-1 ml-7 pl-1 w-3/4'>
-                <button className={`flex items-center justify-center rounded-sm mt-1 w-3.5 h-3.5 ${isProjectsCollapsed ? 'hover:bg-[#262222]' : 'bg-[#262222]'}`} onClick={toggleProjectsTab}>
-                  {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4} className='text-[#f3f4f6]'/> : <ChevronUp size={16} strokeWidth={4} className='text-[#f3f4f6]'/>}
+                <button className={`flex items-center justify-center rounded-sm mt-1 w-3.5 h-3.5 hover:scale-125 transition-transform`} onClick={toggleProjectsTab}>
+                  {isProjectsCollapsed ? <ChevronDown size={16} strokeWidth={4} className='text-[#f3f4f6] hover:text-[#bdb6b6]'/> : <ChevronUp size={16} strokeWidth={4} className='text-[#f3f4f6]'/>}
                 </button>
               </div>
             </div>
