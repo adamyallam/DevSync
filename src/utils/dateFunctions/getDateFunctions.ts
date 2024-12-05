@@ -33,3 +33,12 @@ export const getStartOfWeek = (calendarDate?: Date) => {
   startOfWeek.setDate(date.getDate() - dayOfWeek);
   return startOfWeek;
 };
+
+// Returns the end of the next month
+export const getEndOfNextMonth = (): Date => {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  return new Date(year, month + 2, 0);
+};
