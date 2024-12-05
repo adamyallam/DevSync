@@ -16,9 +16,18 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   const [projectDueDate, setProjectDueDate] = useState<Date | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isDescriptionValid, setIsDescriptionValid] = useState(false);
 
   const createProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    setIsNameValid(true);
+    setIsDescriptionValid(true);
+
+    if (!projectName || !projectDescription) {
+      return null;
+    }
 
     const projectData = {
       name: projectName,
@@ -49,7 +58,6 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
     toggleCreateProjectForm(!isCreateProjectFormOpen)
   };
 
-
   if (!isOpen) return null;
 
   return (
@@ -65,7 +73,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
             <div className='flex flex-col self-start w-full ml-9'>
               <span className='text-xs ml-1 font-semibold'>* Project Name:</span>
-              <input className={`pl-1 p-4 h-7 w-4/5 border-b-4 bg-[#1b1717] outline-none ${projectName ? 'border-[#bdb6b6]' : 'border-[#262222]'} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+              <input className={`pl-1 p-4 h-7 w-4/5 border-b-4 bg-[#1b1717] outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
                 placeholder='Name'
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
@@ -94,7 +102,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
           </div>
 
           <div className='flex w-full h-full justify-center items-center'>
-            <textarea className={`w-3/4 h-3/4 p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${projectDescription ? 'border-[#bdb6b6]' : 'border-[#262222]'} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+            <textarea className={`w-3/4 h-3/4 p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
               placeholder='* Project Description...'
               value={projectDescription}
               onChange={(e) => setProjectDescription(e.target.value)}
