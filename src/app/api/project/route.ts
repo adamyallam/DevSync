@@ -56,25 +56,39 @@ export const POST = async (req: Request) => {
 
 //API to DELETE a project (invokes "deleteProject")
 export const DELETE = async (req: Request) => {
-  const { id } = await req.json();
-  const session = await getServerSession(authOptions)
-
   try {
-    if (session) {
-      const projectId = { id }
-      deleteProject(projectId)
+    const { id } = await req.json();
+    const session = await getServerSession(authOptions);
+
+    // Check for session
+    // if (!session) {
+    //   return NextResponse.json(
+    //     { message: 'Unauthorized access' },
+    //     { status: 401 }
+    //   );
+    // }
+
+    // Validate and delete project
+    if (!id) {
       return NextResponse.json(
-        { message: `project ${id} Deleted!` },
-        { status: 201 }
-      )
+        { message: 'Project ID is required' },
+        { status: 400 }
+      );
     }
-  } catch (err) {
+
+    await deleteProject({ id }); // Await deleteProject
     return NextResponse.json(
-      { message: 'Failed to DELETE', err },
+      { message: `Project ${id} Deleted!` },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error('Error deleting project:', err);
+    return NextResponse.json(
+      { message: 'Failed to DELETE' },
       { status: 500 }
-    )
+    );
   }
-}
+};
 
 //API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => {
