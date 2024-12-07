@@ -74,10 +74,10 @@ export const Navbar = () => {
               <h1 className='font-semibold pl-2 ml-6 text-[#f3f4f6]'>Projects</h1>
               {projects?.length ? (
                 <div>
-                  <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} />
+                  <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} defaultView={projects[0].defaultView}/>
                   {!isProjectsCollapsed &&
                     projects.slice(1).map((project) => (
-                      <ProjectLink key={project.id} projectID={project.id} name={project.name} />
+                      <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
                     ))
                   }
                 </div>
