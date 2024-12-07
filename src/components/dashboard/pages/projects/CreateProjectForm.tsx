@@ -10,12 +10,17 @@ interface Props {
   onClose: () => void;
 }
 
+interface Member {
+  id: number
+}
+
 const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   const { toggleCreateProjectForm, isCreateProjectFormOpen } = useNavbarUIContext();
 
   const [projectDueDate, setProjectDueDate] = useState<Date | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+  const [members, setMembers] = useState<Member[]>([]);
   const [defaultView, setDefaultView] = useState('list')
   const [isNameValid, setIsNameValid] = useState(false);
   const [isDescriptionValid, setIsDescriptionValid] = useState(false);
@@ -37,7 +42,9 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
     const projectData = {
       name: projectName,
       description: projectDescription,
-      dueDate: projectDueDate || getEndOfNextMonth()
+      dueDate: projectDueDate || getEndOfNextMonth(),
+      defaultView: defaultView,
+      members: members
     };
 
     try {
@@ -91,16 +98,16 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
                 <span className='text-xs font-semibold'>Due Date:</span>
 
                 <div className={`group flex gap-2 w-full h-[40%] text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
-                  <Calendar className={`group-focus-within:text-[#bdb6b6] ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
+                  <Calendar className={`group-focus-within:text-[#bdb6b6] flex self-center mb-1 ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
                   <DatePickerField datePickerStyles={`bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
                 </div>
               </div>
 
               <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
-                <span className='text-xs font-semibold'>Add members?</span>
+                <span className='text-xs font-semibold'>Add members:</span>
 
                 <div className='group flex gap-2 w-full h-[40%] text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
-                  <Search size={20} className='group-focus-within:text-[#bdb6b6]' />
+                  <Search size={20} className='group-focus-within:text-[#bdb6b6] flex self-center' />
                   <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
                 </div>
               </div>
