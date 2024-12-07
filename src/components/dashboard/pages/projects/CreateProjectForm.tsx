@@ -16,8 +16,13 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   const [projectDueDate, setProjectDueDate] = useState<Date | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+  const [defaultView, setDefaultView] = useState('list')
   const [isNameValid, setIsNameValid] = useState(false);
   const [isDescriptionValid, setIsDescriptionValid] = useState(false);
+
+  const changeDefaultView = (view: string) => {
+    setDefaultView(view);
+  };
 
   const createProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -104,16 +109,16 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
                 <span className='text-xs ml-1 font-semibold'>Default View:</span>
 
                 <div className='flex gap-3 w-full h-full'>
-                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>List</button>
-                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Overview</button>
-                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Board</button>
-                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Calendar</button>
+                  <button type='button' onClick={() => changeDefaultView('list')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'list' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>List</button>
+                  <button type='button' onClick={() => changeDefaultView('overview')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'overview' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Overview</button>
+                  <button type='button' onClick={() => changeDefaultView('board')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'board' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Board</button>
+                  <button type='button' onClick={() => changeDefaultView('calendar')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'calendar' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Calendar</button>
                 </div>
               </div>
             </div>
 
             <div className='flex flex-col gap-1 w-full h-full justify-center items-center'>
-            <span className='text-xs ml-12 font-semibold self-start'>* Description:</span>
+              <span className='text-xs ml-12 font-semibold self-start'>* Description:</span>
 
               <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
                 placeholder='* Project Description...'
