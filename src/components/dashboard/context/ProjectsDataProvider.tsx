@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, useState, useEffect } from 'react';
 
-type Project = { id: number; name: string };
+type Project = { id: number; name: string; defaultView: string };
 
 type ProjectsContextType = {
   projects: Project[] | null;
