@@ -62,51 +62,69 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-25 z-50 text-[#f3f4f6]">
-      <div className="bg-[#1b1717] w-1/2 h-3/5 rounded-lg shadow-lg p-6 relative">
-        <button className='fixed text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-110 transition-transform'><X onClick={onClose} /></button>
+      <div className="bg-[#1b1717] w-3/6 h-[78%] rounded-lg shadow-lg pt-6 relative">
+        <button className='fixed text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-110 transition-transform pl-7'><X onClick={onClose} /></button>
         <div className='flex justify-center'>
           <h1 className='fixed text-2xl font-semibold'>New Project</h1>
         </div>
 
-        <form onSubmit={createProject} className='flex w-full h-full'>
-          <div className='flex flex-col gap-10 justify-center items-center w-full h-full'>
+        <form onSubmit={createProject} className='flex flex-col w-full h-full pt-6'>
+          <div className='flex w-full h-[100%]'>
+            <div className='flex flex-col justify-center items-center w-full h-full'>
 
-            <div className='flex flex-col self-start w-full ml-9'>
-              <span className='text-xs ml-1 font-semibold'>* Project Name:</span>
-              <input className={`pl-1 p-4 h-7 w-4/5 border-b-4 bg-[#1b1717] outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
-                placeholder='Name'
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
+              <div className='flex flex-col self-start w-[93%] ml-9 h-[20%]'>
+                <span className='text-xs font-semibold'>* Project Name:</span>
+
+                <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-[#1b1717] outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+                  placeholder='Name'
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                />
+              </div>
+
+              <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
+                <span className='text-xs font-semibold'>Due Date:</span>
+
+                <div className={`group flex gap-2 w-full h-[40%] text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
+                  <Calendar className={`group-focus-within:text-[#bdb6b6] ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
+                  <DatePickerField datePickerStyles={`bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
+                </div>
+              </div>
+
+              <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
+                <span className='text-xs font-semibold'>Add members?</span>
+
+                <div className='group flex gap-2 w-full h-[40%] text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
+                  <Search size={20} className='group-focus-within:text-[#bdb6b6]' />
+                  <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
+                </div>
+              </div>
+
+              <div className='flex flex-col self-start ml-9 gap-2 w-full h-[23%]'>
+                <span className='text-xs ml-1 font-semibold'>Default View:</span>
+
+                <div className='flex gap-3 w-full h-full'>
+                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>List</button>
+                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Overview</button>
+                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Board</button>
+                  <button className='bg-[#262222] border-[#403939] border-2 h-[100%] w-[21%] rounded-md text-xs'>Calendar</button>
+                </div>
+              </div>
+            </div>
+
+            <div className='flex flex-col gap-1 w-full h-full justify-center items-center'>
+            <span className='text-xs ml-12 font-semibold self-start'>* Description:</span>
+
+              <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+                placeholder='* Project Description...'
+                value={projectDescription}
+                onChange={(e) => setProjectDescription(e.target.value)}
               />
             </div>
-
-            <div className='flex flex-col self-start ml-9 gap-2 w-full'>
-              <span className='text-xs ml-1 font-semibold'>Due Date:</span>
-
-              <div className={`group flex gap-2 w-4/5 text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
-                <Calendar className={`group-focus-within:text-[#bdb6b6] ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
-                <DatePickerField datePickerStyles={`bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
-              </div>
-            </div>
-
-            <div className='flex flex-col self-start ml-9 gap-2 w-full'>
-              <span className='text-xs ml-1 font-semibold'>Add members?</span>
-
-              <div className='group flex gap-2 w-4/5 text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
-                <Search size={20} className='group-focus-within:text-[#bdb6b6]' />
-                <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
-              </div>
-            </div>
-
-            <button type='submit' className='text-[#f3f4f6] border-2 border-gray-300 w-4/5 h-12 hover:font-semibold hover:text-[#bdb6b6] hover:border-[#bdb6b6] hover:scale-105 transition-transform'>Create Project</button>
           </div>
 
-          <div className='flex w-full h-full justify-center items-center'>
-            <textarea className={`w-3/4 h-3/4 p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
-              placeholder='* Project Description...'
-              value={projectDescription}
-              onChange={(e) => setProjectDescription(e.target.value)}
-            />
+          <div className='flex w-full h-[20%] justify-center'>
+            <button type='submit' className='text-[#f3f4f6] border-2 border-gray-300 w-3/5 h-2/3 hover:font-semibold hover:text-[#bdb6b6] hover:border-[#bdb6b6] hover:scale-105 transition-transform'>Create Project</button>
           </div>
         </form>
 
