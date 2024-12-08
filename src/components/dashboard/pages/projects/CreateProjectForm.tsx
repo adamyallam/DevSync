@@ -4,6 +4,7 @@ import { X, Calendar, Search } from 'lucide-react';
 import DatePickerField from '@/components/styledElements/DatePickerField';
 import { getEndOfNextMonth } from '@/utils/dateFunctions/getDateFunctions';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
 
 interface Props {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface Member {
 
 const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   const { toggleCreateProjectForm, isCreateProjectFormOpen } = useNavbarUIContext();
+  const { addProject } = useProjectsDataContext()
 
   const [projectDueDate, setProjectDueDate] = useState<Date | null>(null);
   const [projectName, setProjectName] = useState("");
@@ -59,6 +61,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
       const result = await res.json();
 
       if (res.status === 201) {
+        addProject(result.project)
         console.log("Project Created:", result.project);
       } else {
         console.log('An error occured, please try again later')

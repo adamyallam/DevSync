@@ -5,6 +5,7 @@ type Project = { id: number; name: string; defaultView: string };
 
 type ProjectsContextType = {
   projects: Project[] | null;
+  addProject: (project: Project) => void
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -14,7 +15,11 @@ interface Props {
 }
 
 export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
-  const [projects, setProjects] = useState<Project[] | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
+
+  const addProject = (project: Project) => {
+    setProjects((prevProjects) => [...prevProjects, project]);
+  };
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -36,7 +41,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects }}>
+    <ProjectsDataContext.Provider value={{ projects, addProject }}>
       {children}
     </ProjectsDataContext.Provider>
   );
