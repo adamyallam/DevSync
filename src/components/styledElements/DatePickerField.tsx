@@ -17,6 +17,7 @@ const DatePickerField: React.FC<Props> = ({ selectedDate, onDateChange, datePick
         dateFormat="yyyy-MM-dd" // Customize format
         placeholderText="Select a date"
         className={`${datePickerStyles}`}
+        wrapperClassName="datePicker"
       />
     </>
   );

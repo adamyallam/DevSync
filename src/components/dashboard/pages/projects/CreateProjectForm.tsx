@@ -102,7 +102,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 <div className={`group flex gap-2 w-full h-[40%] text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
                   <Calendar className={`group-focus-within:text-[#bdb6b6] flex self-center mb-1 ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
-                  <DatePickerField datePickerStyles={`bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
+                  <DatePickerField datePickerStyles={`w-full bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
                 </div>
               </div>
 
@@ -111,7 +111,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 <div className='group flex gap-2 w-full h-[40%] text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
                   <Search size={20} className='group-focus-within:text-[#bdb6b6] flex self-center' />
-                  <input className='bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
+                  <input className='w-full bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
                 </div>
               </div>
 

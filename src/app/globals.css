@@ -24,6 +24,10 @@
   }
 }
 
+.datePicker{
+  width: 100%
+}
+
 .bounce {
   animation: bounce 0.9s ease-in-out infinite;
 }
