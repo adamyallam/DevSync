@@ -7,6 +7,7 @@ import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider
 // Component Imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
+import StatusButton from '@/components/styledElements/StatusButton'
 
 export const Header = () => {
 
@@ -26,7 +27,7 @@ export const Header = () => {
   if (!project) {
     return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
   }
-  
+
   return (
     <div className='mt-16 w-full'>
       <div className="flex">
@@ -35,7 +36,7 @@ export const Header = () => {
           <AutoResizingInput inputClassName="border border-gray-300 rounded py-1" initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
           <button><ChevronDown strokeWidth={2} size={20} /></button>
           <button><Star strokeWidth={1} size={20} /></button>
-          <button className="flex items-center gap-1 ml-3 mt-1 text-sm border rounded-full h-6 p-1 px-2"><div className="border rounded-full border-black w-2 h-2" />Set Status<ChevronDown strokeWidth={2} size={16} /></button>
+          <StatusButton status={project.status}/>
         </div>
 
         <div className="flex gap-2 items-center justify-end mr-8">
