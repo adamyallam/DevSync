@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 interface AutoResizingInputProps {
   initialWidth?: number;
   placeholder?: string;
-  initialState?: string;
+  initialText?: string;
   maxGrowthWidth?: number;
   parentClassName?: string;
   inputClassName?: string;
@@ -12,8 +12,8 @@ interface AutoResizingInputProps {
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialState, parentClassName, inputClassName, spanClassName}) => {
-  const [text, setText] = useState(`${initialState || ''}`)
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText, parentClassName, inputClassName, spanClassName}) => {
+  const [text, setText] = useState(`${initialText || ''}`)
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
 
