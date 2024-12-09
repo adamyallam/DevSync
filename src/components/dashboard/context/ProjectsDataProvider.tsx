@@ -1,7 +1,8 @@
 'use client'
 import React, { createContext, useState, useEffect } from 'react';
+import { Status } from '@prisma/client';
 
-type Project = { id: number; name: string; defaultView: string };
+type Project = { id: number; name: string; defaultView: string; status: Status };
 
 type ProjectsContextType = {
   projects: Project[] | null;
