@@ -6,6 +6,7 @@ type Project = { id: number; name: string; defaultView: string };
 type ProjectsContextType = {
   projects: Project[] | null;
   addProject: (project: Project) => void
+  loading: boolean
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -16,6 +17,7 @@ interface Props {
 
 export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true);
 
   const addProject = (project: Project) => {
     setProjects((prevProjects) => [...prevProjects, project]);
@@ -34,6 +36,8 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
         }
       } catch (err) {
         return { message: 'failed to get projects', err }
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -41,7 +45,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, addProject }}>
+    <ProjectsDataContext.Provider value={{ projects, addProject, loading }}>
       {children}
     </ProjectsDataContext.Provider>
   );
