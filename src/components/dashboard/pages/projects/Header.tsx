@@ -24,7 +24,7 @@ export const Header = () => {
   const project = projects?.find((project) => project.id.toString() === id);
 
   if (!project) {
-    return <div>Project not found</div>;
+    return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
   }
   
   return (
