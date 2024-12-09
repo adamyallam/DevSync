@@ -21,7 +21,7 @@ model Project {
   name        String    @db.VarChar(60)
   description String    @db.VarChar(300)
   defaultView String    @default("list")
-  status      Status?   @default(NOTSTARTED)
+  status      Status?   @default(NotStarted)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -57,7 +57,7 @@ model Task {
   name        String    @db.VarChar(60)
   description String?   @db.VarChar(300)
   comments    String?   @db.VarChar(300)
-  status      Status?   @default(NOTSTARTED)
+  status      Status?   @default(NotStarted)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -73,7 +73,7 @@ model Section {
 
   name        String    @db.VarChar(60)
   description String?   @db.VarChar(300)
-  status      Status?   @default(NOTSTARTED)
+  status      Status?   @default(NotStarted)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -99,7 +99,9 @@ enum Role {
 }
 
 enum Status {
-  NOTSTARTED
-  INPROGRESS
-  COMPLETE
+  NotStarted
+  OnTrack
+  AtRisk
+  OffTrack
+  OnHold
 }
