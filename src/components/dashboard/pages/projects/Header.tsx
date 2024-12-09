@@ -24,7 +24,7 @@ export const Header = () => {
   const project = projects?.find((project) => project.id.toString() === id);
 
   if (!project) {
-    return <div>Project not found</div>; // Show an error if the project doesn't exist
+    return <div>Project not found</div>;
   }
   
   return (
