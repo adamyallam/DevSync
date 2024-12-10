@@ -76,9 +76,9 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-25 z-50 text-[#f3f4f6]">
-      <div className="bg-[#1b1717] w-3/6 h-[78%] rounded-lg shadow-lg pt-6 relative">
-        <button className='fixed text-[#f3f4f6] hover:text-[#bdb6b6] hover:scale-110 transition-transform pl-7'><X onClick={onClose} /></button>
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-25 z-50 text-[#D0E8E8]">
+      <div className="bg-[#212526] w-3/6 h-[78%] rounded-lg shadow-lg pt-6 relative">
+        <button className='fixed text-[#D0E8E8] hover:text-[#89979E] hover:scale-110 transition-transform pl-7'><X onClick={onClose} /></button>
         <div className='flex justify-center'>
           <h1 className='fixed text-2xl font-semibold'>New Project</h1>
         </div>
@@ -90,7 +90,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
               <div className='flex flex-col self-start w-[93%] ml-9 h-[20%]'>
                 <span className='text-xs font-semibold'>* Project Name:</span>
 
-                <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-[#1b1717] outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+                <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-[#212526] outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-[#89979E]" : "border-[#2F3636]"} focus:border-[#89979E] hover:border-[#89979E]`}
                   placeholder='Name'
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
@@ -100,18 +100,18 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
               <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
                 <span className='text-xs font-semibold'>Due Date:</span>
 
-                <div className={`group flex gap-2 w-full h-[40%] text-[#403939] border-b-4 hover:border-[#bdb6b6] hover:text-[#bdb6b6] focus-within:border-[#bdb6b6] pb-0.5 ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`}>
-                  <Calendar className={`group-focus-within:text-[#bdb6b6] flex self-center mb-1 ${projectDueDate ? 'text-[#bdb6b6]' : ''}`} size={20} />
-                  <DatePickerField datePickerStyles={`w-full bg-[#1b1717] text-[#bdb6b6] outline-none focus:border-[#bdb6b6] ${projectDueDate ? 'border-[#bdb6b6]' : 'border-[#262222]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
+                <div className={`group flex gap-2 w-full h-[40%] text-[#3A4042] border-b-4 hover:border-[#89979E] hover:text-[#89979E] focus-within:border-[#89979E] pb-0.5 ${projectDueDate ? 'border-[#89979E]' : 'border-[#2F3636]'}`}>
+                  <Calendar className={`group-focus-within:text-[#89979E] flex self-center mb-1 ${projectDueDate ? 'text-[#89979E]' : ''}`} size={20} />
+                  <DatePickerField datePickerStyles={`w-full bg-[#212526] text-[#89979E] outline-none focus:border-[#89979E] ${projectDueDate ? 'border-[#89979E]' : 'border-[#2F3636]'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
                 </div>
               </div>
 
               <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
                 <span className='text-xs font-semibold'>Add members:</span>
 
-                <div className='group flex gap-2 w-full h-[40%] text-[#403939] border-[#262222] border-b-4 focus-within:border-[#bdb6b6] hover:text-[#bdb6b6] hover:border-[#bdb6b6] pb-0.5'>
-                  <Search size={20} className='group-focus-within:text-[#bdb6b6] flex self-center' />
-                  <input className='w-full bg-[#1b1717] focus:border-[#bdb6b6] outline-none' placeholder='Search' />
+                <div className='group flex gap-2 w-full h-[40%] text-[#3A4042] border-[#2F3636] border-b-4 focus-within:border-[#89979E] hover:text-[#89979E] hover:border-[#89979E] pb-0.5'>
+                  <Search size={20} className='group-focus-within:text-[#89979E] flex self-center' />
+                  <input className='w-full bg-[#212526] focus:border-[#89979E] outline-none' placeholder='Search' />
                 </div>
               </div>
 
@@ -119,10 +119,10 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
                 <span className='text-xs ml-1 font-semibold'>Default View:</span>
 
                 <div className='flex gap-3 w-full h-full'>
-                  <button type='button' onClick={() => changeDefaultView('list')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'list' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>List</button>
-                  <button type='button' onClick={() => changeDefaultView('overview')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'overview' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Overview</button>
-                  <button type='button' onClick={() => changeDefaultView('board')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'board' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Board</button>
-                  <button type='button' onClick={() => changeDefaultView('calendar')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'calendar' ? 'border-white font-bold scale-105' : 'bg-[#262222] border-[#403939] hover:border-white hover:scale-105 transition-transform'}`}>Calendar</button>
+                  <button type='button' onClick={() => changeDefaultView('list')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'list' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>List</button>
+                  <button type='button' onClick={() => changeDefaultView('overview')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'overview' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Overview</button>
+                  <button type='button' onClick={() => changeDefaultView('board')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'board' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Board</button>
+                  <button type='button' onClick={() => changeDefaultView('calendar')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'calendar' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Calendar</button>
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
             <div className='flex flex-col gap-1 w-full h-full justify-center items-center'>
               <span className='text-xs ml-12 font-semibold self-start'>* Description:</span>
 
-              <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#1b1717] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#bdb6b6]" : "border-[#262222]"} focus:border-[#bdb6b6] hover:border-[#bdb6b6]`}
+              <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-[#212526] ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-[#89979E]" : "border-[#2F3636]"} focus:border-[#89979E] hover:border-[#89979E]`}
                 placeholder='* Project Description...'
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
@@ -139,7 +139,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
           </div>
 
           <div className='flex w-full h-[20%] justify-center'>
-            <button type='submit' className='text-[#f3f4f6] border-2 border-gray-300 w-3/5 h-2/3 hover:font-semibold hover:text-[#bdb6b6] hover:border-[#bdb6b6] hover:scale-105 transition-transform'>Create Project</button>
+            <button type='submit' className='text-[#D0E8E8] border-2 border-gray-300 w-3/5 h-2/3 hover:font-semibold hover:text-[#89979E] hover:border-[#89979E] hover:scale-105 transition-transform'>Create Project</button>
           </div>
         </form>
 

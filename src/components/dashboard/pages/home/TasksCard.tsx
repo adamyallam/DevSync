@@ -10,7 +10,7 @@ export const TasksCard = () => {
       <div className="w-550 h-96 border-2 border-gray-200 rounded-lg shadow-sm">
 
         <div className="flex items-center mt-8 ml-12">
-          <div className="w-14 h-14 mb-5 border-2 border-[#403939] bg-gray-200 rounded-full"></div> {/* Profile Photo Placeholder */}
+          <div className="w-14 h-14 mb-5 border-2 border-[#3A4042] bg-gray-200 rounded-full"></div> {/* Profile Photo Placeholder */}
 
           <div className="flex flex-col gap-3 ml-5">
             <h1 className="text-xl">My Tasks</h1>
@@ -18,17 +18,17 @@ export const TasksCard = () => {
             <div className="flex gap-4">
               <div className="flex-col">
                 <button className="text-sm">Upcoming</button>
-                <div className="border-2 mt-3 border-[#403939]"></div>
+                <div className="border-2 mt-3 border-[#3A4042]"></div>
               </div>
 
               <div className="flex-col">
                 <button className="text-sm">Overdue</button>
-                <div className="border-2 mt-3 border-[#403939]"></div>
+                <div className="border-2 mt-3 border-[#3A4042]"></div>
               </div>
 
               <div className="flex-col">
                 <button className="text-sm">Completed</button>
-                <div className="border-2 mt-3 border-[#403939]"></div>
+                <div className="border-2 mt-3 border-[#3A4042]"></div>
               </div>
             </div>
 

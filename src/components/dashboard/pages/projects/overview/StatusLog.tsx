@@ -19,7 +19,7 @@ export const StatusLog = () => {
 
       <div className="ml-3 text-sm text-gray-600">
         <button className="flex items-center gap-2 mt-12">
-          <div className="flex justify-center items-center border border-dashed rounded-full border-[#403939] w-7 h-7">
+          <div className="flex justify-center items-center border border-dashed rounded-full border-[#3A4042] w-7 h-7">
             <Calendar size={15} color="gray"/>
           </div>
           No due date

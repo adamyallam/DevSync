@@ -34,7 +34,7 @@ export const ProjectsCard = () => {
           </>
         ) : (
           <div className="flex justify-center items-center col-span-2 row-span-10">
-            <BouncingDots color="#1b1717" size={15} />
+            <BouncingDots color="#212526" size={15} />
           </div>
         )}
 
