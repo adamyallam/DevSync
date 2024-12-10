@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
@@ -9,12 +10,14 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
+import FavoritedButton from '@/components/styledElements/favoritedButton'
 
 export const Header = () => {
   const { id } = useParams()
   const { projects, loading } = useProjectsDataContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
+  const [favorited, setFavorited] = useState(project?.favorited)
 
   if (loading) {
     return (
@@ -35,7 +38,7 @@ export const Header = () => {
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
           <AutoResizingInput inputClassName="border border-gray-300 rounded py-1" initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
           <button><ChevronDown strokeWidth={2} size={20} /></button>
-          <button><Star strokeWidth={1} size={20} /></button>
+          <button onClick={() => setFavorited(!favorited)} className={`${favorited ? 'text-[#FFD737]' : 'hover:scale-110 hover:text-[#BD9F29] transition-transform'} `}><Star className={`${favorited ? 'fill-[#FFD737] hover:scale-105 transition-all hover:text-[#BD9F29]' : ''}`} strokeWidth={1.5} size={21} /></button>
           <StatusButton status={project.status}/>
         </div>
 
