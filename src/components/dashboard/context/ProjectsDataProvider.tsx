@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Status } from '@prisma/client';
 
-type Project = { id: number; name: string; defaultView: string; status: Status };
+type Project = { id: number; name: string; defaultView: string; status: Status; favorited: boolean };
 
 type ProjectsContextType = {
   projects: Project[] | null;
