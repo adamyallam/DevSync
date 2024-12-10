@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 
 
 // function for creating a project
-export async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string, members?: {id: number}[], defaultView?: string }) {
+export async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string, members?: {id: number}[], defaultView?: string, favorited?: boolean }) {
   try {
     const project = await prisma.project.create({
       data: {
