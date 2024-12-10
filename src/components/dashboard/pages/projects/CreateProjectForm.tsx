@@ -119,10 +119,10 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
                 <span className='text-xs ml-1 font-semibold'>Default View:</span>
 
                 <div className='flex gap-3 w-full h-full'>
-                  <button type='button' onClick={() => changeDefaultView('list')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'list' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>List</button>
-                  <button type='button' onClick={() => changeDefaultView('overview')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'overview' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Overview</button>
-                  <button type='button' onClick={() => changeDefaultView('board')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'board' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Board</button>
-                  <button type='button' onClick={() => changeDefaultView('calendar')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'calendar' ? 'border-white font-bold scale-105' : 'bg-[#2F3636] border-[#3A4042] hover:border-white hover:scale-105 transition-transform'}`}>Calendar</button>
+                  <button type='button' onClick={() => changeDefaultView('list')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'list' ? 'border-[#D0E8E8] font-bold scale-105 bg-[#282E2E]' : 'bg-[#2F3636] border-[#3A4042] hover:border-[#D0E8E8] hover:scale-105 transition-transform'}`}>List</button>
+                  <button type='button' onClick={() => changeDefaultView('overview')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'overview' ? 'border-[#D0E8E8] font-bold scale-105 bg-[#282E2E]' : 'bg-[#2F3636] border-[#3A4042] hover:border-[#D0E8E8] hover:scale-105 transition-transform'}`}>Overview</button>
+                  <button type='button' onClick={() => changeDefaultView('board')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'board' ? 'border-[#D0E8E8] font-bold scale-105 bg-[#282E2E]' : 'bg-[#2F3636] border-[#3A4042] hover:border-[#D0E8E8] hover:scale-105 transition-transform'}`}>Board</button>
+                  <button type='button' onClick={() => changeDefaultView('calendar')} className={`border-2 h-[100%] w-[21%] rounded-md text-xs ${defaultView === 'calendar' ? 'border-[#D0E8E8] font-bold scale-105 bg-[#282E2E]' : 'bg-[#2F3636] border-[#3A4042] hover:border-[#D0E8E8] hover:scale-105 transition-transform'}`}>Calendar</button>
                 </div>
               </div>
             </div>
