@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
+import { usePathSegments } from '@/utils/hooks/usePathSegments'
 
 // Component Imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
@@ -10,9 +11,10 @@ import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElement
 import StatusButton from '@/components/styledElements/StatusButton'
 
 export const Header = () => {
-
   const { id } = useParams()
   const { projects, loading } = useProjectsDataContext()
+
+  const project = projects?.find((project) => project.id.toString() === id);
 
   if (loading) {
     return (
@@ -21,8 +23,6 @@ export const Header = () => {
       </div>
     )
   }
-
-  const project = projects?.find((project) => project.id.toString() === id);
 
   if (!project) {
     return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
@@ -50,11 +50,11 @@ export const Header = () => {
       </div>
 
       <div>
-        <div className="flex gap-4 mt-2 pl-10 text-sm border-b-2 border-gray-300">
-          <Link href={`/dashboard/projects/${id}/overview`} className="z-10"><div className="flex items-center gap-1"><PanelsTopLeft size={14} />Overview</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]" /></Link>
-          <Link href={`/dashboard/projects/${id}/list`} className="z-10"><div className="flex items-center gap-1"><ListOrdered size={16} />List</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]" /></Link>
-          <Link href={`/dashboard/projects/${id}/board`} className="z-10"><div className="flex items-center gap-1"><SquareKanban size={14} />Board</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]" /></Link>
-          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10"><div className="flex items-center gap-1"><Calendar size={14} />Calendar</div> <div className="bg-black w-full h-[2.5px] translate-y-[1.5px]" /></Link>
+        <div className="flex gap-4 mt-2 pl-10 text-xs border-b-2 border-gray-300 font-semibold">
+          <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group"><div className={`${usePathSegments(1) === 'overview' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div> <div className={`${usePathSegments(1) === 'overview' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/list`} className="z-10 group"><div className={`${usePathSegments(1) === 'list' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div> <div className={`${usePathSegments(1) === 'list' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/board`} className="z-10 group"><div className={`${usePathSegments(1) === 'board' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div> <div className={`${usePathSegments(1) === 'board' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group"><div className={`${usePathSegments(1) === 'calendar' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div> <div className={`${usePathSegments(1) === 'calendar' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
         </div>
       </div>
 
