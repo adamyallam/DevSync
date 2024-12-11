@@ -10,9 +10,12 @@ export const FavoritedButton = () => {
 
   const project = projects?.find((project) => project.id.toString() === id);
   const [favorited, setFavorited] = useState(project?.favorited)
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const toggleFavorite = async () => {
-    if (!project) return;
+    if (!project || isDisabled) return;
+
+    setIsDisabled(true);
 
     try {
       const res = await fetch(`http://localhost:3000/api/project`, {
@@ -30,14 +33,16 @@ export const FavoritedButton = () => {
         console.error('Failed to update favorite status');
       }
     } catch (err) {
-      console.error('Error toggling favorite:', err);
+      console.error('Error toggling favorite:', err); 
+    } finally {
+      setTimeout(() => setIsDisabled(false), 3000);
     }
   };
 
 
   return (
     <>
-      <button onClick={toggleFavorite} className={`${favorited ? 'text-[#FFD737]' : 'hover:scale-110 hover:text-[#BD9F29] transition-transform'} `}>
+      <button disabled={isDisabled} onClick={toggleFavorite} className={`${favorited ? 'text-[#FFD737]' : 'hover:scale-110 hover:text-[#BD9F29] transition-transform'} `}>
         <Star className={`${favorited ? 'fill-[#FFD737] hover:scale-105 transition-all hover:text-[#BD9F29]' : ''}`} strokeWidth={1.5} size={21} />
       </button>
     </>
