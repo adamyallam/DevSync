@@ -36,7 +36,7 @@ export const Header = () => {
       <div className="flex">
         <div className='flex gap-2 w-full'>
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
-          <AutoResizingInput inputClassName="border border-gray-300 rounded py-1" initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
+          <AutoResizingInput initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
           <button><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton />
           <StatusButton status={project.status}/>
