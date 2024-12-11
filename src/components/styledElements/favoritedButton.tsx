@@ -11,21 +11,27 @@ export const FavoritedButton = () => {
   const project = projects?.find((project) => project.id.toString() === id);
   const [favorited, setFavorited] = useState(project?.favorited)
 
-  const toggleFavorite = () => {
+  const toggleFavorite = async () => {
+    if (!project) return;
 
-    fetch(`http://localhost:3000/api/project`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ favorited: !favorited }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          setFavorited((prev) => !prev);
-        } else {
-          console.error('Failed to update favorite status');
-        }
-      })
-      .catch((err) => console.error(err))
+    try {
+      const res = await fetch(`http://localhost:3000/api/project`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: project.id,
+          favorited: !favorited,
+        }),
+      });
+
+      if (res.ok) {
+        setFavorited((prev) => !prev);
+      } else {
+        console.error('Failed to update favorite status');
+      }
+    } catch (err) {
+      console.error('Error toggling favorite:', err);
+    }
   };
 
 
