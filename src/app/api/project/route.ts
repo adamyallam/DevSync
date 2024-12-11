@@ -92,24 +92,29 @@ export const DELETE = async (req: Request) => {
 
 //API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => {
-  const { id, name, description } = await req.json();
+  const { id, ...fieldsToUpdate } = await req.json();
   const session = await getServerSession(authOptions)
+
+  if (!id || Object.keys(fieldsToUpdate).length === 0) {
+    return NextResponse.json(
+      { message: 'ID and at least one field to update are required.' },
+      { status: 400 }
+    );
+  }
 
   try {
     if (session) {
-      const projectId = { id }
-      const updatedInfo = { name, description }
-      updateProject(projectId, updatedInfo)
+      const updatedProject = await updateProject({ id }, fieldsToUpdate);
       return NextResponse.json(
-        { message: `project ${id} updated!` },
-        { status: 201 }
-      )
+        { message: `Project ${id} updated!`, project: updatedProject },
+        { status: 200 }
+      );
     }
   } catch (err) {
     return NextResponse.json(
-      { message: 'Failed to UPDATE', err },
+      { message: 'Failed to UPDATE', error: err },
       { status: 500 }
-    )
+    );
   }
 }
 

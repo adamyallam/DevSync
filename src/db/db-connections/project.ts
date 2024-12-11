@@ -39,13 +39,15 @@ export async function deleteProject(projectId: object) {
 
 
 //function for updating a project
-export async function updateProject(projectId: object, updatedInfo: object) {
+export async function updateProject(projectId: { id: number }, fieldsToUpdate: object) {
   const updatedProject = await prisma.project.update({
     where: projectId,
-    data: updatedInfo
-  })
-  console.log("Project's info was updated!", updatedProject)
+    data: fieldsToUpdate,
+  });
+  console.log("Project's info was updated!", updatedProject);
   await prisma.$disconnect()
+
+  return updatedProject;
 }
 
 
