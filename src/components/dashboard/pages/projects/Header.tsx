@@ -10,6 +10,7 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
+import FavoritedButton from '@/components/styledElements/FavoritedButton'
 
 export const Header = () => {
   const { id } = useParams()
@@ -38,7 +39,7 @@ export const Header = () => {
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
           <AutoResizingInput inputClassName="border border-gray-300 rounded py-1" initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
           <button><ChevronDown strokeWidth={2} size={20} /></button>
-          <button onClick={() => setFavorited(!favorited)} className={`${favorited ? 'text-[#FFD737]' : 'hover:scale-110 hover:text-[#BD9F29] transition-transform'} `}><Star className={`${favorited ? 'fill-[#FFD737] hover:scale-105 transition-all hover:text-[#BD9F29]' : ''}`} strokeWidth={1.5} size={21} /></button>
+          <FavoritedButton />
           <StatusButton status={project.status}/>
         </div>
 
