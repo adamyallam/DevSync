@@ -18,7 +18,6 @@ export const Header = () => {
   const projectView = usePathSegments(1)
 
   const project = projects?.find((project) => project.id.toString() === id);
-  const [favorited, setFavorited] = useState(project?.favorited)
 
   if (loading) {
     return (
