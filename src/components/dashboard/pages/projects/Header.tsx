@@ -31,15 +31,38 @@ export const Header = () => {
     return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
   }
 
+  const changeProjectName = async (newProjectName: string) => {
+    if (!project) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/project`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: project.id,
+          name: newProjectName,
+        }),
+      });
+
+      if (res.ok) {
+        console.log('Project name updated, new name:', newProjectName)
+      } else {
+        console.error('Failed to update favorite status');
+      }
+    } catch (err) {
+      console.error('Error toggling favorite:', err);
+    }
+  }
+
   return (
     <div className='mt-16 w-full'>
       <div className="flex">
         <div className='flex gap-2 w-full'>
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
-          <AutoResizingInput initialWidth={125} initialText={project.name} maxGrowthWidth={750} />
+          <AutoResizingInput initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={changeProjectName}/>
           <button><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton />
-          <StatusButton status={project.status}/>
+          <StatusButton status={project.status} />
         </div>
 
         <div className="flex gap-2 items-center justify-end mr-8">

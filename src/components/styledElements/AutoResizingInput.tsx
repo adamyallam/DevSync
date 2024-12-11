@@ -5,24 +5,40 @@ interface AutoResizingInputProps {
   placeholder?: string;
   initialText?: string;
   maxGrowthWidth?: number;
+  onConfirmChange?: (newName: string) => void;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText}) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText, onConfirmChange}) => {
   const [text, setText] = useState(`${initialText || ''}`)
+  const [originalText, setOriginalText] = useState(`${initialText || ''}`);
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (inputRef.current && spanRef.current && spanRef.current.offsetWidth >= initialWidth) {
-      inputRef.current.style.width = `${spanRef.current.offsetWidth + 2}px`;
+    if (inputRef.current && spanRef.current) {
+      const spanWidth = spanRef.current.offsetWidth;
+
+      inputRef.current.style.width = `${Math.max(initialWidth, spanWidth + 2)}px`;
 
       if (maxGrowthWidth) {
-        inputRef.current.style.maxWidth = `${maxGrowthWidth + 2}px`;
+        const limitedWidth = Math.min(parseFloat(inputRef.current.style.width), maxGrowthWidth);
+        inputRef.current.style.width = `${limitedWidth}px`;
       }
-    } 
-  }, [text]);
+    }
+  }, [text, initialWidth, maxGrowthWidth]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && onConfirmChange) {
+      onConfirmChange(text);
+      setOriginalText(text)
+    }
+  };
+
+  const handleBlur = () => {
+    setText(originalText); 
+  };
 
   return (
     <>
@@ -32,7 +48,9 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
         value={text}
         onChange={(e) => setText(e.target.value)}
         ref={inputRef}
-        className={`px-1 py-1 text-md`}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
+        className={`pl-1 px-1 py-1 text-md border border-black`}
         style={{ width: `${initialWidth}px` }}>
       </input>
 
