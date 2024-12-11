@@ -10,11 +10,11 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
-import FavoritedButton from '@/components/styledElements/favoritedButton'
 
 export const Header = () => {
   const { id } = useParams()
   const { projects, loading } = useProjectsDataContext()
+  const projectView = usePathSegments(1)
 
   const project = projects?.find((project) => project.id.toString() === id);
   const [favorited, setFavorited] = useState(project?.favorited)
@@ -54,10 +54,10 @@ export const Header = () => {
 
       <div>
         <div className="flex gap-4 mt-2 pl-10 text-xs border-b-2 border-gray-300 font-semibold">
-          <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group"><div className={`${usePathSegments(1) === 'overview' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div> <div className={`${usePathSegments(1) === 'overview' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/list`} className="z-10 group"><div className={`${usePathSegments(1) === 'list' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div> <div className={`${usePathSegments(1) === 'list' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/board`} className="z-10 group"><div className={`${usePathSegments(1) === 'board' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div> <div className={`${usePathSegments(1) === 'board' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group"><div className={`${usePathSegments(1) === 'calendar' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div> <div className={`${usePathSegments(1) === 'calendar' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group"><div className={`${projectView === 'overview' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div> <div className={`${projectView === 'overview' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/list`} className="z-10 group"><div className={`${projectView === 'list' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div> <div className={`${projectView === 'list' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/board`} className="z-10 group"><div className={`${projectView === 'board' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div> <div className={`${projectView === 'board' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group"><div className={`${projectView === 'calendar' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div> <div className={`${projectView === 'calendar' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
         </div>
       </div>
 
