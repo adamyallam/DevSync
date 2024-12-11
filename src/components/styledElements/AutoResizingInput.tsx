@@ -5,7 +5,7 @@ interface AutoResizingInputProps {
   placeholder?: string;
   initialText?: string;
   maxGrowthWidth?: number;
-  onConfirmChange?: (newName: string) => void;
+  onConfirmChange?: (newName: string) => Promise<void>;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
@@ -31,9 +31,12 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onConfirmChange) {
-      onConfirmChange(text);
       setOriginalText(text)
+      onConfirmChange(text).then(() => {
+        inputRef.current?.blur();
+      })
     }
+
   };
 
   const handleBlur = () => {
