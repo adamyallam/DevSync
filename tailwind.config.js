@@ -10,12 +10,12 @@ module.exports = {
         "22" : '88px'
       },
       colors: {
-        'primary': '#363636',
-        'secondary': '#ff9147',
-        'offwhite': '#e3e3e3',
-        'success': '#59b400',
-        'error': '#ef4848',
-        'noti': '#5e70f4',
+        'primary': '#212526',
+        'primary-text': '#D0E8E8',
+        'secondary-text': '#89979E',
+        'undertone': '#3A4042',
+        'highlighted': '#282E2E',
+        'selected': '#2F3636',
       },
     },
   },
