@@ -18,10 +18,10 @@ export default function Footer(){
           <Twitter size={32} color="#e5e7eb" strokeWidth={1.5} />
           <Linkedin size={32} color="#e5e7eb" strokeWidth={1.5} />
         </div>
-        <div className='hidden md:flex items-end text-[#D0E8E8] justify-center mt-4'>
+        <div className='hidden md:flex items-end text-primary-text justify-center mt-4'>
          <p>Navigate</p>
         </div>
-        <div className="flex justify-center text-center text-[#D0E8E8] mt-5 md:col-start-2 md:row-start-2">
+        <div className="flex justify-center text-center text-primary-text mt-5 md:col-start-2 md:row-start-2">
           <ul>
             <li>
               <Link href='/dashboard'>Dashboard</Link>
@@ -41,7 +41,7 @@ export default function Footer(){
           </ul>
          </div>
           <div className='hidden md:block mt-14'>
-            <p className='text-[#D0E8E8] mb-2'>Join our newsletter!</p>
+            <p className='text-primary-text mb-2'>Join our newsletter!</p>
             <input
               type="email"
               placeholder="Enter your email"
@@ -50,7 +50,7 @@ export default function Footer(){
             <button className="bg-black text-white p-1 w-20 h-10">Sign Up</button>
           </div>
       </div>
-      <div className='grid grid-cols-1 grid-rows-4 bg-[#212526] md:hidden'>
+      <div className='grid grid-cols-1 grid-rows-4 bg-primary md:hidden'>
         <p className='flex justify-center text-gray-200 mt-6 mb-3'>Stay in touch by joining our newsletter!</p>
         <div className="flex justify-center">
            <input

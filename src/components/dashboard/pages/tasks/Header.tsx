@@ -12,7 +12,7 @@ export const Header = () => {
         <div className="flex items-center"> 
           <div className="border-b-2 border-gray-300 w-full">
             <div className="flex ml-8 items-center gap-1">
-              <div className="w-8 h-8 border-2 border-[#3A4042] bg-gray-200 rounded-full mr-2" />
+              <div className="w-8 h-8 border-2 border-undertone bg-gray-200 rounded-full mr-2" />
               <h1 className="text-xl">My Tasks</h1>
               <ChevronDown size={20} strokeWidth={2} className="mt-1"/>
             </div>

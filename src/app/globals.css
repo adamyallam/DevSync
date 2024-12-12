@@ -3,24 +3,24 @@
 @tailwind utilities;
 @import "react-datepicker/dist/react-datepicker.css";
 
-/* #212526 PRIMARY COLOR, 
-#D0E8E8 PRIMARY TEXT COLOR,
-#89979E SECONDARY TEXT COLOR,
-#3A4042 UNDERTONE COLOR, 
-#282E2E SELECTED COLOR, 
-#2F3636 HIGHLIGHTED COLOR */
+/* #212526 PRIMARY, 
+#D0E8E8 PRIMARY TEXT,
+#89979E SECONDARY TEXT,
+#3A4042 UNDERTONE, 
+#282E2E SELECTED, 
+#2F3636 HIGHLIGHTED */
 
 @layer components {
   .sidebar-selected {
-    @apply bg-[#282E2E] rounded-lg w-5/6 h-8 ml-4 pl-4
+    @apply bg-selected rounded-lg w-5/6 h-8 ml-4 pl-4 transition-colors
   }
 
   .sidebar-highlighted {
-    @apply ml-8 
+    @apply ml-8 transition-colors
   }
 
   .sidebar-highlighted:hover {
-    @apply bg-[#2F3636] rounded-lg w-5/6 h-8 ml-4 pl-4
+    @apply bg-highlighted rounded-lg w-5/6 h-8 ml-4 pl-4
   }
 }
 

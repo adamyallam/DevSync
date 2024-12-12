@@ -64,13 +64,13 @@ const StatusButton = ({ status }: StatusButtonProps) => {
       </button>
 
       {statusChangeOpen && (
-        <div className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-4 border-[#3A4042] ${borderColor} rounded-md w-[15%] h-[31.5%] bg-[#212526] overflow-auto`}>
-          <span className="flex self-center ml-1.5 px-1 pt-2 text-xs text-[#89979E] font-semibold">Update status:</span>
+        <div className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-4 border-undertone ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
+          <span className="flex self-center ml-1.5 px-1 pt-2 text-xs text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.keys(statusConfig).filter((statusKey) => statusKey !== 'SetStatus' && statusKey !== 'Complete').map((statusKey, index) => {
               const { label, textColor, bgColor, secondBgColor } = statusConfig[statusKey as StatusKey];
               return (
-                <div onClick={() => changeStatus(statusKey)} key={index} className="hover:bg-[#2F3636] p-1.5">
+                <div onClick={() => changeStatus(statusKey)} key={index} className="hover:bg--selected p-1.5">
                   <button className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold transition-transform text-xs ${bgColor} ${textColor}`}>
                     <div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-3 h-3' : 'w-2 h-2'}`} />
                     {label}
@@ -80,7 +80,7 @@ const StatusButton = ({ status }: StatusButtonProps) => {
             })}
           </div>
 
-          <div className="hover:bg-[#2F3636] pt-2 p-1.5 border-t-2 border-b-2 border-[#3A4042]">
+          <div className="hover:bg--selected pt-2 p-1.5 border-t-2 border-b-2 border-undertone">
             <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold transition-transform text-xs ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
               <Check size={15} strokeWidth={3}/>
               {statusConfig['Complete'].label}
