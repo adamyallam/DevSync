@@ -78,22 +78,34 @@ export const Header = () => {
       <div>
         <div className="flex gap-6 mt-3 pl-10 text-xs border-b-2 border-gray-300 font-semibold">
           <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group">
-            <div className={`${projectView === 'overview' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div>
+            <div className='flex'>
+              <span className={`invisible scale-105 font-bold flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</span>
+              <span className={`absolute ${projectView === 'overview' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-0.5`}><PanelsTopLeft size={14} />Overview</span>
+            </div>
             <div className={`${projectView === 'overview' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
           </Link>
 
           <Link href={`/dashboard/projects/${id}/list`} className="z-10 group">
-            <div className={`${projectView === 'list' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div>
+            <div className='flex'>
+              <span className={`invisible scale-105 font-bold flex items-center gap-1`}><ListOrdered size={14} />List</span>
+              <span className={`absolute ${projectView === 'list' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-0.5`}><ListOrdered size={16} />List</span>
+            </div>
             <div className={`${projectView === 'list' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
           </Link>
 
           <Link href={`/dashboard/projects/${id}/board`} className="z-10 group">
-            <div className={`${projectView === 'board' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div>
+            <div className='flex'>
+              <span className={`invisible scale-105 font-bold flex items-center gap-1`}><SquareKanban size={14} />Board</span>
+              <span className={`absolute ${projectView === 'board' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-0.5`}><SquareKanban size={14} />Board</span>
+            </div>
             <div className={`${projectView === 'board' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
           </Link>
-          
+
           <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group">
-            <div className={`${projectView === 'calendar' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div>
+            <div className='flex'>
+              <span className={`invisible scale-105 font-bold flex items-center gap-1`}><Calendar size={14} />Calendar</span>
+              <span className={`absolute ${projectView === 'calendar' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-0.5`}><Calendar size={14} />Calendar</span>
+            </div>
             <div className={`${projectView === 'calendar' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
           </Link>
         </div>
