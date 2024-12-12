@@ -70,7 +70,7 @@ const StatusButton = ({ status }: StatusButtonProps) => {
             {Object.keys(statusConfig).filter((statusKey) => statusKey !== 'SetStatus' && statusKey !== 'Complete').map((statusKey, index) => {
               const { label, textColor, bgColor, secondBgColor } = statusConfig[statusKey as StatusKey];
               return (
-                <div onClick={() => changeStatus(statusKey)} key={index} className="hover:bg--selected p-1.5">
+                <div onClick={() => changeStatus(statusKey)} key={index} className="hover:bg-selected p-1.5">
                   <button className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold transition-transform text-xs ${bgColor} ${textColor}`}>
                     <div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-3 h-3' : 'w-2 h-2'}`} />
                     {label}

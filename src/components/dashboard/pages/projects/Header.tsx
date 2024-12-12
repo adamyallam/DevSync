@@ -59,7 +59,7 @@ export const Header = () => {
       <div className="flex">
         <div className='flex gap-2 w-full'>
           <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
-          <AutoResizingInput initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={changeProjectName}/>
+          <AutoResizingInput initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={changeProjectName} />
           <button><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton />
           <StatusButton status={project.status} />
@@ -76,11 +76,26 @@ export const Header = () => {
       </div>
 
       <div>
-        <div className="flex gap-4 mt-2 pl-10 text-xs border-b-2 border-gray-300 font-semibold">
-          <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group"><div className={`${projectView === 'overview' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div> <div className={`${projectView === 'overview' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/list`} className="z-10 group"><div className={`${projectView === 'list' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div> <div className={`${projectView === 'list' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/board`} className="z-10 group"><div className={`${projectView === 'board' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div> <div className={`${projectView === 'board' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
-          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group"><div className={`${projectView === 'calendar' ? '' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div> <div className={`${projectView === 'calendar' ? '' : 'hidden'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform`} /></Link>
+        <div className="flex gap-6 mt-3 pl-10 text-xs border-b-2 border-gray-300 font-semibold">
+          <Link href={`/dashboard/projects/${id}/overview`} className="z-10 group">
+            <div className={`${projectView === 'overview' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><PanelsTopLeft size={14} />Overview</div>
+            <div className={`${projectView === 'overview' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
+          </Link>
+
+          <Link href={`/dashboard/projects/${id}/list`} className="z-10 group">
+            <div className={`${projectView === 'list' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><ListOrdered size={16} />List</div>
+            <div className={`${projectView === 'list' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
+          </Link>
+
+          <Link href={`/dashboard/projects/${id}/board`} className="z-10 group">
+            <div className={`${projectView === 'board' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><SquareKanban size={14} />Board</div>
+            <div className={`${projectView === 'board' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
+          </Link>
+          
+          <Link href={`/dashboard/projects/${id}/calendar`} className="z-10 group">
+            <div className={`${projectView === 'calendar' ? 'scale-105 font-bold' : 'group-hover:scale-105 transition-all'} flex items-center gap-1`}><Calendar size={14} />Calendar</div>
+            <div className={`${projectView === 'calendar' ? 'scale-x-100' : 'scale-x-0'} bg-[black] w-full h-[1.5px] translate-y-[1.5px] transition-transform duration-500`} />
+          </Link>
         </div>
       </div>
 
