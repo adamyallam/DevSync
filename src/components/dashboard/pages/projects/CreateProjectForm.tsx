@@ -90,7 +90,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
               <div className='flex flex-col self-start w-[93%] ml-9 h-[20%]'>
                 <span className='text-xs font-semibold'>* Project Name:</span>
 
-                <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-primary outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-secondary-text" : "border-selected"} focus:border-secondary-text hover:border-secondary-text`}
+                <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-primary outline-none ${isNameValid && !projectName ? "border-red-500" : projectName ? "border-primary-text" : "border-undertone"} focus:border-primary-text hover:border-primary-text`}
                   placeholder='Name'
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
@@ -100,18 +100,18 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
               <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
                 <span className='text-xs font-semibold'>Due Date:</span>
 
-                <div className={`group flex gap-2 w-full h-[40%] text-undertone border-b-4 hover:border-secondary-text hover:text-secondary-text focus-within:border-secondary-text pb-0.5 ${projectDueDate ? 'border-secondary-text' : 'border-selected'}`}>
-                  <Calendar className={`group-focus-within:text-secondary-text flex self-center mb-1 ${projectDueDate ? 'text-secondary-text' : ''}`} size={20} />
-                  <DatePickerField datePickerStyles={`w-full bg-primary text-secondary-text outline-none focus:border-secondary-text ${projectDueDate ? 'border-secondary-text' : 'border-selected'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
+                <div className={`group flex gap-2 w-full h-[40%] text-undertone border-b-4 hover:border-primary-text hover:text-secondary-text focus-within:border-primary-text pb-0.5 ${projectDueDate ? 'border-primary-text' : 'border-undertone'}`}>
+                  <Calendar className={`group-focus-within:text-primary-text group-hover:text-primary-text flex self-center mb-1 ${projectDueDate ? 'text-primary-text' : ''}`} size={20} />
+                  <DatePickerField datePickerStyles={`w-full bg-primary text-primary-text outline-none focus:border-primary-text ${projectDueDate ? 'border-primary-text' : 'border-undertone'}`} selectedDate={projectDueDate} onDateChange={setProjectDueDate} />
                 </div>
               </div>
 
               <div className='flex flex-col self-start ml-9 gap-2 w-[93%] h-[20%]'>
                 <span className='text-xs font-semibold'>Add members:</span>
 
-                <div className='group flex gap-2 w-full h-[40%] text-undertone border-selected border-b-4 focus-within:border-secondary-text hover:text-secondary-text hover:border-secondary-text pb-0.5'>
+                <div className='group flex gap-2 w-full h-[40%] text-undertone border-undertone border-b-4 focus-within:border-primary-text hover:text-secondary-text hover:border-primary-text pb-0.5'>
                   <Search size={20} className='group-focus-within:text-secondary-text flex self-center' />
-                  <input className='w-full bg-primary focus:border-secondary-text outline-none' placeholder='Search' />
+                  <input className='w-full bg-primary focus:border-primary-text outline-none' placeholder='Search' />
                 </div>
               </div>
 
@@ -130,7 +130,7 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
             <div className='flex flex-col gap-1 w-full h-full justify-center items-center'>
               <span className='text-xs ml-12 font-semibold self-start'>* Description:</span>
 
-              <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-primary ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-secondary-text" : "border-selected"} focus:border-secondary-text hover:border-secondary-text`}
+              <textarea className={`w-[75%] h-[80%] p-1 pl-2 border-4 resize-none outline-none text-sm bg-primary ${isDescriptionValid && !projectDescription ? "border-red-500" : projectDescription ? "border-primary-text" : "border-undertone"} focus:border-primary-text hover:border-primary-text`}
                 placeholder='* Project Description...'
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
