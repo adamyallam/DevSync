@@ -6,7 +6,7 @@ import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDo
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 //component imports
 import ProjectLink from '../styledElements/ProjectLink';
@@ -15,8 +15,9 @@ import CreateProjectForm from './pages/projects/CreateProjectForm';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar, isCreateProjectFormOpen, toggleCreateProjectForm } = useNavbarUIContext();
-  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
   const { projects } = useProjectsDataContext()
+
+  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
 
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
@@ -32,18 +33,27 @@ export const Navbar = () => {
     }
   }
 
+  const totalProjectLinks = (projects?.length || 0) - 1; // All the links excluding the 1st rendered project due to how the mapping works
   const projectAnimation = {
-    hidden: { opacity: 0, y: -20 },  
+    hidden: { opacity: 0, y: -20 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: index * 0.1, 
-        duration: 0.3,
-        ease: "easeOut",
+        delay: index * 0.1,
+        duration: 0.2,
+        ease: "easeOut"
       },
     }),
-    exit: { opacity: 0, y: -20 }, 
+    exit: (index: number) => ({
+      opacity: 0,
+      y: -20,
+      transition: {
+        delay: (totalProjectLinks - index - 1) * 0.1, // Mirror the delay from `visible`
+        duration: 0.2, // Match the duration
+        ease: "easeOut"
+      },
+    }),
   };
 
   return (
@@ -97,6 +107,7 @@ export const Navbar = () => {
                 <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} defaultView={projects[0].defaultView} />
 
                 <div className='w-full absolute'>
+                <AnimatePresence>
                   {!isProjectsCollapsed &&
                     projects.slice(1).map((project, index) => (
                       <motion.div key={project.id} variants={projectAnimation} initial='hidden' animate='visible' exit='exit' custom={index} >
@@ -104,6 +115,7 @@ export const Navbar = () => {
                       </motion.div>
                     ))
                   }
+                  </AnimatePresence>
                 </div>
 
                 <div className={`${projects?.length <= 1 ? 'invisible' : ''} mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text transition-transform duration-500`} style={{ transform: isProjectsCollapsed ? 'translateY(0)' : `translateY(${(projects?.length || 0) * 32 - 32}px)` }} />
