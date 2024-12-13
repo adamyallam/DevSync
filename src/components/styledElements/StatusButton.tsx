@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
 import { Check } from "lucide-react";
@@ -13,12 +13,14 @@ interface StatusButtonProps {
 const StatusButton = ({ status }: StatusButtonProps) => {
   const { id } = useParams()
   const { projects } = useProjectsDataContext()
+
   const statusKey = status.charAt(0).toUpperCase() + status.slice(1) as StatusKey;
+  const project = projects?.find((project) => project.id.toString() === id);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const statusButtonRef = useRef<HTMLButtonElement>(null)
 
   const [newStatusKey, setNewStatusKey] = useState(statusKey)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
-
-  const project = projects?.find((project) => project.id.toString() === id);
 
   const statusConfig = {
     SetStatus: { label: 'Set Status', textColor: 'text-black', bgColor: '', secondBgColor: 'border-2 border-black', borderColor: '' },
@@ -30,6 +32,22 @@ const StatusButton = ({ status }: StatusButtonProps) => {
   };
 
   const { label, textColor, bgColor, secondBgColor, borderColor } = statusConfig[newStatusKey] || { label: 'No Status Found', textColor: 'text-gray-700', bgColor: 'bg-gray-100', secondBgColor: 'bg-gray-700', borderColor: '' };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node) && statusButtonRef.current && !statusButtonRef.current.contains(event.target as Node)) {
+        setStatusChangeOpen(false);
+      }
+    };
+
+    if (statusChangeOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [statusChangeOpen]);
 
   const changeStatus = async (newStatus: string) => {
     if (!project) return;
@@ -58,13 +76,13 @@ const StatusButton = ({ status }: StatusButtonProps) => {
 
   return (
     <div className='flex flex-col justify-center'>
-      <button onClick={() => setStatusChangeOpen(!statusChangeOpen)} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold hover:scale-105 transition-transform ${label === 'Set Status' ? 'text-sm' : 'text-xs'} ${bgColor} ${textColor}`}>
-        {newStatusKey === 'Complete' as StatusKey ? (<Check size={15} strokeWidth={3}/>) : (<div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-3 h-3' : 'w-2 h-2'}`} />)}
+      <button ref={statusButtonRef} onClick={() => setStatusChangeOpen((prev) => !prev)} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold hover:scale-105 transition-transform ${label === 'Set Status' ? 'text-sm' : 'text-xs'} ${bgColor} ${textColor}`}>
+        {newStatusKey === 'Complete' as StatusKey ? (<Check size={15} strokeWidth={3} />) : (<div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-3 h-3' : 'w-2 h-2'}`} />)}
         {label}
       </button>
 
       {statusChangeOpen && (
-        <div className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-4 border-undertone ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-4 border-undertone ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-xs text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.keys(statusConfig).filter((statusKey) => statusKey !== 'SetStatus' && statusKey !== 'Complete').map((statusKey, index) => {
@@ -80,9 +98,9 @@ const StatusButton = ({ status }: StatusButtonProps) => {
             })}
           </div>
 
-          <div className="hover:bg--selected pt-2 p-1.5 border-t-2 border-b-2 border-undertone">
+          <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-undertone">
             <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold transition-transform text-xs ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
-              <Check size={15} strokeWidth={3}/>
+              <Check size={15} strokeWidth={3} />
               {statusConfig['Complete'].label}
             </button>
           </div>
