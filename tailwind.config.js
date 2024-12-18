@@ -13,13 +13,14 @@ module.exports = {
         'primary': '#212526',
         'secondary': '#383C3D',
         'primary-text': '#DBDADA',
-        'secondary-text': '#89979E',
+        'secondary-text': '#A8B9C2',
         'undertone': '#636363',
-        'highlighted': '#282E2E',
-        'selected': '#2F3636',
+        'highlighted': '#2D3030',
+        'selected': '#414445',
+        'button-hover': '#2F3636'
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 }
 

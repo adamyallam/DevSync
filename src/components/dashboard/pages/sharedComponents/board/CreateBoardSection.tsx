@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 
 //component imports
 import BoardSection from "./BoardSection"
+import BoardTask from "./BoardTask"
 
 export const CreateBoardSection = () => {
   const [boardSections, setBoardSections] = useState<JSX.Element[]>([])
@@ -24,10 +25,10 @@ export const CreateBoardSection = () => {
           {boardSections}
         </div>
         
-        <div className="pr-12">
-          <div className="ml-2 mt-5 h-[calc(100%-40px)] min-w-[270px] bg-gray-100 rounded-lg">
-            <button onClick={() => addBoardSection()} className="flex items-center justify-center gap-1 pt-3 w-full font-semibold opacity-60 hover:opacity-100">
-              <Plus size={18}/>
+        <div className="pr-[250px]">
+          <div onClick={() => addBoardSection()} className="ml-2 mt-5 h-[calc(100%-40px)] min-w-[270px] bg-selected rounded-lg hover:border border-undertone hover:cursor-pointer group">
+            <button className="flex items-center justify-center gap-1 pt-3 w-full text-secondary-text text-sm font-semibold opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-transform">
+              <Plus size={14} strokeWidth={3}/>
               Add Section
             </button>
           </div>

@@ -23,7 +23,7 @@ const StatusButton = ({ status }: StatusButtonProps) => {
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
 
   const statusConfig = {
-    SetStatus: { label: 'Set Status', textColor: 'text-black', bgColor: '', secondBgColor: 'border-2 border-black', borderColor: '' },
+    SetStatus: { label: 'Set Status', textColor: 'text-secondary-text', bgColor: 'bg-selected', secondBgColor: 'border', borderColor: 'border-t-secondary-text' },
     OnTrack: { label: 'On Track', textColor: 'text-[#48F701]', bgColor: 'bg-[#009903]', secondBgColor: 'bg-[#48F701]', borderColor: 'border-t-[#009903]' },
     OffTrack: { label: 'Off Track', textColor: 'text-[#FF7D7A]', bgColor: 'bg-[#A32020]', secondBgColor: 'bg-[#FF7D7A]', borderColor: 'border-t-[#A32020]' },
     AtRisk: { label: 'At Risk', textColor: 'text-[#FDFF01]', bgColor: 'bg-[#D4BD02]', secondBgColor: 'bg-[#FDFF01]', borderColor: 'border-t-[#D4BD02]' },
@@ -77,12 +77,12 @@ const StatusButton = ({ status }: StatusButtonProps) => {
   return (
     <div className='flex flex-col justify-center'>
       <button ref={statusButtonRef} onClick={() => setStatusChangeOpen((prev) => !prev)} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold hover:scale-105 transition-transform ${label === 'Set Status' ? 'text-sm' : 'text-xs'} ${bgColor} ${textColor}`}>
-        {newStatusKey === 'Complete' as StatusKey ? (<Check size={15} strokeWidth={3} />) : (<div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-3 h-3' : 'w-2 h-2'}`} />)}
+        {newStatusKey === 'Complete' as StatusKey ? (<Check size={15} strokeWidth={3} />) : (<div className={`rounded-full ${secondBgColor} ${label === 'Set Status' ? 'w-2 h-2' : 'w-2 h-2'}`} />)}
         {label}
       </button>
 
       {statusChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-4 border-undertone ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-[4px] border-selected ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-xs text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.keys(statusConfig).filter((statusKey) => statusKey !== 'SetStatus' && statusKey !== 'Complete').map((statusKey, index) => {
@@ -98,7 +98,7 @@ const StatusButton = ({ status }: StatusButtonProps) => {
             })}
           </div>
 
-          <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-undertone">
+          <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-selected">
             <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-6 px-1 font-semibold transition-transform text-xs ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
               <Check size={15} strokeWidth={3} />
               {statusConfig['Complete'].label}

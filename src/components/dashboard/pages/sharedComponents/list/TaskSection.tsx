@@ -26,17 +26,17 @@ export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
 
   return (
     <div className="mt-6 w-full">
-      <div className="flex gap-1 ml-8 mt-2 mb-2">
-        <button><ChevronDown size={16} className=""/></button>
-        <AutoResizingInput placeholder="Untitled Section"/>
-        <button className=""><Plus size={16}/></button>
+      <div className="flex ml-8 mt-2 mb-2">
+        <button className="text-secondary-text"><ChevronDown size={18}/></button>
+        <AutoResizingInput initialWidth={115} initialText="New Section"/>
+        <button className="text-secondary-text ml-0.5"><Plus size={16} strokeWidth={3}/></button>
       </div>
 
-      <div className="w-[96%] ml-8 border-gray-300 border-t-2">
+      <div className="w-[96%] ml-8 border-undertone border-t-2">
         {tasks}
       </div>
 
-      <button onClick={() => addTask()} className="ml-12 mt-2 text-sm">Add task...</button>
+      <button onClick={() => addTask()} className="ml-12 mt-2 text-sm text-primary-text">Add task...</button>
     </div>
   )
 }

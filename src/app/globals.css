@@ -3,26 +3,43 @@
 @tailwind utilities;
 @import "react-datepicker/dist/react-datepicker.css";
 
-/* #212526 PRIMARY, 
-#D0E8E8 PRIMARY TEXT,
-#89979E SECONDARY TEXT,
-#3A4042 UNDERTONE, 
-#282E2E SELECTED, 
-#2F3636 HIGHLIGHTED */
-
 @layer components {
   .sidebar-selected {
     @apply bg-selected rounded-lg w-5/6 h-8 ml-4 pl-4 transition-colors
   }
 
   .sidebar-highlighted {
-    @apply ml-8 transition-colors
+    @apply h-8 ml-4 pl-4 rounded-lg w-5/6
   }
 
   .sidebar-highlighted:hover {
     @apply bg-highlighted rounded-lg w-5/6 h-8 ml-4 pl-4
   }
 }
+
+/* Target the scrollbar track (background area) */
+::-webkit-scrollbar {
+  width: 7px; 
+  height: 12px; 
+}
+
+/* Target the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background-color: #636363;
+  border-radius: 5px; 
+}
+
+/* Hover state for the scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4A4A4A;
+}
+
+/* Target the scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: #212526; 
+}
+
+
 
 .datePicker{
   width: 100%
@@ -61,3 +78,4 @@
 .animate-spin-custom {
   animation: spin 2s linear infinite;
 }
+

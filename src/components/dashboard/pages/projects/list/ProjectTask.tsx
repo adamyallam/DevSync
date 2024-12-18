@@ -9,29 +9,29 @@ export const ProjectTask = () => {
 
   return (
     <div className="w-full">
-      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-gray-300 gap-2 h-10 transition-all duration-300`}>
-        <div className={`flex col-span-4 border-r-2`}>
+      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 transition-all duration-300`}>
+        <div className={`flex col-span-4 border-r-2 border-undertone`}>
           <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
           <input 
             type="text" 
             placeholder="Name"
             value={taskName} 
             onChange={(e) => setTaskName(e.target.value)} 
-            className="text-sm w-full px-2"
+            className="text-sm w-full px-2 bg-secondary placeholder-primary-text text-primary-text"
           />
         </div>
 
-        <div className={`flex items-center justify-between border-r-2 col-span-2`}>
-          <button className="w-full pl-1"><UserRoundSearch size={22}/></button> 
-          <button className="pr-2"><Plus size={18}/></button>
+        <div className={`flex items-center justify-between border-r-2 border-undertone col-span-2`}>
+          <button className="w-full pl-1 text-primary-text"><UserRoundSearch size={22}/></button> 
+          <button className="pr-2 text-secondary-text"><Plus size={18}/></button>
         </div>
 
-        <div className={`flex border-r-2 col-span-2`}>
-          <button className="w-full pl-1"><CalendarClock size={22} /></button>
+        <div className={`flex border-r-2 border-undertone col-span-2`}>
+          <button className="w-full pl-1 text-primary-text"><CalendarClock size={22} /></button>
         </div>
 
         <div className="self-center col-span-2">
-          <button className="flex items-center gap-1"><div className="border rounded-full bg-red-500 w-3 h-3 ml-1 mr-1"/>High<ChevronDown size={13} className="mt-1"/></button>
+          <button className="flex items-center gap-1 text-primary-text"><div className="border rounded-full border-secondary-text w-3 h-3 ml-1 mr-1"/>High<ChevronDown size={13} className="mt-1 text-secondary-text"/></button>
         </div>
       </div>
     </div>

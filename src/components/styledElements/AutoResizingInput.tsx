@@ -5,16 +5,22 @@ interface AutoResizingInputProps {
   placeholder?: string;
   initialText?: string;
   maxGrowthWidth?: number;
+  textSize?: string;
   onConfirmChange?: (newName: string) => Promise<void>;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText, onConfirmChange}) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText, textSize, onConfirmChange}) => {
   const [text, setText] = useState(`${initialText || ''}`)
   const [originalText, setOriginalText] = useState(`${initialText || ''}`);
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+    setText(`${initialText || ''}`);
+    setOriginalText(`${initialText || ''}`);
+  }, [initialText]);
 
   useEffect(() => {
     if (inputRef.current && spanRef.current) {
@@ -53,11 +59,11 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
         ref={inputRef}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className={`pl-1 px-1 py-1 text-md border border-black`}
+        className={`pl-1 px-1 py-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
         style={{ width: `${initialWidth}px` }}>
       </input>
 
-      <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 text-md`}>
+      <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${textSize ? `${textSize}` : 'text-sm'} font-bold`}>
         {text}
       </span>
     </>

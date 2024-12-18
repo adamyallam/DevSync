@@ -8,7 +8,7 @@ import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 const CalendarManager = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
-  
+
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const startOfWeek = getStartOfWeek();
 
@@ -60,7 +60,7 @@ const CalendarManager = () => {
   }
 
   // Moves the calendar date to the current date
-  const moveCalendarDateToday = () => { 
+  const moveCalendarDateToday = () => {
     setCalendarDate(new Date());
   }
 
@@ -68,54 +68,50 @@ const CalendarManager = () => {
     <div className="pt-3 pb-3 flex justify-between">
       <div className="flex items-center ml-8">
 
-        <button onClick={() => moveCalendarDateToday()} className="border border-gray-400 text-sm w-12 h-7 rounded-md">Today</button>
+        <button onClick={() => moveCalendarDateToday()} className="w-14 h-7 hover:bg-button-hover hover:scale-105 transition-transform outline-2 outline outline-primary rounded-sm text-white text-xs font-semibold">Today</button>
 
         <div className="flex items-center gap-2 ml-3">
-          <button onClick={() => moveCalendarDateBack()} className="hover:bg-gray-100 hover:rounded-md"><ChevronLeft strokeWidth={1.5}/></button>
-          <button onClick={() => moveCalendarDateFoward()} className="hover:bg-gray-100 hover:rounded-md"><ChevronRight strokeWidth={1.5}/></button>
+          <button onClick={() => moveCalendarDateBack()} className="text-primary-text hover:scale-110 transition-transform hover:text-secondary-text"><ChevronLeft strokeWidth={1.5} /></button>
+          <button onClick={() => moveCalendarDateFoward()} className="text-primary-text hover:scale-110 transition-transform hover:text-secondary-text"><ChevronRight strokeWidth={1.5} /></button>
         </div>
 
-        <span className="ml-2 text-lg">{monthsOfYear[calendarDate.getMonth()]} {calendarDate.getFullYear()}</span>
+        <span className="ml-2 text-primary-text">{monthsOfYear[calendarDate.getMonth()]} {calendarDate.getFullYear()}</span>
       </div>
-      
+
       <div className="flex mr-8 gap-5">
         <div className="relative gap-4 self-center">
 
-          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center border border-gray-400 rounded-md h-7">
-            <span className="pl-2 pr-2">{weekOrMonth}</span>
-            <div className="place-content-center pt-1 pl-1 pr-1 border-l border-gray-400 h-7">
-              <ChevronDown size={16} />
+          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center rounded-sm h-7 border border-primary text-primary-text text-sm hover:bg-button-hover hover:scale-105 transition-transform font-semibold hover:text-white">
+            <span className="pl-2">{weekOrMonth}</span>
+            <div className="place-content-center pt-1 pl-0.5 pr-0.5 h-7">
+              <ChevronDown size={16} strokeWidth={2.5} />
             </div>
           </button>
 
           {isOpen && (
-            <div className="absolute mt-1 w-28 bg-white border border-gray-300 rounded-md shadow-md z-10">
+            <div className="absolute w-24 bg-primary border-2 border-selected rounded-md shadow-md z-10">
 
               <button onClick={() => handleOptionClick('Week')}
-              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Week' ? 'bg-gray-100' : ''}`}>
-                <div className="flex items-center gap-1">
-                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Week' ? '' : 'hidden'}`} size={16}/></div>
-                  <div>Week</div>
+                className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs`}>
+                <div className="flex items-center justify-center gap-1 text-primary-text">
+                  <div className="flex gap-1 items-center"><Check className={`${weekOrMonth === 'Week' ? '' : 'hidden'}`} size={12} strokeWidth={3} />Week</div>
                 </div>
               </button>
 
               <button onClick={() => handleOptionClick('Month')}
-              className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${weekOrMonth === 'Month' ? 'bg-gray-100' : ''}`}>
-                <div className="flex items-center gap-1">
-                  <div className="w-4 h-4"><Check className={`${weekOrMonth === 'Month' ? '' : 'hidden'}`} size={16}/></div>
-                  <div>Month</div>
+                className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs border-t border-t-selected`}>
+                <div className="flex items-center justify-center gap-1 text-primary-text">
+                  <div className="flex gap-1 items-center"><Check className={`${weekOrMonth === 'Month' ? '' : 'hidden'}`} size={12} strokeWidth={3} />Month</div>
                 </div>
               </button>
-              
+
             </div>
           )}
         </div>
 
-        <button onClick={() => {setIsWeekendShowing(!isWeekendShowing)}} className={`group text-sm`}>
+        <button onClick={() => { setIsWeekendShowing(!isWeekendShowing) }} className={`flex gap-1 group items-center text-xs font-semibold text-primary-text hover:scale-105 hover:text-white transition-transform`}>
           Weekends
-          <div className={`bg-red-600 h-[3px] w-full`}>
-            <div className={`bg-green-500 w-0 h-[3px] transition-all duration-300 ${isWeekendShowing ? 'w-full group-hover:w-3/4' : 'group-hover:w-1/4'}`} />
-          </div>
+          <Check size={14} strokeWidth={3} className={`${isWeekendShowing ? 'opacity-0' : 'opacity-100'} transition-opacity`} />
         </button>
       </div>
     </div>

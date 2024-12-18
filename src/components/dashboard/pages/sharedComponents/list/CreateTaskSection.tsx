@@ -26,7 +26,7 @@ export const CreateTaskSection = () => {
         {sections}
       </div>
       
-      <button onClick={() => addSection()} className="flex items-center font-semibold opacity-60 hover:opacity-100 ml-8 mt-5">
+      <button onClick={() => addSection()} className="flex items-center font-semibold text-secondary-text opacity-50 hover:scale-105 hover:opacity-100 transition-transform ml-8 mt-5">
         <Plus size={16}/>
         Add Section
       </button>

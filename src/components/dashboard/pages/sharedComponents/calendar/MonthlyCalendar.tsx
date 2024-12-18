@@ -12,11 +12,11 @@ export const MonthlyCalendar = () => {
 
   return (
     <div className='flex flex-col h-full w-full'>
-      <div className='flex w-full border'>
+      <div className='flex w-full border-2 border-undertone'>
         {fullCalendar.slice(0, 7).map((dateString, index) => ( // Maps through the first week of the fullCalendar array     
-          <div key={index} className={`${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/5' : 'w-full'}`}`}>
+          <div key={index} className={`${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/5' : 'w-full'}`} bg-secondary`}>
 
-            <div className={`p-1 pl-2 text-start font-semibold text-gray-600 text-xs w-full ${(index === 0 || index === 5 || index === 6) ? (isWeekendShowing ? 'border-r' : '') : 'border-r'}`}>
+            <div className={`p-1 pl-2 text-start font-bold text-primary-text text-xs w-full border-undertone ${(index === 0 || index === 5 || index === 6) ? (isWeekendShowing ? 'border-r-2' : '') : 'border-r-2'}`}>
                 {!isWeekendShowing && (index === 0 || index === 6) ? <div /> : daysOfWeek[parseISO(dateString).getDay()].slice(0, 3).toUpperCase()}
             </div>
 
@@ -24,7 +24,7 @@ export const MonthlyCalendar = () => {
         ))}
       </div>
 
-      <div className={`grid ${fullCalendar.length >= 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden`}> 
+      <div className={`grid ${fullCalendar.length >= 36 ? 'grid-rows-6' : 'grid-rows-5'} ${isWeekendShowing ? 'grid-cols-7' : 'grid-cols-[repeat(27,minmax(0,1fr))]'} pt-1 h-full w-full overflow-y-auto overflow-x-hidden `}> 
         {fullCalendar.map((dateString, index) => { // Maps through the fullCalendar array
           const currentDay = areDatesEqual(new Date(), parseISO(dateString));
           const columnIndex = index % 7; 
@@ -33,12 +33,12 @@ export const MonthlyCalendar = () => {
           const isNextMonthDay = index >= (getDaysInMonth(calendarDate) + getFirstDayOfMonth(calendarDate));
           
 
-          const plusTaskButton = <button className="opacity-80"><Plus onClick={() => addTask(dateString)} size={14} strokeWidth={3}/></button>
+          const plusTaskButton = <button className={`${isPrevMonthDay || isNextMonthDay ? 'text-primary-text' : 'text-black'}`}><Plus onClick={() => addTask(dateString)} size={14} strokeWidth={3}/></button>
 
           return (
-            <div key={index} className={`flex flex-col pl-2 pt-1 border overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-gray-100' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>
+            <div key={index} className={`flex flex-col pl-2 pt-1 bg-[#B8B7B7] border border-undertone overflow-x-hidden overflow-y-auto ${isPrevMonthDay || isNextMonthDay ? 'bg-secondary' : ''} ${isWeekendShowing ? 'col-span-1' : (isWeekend ? 'col-span-1' : 'col-span-5')}`}>
               <div className={`flex items-center justify-between mr-2`}>
-                <div className={`flex mb-2 ${currentDay ? 'items-center justify-center border bg-blue-500 w-6 h-7 rounded-md text-white' : ''}`}>
+                <div className={`flex mb-2 ${currentDay ? 'items-center justify-center border-2 border-undertone w-8 h-7 rounded-md bg-secondary text-white font-semibold text-sm' : (isPrevMonthDay || isNextMonthDay ? 'text-primary-text text-sm font-semibold' : 'text-black font-semibold text-sm')}`}>
                   {parseISO(dateString).getDate()}
                 </div>
 
@@ -59,7 +59,7 @@ export const MonthlyCalendar = () => {
             </div>
           )
         })}
-        <div className={`bg-gray-100 w-screen ${fullCalendar.length >= 36 ? '' : 'hidden'}`}/>
+        <div className={`bg-secondary w-screen ${fullCalendar.length >= 36 ? '' : 'hidden'}`}/>
       </div>
     </div>
   )

@@ -36,8 +36,8 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   //Function to display the addTaskButton
   const addTaskButton = (date: string) => {
     return (
-      <button onClick={() => {addTask(date)}} className={`flex items-center pb-2 font-semibold opacity-80 hover:opacity-100 ${weekOrMonth === 'Month' ? 'text-xs' : ''}`}>
-        <Plus size={weekOrMonth === 'Week' ? 17 : 12} strokeWidth={2.5}/>
+      <button onClick={() => {addTask(date)}} className={`flex items-center pb-2 font-semibold text-black opacity-70 hover:opacity-100 hover:scale-105 transition-transform ${weekOrMonth === 'Month' ? 'text-xs' : 'text-sm'}`}>
+        <Plus size={weekOrMonth === 'Week' ? 14 : 12} strokeWidth={2.5}/>
         Add Task
       </button>
     )
@@ -47,7 +47,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
   const addTask = (date: string) => {
   
     const calendarTask = (
-      <CalendarTask key={calendarTasks[date]?.length || 0} parentClassName='w-[85%] pb-1.5' inputClassName='px-1 py-1 text-md w-full border border-gray-300 rounded-md drop-shadow-sm'/>
+      <CalendarTask key={calendarTasks[date]?.length || 0} parentClassName='w-[85%] pb-1.5' inputClassName='px-1 py-1 text-sm text-white focus:outline outline-white w-full bg-selected border-2 border-selected rounded-md drop-shadow-sm'/>
     );
   
     setCalendarTasks((prevTasks) => ({
@@ -61,7 +61,7 @@ export const CalendarUIProvider: React.FC<Props> = ({ children }) => {
     const taskCount = calendarTasks[date]?.length || 0;
   
     return (
-      <div className="flex justify-center text-white text-xs items-center bg-blue-800 rounded-full h-4 w-4">
+      <div className="flex justify-center text-primary-text text-xs items-center bg-primary rounded-full h-5 w-5 font-semibold">
         <span className="mb-0.5">{taskCount}</span>
       </div>
     );

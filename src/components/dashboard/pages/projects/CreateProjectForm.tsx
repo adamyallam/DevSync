@@ -76,8 +76,8 @@ const CreateProjectForm: React.FC<Props> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-25 z-50 text-primary-text">
-      <div className="bg-primary w-3/6 h-[78%] rounded-lg shadow-lg pt-6 relative">
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-40 z-50 text-primary-text">
+      <div className="bg-primary w-3/6 h-[78%] rounded-lg shadow-lg pt-6 relative border-[3px] border-highlighted drop-shadow-2xl">
         <button className='fixed text-primary-text hover:text-secondary-text hover:scale-110 transition-transform pl-7'><X onClick={onClose} /></button>
         <div className='flex justify-center'>
           <h1 className='fixed text-2xl font-semibold'>New Project</h1>
