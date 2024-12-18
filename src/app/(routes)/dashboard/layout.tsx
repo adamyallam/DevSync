@@ -21,7 +21,7 @@ const dashboardLayout: React.FC<Props> = async ({ children }) => {
         <NavbarUIProvider>
           <div className="flex h-screen w-screen overflow-x-hidden">
             <Navbar />
-            <Transition classes="flex-1 h-full w-full" transition="ml-60">
+            <Transition classes="flex-1 h-full w-full bg-secondary" transition="ml-60">
               {children}
             </Transition>
           </div>

@@ -6,9 +6,9 @@ import ProjectsCard from "@/components/dashboard/pages/home/ProjectsCard";
 export default async function home() {
 
   return (
-    <div>
+    <div className="">
       <div>
-        <h1 className="text-2xl ml-8 mt-20">Home</h1>
+        <h1 className="text-2xl ml-8 mt-20 text-white">Home</h1>
       </div>
 
       <div className="mt-5">

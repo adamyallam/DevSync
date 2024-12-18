@@ -29,13 +29,12 @@ export const FavoritedButton = () => {
 
       if (res.ok) {
         setFavorited((prev) => !prev);
+        setIsDisabled(false)
       } else {
         console.error('Failed to update favorite status');
       }
     } catch (err) {
       console.error('Error toggling favorite:', err);
-    } finally {
-      setTimeout(() => { setIsDisabled(false) }, 3000);
     }
   };
 
