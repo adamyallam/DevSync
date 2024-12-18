@@ -7,11 +7,11 @@ import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 type StatusKey = 'SetStatus' | 'OnTrack' | 'OffTrack' | 'AtRisk' | 'OnHold';
 
-interface StatusButtonProps {
+interface Props {
   status: string;
 }
 
-const StatusButton = ({ status }: StatusButtonProps) => {
+const StatusButton = ({ status }: Props) => {
   const { id } = useParams()
   const { projects } = useProjectsDataContext()
   const {isSidebarOpen} = useNavbarUIContext()
