@@ -69,7 +69,7 @@ export const Navbar = () => {
         <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
       </div>
       {/* Sidebar */}
-      <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-primary text-primary-text w-60 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
+      <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-primary text-primary-text w-60 transition-transform duration-300 border-r-2 border-undertone ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
         <div className='bg-primary border-b border-undertone pt-2 pb-2'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
             <Home size={20} className='text-primary-text' strokeWidth={1.5} />
