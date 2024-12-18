@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
 import { Check } from "lucide-react";
+import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 type StatusKey = 'SetStatus' | 'OnTrack' | 'OffTrack' | 'AtRisk' | 'OnHold';
 
@@ -13,6 +14,7 @@ interface StatusButtonProps {
 const StatusButton = ({ status }: StatusButtonProps) => {
   const { id } = useParams()
   const { projects } = useProjectsDataContext()
+  const {isSidebarOpen} = useNavbarUIContext()
 
   const statusKey = status.charAt(0).toUpperCase() + status.slice(1) as StatusKey;
   const project = projects?.find((project) => project.id.toString() === id);
@@ -82,7 +84,7 @@ const StatusButton = ({ status }: StatusButtonProps) => {
       </button>
 
       {statusChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute left-[507px] top-24 border-[4px] border-selected ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute ${isSidebarOpen ? 'left-[505px]' : 'left-[265px]'} left-[505px] top-24 border-[4px] border-selected ${borderColor} rounded-md w-[15%] h-[31.5%] bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-xs text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.keys(statusConfig).filter((statusKey) => statusKey !== 'SetStatus' && statusKey !== 'Complete').map((statusKey, index) => {
