@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { getStartOfWeek, monthsOfYear } from "@/utils/dateFunctions/getDateFunctions";
@@ -11,6 +11,25 @@ const CalendarManager = () => {
 
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const startOfWeek = getStartOfWeek();
+
+  const calendarViewButtonRef = useRef<HTMLButtonElement>(null)
+  const calendarViewMenuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (calendarViewMenuRef.current && !calendarViewMenuRef.current.contains(event.target as Node) && calendarViewButtonRef.current && !calendarViewButtonRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen]);
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);
@@ -81,7 +100,7 @@ const CalendarManager = () => {
       <div className="flex mr-8 gap-5">
         <div className="relative gap-4 self-center">
 
-          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center rounded-sm h-7 border border-primary text-primary-text text-sm hover:bg-button-hover hover:scale-105 transition-transform font-semibold hover:text-white">
+          <button ref={calendarViewButtonRef} onClick={() => setIsOpen(!isOpen)} className="flex items-center rounded-sm h-7 border border-primary text-primary-text text-sm hover:bg-button-hover hover:scale-105 transition-transform font-semibold hover:text-white">
             <span className="pl-2">{weekOrMonth}</span>
             <div className="place-content-center pt-1 pl-0.5 pr-0.5 h-7">
               <ChevronDown size={16} strokeWidth={2.5} />
@@ -89,7 +108,7 @@ const CalendarManager = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute w-24 bg-primary border-2 border-selected rounded-md shadow-md z-10">
+            <div ref={calendarViewMenuRef} className="absolute w-24 bg-primary border-2 border-selected rounded-md shadow-md z-10">
 
               <button onClick={() => handleOptionClick('Week')}
                 className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs`}>
