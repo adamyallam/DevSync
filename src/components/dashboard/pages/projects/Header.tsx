@@ -1,8 +1,8 @@
 'use client'
 import Link from 'next/link'
-import { Share2 } from 'lucide-react'
+import { useState } from 'react'
 import { useParams } from 'next/navigation'
-import { ChevronDown, Star, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Upload } from "lucide-react"
+import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, Check, CalendarX, CalendarClock, CalendarCheck, CalendarMinus2 } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
 
@@ -18,6 +18,15 @@ export const Header = () => {
   const projectView = usePathSegments(1)
 
   const project = projects?.find((project) => project.id.toString() === id);
+
+  const [statusStyles, setStatusStyles] = useState({
+    bgColor: 'bg-selected',
+    icon: <div className="w-2 h-2 rounded-full bg-selected" />,
+  }); 
+
+  const handleStatusStyles = (styles: { bgColor: string; icon: JSX.Element }) => {
+    setStatusStyles(styles);
+  };
 
   if (loading) {
     return (
@@ -59,16 +68,16 @@ export const Header = () => {
     <div className='mt-16 w-full'>
       <div className="flex">
         <div className='flex gap-1 w-full'>
-          <div className="border-2 border-red-500 bg-red-300 w-8 h-8 rounded-xl ml-8" />
+          <div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div>
           <AutoResizingInput textSize='text-lg' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={changeProjectName} />
           <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton />
-          <StatusButton status={project.status} />
+          <StatusButton status={project.status} onStatusChange={handleStatusStyles} />
         </div>
 
 
       </div>
-      <div className="absolute flex gap-2 right-0 top-[80px] mr-8">
+      <div className="absolute flex gap-2 right-0 top-[76px] mr-8">
           <button className="flex">
             <div className="border rounded-full border-red-600 bg-red-400 w-8 h-8 translate-x-[6px]" />
             <div className="flex items-center justify-center border border-undertone rounded-full bg-primary w-8 h-8"><Ellipsis color="#6b6b6b" size={15} strokeWidth={3} /></div>
