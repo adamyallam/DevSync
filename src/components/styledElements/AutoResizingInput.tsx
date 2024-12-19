@@ -59,7 +59,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
         ref={inputRef}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className={`pl-1 px-1 py-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
+        className={`pl-1 px-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
         style={{ width: `${initialWidth}px` }}>
       </input>
 
