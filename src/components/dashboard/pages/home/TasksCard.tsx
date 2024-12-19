@@ -24,7 +24,7 @@ export const TasksCard = () => {
                 { name: 'Overdue' },
                 { name: 'Completed' }
               ].map(({ name }) => (
-                <div className="flex-col ml-1">
+                <div key={name} className="flex-col ml-1">
                   <div className="flex">
                     <span className={`invisible scale-105 font-semibold text-xs`}>{name}</span>
                     <button onClick={() => setTaskView(name)} className={`absolute ${taskView === name ? 'scale-110 font-semibold' : 'hover:scale-110 hover:font-semibold transition-all'} text-xs`}>{name}</button>
