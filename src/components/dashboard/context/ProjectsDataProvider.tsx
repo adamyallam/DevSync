@@ -8,6 +8,8 @@ type ProjectsContextType = {
   projects: Project[] | null;
   addProject: (project: Project) => void
   loading: boolean
+  updateProjectStatus: (projectId: number, newStatus: Status) => void
+  updateProjectName: (projectId: number, newName: string) => void
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -22,6 +24,22 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
   const addProject = (project: Project) => {
     setProjects((prevProjects) => [...prevProjects, project]);
+  };
+
+  const updateProjectName = (projectId: number, newName: string) => { 
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId ? { ...project, name: newName || project.name } : project
+      )
+    );
+  }
+
+  const updateProjectStatus = (projectId: number, newStatus: Status) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId ? { ...project, status: newStatus } : project
+      )
+    );
   };
 
   useEffect(() => {
@@ -46,7 +64,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, addProject, loading }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectStatus, updateProjectName }}>
       {children}
     </ProjectsDataContext.Provider>
   );

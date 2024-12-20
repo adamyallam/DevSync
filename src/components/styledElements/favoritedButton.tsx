@@ -29,6 +29,7 @@ export const FavoritedButton = () => {
 
       if (res.ok) {
         setFavorited((prev) => !prev);
+        project.favorited = !favorited;
         setIsDisabled(false)
       } else {
         console.error('Failed to update favorite status');
