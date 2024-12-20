@@ -13,7 +13,7 @@ interface Props {
 
 const StatusButton = ({ status, onStatusChange }: Props) => {
   const { id } = useParams()
-  const { projects, updateProjectStatus } = useProjectsDataContext()
+  const { projects, updateProject } = useProjectsDataContext()
   const { isSidebarOpen } = useNavbarUIContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -64,7 +64,7 @@ const StatusButton = ({ status, onStatusChange }: Props) => {
         const updatedStyles = statusConfig[updatedStatusKey];
   
         setNewStatusKey(updatedStatusKey);
-        updateProjectStatus(project.id, updatedStatusKey);
+        updateProject(project.id, {status: updatedStatusKey});
         onStatusChange({ bgColor: updatedStyles.bgColor, icon: updatedStyles.icon });
         setStatusChangeOpen(!statusChangeOpen);
         console.log('Project name updated, new name:', newStatus)

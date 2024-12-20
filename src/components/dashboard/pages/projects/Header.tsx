@@ -14,7 +14,7 @@ import FavoritedButton from '@/components/styledElements/FavoritedButton'
 
 export const Header = () => {
   const { id } = useParams()
-  const { projects, loading, updateProjectName } = useProjectsDataContext()
+  const { projects, loading, updateProject } = useProjectsDataContext()
   const projectView = usePathSegments(1)
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -55,7 +55,7 @@ export const Header = () => {
 
       if (res.ok) {
         console.log('Project name updated, new name:', newProjectName)
-        updateProjectName(project.id, newProjectName)
+        updateProject(project.id, {name: newProjectName})
       } else {
         console.error('Failed to update favorite status');
       }
