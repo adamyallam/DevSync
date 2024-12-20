@@ -6,7 +6,7 @@ interface AutoResizingInputProps {
   initialText?: string;
   maxGrowthWidth?: number;
   textSize?: string;
-  onConfirmChange?: (newName: string) => Promise<void>;
+  onConfirmChange?: (property: 'description' | 'descriptionTitle', newName: string) => Promise<void>;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
@@ -39,7 +39,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
     if (e.key === 'Enter' && onConfirmChange) {
       if (text.trim() && text !== originalText) {
         setOriginalText(text)
-        onConfirmChange(text).then(() => {
+        onConfirmChange('descriptionTitle', text).then(() => {
           inputRef.current?.blur();
         })
 
