@@ -11,13 +11,13 @@ interface AutoResizingInputProps {
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidth = 125, maxGrowthWidth, placeholder, initialText, textSize, onConfirmChange}) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textSize, onConfirmChange }) => {
   const [text, setText] = useState(`${initialText || ''}`)
   const [originalText, setOriginalText] = useState(`${initialText || ''}`);
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
 
-    useEffect(() => {
+  useEffect(() => {
     setText(`${initialText || ''}`);
     setOriginalText(`${initialText || ''}`);
   }, [initialText]);
@@ -37,16 +37,20 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({initialWidt
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onConfirmChange) {
-      setOriginalText(text)
-      onConfirmChange(text).then(() => {
-        inputRef.current?.blur();
-      })
-    }
+      if (text.trim() && text !== originalText) {
+        setOriginalText(text)
+        onConfirmChange(text).then(() => {
+          inputRef.current?.blur();
+        })
 
+      } else {
+        inputRef.current?.blur();
+      }
+    }
   };
 
   const handleBlur = () => {
-    setText(originalText); 
+    setText(originalText);
   };
 
   return (
