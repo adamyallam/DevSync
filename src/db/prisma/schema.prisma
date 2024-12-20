@@ -18,14 +18,15 @@ model Project {
   members  User[]    @relation("ProjectMembers")
   tasks    Task[]
 
-  name        String    @db.VarChar(60)
-  description String    @db.VarChar(300)
-  defaultView String    @default("list")
-  status      Status?   @default(SetStatus)
-  favorited   Boolean   @default(false)
-  dueDate     DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  name             String    @db.VarChar(60)
+  descriptionTitle String    @db.VarChar(60) @default("Project description")
+  description      String    @db.VarChar(3000)
+  defaultView      String    @default("list")
+  status           Status?   @default(SetStatus)
+  favorited        Boolean   @default(false)
+  dueDate          DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 }
 
 model User {
