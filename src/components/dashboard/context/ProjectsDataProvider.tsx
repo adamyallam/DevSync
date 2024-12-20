@@ -2,14 +2,13 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Status } from '@prisma/client';
 
-type Project = { id: number; name: string; description: string; defaultView: string; status: Status; favorited: boolean };
+type Project = { id: number; name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
 
 type ProjectsContextType = {
   projects: Project[] | null;
-  addProject: (project: Project) => void
-  loading: boolean
-  updateProjectStatus: (projectId: number, newStatus: Status) => void
-  updateProjectName: (projectId: number, newName: string) => void
+  loading: boolean;
+  addProject: (project: Project) => void;
+  updateProject: (projectId: number, updates: Partial<{ name: string; description: string, descriptionTitle: string, status: Status }>) => void
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -26,18 +25,10 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
 
-  const updateProjectName = (projectId: number, newName: string) => { 
+  const updateProject = (projectId: number, updates: Partial<{ name: string; description: string, descriptionTitle: string, status: Status }>) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
-        project.id === projectId ? { ...project, name: newName || project.name } : project
-      )
-    );
-  }
-
-  const updateProjectStatus = (projectId: number, newStatus: Status) => {
-    setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === projectId ? { ...project, status: newStatus } : project
+        project.id === projectId ? { ...project, ...updates } : project
       )
     );
   };
@@ -64,7 +55,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectStatus, updateProjectName }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProject }}>
       {children}
     </ProjectsDataContext.Provider>
   );
