@@ -45,8 +45,13 @@ const StatusButton = ({ status }: Props) => {
 
   const changeStatus = async (newStatus: string) => {
     if (!project) return;
-    await updateProjectProperty(project, 'status', newStatus);
     setStatusChangeOpen(false);
+
+    try {
+      await updateProjectProperty(project, 'status', newStatus);
+    } catch { 
+      console.log('Failed to update project status')
+    }
   };
 
   return (

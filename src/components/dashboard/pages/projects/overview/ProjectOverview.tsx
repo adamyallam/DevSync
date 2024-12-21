@@ -18,6 +18,7 @@ export const ProjectOverview = () => {
   const project = projects?.find((project) => project.id.toString() === id);
 
   const [value, setValue] = useState(project?.description || '');
+  const [originalValue, setOriginalValue] = useState(project?.description || '');
   const [isExpanded, setIsExpanded] = useState(false);
   const [showSeeLess, setShowSeeLess] = useState(false);
 
@@ -29,6 +30,7 @@ export const ProjectOverview = () => {
 
   useEffect(() => {
     setValue(`${project?.description || ''}`);
+    setOriginalValue(`${project?.description || ''}`);
   }, [project?.description]);
 
   if (loading) {
@@ -52,15 +54,27 @@ export const ProjectOverview = () => {
     }
   };
 
+  const handleBlur = async () => {
+    const previousValue = originalValue
+    
+    try {
+      await updateProjectProperty(project, 'description', value)
+      setOriginalValue(value);
+    } catch { 
+      setValue(previousValue);
+      console.log('Failed to update project description');
+    }
+  }
+
   return (
     <div className="relative flex flex-col ml-20 mt-8 h-full gap-2">
       <AutoResizingInput
         textSize="text-lg"
         initialWidth={200}
         maxGrowthWidth={725}
-        onConfirmChange={(newName) => project && updateProjectProperty(project, 'descriptionTitle', newName)}
+        onConfirmChange={(newName) => updateProjectProperty(project, 'descriptionTitle', newName)}
         placeholder="Project Description..."
-        initialText={project?.descriptionTitle}
+        initialText={project.descriptionTitle}
       />
 
       <div className="flex flex-col w-full relative">
@@ -70,7 +84,7 @@ export const ProjectOverview = () => {
           maxLength={3000}
           onFocus={() => setIsExpanded(true)}
           onChange={handleChange}
-          onBlur={() => project && updateProjectProperty(project, 'description', value)}
+          onBlur={handleBlur}
           className={`resize-none text-sm w-4/5 h-auto max-h-[225px] ml-0.5 ${!isExpanded ? "max-h-[225px]" : "max-h-none"} overflow-hidden outline-none bg-secondary placeholder-secondary-text text-primary-text hover:outline hover:outline-2 hover:outline-undertone focus:outline-2 focus:outline-secondary-text rounded-sm p-1`}
           placeholder="Type your description, welcome message, or project info here!"
           style={{ minHeight: "150px" }}

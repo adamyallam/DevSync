@@ -44,7 +44,7 @@ export const Header = () => {
           <div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div>
           <AutoResizingInput textSize='text-lg' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectProperty(project, 'name', newName)} />
           <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
-          <FavoritedButton />
+          <FavoritedButton favorited={project.favorited}/>
           <StatusButton status={project.status} />
         </div>
 
