@@ -29,40 +29,120 @@ export const RotatingCircle = () => {
 export const HeaderSkeletonLoader = () => {
   return (
     <div className="mt-16 w-full animate-pulse">
-      {/* Top Section */}
       <div className="flex">
-        <div className="flex gap-2 w-full">
-          {/* Placeholder for icon */}
-          <div className="bg-gray-300 w-8 h-8 rounded-xl ml-8"></div>
-
-          {/* Placeholder for input */}
-          <div className="bg-gray-300 h-8 rounded py-1 w-[275px]"></div>
-        </div>
-
-        <div className="flex gap-2 items-center justify-end mr-8">
-          {/* Placeholder for profile icon */}
-          <div className="flex">
-            <div className="bg-gray-300 w-6 h-6 translate-x-[6px] rounded-full"></div>
-            <div className="bg-gray-300 w-6 h-6 rounded-full"></div>
-          </div>
-
-          {/* Placeholder for Share button */}
-          <div className="bg-gray-300 w-14 h-7 rounded-md"></div>
+        <div className="flex items-center gap-1.5 w-full">
+          <div className="flex items-center justify-center border-2 border-primary bg-gray-300 w-8 h-8 rounded-md ml-8" />
+          <div className="h-6 bg-gray-300 rounded w-32" />
+          <div className="h-5 bg-gray-300 rounded w-5 ml-1" />
+          <div className="h-5 bg-gray-300 rounded w-5" />
+          <div className="h-5 bg-gray-300 rounded w-16" />
         </div>
       </div>
 
-      {/* Navigation Links */}
-      <div className="mt-2 pl-10">
-        <div className="flex gap-4 text-sm">
-          {[...Array(4)].map((_, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <div className="bg-gray-300 w-14 h-5 rounded"></div>
-              <div className="bg-gray-300 w-14 h-[2.5px] mt-1 rounded"></div>
-            </div>
-          ))}
+      <div className="absolute flex gap-2 right-0 top-[76px] mr-8">
+        <button className="flex">
+          <div className="border rounded-full bg-gray-300 w-8 h-8 translate-x-[6px]" />
+          <div className="flex items-center justify-center border border-undertone rounded-full bg-gray-300 w-8 h-8" />
+        </button>
+
+        <button className="w-[80px] h-[35px] bg-gray-300 rounded-sm" />
+      </div>
+
+      <div>
+        <div className="flex gap-10 mt-4 pl-10 text-sm font-semibold border-b border-undertone">
+          {Array(4)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="h-4 w-16 bg-gray-300 rounded mb-2" />
+                <div className="h-[1.5px] bg-gray-300 w-full" />
+              </div>
+            ))}
         </div>
       </div>
     </div>
+  );
+};
+
+export const OverviewSkeletonLoader = () => {
+  return (
+    <div className="w-full">
+      <div className="relative flex flex-col ml-20 mt-8 h-full gap-2 animate-pulse">
+        {/* Skeleton for the auto-resizing input */}
+        <div className="h-6 w-[200px] bg-gray-300 rounded"></div>
+
+        {/* Skeleton for the textarea */}
+        <div className="flex flex-col w-full relative">
+          <div className="w-4/5 h-[150px] bg-gray-300 rounded"></div>
+        </div>
+
+        {/* Skeleton for project roles & members */}
+        <div className="h-full pb-10">
+          <div className="h-6 w-48 bg-gray-300 rounded mt-10"></div>
+
+          <div className="flex gap-16 ml-5 mt-6">
+            {/* Skeleton for "Add Member" button */}
+            <div className="flex items-center gap-3">
+              <div className="border-2 border-dashed rounded-full border-gray-300 w-9 h-9 bg-gray-300"></div>
+              <div className="h-4 w-24 bg-gray-300 rounded"></div>
+            </div>
+
+            {/* Skeleton for member information */}
+            <div className="flex items-center gap-2">
+              <div className="rounded-full bg-gray-300 w-10 h-10"></div>
+              <div className="flex flex-col items-start gap-1">
+                <div className="h-4 w-24 bg-gray-300 rounded"></div>
+                <div className="h-3 w-16 bg-gray-300 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const StatusLogSkeletonLoader = () => {
+  return (
+      <div className="border border-undertone bg-highlighted p-4 h-[700px] w-[319px] overflow-y-auto animate-pulse">
+        <div className="ml-5">
+          <div className="h-4 w-24 bg-gray-300 rounded mb-4" />
+          <div className="flex gap-4 mt-3">
+            <div className="h-6 w-20 bg-gray-300 rounded-md" />
+            <div className="h-6 w-20 bg-gray-300 rounded-md" />
+            <div className="h-6 w-20 bg-gray-300 rounded-md" />
+            <div className="h-6 w-6 bg-gray-300 rounded-full" />
+          </div>
+        </div>
+        <div className="ml-3 text-sm text-primary-text">
+          <div className="flex items-center gap-2 mt-12">
+            <div className="flex justify-center items-center border border-dashed rounded-full border-secondary-text w-7 h-7 bg-gray-300" />
+            <div className="h-4 w-32 bg-gray-300 rounded" />
+          </div>
+          <div className="ml-[13px] mt-1 border border-undertone border-dashed w-0 h-12" />
+          <div className="flex gap-2 ml-1 mt-1">
+            <div className="flex flex-col">
+              <div className="w-5 h-5 bg-gray-300 rounded-full" />
+              <div className="ml-[9px] mt-1 border border-undertone w-0 h-24" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="h-4 w-36 bg-gray-300 rounded" />
+              <div className="h-3 w-24 bg-gray-300 rounded" />
+              <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
+            </div>
+          </div>
+          <div className="flex gap-2 ml-1 mt-1">
+            <div className="flex flex-col">
+              <div className="w-5 h-5 bg-gray-300 rounded-full" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="h-4 w-40 bg-gray-300 rounded" />
+              <div className="h-3 w-24 bg-gray-300 rounded" />
+              <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
+            </div>
+          </div>
+        </div>
+      </div>
   );
 };
 
