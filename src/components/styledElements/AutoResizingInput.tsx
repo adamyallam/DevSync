@@ -6,7 +6,7 @@ interface AutoResizingInputProps {
   initialText?: string;
   maxGrowthWidth?: number;
   textSize?: string;
-  onConfirmChange?: (property: 'description' | 'descriptionTitle', newName: string) => Promise<void>;
+  onConfirmChange?: (newName: string) => void;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
@@ -35,22 +35,23 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
     }
   }, [text, initialWidth, maxGrowthWidth]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onConfirmChange) {
       if (text.trim() && text !== originalText) {
-        setOriginalText(text)
-        onConfirmChange('descriptionTitle', text).then(() => {
-          inputRef.current?.blur();
-        })
-
+        try {
+          await onConfirmChange(text);
+          initialText = text;
+          inputRef.current?.blur()
+        } catch (err) {
+          setText(originalText);
+          inputRef.current?.blur()
+          console.error('Error updating name:', err);
+        }
       } else {
-        inputRef.current?.blur();
+        setText(originalText);
+        inputRef.current?.blur()
       }
     }
-  };
-
-  const handleBlur = () => {
-    setText(originalText);
   };
 
   return (
@@ -62,7 +63,6 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
         onChange={(e) => setText(e.target.value)}
         ref={inputRef}
         onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
         className={`pl-1 px-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
         style={{ width: `${initialWidth}px` }}>
       </input>

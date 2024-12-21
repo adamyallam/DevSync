@@ -8,7 +8,7 @@ type ProjectsContextType = {
   projects: Project[] | null;
   loading: boolean;
   addProject: (project: Project) => void;
-  updateProject: (projectId: number, updates: Partial<{ name: string; description: string, descriptionTitle: string, status: Status }>) => void
+  updateProjectProperty: (project: Project | null, property: keyof Project, newValue: string | Status) => void;
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -33,6 +33,30 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     );
   };
 
+  const updateProjectProperty = async (project: Project | null, property: keyof Project, newValue: string | Status) => {
+    if (!project || newValue === project[property]) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/project`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: project.id,
+          [property]: newValue,
+        }),
+      });
+
+      if (res.ok) {
+        updateProject(project.id, { [property]: newValue });
+        console.log(`Project ${property} updated, new ${property}:`, newValue);
+      } else {
+        console.error(`Failed to update project ${property}`);
+      }
+    } catch (err) {
+      console.error(`Error updating project ${property}`);
+    }
+  };
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -55,7 +79,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProject }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectProperty }}>
       {children}
     </ProjectsDataContext.Provider>
   );

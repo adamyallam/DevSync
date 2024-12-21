@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, Check, CalendarX, CalendarClock, CalendarCheck, CalendarMinus2 } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
+import { statusConfig } from '@/utils/statusConfig'
 
 // Component Imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
@@ -14,19 +15,10 @@ import FavoritedButton from '@/components/styledElements/FavoritedButton'
 
 export const Header = () => {
   const { id } = useParams()
-  const { projects, loading, updateProject } = useProjectsDataContext()
+  const { projects, loading, updateProjectProperty } = useProjectsDataContext()
   const projectView = usePathSegments(1)
 
   const project = projects?.find((project) => project.id.toString() === id);
-
-  const [statusStyles, setStatusStyles] = useState({
-    bgColor: 'bg-selected',
-    icon: <div className="w-2 h-2 rounded-full bg-selected" />,
-  }); 
-
-  const handleStatusStyles = (styles: { bgColor: string; icon: JSX.Element }) => {
-    setStatusStyles(styles);
-  };
 
   if (loading) {
     return (
@@ -40,39 +32,20 @@ export const Header = () => {
     return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
   }
 
-  const changeProjectName = async (newProjectName: string) => {
-    if (!project) return;
-
-    try {
-      const res = await fetch(`http://localhost:3000/api/project`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: project.id,
-          name: newProjectName,
-        }),
-      });
-
-      if (res.ok) {
-        console.log('Project name updated, new name:', newProjectName)
-        updateProject(project.id, {name: newProjectName})
-      } else {
-        console.error('Failed to update favorite status');
-      }
-    } catch (err) {
-      console.error('Error toggling favorite:', err);
-    }
-  }
+  const statusStyles = statusConfig[project.status] || {
+    bgColor: 'bg-gray-300',
+    icon: <div className="w-4 h-4 rounded-full bg-red-500" />,
+  };
 
   return (
     <div className='mt-16 w-full'>
       <div className="flex">
         <div className='flex gap-1 w-full'>
           <div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div>
-          <AutoResizingInput textSize='text-lg' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={changeProjectName} />
+          <AutoResizingInput textSize='text-lg' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectProperty(project, 'name', newName)} />
           <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton />
-          <StatusButton status={project.status} onStatusChange={handleStatusStyles} />
+          <StatusButton status={project.status} />
         </div>
 
 

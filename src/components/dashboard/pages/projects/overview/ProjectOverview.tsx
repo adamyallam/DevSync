@@ -11,7 +11,7 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 
 export const ProjectOverview = () => {
   const { id } = useParams();
-  const { projects, updateProject } = useProjectsDataContext();
+  const { projects, updateProjectProperty } = useProjectsDataContext();
   const { isSidebarOpen } = useNavbarUIContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -30,30 +30,6 @@ export const ProjectOverview = () => {
     setValue(`${project?.description || ''}`);
   }, [project?.description]);
 
-  const updateProjectProperty = async (property: 'description' | 'descriptionTitle', newValue: string) => {
-    if (!project || newValue === project[property]) return;
-
-    try {
-      const res = await fetch(`http://localhost:3000/api/project`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: project.id,
-          [property]: newValue,
-        }),
-      });
-
-      if (res.ok) {
-        updateProject(project.id, { [property]: newValue });
-        console.log(`Project ${property} updated, new ${property}:`, newValue);
-      } else {
-        console.error(`Failed to update project ${property}`);
-      }
-    } catch (err) {
-      console.error(`Error updating project ${property}:`, err);
-    }
-  };
-
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
     if (textAreaRef.current) {
@@ -69,7 +45,7 @@ export const ProjectOverview = () => {
         textSize="text-lg"
         initialWidth={200}
         maxGrowthWidth={725}
-        onConfirmChange={updateProjectProperty}
+        onConfirmChange={(newName) => project && updateProjectProperty(project, 'descriptionTitle', newName)}
         placeholder="Project Description..."
         initialText={project?.descriptionTitle}
       />
@@ -81,7 +57,7 @@ export const ProjectOverview = () => {
           maxLength={3000}
           onFocus={() => setIsExpanded(true)}
           onChange={handleChange}
-          onBlur={() => updateProjectProperty('description', value)}
+          onBlur={() => project && updateProjectProperty(project, 'description', value)}
           className={`resize-none text-sm w-4/5 h-auto max-h-[225px] ml-0.5 ${!isExpanded ? "max-h-[225px]" : "max-h-none"} overflow-hidden outline-none bg-secondary placeholder-secondary-text text-primary-text hover:outline hover:outline-2 hover:outline-undertone focus:outline-2 focus:outline-secondary-text rounded-sm p-1`}
           placeholder="Type your description, welcome message, or project info here!"
           style={{ minHeight: "150px" }}
