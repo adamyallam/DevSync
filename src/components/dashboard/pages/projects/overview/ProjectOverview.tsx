@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useParams } from "next/navigation";
 import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
+import { OverviewSkeletonLoader } from "@/components/styledElements/LoadingElements";
 
 //Component imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
@@ -11,7 +12,7 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 
 export const ProjectOverview = () => {
   const { id } = useParams();
-  const { projects, updateProjectProperty } = useProjectsDataContext();
+  const { projects, loading, updateProjectProperty } = useProjectsDataContext();
   const { isSidebarOpen } = useNavbarUIContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -29,6 +30,18 @@ export const ProjectOverview = () => {
   useEffect(() => {
     setValue(`${project?.description || ''}`);
   }, [project?.description]);
+
+  if (loading) {
+    return (
+      <div className=''>
+        <OverviewSkeletonLoader />
+      </div>
+    )
+  }
+
+  if (!project) {
+    return <div />;
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
