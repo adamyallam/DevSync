@@ -2,9 +2,10 @@
 import { useState, useEffect, useRef } from "react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
-import { Check, CalendarX, CalendarClock, CalendarCheck, CalendarMinus2, Calendar } from "lucide-react";
+import { Check } from "lucide-react";
 import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import { statusConfig, StatusKey } from "@/utils/statusConfig";
+import ErrorMessage from "./ErrorMessage";
 
 interface Props {
   status: string;
@@ -15,6 +16,7 @@ const StatusButton = ({ status }: Props) => {
   const { projects, updateProjectProperty } = useProjectsDataContext()
   const { isSidebarOpen } = useNavbarUIContext()
 
+  const [displayError, setDisplayError] = useState(false)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -49,17 +51,24 @@ const StatusButton = ({ status }: Props) => {
 
     try {
       await updateProjectProperty(project, 'status', newStatus);
-    } catch { 
+    } catch {
+      setDisplayError(true)
       console.log('Failed to update project status')
+      setTimeout(() => {
+        setDisplayError(false)
+      }, 5000)
     }
   };
 
   return (
     <div className='flex flex-col justify-center'>
-      <button ref={statusButtonRef} onClick={() => setStatusChangeOpen((prev) => !prev)} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold hover:scale-105 transition-transform ${statusDetails.label === 'Set Status' ? 'text-xs' : 'text-[10px]'} ${statusDetails.bgColor} ${statusDetails.textColor}`}>
-        {status === 'Complete' ? (<Check size={12} strokeWidth={3} />) : (<div className={`rounded-full ${statusDetails.secondBgColor} ${statusDetails.label === 'Set Status' ? 'w-2 h-2' : 'w-1.5 h-1.5'}`} />)}
-        {statusDetails.label}
-      </button>
+      <div className="flex items-center gap-3">
+        <button ref={statusButtonRef} onClick={() => setStatusChangeOpen((prev) => !prev)} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold hover:scale-105 transition-transform ${statusDetails.label === 'Set Status' ? 'text-xs' : 'text-[10px]'} ${statusDetails.bgColor} ${statusDetails.textColor}`}>
+          {status === 'Complete' ? (<Check size={12} strokeWidth={3} />) : (<div className={`rounded-full ${statusDetails.secondBgColor} ${statusDetails.label === 'Set Status' ? 'w-2 h-2' : 'w-1.5 h-1.5'}`} />)}
+          {statusDetails.label}
+        </button>
+        {displayError && <ErrorMessage setDisplayError={setDisplayError} text='Failed to update project status' />}
+      </div>
 
       {statusChangeOpen && (
         <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute ${isSidebarOpen ? 'left-[505px]' : 'left-[265px]'} left-[505px] top-24 border-[4px] border-selected ${statusDetails.borderColor} rounded-md w-[15%] h-[31%] bg-primary overflow-auto`}>
