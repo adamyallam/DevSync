@@ -9,6 +9,8 @@ type ProjectsContextType = {
   loading: boolean;
   addProject: (project: Project) => void;
   updateProjectProperty: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
+  showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
+  exitError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
 };
 
 export const ProjectsDataContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -33,11 +35,32 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     );
   };
 
+  const showError = (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => {
+    console.log('Failed to update project status')
+    setDisplayError(true)
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      setDisplayError(false)
+    }, 5000);
+  }
+
+  const exitError = (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setDisplayError(false)
+  }
+
   const updateProjectProperty = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => {
     if (!project || newValue === project[property]) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/project`, {
+      const res = await fetch(`http://localhost:3000/api/prject`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -78,7 +101,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectProperty }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectProperty, showError, exitError }}>
       {children}
     </ProjectsDataContext.Provider>
   );

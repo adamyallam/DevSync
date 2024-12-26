@@ -13,13 +13,14 @@ interface Props {
 
 const StatusButton = ({ status }: Props) => {
   const { id } = useParams()
-  const { projects, updateProjectProperty } = useProjectsDataContext()
+  const { projects, updateProjectProperty, showError, exitError } = useProjectsDataContext()
   const { isSidebarOpen } = useNavbarUIContext()
 
   const [displayError, setDisplayError] = useState(false)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
 
   const menuRef = useRef<HTMLDivElement>(null);
+  const errorTimeoutRef = useRef<number | null>(null);
   const statusButtonRef = useRef<HTMLButtonElement>(null)
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -52,11 +53,7 @@ const StatusButton = ({ status }: Props) => {
     try {
       await updateProjectProperty(project, 'status', newStatus);
     } catch {
-      setDisplayError(true)
-      console.log('Failed to update project status')
-      setTimeout(() => {
-        setDisplayError(false)
-      }, 5000)
+      showError(setDisplayError, errorTimeoutRef)
     }
   };
 
@@ -67,7 +64,7 @@ const StatusButton = ({ status }: Props) => {
           {status === 'Complete' ? (<Check size={12} strokeWidth={3} />) : (<div className={`rounded-full ${statusDetails.secondBgColor} ${statusDetails.label === 'Set Status' ? 'w-2 h-2' : 'w-1.5 h-1.5'}`} />)}
           {statusDetails.label}
         </button>
-        {displayError && <ErrorMessage setDisplayError={setDisplayError} text='Failed to update project status' />}
+        <ErrorMessage arrowDirection={'left'} displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} text='Failed to update project status' />
       </div>
 
       {statusChangeOpen && (
