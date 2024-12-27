@@ -46,16 +46,15 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
         try {
           await onConfirmChange(text);
           setOriginalText(text)
-          inputRef.current?.blur()
         } catch {
           setText(previousValue);
-          inputRef.current?.blur()
           showError(setDisplayError, errorTimeoutRef)
         }
       } else {
         setText(previousValue);
-        inputRef.current?.blur()
       }
+
+      inputRef.current?.blur()
     }
   };
 
