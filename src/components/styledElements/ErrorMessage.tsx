@@ -2,13 +2,12 @@
 import { X } from "lucide-react"
 
 interface Props {
-  text: string
   displayError: boolean
   exitError: () => void
-  arrowDirection: 'top' | 'bottom' | 'left' | 'right';
+  arrowDirection?: 'top' | 'bottom' | 'left' | 'right';
 }
 
-const ErrorMessage: React.FC<Props> = ({ text, displayError, exitError, arrowDirection }) => {
+const ErrorMessage: React.FC<Props> = ({ displayError, exitError, arrowDirection }) => {
 
   const arrowStyles = (() => {
     switch (arrowDirection) {
@@ -50,9 +49,9 @@ const ErrorMessage: React.FC<Props> = ({ text, displayError, exitError, arrowDir
   })();
 
   return (
-    <div className={`relative text-[9px] bg-[#A32020] text-primary-text font-semibold p-0.5 rounded-sm ${displayError ? 'block' : 'hidden'}`}>
+    <div className={`relative text-[9px] bg-[#A32020] text-primary-text font-semibold p-1 rounded-sm ${displayError ? 'block' : 'hidden'}`}>
       <div className="flex">
-        <span>{text}</span>
+        <span>An error occured while updating</span>
         <X onClick={exitError} size={7} strokeWidth={5} className={`text-primary-text ml-1 hover:cursor-pointer hover:scale-125 transition-transform ${arrowDirection === 'right' ? 'order-first mr-1' : 'ml-1'}`} />
       </div>
       <style jsx>{`
