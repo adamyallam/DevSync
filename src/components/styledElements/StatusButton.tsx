@@ -64,7 +64,7 @@ const StatusButton = ({ status }: Props) => {
           {status === 'Complete' ? (<Check size={12} strokeWidth={3} />) : (<div className={`rounded-full ${statusDetails.secondBgColor} ${statusDetails.label === 'Set Status' ? 'w-2 h-2' : 'w-1.5 h-1.5'}`} />)}
           {statusDetails.label}
         </button>
-        <ErrorMessage arrowDirection={'left'} displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} text='Failed to update project status' />
+        <ErrorMessage arrowDirection={'left'} displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} />
       </div>
 
       {statusChangeOpen && (

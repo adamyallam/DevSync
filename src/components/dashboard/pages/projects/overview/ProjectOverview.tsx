@@ -5,14 +5,14 @@ import { useParams } from "next/navigation";
 import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { OverviewSkeletonLoader } from "@/components/styledElements/LoadingElements";
-
-//Component imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
+import ErrorMessage from "@/components/styledElements/ErrorMessage";
+
 
 
 export const ProjectOverview = () => {
   const { id } = useParams();
-  const { projects, loading, updateProjectProperty } = useProjectsDataContext();
+  const { projects, loading, updateProjectProperty, showError, exitError } = useProjectsDataContext();
   const { isSidebarOpen } = useNavbarUIContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -21,7 +21,9 @@ export const ProjectOverview = () => {
   const [originalValue, setOriginalValue] = useState(project?.description || '');
   const [isExpanded, setIsExpanded] = useState(false);
   const [showSeeLess, setShowSeeLess] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
 
+  const errorTimeoutRef = useRef<number | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -56,13 +58,13 @@ export const ProjectOverview = () => {
 
   const handleBlur = async () => {
     const previousValue = originalValue
-    
+
     try {
       await updateProjectProperty(project, 'description', value)
       setOriginalValue(value);
-    } catch { 
+    } catch {
       setValue(previousValue);
-      console.log('Failed to update project description');
+      showError(setDisplayError, errorTimeoutRef)
     }
   }
 
@@ -97,6 +99,10 @@ export const ProjectOverview = () => {
             {isExpanded ? 'See Less' : 'See More'}
           </button>
         }
+
+        <div className="absolute bottom-1 left-2">
+          <ErrorMessage displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} />
+        </div>
       </div>
 
       <div className="h-full pb-10">

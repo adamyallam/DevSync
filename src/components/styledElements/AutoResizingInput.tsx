@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
+import ErrorMessage from './ErrorMessage';
 
 interface AutoResizingInputProps {
   initialWidth?: number;
@@ -12,10 +14,16 @@ interface AutoResizingInputProps {
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
 export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textSize, onConfirmChange }) => {
+  const {showError, exitError} = useProjectsDataContext()
+
   const [text, setText] = useState(`${initialText}`)
   const [originalText, setOriginalText] = useState(`${initialText}`);
+  const [displayError, setDisplayError] = useState(false);
+  
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
+  const errorTimeoutRef = useRef<number | null>(null);
+
 
   useEffect(() => {
     if (inputRef.current && spanRef.current) {
@@ -42,7 +50,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
         } catch {
           setText(previousValue);
           inputRef.current?.blur()
-          console.log('Error updating name');
+          showError(setDisplayError, errorTimeoutRef)
         }
       } else {
         setText(previousValue);
@@ -52,22 +60,27 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
   };
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        ref={inputRef}
-        onKeyDown={handleKeyDown}
-        className={`pl-1 px-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
-        style={{ width: `${initialWidth}px` }}>
-      </input>
+    <div className='flex flex-col justify-center z-20'>
+      <div>
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
+          className={`pl-1 px-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
+          style={{ width: `${initialWidth}px` }}>
+        </input>
+        <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${textSize ? `${textSize}` : 'text-sm'} font-bold`}>
+          {text}
+        </span>
+      </div>
 
-      <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${textSize ? `${textSize}` : 'text-sm'} font-bold`}>
-        {text}
-      </span>
-    </>
+      <div className='absolute mt-16'>
+        <ErrorMessage displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} arrowDirection='top' />
+      </div>
+    </div>
   );
 };
 
