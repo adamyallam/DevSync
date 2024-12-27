@@ -68,7 +68,7 @@ const StatusButton = ({ status }: Props) => {
       </div>
 
       {statusChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute ${isSidebarOpen ? 'left-[505px]' : 'left-[265px]'} left-[505px] top-24 border-[4px] border-selected ${statusDetails.borderColor} rounded-md w-[15%] h-[31%] bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute ${isSidebarOpen ? 'left-[505px]' : 'left-[265px]'} top-24 border-[4px] border-selected ${statusDetails.borderColor} rounded-md w-[15%] h-[31%] bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-[10px] text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.entries(statusConfig).filter(([key]) => key !== 'Complete' && key !== 'SetStatus').map(([key, { label, bgColor, textColor, secondBgColor }]) => {
