@@ -130,7 +130,7 @@ const CalendarManager = () => {
 
         <button onClick={() => { setIsWeekendShowing(!isWeekendShowing) }} className={`flex gap-1 group items-center text-xs font-semibold text-primary-text hover:scale-105 hover:text-white transition-transform`}>
           Weekends
-          <Check size={14} strokeWidth={3} className={`${isWeekendShowing ? 'opacity-0' : 'opacity-100'} transition-opacity`} />
+          <Check size={14} strokeWidth={3} className={`${isWeekendShowing ? 'opacity-100' : 'opacity-0'} transition-opacity`} />
         </button>
       </div>
     </div>
