@@ -12,7 +12,7 @@ export const AddTaskHeaderButton: React.FC<Props> = ({showFilterSort = true}) =>
       <div className="flex justify-between">
         <div className="ml-8 ">
           <div>
-            <button className="flex items-center gap-0.5 border-2 border-primary hover:bg-selected hover:scale-105 transition-transform font-semibold rounded-sm p-1.5 pr-2 text-xs text-white"><Plus strokeWidth={3} size={13}/>Add task</button>
+            <button className="flex items-center gap-0.5 border-2 border-primary hover:bg-button-hover hover:scale-105 transition-transform font-semibold rounded-sm p-1.5 pr-2 text-xs text-white"><Plus strokeWidth={3} size={13}/>Add task</button>
           </div>
         </div>
         
