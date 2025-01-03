@@ -2,7 +2,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Status } from '@prisma/client';
 
-type Project = { id: number; name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
+type Section = { id: number; name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
+
+type Project = { id: number; sections: Section[], name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
 
 type ProjectsContextType = {
   projects: Project[] | null;
@@ -60,7 +62,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     if (!project || newValue === project[property]) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/prject`, {
+      const res = await fetch(`http://localhost:3000/api/project`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
