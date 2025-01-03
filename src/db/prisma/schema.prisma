@@ -15,11 +15,10 @@ model Project {
   ownerID  Int
   owner    User      @relation("ProjectOwner", fields: [ownerID], references: [id], onDelete: Cascade)
   sections Section[]
-  members  User[]    @relation("ProjectMembers")
   tasks    Task[]
 
   name             String    @db.VarChar(60)
-  descriptionTitle String    @db.VarChar(60) @default("Project description")
+  descriptionTitle String    @default("Project description") @db.VarChar(60)
   description      String    @db.VarChar(3000)
   defaultView      String    @default("list")
   status           Status?   @default(SetStatus)
@@ -30,31 +29,24 @@ model Project {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  ownedProjects Project[] @relation("ProjectOwner")
-  projects      Project[] @relation("ProjectMembers")
-  sections      Section[]
-  tasks         Task[]
-  comments      Comment[]
+  id       Int       @id @default(autoincrement())
+  projects Project[] @relation("ProjectOwner")
 
   firstName String   @db.VarChar(40)
   lastName  String   @db.VarChar(40)
   username  String   @unique @db.VarChar(20)
   email     String   @unique
   password  String
-  role      Role?    @default(DEVELOPER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Task {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   projectID Int
   sectionID Int?
-  project   Project   @relation(fields: [projectID], references: [id])
-  section   Section?  @relation(fields: [sectionID], references: [id])
-  users     User[]
-  Comments  Comment[]
+  project   Project  @relation(fields: [projectID], references: [id])
+  section   Section? @relation(fields: [sectionID], references: [id])
 
   name        String    @db.VarChar(60)
   description String?   @db.VarChar(300)
@@ -68,12 +60,10 @@ model Task {
 model Section {
   id        Int     @id @default(autoincrement())
   projectID Int
-  userID    Int
-  users     User    @relation(fields: [userID], references: [id])
   project   Project @relation(fields: [projectID], references: [id])
   tasks     Task[]
 
-  name        String    @db.VarChar(60)
+  name        String?   @default("Untitled Section") @db.VarChar(60)
   description String?   @db.VarChar(300)
   status      Status?   @default(SetStatus)
   dueDate     DateTime?
@@ -81,24 +71,17 @@ model Section {
   updatedAt   DateTime  @updatedAt
 }
 
-model Comment {
-  id     Int  @id @default(autoincrement())
-  task   Task @relation(fields: [taskId], references: [id])
-  taskId Int
-  author User @relation(fields: [userId], references: [id])
-  userId Int
+// model Comment {
+//   id     Int  @id @default(autoincrement())
+//   task   Task @relation(fields: [taskId], references: [id])
+//   taskId Int
+//   author User @relation(fields: [userId], references: [id])
+//   userId Int
 
-  title       String
-  description String
-  postedAt    DateTime @default(now())
-}
-
-enum Role {
-  DEVELOPER
-  MODERATOR
-  ADMIN
-  OWNER
-}
+//   title       String
+//   description String
+//   postedAt    DateTime @default(now())
+// }
 
 enum Status {
   SetStatus
