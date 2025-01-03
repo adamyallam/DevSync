@@ -2,13 +2,22 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 
 // function for creating a section
-export async function createSection(sectionData: object) {
+export async function createSection(id: number) {
+  try {
     const section = await prisma.section.create({
-        data: sectionData
-      })
-      console.log("New section was created!", section)
-      // await prisma.section.deleteMany();
-      await prisma.$disconnect()
+      data: {
+        projectID: id
+      }
+    })
+    
+    console.log("New section was created!", section)
+    return section
+  } catch (error) {
+    console.error("Error in createProject function:", error);
+    throw new Error("Failed to create project in database.");
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 // function for deleting a section
@@ -26,7 +35,7 @@ export async function updateSection(sectionId: object, updatedInfo: object) {
     where: sectionId,
     data: updatedInfo
   })
-  console.log("Section's info was updated!",updatedsection)
+  console.log("Section's info was updated!", updatedsection)
   await prisma.$disconnect()
 }
 
@@ -51,4 +60,4 @@ export async function readAllSections() {
 }
 
 
-export default {createSection, deleteSection, updateSection, readSection, readAllSections};
+export default { createSection, deleteSection, updateSection, readSection, readAllSections };
