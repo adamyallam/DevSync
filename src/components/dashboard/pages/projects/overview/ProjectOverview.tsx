@@ -12,7 +12,7 @@ import ErrorMessage from "@/components/styledElements/ErrorMessage";
 
 export const ProjectOverview = () => {
   const { id } = useParams();
-  const { projects, loading, updateProjectProperty, showError, exitError } = useProjectsDataContext();
+  const { projects, loading, updateProjectDatabase, showError, exitError } = useProjectsDataContext();
   const { isSidebarOpen } = useNavbarUIContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
@@ -60,7 +60,7 @@ export const ProjectOverview = () => {
     const previousValue = originalValue
 
     try {
-      await updateProjectProperty(project, 'description', value)
+      await updateProjectDatabase(project, 'description', value)
       setOriginalValue(value);
     } catch {
       setValue(previousValue);
@@ -74,7 +74,7 @@ export const ProjectOverview = () => {
         textSize="text-lg"
         initialWidth={200}
         maxGrowthWidth={725}
-        onConfirmChange={(newName) => updateProjectProperty(project, 'descriptionTitle', newName)}
+        onConfirmChange={(newName) => updateProjectDatabase(project, 'descriptionTitle', newName)}
         placeholder="Project Description..."
         initialText={project.descriptionTitle}
       />

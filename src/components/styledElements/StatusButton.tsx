@@ -13,7 +13,7 @@ interface Props {
 
 const StatusButton = ({ status }: Props) => {
   const { id } = useParams()
-  const { projects, updateProjectProperty, showError, exitError } = useProjectsDataContext()
+  const { projects, updateProjectDatabase, showError, exitError } = useProjectsDataContext()
   const { isSidebarOpen } = useNavbarUIContext()
 
   const [displayError, setDisplayError] = useState(false)
@@ -51,7 +51,7 @@ const StatusButton = ({ status }: Props) => {
     setStatusChangeOpen(false);
 
     try {
-      await updateProjectProperty(project, 'status', newStatus);
+      await updateProjectDatabase(project, 'status', newStatus);
     } catch {
       showError(setDisplayError, errorTimeoutRef)
     }

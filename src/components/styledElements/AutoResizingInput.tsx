@@ -38,7 +38,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
     }
   }, [text, initialWidth, maxGrowthWidth]);
 
-  const updateDatabase = async () => {
+  const updateInput = async () => {
     const previousValue = originalText;
   
     if (text.trim() && text !== originalText) {
@@ -56,13 +56,13 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      await updateDatabase();
+      await updateInput();
       inputRef.current?.blur();
     }
   };
   
   const handleBlur = async () => {
-    await updateDatabase();
+    await updateInput();
   };
 
   return (

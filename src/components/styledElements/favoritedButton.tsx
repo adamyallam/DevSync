@@ -9,7 +9,7 @@ interface Props {favorited: boolean;}
 
 export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
   const { id } = useParams()
-  const { projects, updateProjectProperty, exitError, showError } = useProjectsDataContext()
+  const { projects, updateProjectDatabase, exitError, showError } = useProjectsDataContext()
 
   const project = projects?.find((project) => project.id.toString() === id);
 
@@ -23,7 +23,7 @@ export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
     setIsDisabled(true);
 
     try {
-      await updateProjectProperty(project, 'favorited', !favorited)
+      await updateProjectDatabase(project, 'favorited', !favorited)
     } catch { 
       showError(setDisplayError, errorTimeoutRef)
     } finally {
