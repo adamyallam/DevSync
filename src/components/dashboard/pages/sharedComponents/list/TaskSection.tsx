@@ -8,9 +8,10 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 
 interface Props {
   isFirstSection: boolean
+  sectionTitle: string
 }
 
-export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
+export const TaskSection: React.FC<Props> = ( {isFirstSection = false, sectionTitle} ) => {
   const [tasks, setTasks] = useState<JSX.Element[]>([]);
 
   function addTask() {
@@ -28,7 +29,7 @@ export const TaskSection: React.FC<Props> = ( {isFirstSection = false} ) => {
     <div className="mt-6 w-full">
       <div className="flex ml-8 mt-2 mb-2">
         <button className="text-secondary-text"><ChevronDown size={18}/></button>
-        <AutoResizingInput initialWidth={115} initialText="New Section"/>
+        <AutoResizingInput initialWidth={115} initialText={sectionTitle}/>
         <button className="text-secondary-text ml-0.5"><Plus size={16} strokeWidth={3}/></button>
       </div>
 
