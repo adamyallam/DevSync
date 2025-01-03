@@ -9,28 +9,21 @@ export async function createUser(userData: object) {
   const user = await prisma.user.create({
     data: {
       ...userData,
-      ownedProjects: {
+      projects: {
         create: {
-          name: "Default Project", // Or any default value you want
+          name: "Default Project",
           description: "This is your first project",
-          dueDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // Example due date, 1 month from now
-          members: {
-            connect: [] // We'll add this part below
+          dueDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+          sections: {
+            create: {
+              name: "Default Section",
+              description: 'This is your first section',
+            } // We'll add this part below
           }
         }
       }
     },
-    include: { ownedProjects: true }
-  });
-
-  // Now add the owner to the members list for the created project
-  await prisma.project.update({
-    where: { id: user.ownedProjects[0].id },
-    data: {
-      members: {
-        connect: { id: user.id } // Add the owner as a member
-      }
-    }
+    include: { projects: { include: { sections: true } } }
   });
 
   console.log("New user created with project and added to members!", user);

@@ -9,7 +9,14 @@ export async function createProject(userId: number, projectData: { name: string,
       data: {
         ...projectData,
         ownerID: userId,
+        sections: {
+          create: {
+            name: "Default Section",
+            description: 'This is your first section',
+          } 
+        }
       },
+      include: { sections: true }
     });
 
     console.log("New project was created:", project);
