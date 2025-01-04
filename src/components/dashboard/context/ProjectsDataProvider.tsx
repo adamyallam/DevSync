@@ -10,7 +10,8 @@ type ProjectsContextType = {
   projects: Project[] | null;
   loading: boolean;
   addProject: (project: Project) => void;
-  updateProjectProperty: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
+  updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
+  updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
   showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
   exitError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
 };
@@ -29,7 +30,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
 
-  const updateProject = (projectId: number, updates: Partial<{ name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
+  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
         project.id === projectId ? { ...project, ...updates } : project
@@ -58,7 +59,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     setDisplayError(false)
   }
 
-  const updateProjectProperty = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => {
+  const updateProjectDatabase = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => {
     if (!project || newValue === project[property]) return;
 
     try {
@@ -73,7 +74,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
       if (!res.ok) { throw new Error('Failed to update project') }
 
-      updateProject(project.id, { [property]: newValue });
+      updateProjectState(project.id, { [property]: newValue });
       console.log(`Project ${property} updated, new ${property}:`, newValue);
     } catch (err) {
       console.error(`Error updating project ${property}`);
@@ -103,7 +104,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectProperty, showError, exitError }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, showError, exitError, updateProjectState }}>
       {children}
     </ProjectsDataContext.Provider>
   );
