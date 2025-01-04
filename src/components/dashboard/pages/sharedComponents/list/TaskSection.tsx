@@ -29,7 +29,7 @@ export const TaskSection: React.FC<Props> = ( {isFirstSection = false, sectionTi
     <div className="mt-6 w-full">
       <div className="flex ml-8 mt-2 mb-2">
         <button className="text-secondary-text"><ChevronDown size={18}/></button>
-        <AutoResizingInput initialWidth={115} initialText={sectionTitle}/>
+        <AutoResizingInput initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section"/>
         <button className="text-secondary-text ml-0.5"><Plus size={16} strokeWidth={3}/></button>
       </div>
 
