@@ -1,11 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-export const db = prisma
+import prisma from '@/db/prisma'
 
 //All User related functions
 
 // function for creating a user
-export async function createUser(userData: object) {
+export async function createUser(userData: {firstName: string, lastName: string, username: string, email: string, password: string}) {
   const user = await prisma.user.create({
     data: {
       ...userData,
@@ -30,7 +28,7 @@ export async function createUser(userData: object) {
 }
 
 // function for deleting a user
-export async function deleteUser(userId: object) {
+export async function deleteUser(userId: {id: number}) {
   const deletedUser = await prisma.user.delete({
     where: userId
   })
@@ -38,7 +36,7 @@ export async function deleteUser(userId: object) {
 }
 
 //function for updating a user
-export async function updateUser(userId: object, updatedInfo: object) {
+export async function updateUser(userId: {id: number}, updatedInfo: object) {
   const updatedUser = await prisma.user.update({
     where: userId,
     data: updatedInfo

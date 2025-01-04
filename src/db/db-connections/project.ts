@@ -1,6 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-
+import prisma from '@/db/prisma'
 
 // function for creating a project
 export async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string, defaultView?: string }) {
@@ -28,7 +26,7 @@ export async function createProject(userId: number, projectData: { name: string,
 }
 
 // function for deleting a project
-export async function deleteProject(projectId: object) {
+export async function deleteProject(projectId: { id: number }) {
   const deletedProject = await prisma.project.delete({
     where: projectId
   })

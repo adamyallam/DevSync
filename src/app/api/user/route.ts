@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
-import { db, createUser, deleteUser, updateUser, readUser, readAllUsers } from "src/db/db-connections/user"
+import { createUser, deleteUser, updateUser, readUser, readAllUsers } from "src/db/db-connections/user"
 import { hash } from 'bcrypt'
 import authOptions from "../auth/[...nextauth]/authOptions"
 import { getServerSession } from 'next-auth'
+import prisma from "@/db/prisma"
 
 //API to add or "POST" a user (invokes "createUser")
 export const POST = async (req: NextRequest) => {
@@ -16,7 +17,7 @@ export const POST = async (req: NextRequest) => {
       const userData = { firstName, lastName, username, email, password: hashedPassword };
 
       // Check if email already exists
-      const existingEmail = await db.user.findUnique({
+      const existingEmail = await prisma.user.findUnique({
         where: { email }
       });
       if (existingEmail) {
@@ -24,7 +25,7 @@ export const POST = async (req: NextRequest) => {
       }
 
       // Check if username already exists
-      const existingUsername = await db.user.findUnique({
+      const existingUsername = await prisma.user.findUnique({
         where: { username }
       });
       if (existingUsername) {
@@ -74,7 +75,7 @@ export const PATCH = async (req: Request) => {
       const updatedInfo = { firstName, lastName, username, email, password }
 
       // check if email already exists
-      const existingEmail = await db.user.findUnique({
+      const existingEmail = await prisma.user.findUnique({
         where: {
           email: email
         }
@@ -86,7 +87,7 @@ export const PATCH = async (req: Request) => {
         )
       }
       // check if username already exists
-      const existingUsername = await db.user.findUnique({
+      const existingUsername = await prisma.user.findUnique({
         where: {
           username: username
         }

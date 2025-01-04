@@ -1,5 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+import prisma from '@/db/prisma'
 
 // function for creating a section
 export async function createSection(id: number) {
@@ -19,7 +18,7 @@ export async function createSection(id: number) {
 }
 
 // function for deleting a section
-export async function deleteSection(sectionId: object) {
+export async function deleteSection(sectionId: {id: number}) {
   const deletedsection = await prisma.section.delete({
     where: sectionId
   })
@@ -27,7 +26,7 @@ export async function deleteSection(sectionId: object) {
 }
 
 //function for updating a section
-export async function updateSection(sectionId: object, updatedInfo: object) {
+export async function updateSection(sectionId: {id: number}, updatedInfo: object) {
   const updatedsection = await prisma.section.update({
     where: sectionId,
     data: updatedInfo
