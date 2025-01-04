@@ -27,7 +27,6 @@ export async function createUser(userData: object) {
   });
 
   console.log("New user created with project and added to members!", user);
-  await prisma.$disconnect();
 }
 
 // function for deleting a user
@@ -36,7 +35,6 @@ export async function deleteUser(userId: object) {
     where: userId
   })
   console.log(`User was deleted!`, deletedUser)
-  await prisma.$disconnect()
 }
 
 //function for updating a user
@@ -46,7 +44,6 @@ export async function updateUser(userId: object, updatedInfo: object) {
     data: updatedInfo
   })
   console.log("User's info was updated!", updatedUser)
-  await prisma.$disconnect()
 }
 
 //function for reading one user
@@ -59,14 +56,12 @@ export async function readUser(id: number) {
   } else {
     console.log("User was read!", user)
   }
-  await prisma.$disconnect()
 }
 
 //function for reading all users
 export async function readAllUsers() {
   const users = await prisma.user.findMany()
   console.log("All users were read!", users)
-  await prisma.$disconnect()
 }
 
 

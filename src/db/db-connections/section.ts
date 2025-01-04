@@ -15,8 +15,6 @@ export async function createSection(id: number) {
   } catch (error) {
     console.error("Error in createProject function:", error);
     throw new Error("Failed to create project in database.");
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -26,7 +24,6 @@ export async function deleteSection(sectionId: object) {
     where: sectionId
   })
   console.log("Section was deleted!", deletedsection)
-  await prisma.$disconnect()
 }
 
 //function for updating a section
@@ -36,7 +33,6 @@ export async function updateSection(sectionId: object, updatedInfo: object) {
     data: updatedInfo
   })
   console.log("Section's info was updated!", updatedsection)
-  await prisma.$disconnect()
 }
 
 //function for reading a section
@@ -49,14 +45,12 @@ export async function readSection(id: number) {
   } else {
     console.log("section was read!", section)
   }
-  await prisma.$disconnect()
 }
 
 //function for reading all sections
 export async function readAllSections() {
   const sections = await prisma.section.findMany()
   console.log("All sections were read!", sections)
-  await prisma.$disconnect()
 }
 
 

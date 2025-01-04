@@ -24,8 +24,6 @@ export async function createProject(userId: number, projectData: { name: string,
   } catch (error) {
     console.error("Error in createProject function:", error);
     throw new Error("Failed to create project in database.");
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -35,7 +33,6 @@ export async function deleteProject(projectId: object) {
     where: projectId
   })
   console.log("Project was deleted!", deletedProject)
-  await prisma.$disconnect()
 }
 
 
@@ -46,7 +43,6 @@ export async function updateProject(projectId: { id: number }, fieldsToUpdate: o
     data: fieldsToUpdate,
   });
   console.log("Project's info was updated!", updatedProject);
-  await prisma.$disconnect()
 
   return updatedProject;
 }
@@ -62,7 +58,6 @@ export async function readProject(id: number) {
   } else {
     console.log("Project was read!", project)
   }
-  await prisma.$disconnect()
 }
 
 //function for reading all projects
@@ -76,7 +71,6 @@ export async function readAllProjects(id: number) {
     }
   });
   console.log("All projects were read!", projects)
-  await prisma.$disconnect()
   return projects
 }
 
