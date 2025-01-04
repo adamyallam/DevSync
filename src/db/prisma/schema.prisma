@@ -63,7 +63,7 @@ model Section {
   project   Project @relation(fields: [projectID], references: [id])
   tasks     Task[]
 
-  name        String?   @db.VarChar(60)
+  name        String?   @default("") @db.VarChar(60)
   description String?   @db.VarChar(300)
   status      Status?   @default(SetStatus)
   dueDate     DateTime?
