@@ -7,11 +7,11 @@ import { getServerSession } from 'next-auth'
 //API to add or "POST" a section (invokes "createsection")
 export const POST = async (req: Request) => {
   const session = await getServerSession(authOptions)
-  const { projectId } = await req.json()
+  const { projectID } = await req.json()
 
   try {
     if (session) {
-      const newSection = await createSection(projectId)
+      const newSection = await createSection(projectID)
 
       return NextResponse.json(
         { message: 'New section created!', section: newSection },
