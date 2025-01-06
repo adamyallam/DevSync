@@ -12,6 +12,7 @@ type ProjectsContextType = {
   addProject: (project: Project) => void;
   updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
   updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
+  updateSectionDatabase: (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => void;
   showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
   exitError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
 };
@@ -75,12 +76,33 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
       if (!res.ok) { throw new Error('Failed to update project') }
 
       updateProjectState(project.id, { [property]: newValue });
-      console.log(`Project ${property} updated, new ${property}:`, newValue);
     } catch (err) {
       console.error(`Error updating project ${property}`);
       throw err
     }
   };
+
+  const updateSectionDatabase = async (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => {
+    if (!section || newValue === section[property] || !project) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/section`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: section.id,
+          [property]: newValue,
+        }),
+      });
+
+      if (!res.ok) { throw new Error('Failed to update section') }
+      
+      updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
+    } catch (err) {
+      console.error(`Error updating section ${property}`);
+      throw err
+    }
+  }
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -104,7 +126,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, showError, exitError, updateProjectState }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, showError, exitError, updateProjectState }}>
       {children}
     </ProjectsDataContext.Provider>
   );
