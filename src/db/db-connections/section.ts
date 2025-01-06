@@ -26,12 +26,14 @@ export async function deleteSection(sectionId: {id: number}) {
 }
 
 //function for updating a section
-export async function updateSection(sectionId: {id: number}, updatedInfo: object) {
+export async function updateSection(sectionId: {id: number}, fieldsToUpdate: object) {
   const updatedsection = await prisma.section.update({
     where: sectionId,
-    data: updatedInfo
+    data: fieldsToUpdate
   })
+  
   console.log("Section's info was updated!", updatedsection)
+  return updatedsection
 }
 
 //function for reading a section
