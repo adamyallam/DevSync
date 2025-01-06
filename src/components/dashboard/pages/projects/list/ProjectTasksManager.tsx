@@ -3,12 +3,19 @@ import { ChevronDown } from "lucide-react"
 
 // Component Imports
 import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton";
+import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
+import { ProjectTasksManagerSkeleton } from "@/components/styledElements/LoadingElements";
 
 export const ProjectTasksManager = () => { 
+  const {loading} = useProjectsDataContext()
+
+  if (loading) {
+    return <ProjectTasksManagerSkeleton />
+  }
 
   return (
     <div className="w-full">
-      <AddTaskHeaderButton />
+      <AddTaskHeaderButton showFilterSort={false}/>
 
       <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-t-2 border-undertone gap-2 ml-8 h-10 w-[95%] pr-[1px] transition-all duration-300`}>
         <div className={`flex justify-between border-r-2 border-undertone ml-2 col-span-4`}>

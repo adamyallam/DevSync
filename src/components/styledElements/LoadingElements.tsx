@@ -146,6 +146,36 @@ export const StatusLogSkeletonLoader = () => {
   );
 };
 
+export const ProjectTasksManagerSkeleton = () => {
+  return (
+    <div className="animate-pulse w-full">
+      <div className="h-7 w-20 bg-gray-300 rounded mb-2 mt-2 ml-8"></div>
+
+      <div className="grid grid-cols-10 grid-rows-1 border-b-2 border-t-2 border-gray-300 gap-2 ml-8 h-10 w-[95%] pr-[1px]">
+        <div className="flex justify-between items-center border-r-2 border-gray-300 ml-2 col-span-4">
+          <div className="h-4 w-24 bg-gray-300 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded mr-2"></div>
+        </div>
+
+        <div className="flex justify-between items-center border-r-2 border-gray-300 col-span-2">
+          <div className="h-4 w-16 bg-gray-300 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded mr-2"></div>
+        </div>
+
+        <div className="flex justify-between items-center border-r-2 border-gray-300 col-span-2">
+          <div className="h-4 w-16 bg-gray-300 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded mr-2"></div>
+        </div>
+
+        <div className="flex justify-between items-center col-span-2">
+          <div className="h-4 w-16 bg-gray-300 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded mr-2"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const TaskSectionSkeletonLoader = () => {
   return (
     <div className="animate-pulse">
