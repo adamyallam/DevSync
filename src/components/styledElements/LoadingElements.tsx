@@ -104,46 +104,70 @@ export const OverviewSkeletonLoader = () => {
 
 export const StatusLogSkeletonLoader = () => {
   return (
-      <div className="border border-undertone bg-highlighted p-4 h-[700px] w-[319px] overflow-y-auto animate-pulse">
-        <div className="ml-5">
-          <div className="h-4 w-24 bg-gray-300 rounded mb-4" />
-          <div className="flex gap-4 mt-3">
-            <div className="h-6 w-20 bg-gray-300 rounded-md" />
-            <div className="h-6 w-20 bg-gray-300 rounded-md" />
-            <div className="h-6 w-20 bg-gray-300 rounded-md" />
-            <div className="h-6 w-6 bg-gray-300 rounded-full" />
+    <div className="border border-undertone bg-highlighted p-4 h-[700px] w-[319px] overflow-y-auto animate-pulse">
+      <div className="ml-5">
+        <div className="h-4 w-24 bg-gray-300 rounded mb-4" />
+        <div className="flex gap-4 mt-3">
+          <div className="h-6 w-20 bg-gray-300 rounded-md" />
+          <div className="h-6 w-20 bg-gray-300 rounded-md" />
+          <div className="h-6 w-20 bg-gray-300 rounded-md" />
+          <div className="h-6 w-6 bg-gray-300 rounded-full" />
+        </div>
+      </div>
+      <div className="ml-3 text-sm text-primary-text">
+        <div className="flex items-center gap-2 mt-12">
+          <div className="flex justify-center items-center border border-dashed rounded-full border-secondary-text w-7 h-7 bg-gray-300" />
+          <div className="h-4 w-32 bg-gray-300 rounded" />
+        </div>
+        <div className="ml-[13px] mt-1 border border-undertone border-dashed w-0 h-12" />
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <div className="w-5 h-5 bg-gray-300 rounded-full" />
+            <div className="ml-[9px] mt-1 border border-undertone w-0 h-24" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="h-4 w-36 bg-gray-300 rounded" />
+            <div className="h-3 w-24 bg-gray-300 rounded" />
+            <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
           </div>
         </div>
-        <div className="ml-3 text-sm text-primary-text">
-          <div className="flex items-center gap-2 mt-12">
-            <div className="flex justify-center items-center border border-dashed rounded-full border-secondary-text w-7 h-7 bg-gray-300" />
-            <div className="h-4 w-32 bg-gray-300 rounded" />
+        <div className="flex gap-2 ml-1 mt-1">
+          <div className="flex flex-col">
+            <div className="w-5 h-5 bg-gray-300 rounded-full" />
           </div>
-          <div className="ml-[13px] mt-1 border border-undertone border-dashed w-0 h-12" />
-          <div className="flex gap-2 ml-1 mt-1">
-            <div className="flex flex-col">
-              <div className="w-5 h-5 bg-gray-300 rounded-full" />
-              <div className="ml-[9px] mt-1 border border-undertone w-0 h-24" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="h-4 w-36 bg-gray-300 rounded" />
-              <div className="h-3 w-24 bg-gray-300 rounded" />
-              <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
-            </div>
-          </div>
-          <div className="flex gap-2 ml-1 mt-1">
-            <div className="flex flex-col">
-              <div className="w-5 h-5 bg-gray-300 rounded-full" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="h-4 w-40 bg-gray-300 rounded" />
-              <div className="h-3 w-24 bg-gray-300 rounded" />
-              <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
-            </div>
+          <div className="flex flex-col gap-2">
+            <div className="h-4 w-40 bg-gray-300 rounded" />
+            <div className="h-3 w-24 bg-gray-300 rounded" />
+            <div className="border bg-gray-300 rounded-full w-7 h-7 mt-2" />
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
+export const TaskSectionSkeletonLoader = () => {
+  return (
+    <div className="animate-pulse">
+      {[...Array(3)].map((_, index) => (
+        <div key={index}>
+          <div className="mt-6 w-full">
+            <div className="flex ml-8 mt-2 mb-2">
+              <div className="h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="ml-2 h-6 w-[115px] bg-gray-300 rounded"></div>
+              <div className="h-4 w-4 bg-gray-300 rounded ml-1"></div>
+            </div>
 
+            <div className="w-[96%] ml-8 h-2 bg-gray-300 rounded"></div>
+
+            <div className="ml-8 mt-4 space-y-2">
+              <div className="h-4 w-[80%] bg-gray-300 rounded"></div>
+            </div>
+
+            <div className="ml-12 mt-2 h-4 w-[100px] bg-gray-300 rounded"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}

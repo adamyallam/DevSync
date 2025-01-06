@@ -3,12 +3,17 @@ import { Plus } from "lucide-react"
 import TaskSection from "./TaskSection"
 import { useParams } from "next/navigation"
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider"
+import { TaskSectionSkeletonLoader } from "@/components/styledElements/LoadingElements"
 
 export const CreateTaskSection = () => {
-  const { projects, updateProjectState } = useProjectsDataContext()
+  const { projects, updateProjectState, loading } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
   const project = projects?.find((project) => project.id.toString() === id);
+
+  if (loading) {
+    return <TaskSectionSkeletonLoader />
+  }
 
   if (!project || !project.sections) {
     return <div className='mt-16 ml-8 text-2xl'>No sections found</div>;
