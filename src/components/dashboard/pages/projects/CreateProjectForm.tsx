@@ -23,8 +23,8 @@ const CreateProjectForm = () => {
   const [projectData, setProjectData] = useState<ProjectData>(initialState)
   const [isNameValid, setIsNameValid] = useState(false);
   const [isDescriptionValid, setIsDescriptionValid] = useState(false);
+  
   const [displayError, setDisplayError] = useState(false);
-
   const errorTimeoutRef = useRef<number | null>(null);
 
   const updateProjectData = (property: keyof ProjectData, newValue: string | Date | null) => {
