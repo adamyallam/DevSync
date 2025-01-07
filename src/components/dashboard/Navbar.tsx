@@ -141,7 +141,7 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-      <CreateProjectForm isOpen={isCreateProjectFormOpen} onClose={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} />
+      <CreateProjectForm />
     </div>
   )
 }
