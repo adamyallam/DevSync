@@ -20,6 +20,8 @@ const CreateProjectForm = () => {
   }
 
   const [projectData, setProjectData] = useState<ProjectData>(initialState)
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isDescriptionValid, setIsDescriptionValid] = useState(false);
 
   const updateProjectData = (property: keyof ProjectData, newValue: string | Date | null) => {
     setProjectData((prevData) => ({
@@ -32,9 +34,6 @@ const CreateProjectForm = () => {
     toggleCreateProjectForm(!isCreateProjectFormOpen)
     setProjectData(initialState)
   }
-
-  const [isNameValid, setIsNameValid] = useState(false);
-  const [isDescriptionValid, setIsDescriptionValid] = useState(false);
 
   const createProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
