@@ -27,6 +27,27 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/project");
+        const data = await res.json();
+
+        if (data.projects) {
+          setProjects(data.projects);
+        } else {
+          console.error('No projects found')
+        }
+      } catch (err) {
+        return { message: 'failed to get projects', err }
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects();
+  }, [])
+
   const addProject = (project: Project) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
@@ -103,27 +124,6 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
       throw err
     }
   }
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/project");
-        const data = await res.json();
-
-        if (data.projects) {
-          setProjects(data.projects);
-        } else {
-          console.error('No projects found')
-        }
-      } catch (err) {
-        return { message: 'failed to get projects', err }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchProjects();
-  }, [])
 
   return (
     <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, showError, exitError, updateProjectState }}>

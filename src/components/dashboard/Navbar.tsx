@@ -7,8 +7,6 @@ import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
 import { motion, AnimatePresence } from 'framer-motion'
-
-//component imports
 import ProjectLink from '../styledElements/ProjectLink';
 import { BouncingDots } from '../styledElements/LoadingElements';
 import CreateProjectForm from './pages/projects/CreateProjectForm';
