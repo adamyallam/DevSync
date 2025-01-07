@@ -17,7 +17,7 @@ export const ProjectsCard = () => {
         <button className="flex items-center gap-0.5 text-xs ml-2 text-secondary-text hover:font-semibold hover:scale-105 transition-transform">Recents<ChevronDown size={14} strokeWidth={3}  className="mt-1"/></button>
       </div>
 
-      <div className="grid grid-cols-2 gap-y-6 ml-8 w-[90%] h-[40%] mt-8 pb-5">
+      <div className="grid grid-cols-2 gap-y-6 ml-8 w-[90%] mt-8 pb-5">
         {projects?.length ? (
           <>
             <button className="flex items-center hover:bg-highlighted p-2 rounded-md">
