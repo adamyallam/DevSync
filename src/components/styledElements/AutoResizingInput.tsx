@@ -41,9 +41,9 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
   const updateInput = async () => {
     const previousValue = originalText;
   
-    if (text.trim() && text !== originalText) {
+    if (text.trim() && text !== originalText && onConfirmChange) {
       try {
-        await onConfirmChange?.(text);
+        await onConfirmChange(text);
         setOriginalText(text);
       } catch {
         setText(previousValue);
