@@ -53,7 +53,7 @@ export const CreateTaskSection = () => {
     <div className="w-full">
       <div className="w-full">
         {project.sections.map((section) => (
-          <TaskSection key={String(section.id)} sectionId={section.id} isFirstSection={project.sections.length === 0} sectionTitle={section.name || ''} />
+          <TaskSection key={String(section.id)} sectionId={section.id} sectionTitle={section.name || ''} />
         ))}
       </div>
 
