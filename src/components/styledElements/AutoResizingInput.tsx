@@ -7,17 +7,17 @@ interface AutoResizingInputProps {
   placeholder?: string;
   initialText?: string;
   maxGrowthWidth?: number;
-  textSize?: string;
+  textStyles?: string;
   onConfirmChange?: (newName: string) => void;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textSize, onConfirmChange }) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textStyles, onConfirmChange }) => {
   const {showError, exitError} = useProjectsDataContext()
 
-  const [text, setText] = useState(`${initialText}`)
-  const [originalText, setOriginalText] = useState(`${initialText}`);
+  const [text, setText] = useState(initialText || '')
+  const [originalText, setOriginalText] = useState(initialText || '');
   const [displayError, setDisplayError] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,8 +66,8 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
   };
 
   return (
-    <div className='flex flex-col justify-center'>
-      <div>
+    <div className='flex flex-col justify-center h-full'>
+      <div className='h-full'>
         <input
           type="text"
           placeholder={placeholder}
@@ -76,10 +76,10 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
           ref={inputRef}
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
-          className={`pl-1 px-1 ${textSize ? `${textSize}` : 'text-sm'} bg-secondary text-primary-text rounded-sm font-bold hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
+          className={`pl-1 px-1 ${textStyles ? `${textStyles}` : 'text-sm font-bold'} h-full bg-secondary text-primary-text rounded-sm hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text`}
           style={{ width: `${initialWidth}px` }}>
         </input>
-        <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${textSize ? `${textSize}` : 'text-sm'} font-bold`}>
+        <span ref={spanRef} className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${textStyles ? `${textStyles}` : 'text-sm font-bold'} `}>
           {text}
         </span>
       </div>
