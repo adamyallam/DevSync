@@ -59,7 +59,7 @@ const CreateProjectForm = () => {
         body: JSON.stringify(projectData)
       });
 
-      if (!res.ok) { throw new Error('Failed to update project') }
+      if (!res.ok) { throw new Error('Failed to create project') }
 
       const result = await res.json();
 
@@ -96,7 +96,7 @@ const CreateProjectForm = () => {
         ) : (
           <form onSubmit={createProject} className='flex flex-col w-full h-full pt-6'>
             <div className='flex w-full h-[100%]'>
-              <div className='flex flex-col justify-center items-center w-full h-full'>
+              <div className='flex flex-col gap-5 justify-center items-center w-full h-full'>
 
                 <div className='flex flex-col self-start w-[93%] ml-9 h-[20%]'>
                   <span className='text-xs font-semibold'>* Project Name:</span>
