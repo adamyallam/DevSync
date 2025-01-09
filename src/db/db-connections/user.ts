@@ -1,34 +1,27 @@
 import prisma from '@/db/prisma'
+import { getEndOfNextMonth } from '@/utils/dateFunctions/getDateFunctions';
 
 //All User related functions
 
 // function for creating a user
-export async function createUser(userData: {firstName: string, lastName: string, username: string, email: string, password: string}) {
-  const user = await prisma.user.create({
-    data: {
-      ...userData,
-      projects: {
-        create: {
-          name: "Default Project",
-          description: "This is your first project",
-          dueDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-          sections: {
-            create: {
-              name: "Default Section",
-              description: 'This is your first section',
-            } // We'll add this part below
-          }
-        }
-      }
-    },
-    include: { projects: { include: { sections: true } } }
-  });
+export async function createUser(userData: { firstName: string, lastName: string, username: string, email: string, password: string }) {
+  try {
+    const user = await prisma.user.create({
+      data: {
+        ...userData
+      },
+    });
 
-  console.log("New user created with project and added to members!", user);
+    console.log('User created:', user);
+    return user;
+  } catch (err) {
+    console.error("Error in createProject function:", err);
+    throw new Error("Failed to create project in database.");
+  }
 }
 
 // function for deleting a user
-export async function deleteUser(userId: {id: number}) {
+export async function deleteUser(userId: { id: number }) {
   const deletedUser = await prisma.user.delete({
     where: userId
   })
@@ -36,7 +29,7 @@ export async function deleteUser(userId: {id: number}) {
 }
 
 //function for updating a user
-export async function updateUser(userId: {id: number}, updatedInfo: object) {
+export async function updateUser(userId: { id: number }, updatedInfo: object) {
   const updatedUser = await prisma.user.update({
     where: userId,
     data: updatedInfo
