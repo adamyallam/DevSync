@@ -2,15 +2,15 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Status } from '@prisma/client';
 
-type Section = { id: number; name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
-
-type Project = { id: number; sections: Section[], name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
+type Task = { id: number; name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
+type Section = { id: number; tasks: Task[], name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
+type Project = { id: number; sections: Section[], tasks: Task[], name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
 
 type ProjectsContextType = {
   projects: Project[] | null;
   loading: boolean;
   addProject: (project: Project) => void;
-  updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
+  updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
   updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
   updateSectionDatabase: (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => void;
   showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
@@ -52,7 +52,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
 
-  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
+  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
         project.id === projectId ? { ...project, ...updates } : project
@@ -61,7 +61,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   };
 
   const showError = (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => {
-    console.log('Failed to update project status')
+    console.log('Failed to update')
     setDisplayError(true)
 
     if (timeoutRef.current) {
@@ -117,13 +117,35 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
       });
 
       if (!res.ok) { throw new Error('Failed to update section') }
-      
+
       updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
     } catch (err) {
       console.error(`Error updating section ${property}`);
       throw err
     }
   }
+
+  // const updateTaskDatabase = async (task: Task | null, section: Section | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => {
+  //   if (!task || newValue === task[property] || !project || !section) return;
+
+  //   try {
+  //     const res = await fetch(`http://localhost:3000/api/task`, {
+  //       method: 'PATCH',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         id: task.id,
+  //         [property]: newValue,
+  //       }),
+  //     });
+
+  //     if (!res.ok) { throw new Error('Failed to update section') }
+
+  //     updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
+  //   } catch (err) {
+  //     console.error(`Error updating section ${property}`);
+  //     throw err
+  //   }
+  // }
 
   return (
     <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, showError, exitError, updateProjectState }}>
