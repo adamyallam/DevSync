@@ -96,7 +96,7 @@ export async function readAllProjects(id: number) {
         ownerID: id
       },
       include: {
-        sections: {include: {tasks: true}},
+        sections: true,
         tasks: true
       }
     });
