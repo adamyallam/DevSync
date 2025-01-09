@@ -13,7 +13,7 @@ import CreateProjectForm from './pages/projects/CreateProjectForm';
 
 export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar, isCreateProjectFormOpen, toggleCreateProjectForm } = useNavbarUIContext();
-  const { projects } = useProjectsDataContext()
+  const { projects, loading } = useProjectsDataContext()
 
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
 
@@ -100,34 +100,39 @@ export const Navbar = () => {
               </button>
               <h1 className='font-semibold text-primary-text'>Projects</h1>
             </div>
-            {projects?.length ? (
-              <div className='w-full'>
-                <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} defaultView={projects[0].defaultView} />
-
-                <div className='w-full absolute'>
-                <AnimatePresence>
-                  {!isProjectsCollapsed &&
-                    projects.slice(1).map((project, index) => (
-                      <motion.div key={project.id} variants={projectAnimation} initial='hidden' animate='visible' exit='exit' custom={index} >
-                        <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
-                      </motion.div>
-                    ))
-                  }
-                  </AnimatePresence>
-                </div>
-
-                <div className={`${projects?.length <= 1 ? 'invisible' : ''} mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text transition-transform duration-500`} style={{ transform: isProjectsCollapsed ? 'translateY(0)' : `translateY(${(projects?.length || 0) * 32 - 32}px)` }} />
-              </div>
-            ) : (
+            {loading ? (
               <div className='flex flex-col w-full'>
                 <div className='ml-10 mt-3 mb-2'>
                   <BouncingDots color={'#D0E8E8'} />
                 </div>
                 <div className={`mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text`} />
               </div>
+            ) : !projects?.length ? (
+              <div className='w-full'>
+                <div className='w-full flex flex-col justify-center mt-1 hover:scale-105 transition-transform hover:cursor-pointer group'>
+                  <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-xs group-hover:font-semibold text-primary-text group-hover:text-secondary-text'>Create First Project</button>
+                  <div className='border-b w-1/2 self-center mt-1 group-hover:border-secondary-text' />
+                </div>
+              </div>
+            ) : (
+              <div className='w-full'>
+                <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} defaultView={projects[0].defaultView} />
+
+                <div className='w-full absolute'>
+                  <AnimatePresence>
+                    {!isProjectsCollapsed &&
+                      projects.slice(1).map((project, index) => (
+                        <motion.div key={String(project.id)} variants={projectAnimation} initial='hidden' animate='visible' exit='exit' custom={index} >
+                          <ProjectLink projectID={project.id} name={project.name} defaultView={project.defaultView} />
+                        </motion.div>
+                      ))
+                    }
+                  </AnimatePresence>
+                </div>
+
+                <div className={`${projects?.length <= 1 ? 'invisible' : ''} mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text transition-transform duration-500`} style={{ transform: isProjectsCollapsed ? 'translateY(0)' : `translateY(${(projects?.length || 0) * 32 - 32}px)` }} />
+              </div>
             )}
-
-
           </div>
         </div>
         <div className='w-full flex flex-col mt-auto items-center border-t-2 border-undertone pb-4'>
