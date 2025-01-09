@@ -4,6 +4,8 @@ import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider"
 import { useParams } from "next/navigation"
+import { useState, useRef } from "react"
+import ErrorMessage from "@/components/styledElements/ErrorMessage"
 
 interface Props {
   sectionTitle: string
@@ -11,13 +13,17 @@ interface Props {
 }
 
 export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle }) => {
-  const { projects, updateSectionDatabase, updateProjectState, showError } = useProjectsDataContext()
+  const { projects, updateSectionDatabase, updateProjectState, showError, exitError } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
   const project = projects?.find((project) => project.id.toString() === id);
   const section = project?.sections?.find((section) => section.id === sectionId);
+  const tasks = project?.tasks?.filter((task) => task.sectionID === sectionId);
 
-  if (!project || !section ) {
+  const [displayError, setDisplayError] = useState(false)
+  const errorTimeoutRef = useRef<number | null>(null);
+
+  if (!project || !section) {
     return <div className='mt-5 ml-8 text-2xl'>Can't retrieve data</div>;
   }
 
@@ -39,7 +45,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle }) => {
       updateProjectState(project.id, { tasks: [...project.tasks, result.task] });
       console.log("Task Created:", result.task);
     } catch (error) {
-      // showError(setDisplayError, errorTimeoutRef)
+      showError(setDisplayError, errorTimeoutRef)
       console.error("Error creating task:", error);
     }
   };
@@ -51,17 +57,22 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle }) => {
         <AutoResizingInput initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
         <button className="text-secondary-text ml-0.5"><Plus size={16} strokeWidth={3} /></button>
       </div>
-      {section.tasks ? (
+      {tasks ? (
         <div className="w-[96%] ml-8 border-undertone border-t-2">
-          {section.tasks.map((task) => (
-            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''}  />
+          {tasks.map((task) => (
+            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} />
           ))}
         </div>
       ) : (
         <div className="w-[96%] ml-8 border-undertone border-t-2"></div>
       )}
 
-      <button onClick={createTask} className="ml-12 mt-2 text-sm text-secondary-text font-semibold opacity-70 hover:opacity-100 hover:scale-105 transition-transform">Add task...</button>
+      <div className="flex items-center">
+        <button onClick={createTask} className="ml-12 mt-2 text-sm text-secondary-text font-semibold opacity-70 hover:opacity-100 hover:scale-105 transition-transform">Add task...</button>
+        <div className="mt-2 ml-3">
+          <ErrorMessage arrowDirection={'left'} displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} />
+        </div>
+      </div>
     </div>
   )
 }
