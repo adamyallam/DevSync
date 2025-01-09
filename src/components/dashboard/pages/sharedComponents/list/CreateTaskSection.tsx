@@ -22,7 +22,7 @@ export const CreateTaskSection = () => {
   }
 
   if (!project || !project.sections) {
-    return <div className='mt-16 ml-8 text-2xl'>No sections found</div>;
+    return <div className='mt-16 ml-8 text-2xl'>Can't retrieve data</div>;
   }
 
   const createSection = async () => {
@@ -53,7 +53,7 @@ export const CreateTaskSection = () => {
     <div className="w-full">
       <div className="w-full">
         {project.sections.map((section) => (
-          <TaskSection key={section.id} sectionId={section.id} isFirstSection={project.sections.length === 0} sectionTitle={section.name || ''} />
+          <TaskSection key={String(section.id)} sectionId={section.id} isFirstSection={project.sections.length === 0} sectionTitle={section.name || ''} />
         ))}
       </div>
 
