@@ -48,18 +48,6 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     fetchProjects();
   }, [])
 
-  const addProject = (project: Project) => {
-    setProjects((prevProjects) => [...prevProjects, project]);
-  };
-
-  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
-    setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === projectId ? { ...project, ...updates } : project
-      )
-    );
-  };
-
   const showError = (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => {
     console.log('Failed to update')
     setDisplayError(true)
@@ -80,6 +68,18 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
     setDisplayError(false)
   }
+
+  const addProject = (project: Project) => {
+    setProjects((prevProjects) => [...prevProjects, project]);
+  };
+
+  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId ? { ...project, ...updates } : project
+      )
+    );
+  };
 
   const updateProjectDatabase = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => {
     if (!project || newValue === project[property]) return;
