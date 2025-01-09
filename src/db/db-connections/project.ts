@@ -6,19 +6,49 @@ export async function createProject(userId: number, projectData: { name: string,
     const project = await prisma.project.create({
       data: {
         ...projectData,
-        ownerID: userId,
-        sections: {
-          create: {
-            name: "Default Section",
-            description: 'This is your first section',
-          } 
-        }
+        owner: {
+          connect: { id: userId },
+        },
       },
-      include: { sections: true }
     });
 
-    console.log("New project was created:", project);
-    return project;
+    const section = await prisma.section.create({
+      data: {
+        name: "Default Section",
+        description: "This is the first section of the project.",
+        project: {
+          connect: { id: project.id },
+        },
+      },
+    });
+
+    const task = await prisma.task.create({
+      data: {
+        name: "Default Task",
+        description: "This is the first task of the section.",
+        project: {
+          connect: { id: project.id },
+        },
+        section: {
+          connect: { id: section.id },
+        },
+      },
+    });
+
+    const projectWithRelations = await prisma.project.findUnique({
+      where: { id: project.id },
+      include: {
+        sections: {
+          include: {
+            tasks: true,
+          },
+        },
+        tasks: true,
+      },
+    });
+
+    console.log("Project created:", projectWithRelations);
+    return projectWithRelations
   } catch (error) {
     console.error("Error in createProject function:", error);
     throw new Error("Failed to create project in database.");
@@ -60,16 +90,22 @@ export async function readProject(id: number) {
 
 //function for reading all projects
 export async function readAllProjects(id: number) {
-  const projects = await prisma.project.findMany({
-    where: {
-      ownerID: id
-    },
-    include: {
-      sections: true
-    }
-  });
-  console.log("All projects were read!", projects)
-  return projects
+  try {
+    const projects = await prisma.project.findMany({
+      where: {
+        ownerID: id
+      },
+      include: {
+        sections: true,
+        tasks: true
+      }
+    });
+    console.log("All projects were read!", projects)
+    return projects
+  } catch (err) {
+    console.error("Error in readAllProjects function:", err);
+    throw new Error("Failed to read projects in database.");
+  }
 }
 
 export default { createProject, deleteProject, updateProject, readProject, readAllProjects };

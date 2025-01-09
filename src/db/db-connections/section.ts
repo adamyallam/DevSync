@@ -1,19 +1,21 @@
 import prisma from '@/db/prisma'
 
 // function for creating a section
-export async function createSection(id: number) {
+export async function createSection(projectId: number) {
   try {
     const section = await prisma.section.create({
       data: {
-        projectID: id
-      }
-    })
-    
-    console.log("New section was created!", section)
-    return section
+        project: {
+          connect: { id: projectId },
+        },
+      },
+    });
+
+    console.log('Section created:', section);
+    return section;
   } catch (error) {
-    console.error("Error in createProject function:", error);
-    throw new Error("Failed to create project in database.");
+    console.error("Error in createSection function:", error);
+    throw new Error("Failed to create section in database.");
   }
 }
 

@@ -1,17 +1,30 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+import prisma from '@/db/prisma'
 
 // function for creating a task
-export async function createTask(taskData: object) {
-  const task = await prisma.task.create({
-    data: taskData
-  })
-  console.log("New task created!", task)
-  // await prisma.task.deleteMany();
+export async function createTask(projectId: number, sectionId: number) {
+  try {
+    const task = await prisma.task.create({
+      data: {
+        project: {
+          connect: { id: projectId },
+        },
+        section: {
+          connect: { id: sectionId },
+        },
+      },
+    });
+
+    console.log('Task created:', task);
+
+    return task;
+  } catch (error) {
+    console.error("Error in createTask function:", error);
+    throw new Error("Failed to create task in database.");
+  }
 }
 
 // function for deleting a task
-export async function deleteTask(taskId: object) {
+export async function deleteTask(taskId: {id: number}) {
   const deletedtask = await prisma.task.delete({
     where: taskId
   })
@@ -19,7 +32,7 @@ export async function deleteTask(taskId: object) {
 }
 
 //function for updating a task
-export async function updateTask(taskId: object, updatedInfo: object) {
+export async function updateTask(taskId: {id: number}, updatedInfo: object) {
   const updatedtask = await prisma.task.update({
     where: taskId,
     data: updatedInfo
