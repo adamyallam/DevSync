@@ -1,24 +1,20 @@
 'use client'
 import { Plus, BadgeCheck, CalendarClock, ChevronDown, UserRoundSearch } from "lucide-react"
-import { useState } from "react";
+import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 
-// Component Imports
+interface Props {
+taskName: string,
+taskId: number
+}
 
-export const ProjectTask = () => { 
-  const [taskName, setTaskName] = useState('');
+export const ProjectTask: React.FC<Props> = ({taskName, taskId}) => { 
 
   return (
     <div className="w-full">
       <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 transition-all duration-300`}>
         <div className={`flex col-span-4 border-r-2 border-undertone`}>
           <button className="mr-1 ml-5"><BadgeCheck size={22} color="green"/></button>
-          <input 
-            type="text" 
-            placeholder="Name"
-            value={taskName} 
-            onChange={(e) => setTaskName(e.target.value)} 
-            className="text-sm w-full px-2 bg-secondary placeholder-primary-text text-primary-text"
-          />
+          <AutoResizingInput initialWidth={440} maxGrowthWidth={440} placeholder="Name" initialText={taskName} textStyles="text-sm"/>
         </div>
 
         <div className={`flex items-center justify-between border-r-2 border-undertone col-span-2`}>
