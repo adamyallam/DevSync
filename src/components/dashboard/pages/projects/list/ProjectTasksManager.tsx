@@ -24,12 +24,12 @@ export const ProjectTasksManager = () => {
         </div>
 
         <div className={`flex justify-between border-r-2 border-undertone col-span-2`}>
-          <button className="text-xs text-primary-text">Asignee</button>
+          <button className="text-xs text-primary-text">Due Date</button>
           <button className="mr-2 text-secondary-text"><ChevronDown size={16} className="mt-1"/></button>
         </div>
 
         <div className={`flex justify-between items-center border-r-2 border-undertone col-span-2`}>
-          <p className="text-xs text-primary-text">Due date</p>
+          <p className="text-xs text-primary-text">Status</p>
           <button className="mr-2 text-secondary-text"><ChevronDown size={16} className="mt-1"/></button>
         </div>
 

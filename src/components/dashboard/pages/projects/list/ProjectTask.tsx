@@ -28,17 +28,16 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
           <AutoResizingInput initialWidth={440} maxGrowthWidth={440} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
         </div>
 
-        <div className={`flex items-center justify-between border-r-2 border-undertone col-span-2`}>
-          <button className="w-full pl-1 text-primary-text"><UserRoundSearch size={22} /></button>
-          <button className="pr-2 text-secondary-text"><Plus size={18} /></button>
-        </div>
-
         <div className={`flex border-r-2 border-undertone col-span-2`}>
           <button className="w-full pl-1 text-primary-text"><CalendarClock size={22} /></button>
         </div>
 
+        <div className={`flex items-center justify-between border-r-2 border-undertone col-span-2`}>
+          <button className="w-full pl-1 text-primary-text"><UserRoundSearch size={22} /></button>
+        </div>
+
         <div className="self-center col-span-2">
-          <button className="flex items-center gap-1 text-primary-text"><div className="border rounded-full border-secondary-text w-3 h-3 ml-1 mr-1" />High<ChevronDown size={13} className="mt-1 text-secondary-text" /></button>
+          <button className="flex items-center gap-1 text-primary-text"><div className="border rounded-full border-secondary-text w-3 h-3 ml-1 mr-1" />High</button>
         </div>
       </div>
     </div>
