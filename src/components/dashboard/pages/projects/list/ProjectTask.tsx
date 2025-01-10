@@ -3,6 +3,7 @@ import { Plus, BadgeCheck, CalendarClock, ChevronDown, UserRoundSearch } from "l
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
+import DatePickerField from "@/components/styledElements/DatePickerField";
 
 interface Props {
   taskName: string,
@@ -28,12 +29,13 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
           <AutoResizingInput initialWidth={440} maxGrowthWidth={440} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
         </div>
 
-        <div className={`flex border-r-2 border-undertone col-span-2`}>
-          <button className="w-full pl-1 text-primary-text"><CalendarClock size={22} /></button>
+        <div className={`flex items-center gap-2 border-r-2 border-undertone col-span-2`}>
+          <button className={`pl-1 ${task.dueDate ? 'text-primary-text' : 'text-secondary-text'}`}><CalendarClock size={18} /></button>
+          <DatePickerField datePickerStyles={`w-[50%] text-sm border-b-2 border-secondary-text bg-secondary text-primary-text`} selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
         </div>
 
         <div className={`flex items-center justify-between border-r-2 border-undertone col-span-2`}>
-          <button className="w-full pl-1 text-primary-text"><UserRoundSearch size={22} /></button>
+          <button className="w-full pl-1 text-primary-text"><div className="h-3 w-3 border rounded-full border-white bg-white" /></button>
         </div>
 
         <div className="self-center col-span-2">
