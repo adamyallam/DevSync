@@ -51,6 +51,7 @@ model Task {
   name        String?   @default("") @db.VarChar(60)
   description String?   @default("New task") @db.VarChar(300)
   status      Status?   @default(SetStatus)
+  priority    Priority? @default(SetPriority)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -81,6 +82,13 @@ model Section {
 //   description String
 //   postedAt    DateTime @default(now())
 // }
+
+enum Priority {
+  SetPriority
+  High
+  Medium
+  Low
+}
 
 enum Status {
   SetStatus
