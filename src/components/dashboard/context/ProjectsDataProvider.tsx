@@ -1,8 +1,8 @@
 'use client'
 import React, { createContext, useState, useEffect } from 'react';
-import { Status } from '@prisma/client';
+import { Status, Priority } from '@prisma/client';
 
-type Task = { id: number; sectionID: number, name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
+type Task = { id: number; sectionID: number, name: string | null; description: string | null; status: Status | null; priority: Priority | null, dueDate: Date | null; createdAt: Date; updatedAt: Date; };
 type Section = { id: number; tasks: Task[], name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
 type Project = { id: number; sections: Section[], tasks: Task[], name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
 
@@ -13,7 +13,7 @@ type ProjectsContextType = {
   updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
   updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
   updateSectionDatabase: (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => void;
-  updateTaskDatabase: (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => void;
+  updateTaskDatabase: (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean | Date) => void;
   showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
   exitError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
 };
@@ -74,7 +74,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
 
-  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => {
+  const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status, priority: Priority }>) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
         project.id === projectId ? { ...project, ...updates } : project
@@ -126,7 +126,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => {
+  const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean | Date) => {
     if (!task || newValue === task[property] || !project) return;
 
     try {
