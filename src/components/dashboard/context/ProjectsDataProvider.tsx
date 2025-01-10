@@ -13,6 +13,7 @@ type ProjectsContextType = {
   updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
   updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
   updateSectionDatabase: (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => void;
+  updateTaskDatabase: (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => void;
   showError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
   exitError: (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => void;
 };
@@ -125,30 +126,30 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  // const updateTaskDatabase = async (task: Task | null, section: Section | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => {
-  //   if (!task || newValue === task[property] || !project || !section) return;
+  const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean) => {
+    if (!task || newValue === task[property] || !project) return;
 
-  //   try {
-  //     const res = await fetch(`http://localhost:3000/api/task`, {
-  //       method: 'PATCH',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         id: task.id,
-  //         [property]: newValue,
-  //       }),
-  //     });
+    try {
+      const res = await fetch(`http://localhost:3000/api/task`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: task.id,
+          [property]: newValue,
+        }),
+      });
 
-  //     if (!res.ok) { throw new Error('Failed to update section') }
+      if (!res.ok) { throw new Error('Failed to update task') }
 
-  //     updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
-  //   } catch (err) {
-  //     console.error(`Error updating section ${property}`);
-  //     throw err
-  //   }
-  // }
+      updateProjectState(project.id, { tasks: project.tasks.map((t) => t.id === task.id ? { ...t, [property]: newValue } : t), });
+    } catch (err) {
+      console.error(`Error updating task ${property}`);
+      throw err
+    }
+  }
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, showError, exitError, updateProjectState }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, updateTaskDatabase, showError, exitError, updateProjectState }}>
       {children}
     </ProjectsDataContext.Provider>
   );
