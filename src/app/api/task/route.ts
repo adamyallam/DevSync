@@ -55,16 +55,21 @@ export const DELETE = async (req: Request) => {
 
 //API to UPDATE a task (invokes "updatetask")
 export const PATCH = async (req: Request) => {
-  const { id, name, description } = await req.json();
+  const { id, ...fieldsToUpdate } = await req.json();
   const session = await getServerSession(authOptions)
+
+  if (!id || Object.keys(fieldsToUpdate).length === 0) {
+    return NextResponse.json(
+      { message: 'ID and at least one field to update are required.' },
+      { status: 400 }
+    );
+  }
 
   try {
     if (session) {
-      const taskId = { id }
-      const updatedInfo = { name, description }
-      updateTask(taskId, updatedInfo)
+      const updatedTask = await updateTask({ id }, fieldsToUpdate)
       return NextResponse.json(
-        { message: `task ${id} updated!` },
+        { message: `task ${id} updated!`, task: updatedTask },
         { status: 201 }
       )
     }

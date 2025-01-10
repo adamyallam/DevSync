@@ -32,12 +32,13 @@ export async function deleteTask(taskId: {id: number}) {
 }
 
 //function for updating a task
-export async function updateTask(taskId: {id: number}, updatedInfo: object) {
-  const updatedtask = await prisma.task.update({
+export async function updateTask(taskId: {id: number}, fieldsToUpdate: object) {
+  const updatedTask = await prisma.task.update({
     where: taskId,
-    data: updatedInfo
+    data: fieldsToUpdate
   })
-  console.log("Task's info was updated!", updatedtask)
+  console.log("Task's info was updated!", updatedTask)
+  return updatedTask
 }
 
 //function for reading a task
