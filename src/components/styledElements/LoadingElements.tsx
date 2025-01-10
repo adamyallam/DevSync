@@ -179,7 +179,7 @@ export const ProjectTasksManagerSkeleton = () => {
 export const TaskSectionSkeletonLoader = () => {
   return (
     <div className="animate-pulse">
-      {[...Array(3)].map((_, index) => (
+      {[...Array(4)].map((_, index) => (
         <div key={index}>
           <div className="mt-6 w-full">
             <div className="flex ml-8 mt-2 mb-2">
