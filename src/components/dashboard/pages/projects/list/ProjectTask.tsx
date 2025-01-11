@@ -5,6 +5,7 @@ import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider
 import { useParams } from "next/navigation";
 import DatePickerField from "@/components/styledElements/DatePickerField";
 import StatusButton from "@/components/styledElements/StatusButton";
+import PriorityButton from "@/components/styledElements/PriorityButton";
 
 interface Props {
   taskName: string,
@@ -35,12 +36,12 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
           <DatePickerField datePickerStyles={`w-[50%] text-sm border-b-2 border-secondary-text bg-secondary text-primary-text hover:cursor-pointer group-hover:scale-[1.05] transition-transform`} selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
         </div>
 
-        <div className={`w-full flex items-center border-r-2 border-undertone col-span-2`}>
-          <StatusButton project={project} task={task} model="task" status={task.status || 'No Status'} />
+        <div className="w-full flex items-center border-r-2 border-undertone col-span-2">
+          <PriorityButton project={project} task={task} priority={task.priority || 'No Priority'} />
         </div>
 
-        <div className="self-center col-span-2">
-          <button className="flex items-center gap-1 text-primary-text"><div className="border rounded-full border-secondary-text w-3 h-3 ml-1 mr-1" />High</button>
+        <div className={`w-full flex items-center col-span-2`}>
+          <StatusButton project={project} task={task} model="task" status={task.status || 'No Status'} />
         </div>
       </div>
     </div>
