@@ -27,7 +27,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
     <div className="w-full h-full">
       <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 transition-all duration-300`}>
         <div className={`flex col-span-4 border-r-2 border-undertone`}>
-          <button className="mr-1 ml-5"><BadgeCheck size={22} color="green" /></button>
+          <button className="mr-1 ml-5 hover:scale-110 transition-transform"><BadgeCheck size={22} color="green" /></button>
           <AutoResizingInput initialWidth={440} maxGrowthWidth={440} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
         </div>
 
