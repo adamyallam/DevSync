@@ -14,7 +14,7 @@ interface Props {
 }
 
 const StatusButton = ({ status, model, project, task }: Props) => {
-const { updateProjectDatabase, updateTaskDatabase, showError, exitError } = useProjectsDataContext()
+  const { updateProjectDatabase, updateTaskDatabase, showError, exitError } = useProjectsDataContext()
 
   const [displayError, setDisplayError] = useState(false)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
@@ -94,13 +94,13 @@ const { updateProjectDatabase, updateTaskDatabase, showError, exitError } = useP
               );
             })}
           </div>
-
-          <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-selected">
-            <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold transition-transform text-[10px] ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
-              <Check size={12} strokeWidth={3} />
-              {statusConfig['Complete'].label}
-            </button>
-          </div>
+          {!task &&
+            <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-selected">
+              <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold transition-transform text-[10px] ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
+                <Check size={12} strokeWidth={3} />
+                {statusConfig['Complete'].label}
+              </button>
+            </div>}
         </div>
       )}
     </div>
