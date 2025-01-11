@@ -66,8 +66,8 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
   };
 
   return (
-    <div className='flex flex-col justify-center h-full'>
-      <div className='h-full'>
+    <div className='flex flex-col justify-center'>
+      <div className=''>
         <input
           type="text"
           placeholder={placeholder}
