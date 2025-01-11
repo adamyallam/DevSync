@@ -65,8 +65,10 @@ export const Navbar = () => {
           <button className='pl-3 text-primary-text hover:text-secondary-text hover:scale-110 transition-transform' onClick={() => toggleSidebar(!isSidebarOpen)}>
             {isSidebarOpen ? <X /> : <MenuIcon />}
           </button>
+
           <button className='border bg-white rounded-full w-16 h-7'>Create</button>
         </div>
+
         <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
       </div>
       {/* Sidebar */}
@@ -74,17 +76,21 @@ export const Navbar = () => {
         <div className='bg-primary border-b border-undertone pt-2 pb-2'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
             <Home size={20} className='text-primary-text' strokeWidth={1.5} />
+
             <span className='ml-1 text-sm text-primary-text'>Home</span>
           </Link>
         </div>
+
         <div>
           <div className='relative pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
               <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${isProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleProjectsTab}>
                 <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
               </button>
+
               <h1 className='font-semibold text-primary-text'>Projects</h1>
             </div>
+
             {loading ? (
               <div className='flex flex-col w-full'>
                 <div className='ml-10 mt-3 mb-2'>
@@ -96,6 +102,7 @@ export const Navbar = () => {
               <div className='w-full'>
                 <div className='w-full flex flex-col justify-center mt-1 hover:scale-105 transition-transform hover:cursor-pointer group'>
                   <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-xs group-hover:font-semibold text-primary-text group-hover:text-secondary-text'>Create First Project</button>
+                  
                   <div className='border-b w-1/2 self-center mt-1 group-hover:border-secondary-text' />
                 </div>
               </div>
@@ -122,6 +129,7 @@ export const Navbar = () => {
         </div>
         <div className='w-full flex flex-col mt-auto items-center border-t-2 border-undertone pb-4'>
           <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-primary-text border-2 border-gray-300 p-2 w-10/12 mt-4 hover:font-semibold hover:text-secondary-text hover:border-[#89979E] hover:scale-105 transition-transform'>Create Project</button>
+          
           <div className='flex mt-2 gap-2'>
             <button><Instagram strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
             <button><Twitter strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
