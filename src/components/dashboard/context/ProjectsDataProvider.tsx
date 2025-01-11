@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Status, Priority } from '@prisma/client';
 
-export type Task = { id: number; sectionID: number, name: string | null; description: string | null; status: Status | null; priority: Priority | null, dueDate: Date | null; createdAt: Date; updatedAt: Date; };
+export type Task = { id: number; sectionID: number, name: string | null; description: string | null; status: Status | null; priority: Priority | null, completed: boolean, dueDate: Date | null; createdAt: Date; updatedAt: Date; };
 export type Section = { id: number; tasks: Task[], name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
 export type Project = { id: number; sections: Section[], tasks: Task[], name: string; descriptionTitle: string; description: string; defaultView: string; status: Status; favorited: boolean };
 
