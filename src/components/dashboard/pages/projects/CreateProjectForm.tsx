@@ -113,7 +113,7 @@ const CreateProjectForm = () => {
 
                   <div className={`group flex gap-2 w-full h-[40%] text-undertone border-b-4 hover:border-primary-text hover:text-secondary-text focus-within:border-primary-text pb-0.5 ${projectData.dueDate ? 'border-primary-text' : 'border-undertone'}`}>
                     <Calendar className={`group-focus-within:text-primary-text group-hover:text-primary-text flex self-center mb-1 ${projectData.dueDate ? 'text-primary-text' : ''}`} size={20} />
-                    <DatePickerField datePickerStyles={`w-full bg-primary text-primary-text outline-none focus:border-primary-text ${projectData.dueDate ? 'border-primary-text' : 'border-undertone'}`} selectedDate={projectData.dueDate} onDateChange={(date) => updateProjectData('dueDate', date)} />
+                    <DatePickerField datePickerStyles={`w-full bg-primary text-primary-text outline-none focus:border-primary-text hover:cursor-pointer ${projectData.dueDate ? 'border-primary-text' : 'border-undertone'}`} selectedDate={projectData.dueDate} onDateChange={(date) => updateProjectData('dueDate', date)} />
                   </div>
                 </div>
 
