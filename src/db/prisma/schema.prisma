@@ -52,6 +52,7 @@ model Task {
   description String?   @default("New task") @db.VarChar(300)
   status      Status?   @default(SetStatus)
   priority    Priority? @default(SetPriority)
+  completed   Boolean?  @default(false)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
