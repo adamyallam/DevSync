@@ -30,9 +30,9 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
           <AutoResizingInput initialWidth={440} maxGrowthWidth={440} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
         </div>
 
-        <div className={`flex items-center gap-2 border-r-2 border-undertone col-span-2`}>
+        <div className={`flex items-center gap-2 border-r-2 border-undertone col-span-2 group`}>
           <button className={`pl-1 ${task.dueDate ? 'text-primary-text' : 'text-secondary-text'}`}><CalendarClock size={18} /></button>
-          <DatePickerField datePickerStyles={`w-[50%] text-sm border-b-2 border-secondary-text bg-secondary text-primary-text`} selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
+          <DatePickerField datePickerStyles={`w-[50%] text-sm border-b-2 border-secondary-text bg-secondary text-primary-text hover:cursor-pointer group-hover:scale-[1.05] transition-transform`} selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
         </div>
 
         <div className={`w-full flex items-center border-r-2 border-undertone col-span-2`}>
