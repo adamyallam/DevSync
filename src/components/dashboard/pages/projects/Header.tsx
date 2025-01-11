@@ -6,8 +6,6 @@ import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calend
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import { statusConfig } from '@/utils/statusConfig'
-
-// Component Imports
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
@@ -45,7 +43,7 @@ export const Header = () => {
           <AutoResizingInput textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
           <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
           <FavoritedButton favorited={project.favorited}/>
-          <StatusButton status={project.status} />
+          <StatusButton project={project} model='project' status={project.status} />
         </div>
 
 
