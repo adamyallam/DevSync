@@ -1,9 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
-import { useParams } from "next/navigation";
 import { Check } from "lucide-react";
-import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import { statusConfig, StatusKey } from "@/utils/statusConfig";
 import ErrorMessage from "./ErrorMessage";
 import { Project, Task } from "../dashboard/context/ProjectsDataProvider";
@@ -17,7 +15,6 @@ interface Props {
 
 const StatusButton = ({ status, model, project, task }: Props) => {
 const { updateProjectDatabase, updateTaskDatabase, showError, exitError } = useProjectsDataContext()
-  const { isSidebarOpen } = useNavbarUIContext()
 
   const [displayError, setDisplayError] = useState(false)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
