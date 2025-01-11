@@ -67,7 +67,12 @@ const StatusButton = ({ status, model, project, task }: Props) => {
         await updateProjectDatabase(project, 'status', newStatus);
       } else if (model === 'task') {
         if (task) {
-          await updateTaskDatabase(task, project, 'status', newStatus);
+          if (newStatus === 'Complete') {
+            await updateTaskDatabase(task, project, 'status', newStatus);
+            await updateTaskDatabase(task, project, 'completed', true);
+          } else {
+            await updateTaskDatabase(task, project, 'status', newStatus);
+          }
         } else {
           throw new Error("can't find task")
         }
