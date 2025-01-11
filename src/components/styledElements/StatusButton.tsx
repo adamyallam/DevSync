@@ -48,6 +48,16 @@ const StatusButton = ({ status, model, project, task }: Props) => {
     };
   }, [statusChangeOpen]);
 
+
+  useEffect(() => {
+    if (task?.completed) {
+      changeStatus('Complete')
+    } else {
+      changeStatus('SetStatus')
+    }
+  }, [task?.completed])
+
+
   const changeStatus = async (newStatus: string) => {
     if (!project) return;
     setStatusChangeOpen(false);
@@ -94,13 +104,13 @@ const StatusButton = ({ status, model, project, task }: Props) => {
               );
             })}
           </div>
-          {!task &&
-            <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-selected">
-              <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold transition-transform text-[10px] ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
-                <Check size={12} strokeWidth={3} />
-                {statusConfig['Complete'].label}
-              </button>
-            </div>}
+
+          <div className="hover:bg-selected pt-2 p-1.5 border-t-2 border-b-2 border-selected">
+            <button onClick={() => changeStatus('Complete')} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold transition-transform text-[10px] ${statusConfig['Complete'].bgColor} ${statusConfig['Complete'].textColor}`}>
+              <Check size={12} strokeWidth={3} />
+              {statusConfig['Complete'].label}
+            </button>
+          </div>
         </div>
       )}
     </div>
