@@ -82,7 +82,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     );
   };
 
-  const updateProjectDatabase = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => {
+  const updateProjectDatabase = async (project: Project | null, property: keyof Project, newValue: string | Status | boolean | Date) => {
     if (!project || newValue === project[property]) return;
 
     try {
@@ -126,7 +126,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | boolean | Date) => {
+  const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | Priority | boolean | Date) => {
     if (!task || newValue === task[property] || !project) return;
 
     try {
