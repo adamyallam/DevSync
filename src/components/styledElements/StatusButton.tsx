@@ -6,14 +6,17 @@ import { Check } from "lucide-react";
 import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 import { statusConfig, StatusKey } from "@/utils/statusConfig";
 import ErrorMessage from "./ErrorMessage";
+import { Project, Task } from "../dashboard/context/ProjectsDataProvider";
 
 interface Props {
   status: string;
+  model: 'task' | 'project'
+  project: Project
+  task?: Task
 }
 
-const StatusButton = ({ status }: Props) => {
-  const { id } = useParams()
-  const { projects, updateProjectDatabase, showError, exitError } = useProjectsDataContext()
+const StatusButton = ({ status, model, project, task }: Props) => {
+const { updateProjectDatabase, updateTaskDatabase, showError, exitError } = useProjectsDataContext()
   const { isSidebarOpen } = useNavbarUIContext()
 
   const [displayError, setDisplayError] = useState(false)
@@ -23,7 +26,9 @@ const StatusButton = ({ status }: Props) => {
   const errorTimeoutRef = useRef<number | null>(null);
   const statusButtonRef = useRef<HTMLButtonElement>(null)
 
-  const project = projects?.find((project) => project.id.toString() === id);
+  if (!project) {
+    return null
+  }
 
   const statusDetails = statusConfig[status as StatusKey] || {
     label: 'Unknown',
@@ -51,14 +56,23 @@ const StatusButton = ({ status }: Props) => {
     setStatusChangeOpen(false);
 
     try {
-      await updateProjectDatabase(project, 'status', newStatus);
+      if (model === 'project') {
+        await updateProjectDatabase(project, 'status', newStatus);
+      } else if (model === 'task') {
+        if (task) {
+          await updateTaskDatabase(task, project, 'status', newStatus);
+        } else {
+          throw new Error("can't find task")
+        }
+      }
+
     } catch {
       showError(setDisplayError, errorTimeoutRef)
     }
   };
 
   return (
-    <div className='flex flex-col justify-center'>
+    <div className={`${model === 'task' ? 'relative' : ''} w-full flex flex-col justify-center`}>
       <div className="flex items-center gap-3">
         <button ref={statusButtonRef} onClick={() => setStatusChangeOpen((prev) => !prev)} className={`group flex items-center gap-1 ml-1 rounded-md h-5 px-1 font-semibold hover:scale-105 transition-transform ${statusDetails.label === 'Set Status' ? 'text-xs' : 'text-[10px]'} ${statusDetails.bgColor} ${statusDetails.textColor}`}>
           {status === 'Complete' ? (<Check size={12} strokeWidth={3} />) : (<div className={`rounded-full ${statusDetails.secondBgColor} ${statusDetails.label === 'Set Status' ? 'w-2 h-2' : 'w-1.5 h-1.5'}`} />)}
@@ -68,7 +82,7 @@ const StatusButton = ({ status }: Props) => {
       </div>
 
       {statusChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute ${isSidebarOpen ? 'left-[505px]' : 'left-[265px]'} top-24 border-[4px] border-selected ${statusDetails.borderColor} rounded-md w-[15%] h-[31%] bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 ${model === 'task' ? 'absolute top-full w-full mt-1' : 'w-[15%] h-[31%] absolute top-24'} border-[4px] border-selected ${statusDetails.borderColor} rounded-md bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-[10px] text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.entries(statusConfig).filter(([key]) => key !== 'Complete' && key !== 'SetStatus').map(([key, { label, bgColor, textColor, secondBgColor }]) => {
