@@ -17,7 +17,7 @@ export const ProjectTasksManager = () => {
     <div className="w-full">
       <AddTaskHeaderButton showFilterSort={false}/>
 
-      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-t-2 border-undertone gap-2 ml-8 h-10 w-[95%] pr-[1px] transition-all duration-300`}>
+      <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-t-2 border-undertone gap-2 h-10 ml-8 w-[95.53%] transition-all duration-300`}>
         <div className={`flex justify-between border-r-2 border-undertone ml-2 col-span-4`}>
           <button className="text-xs text-primary-text">Task Name</button>
           <button className="mr-2 text-secondary-text"><ChevronDown size={16} className="mt-1" /></button>
