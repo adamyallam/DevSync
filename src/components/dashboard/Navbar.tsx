@@ -76,26 +76,8 @@ export const Navbar = () => {
             <Home size={20} className='text-primary-text' strokeWidth={1.5} />
             <span className='ml-1 text-sm text-primary-text'>Home</span>
           </Link>
-          {/* Code to add My Tasks if necessary
-            <Link href='/dashboard/tasks/list' className={`flex items-center h-8 ${applySidebarClass('tasks/list', 'tasks/board', 'tasks/calendar', 'tasks/files')}`}>
-              <CircleCheck size={20} color="#e5e7eb" strokeWidth={1.5} />
-              <span className='ml-1 text-sm'>Tasks</span>
-            </Link> */}
-          {/* Code to add Inbox if necassary
-            <Link href='/dashboard/inbox/activity' className={`flex items-center h-8 ${applySidebarClass('inbox/activity', 'inbox/archive')}`} >
-              <Inbox size={20} color="#e5e7eb" strokeWidth={1.5}/>
-              <span className='ml-1 text-sm'>Inbox</span>
-            </Link> */}
         </div>
         <div>
-          {/* Code to add Workspace if necassary
-            <div className='pb-3 pt-3'>
-              <h1 className='ml-8 font-bold'>Team</h1>
-              <Link href='/dashboard/workspace' className={`flex items-center h-8 ${applySidebarClass('dashboard/workspace')}`}>
-                <UserRound size={20} color="#e5e7eb" strokeWidth={1.5}/>
-                <span className='ml-1 text-sm'>Workspace</span>
-              </Link>
-            </div> */}
           <div className='relative pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
               <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${isProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleProjectsTab}>
