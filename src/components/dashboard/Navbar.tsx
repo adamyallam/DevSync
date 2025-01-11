@@ -17,6 +17,10 @@ export const Navbar = () => {
 
   const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
 
+  const favoritedProjects = projects?.filter(project => project.favorited === true)
+  const unfavoritedProjects = projects?.filter(project => project.favorited === false)
+  const totalProjectLinks = (unfavoritedProjects?.length || 0) - 1;
+
   const toggleProjectsTab = () => {
     setIsProjectsCollapsed(!isProjectsCollapsed)
   }
@@ -31,7 +35,6 @@ export const Navbar = () => {
     }
   }
 
-  const totalProjectLinks = (projects?.length || 0) - 1; // All the links excluding the 1st rendered project due to how the mapping works
   const projectAnimation = {
     hidden: { opacity: 0, y: -20 },
     visible: (index: number) => ({
@@ -47,8 +50,8 @@ export const Navbar = () => {
       opacity: 0,
       y: -20,
       transition: {
-        delay: (totalProjectLinks - index - 1) * 0.1, // Mirror the delay from `visible`
-        duration: 0.2, // Match the duration
+        delay: (totalProjectLinks - index - 1) * 0.1,
+        duration: 0.2,
         ease: "easeOut"
       },
     }),
@@ -121,7 +124,7 @@ export const Navbar = () => {
                 <div className='w-full absolute'>
                   <AnimatePresence>
                     {!isProjectsCollapsed &&
-                      projects.slice(1).map((project, index) => (
+                      unfavoritedProjects?.slice(1).map((project, index) => (
                         <motion.div key={String(project.id)} variants={projectAnimation} initial='hidden' animate='visible' exit='exit' custom={index} >
                           <ProjectLink projectID={project.id} name={project.name} defaultView={project.defaultView} />
                         </motion.div>
