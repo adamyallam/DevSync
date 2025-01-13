@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import DatePickerField from "@/components/styledElements/DatePickerField";
 import StatusButton from "@/components/styledElements/StatusButton";
 import PriorityButton from "@/components/styledElements/PriorityButton";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Props {
   taskName: string,
@@ -17,6 +17,12 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
   const { projects, updateTaskDatabase } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
+  const [taskMenuOpen, setTaskMenuOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+
+  const menuRef = useRef<HTMLDivElement>(null);
+  const taskRef = useRef<HTMLDivElement>(null);
+
   const project = projects?.find((project) => project.id.toString() === id);
   const task = project?.tasks?.find((task) => task.id === taskId);
 
@@ -24,12 +30,34 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
     return <div className='mt-5 ml-8 text-2xl'>No task found</div>;
   }
 
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node) && taskRef.current && !taskRef.current.contains(event.target as Node)) {
+        setTaskMenuOpen(false);
+      }
+    };
+
+    if (taskMenuOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+    
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [taskMenuOpen]);
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setTaskMenuOpen(true);
+    setMenuPosition({ x: e.pageX, y: e.pageY });
+  };
+
   return (
-    <div className="w-full h-full">
+    <div ref={taskRef} className="w-full h-full" onContextMenu={handleContextMenu} onClick={() => setTaskMenuOpen(false)}>
       <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
         <div className={`flex col-span-4 border-r-2 border-undertone`}>
           <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="mr-1 ml-5 hover:scale-110 transition-transform">
-            <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed || task.status === 'Complete' ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white"/></div>
+            <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed || task.status === 'Complete' ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
           </button>
 
           <AutoResizingInput initialWidth={150} maxGrowthWidth={444} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
@@ -48,6 +76,12 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
           <StatusButton project={project} task={task} model="task" status={task.status || 'No Status'} />
         </div>
       </div>
+      {taskMenuOpen && (
+        <div ref={menuRef} className="absolute bg-black w-20 h-20"  style={{ top: menuPosition.y, left: menuPosition.x }}>
+          <span className="text-white">random option</span>
+        </div>
+      )
+      }
     </div>
   )
 }
