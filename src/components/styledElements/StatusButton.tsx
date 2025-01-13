@@ -49,33 +49,16 @@ const StatusButton = ({ status, model, project, task }: Props) => {
   }, [statusChangeOpen]);
 
 
-  useEffect(() => {
-    if (task?.completed) {
-      changeStatus('Complete')
-    } else {
-      changeStatus('SetStatus')
-    }
-  }, [task?.completed])
-
-
   const changeStatus = async (newStatus: string) => {
-    if (!project) return;
     setStatusChangeOpen(false);
 
     try {
-      if (model === 'project') {
+      if (model === 'project' && project) {
         await updateProjectDatabase(project, 'status', newStatus);
-      } else if (model === 'task') {
-        if (task) {
-          if (newStatus === 'Complete') {
-            await updateTaskDatabase(task, project, 'status', newStatus);
-            await updateTaskDatabase(task, project, 'completed', true);
-          } else {
-            await updateTaskDatabase(task, project, 'status', newStatus);
-          }
-        } else {
-          throw new Error("can't find task")
-        }
+      } else if (model === 'task' && task) {
+        await updateTaskDatabase(task, project, 'status', newStatus);
+      } else {
+        throw new Error("can't find project or task")
       }
 
     } catch {
