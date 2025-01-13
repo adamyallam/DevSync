@@ -70,7 +70,7 @@ export const Navbar = () => {
           {favoritedProjects.length ? (
             <div className={`pt-3 pb-3`}>
               <div className='flex items-center gap-1 ml-5'>
-                <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${favoritedProjects.length <= 1 ? '' : isFavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleFavoritedProjectsTab}>
+                <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${favoritedProjects.length <= 1 ? '' : isFavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={favoritedProjects.length > 1 ? toggleFavoritedProjectsTab : () => { }}>
                   <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
                 </button>
 
@@ -79,14 +79,16 @@ export const Navbar = () => {
 
               <div className='flex flex-col w-full'>
                 <div className='w-full'>
+                  <ProjectLink key={favoritedProjects[0].id} projectID={favoritedProjects[0].id} name={favoritedProjects[0].name} defaultView={favoritedProjects[0].defaultView} />
+
                   {!isFavoritedProjectsCollapsed &&
-                    favoritedProjects.map((project) => (
+                    favoritedProjects.slice(1).map((project) => (
                       <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
                     ))
                   }
                 </div>
 
-                <div className='w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text' />
+                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text ${favoritedProjects.length <= 1 ? 'hidden' : ''}`} />
               </div>
             </div>
           ) : (
@@ -96,7 +98,7 @@ export const Navbar = () => {
           {/* Unfavorited Projects */}
           <div className='flex flex-col pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
-              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${unfavoritedProjects.length <= 1 ? '' : isUnfavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleUnfavoritedProjectsTab}>
+              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${unfavoritedProjects.length <= 1 ? '' : isUnfavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={unfavoritedProjects.length > 1 ? toggleUnfavoritedProjectsTab : () => { }}>
                 <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
               </button>
 
@@ -121,14 +123,16 @@ export const Navbar = () => {
             ) : (
               <div className='flex flex-col w-full'>
                 <div className='flex flex-col w-full'>
+                  <ProjectLink key={unfavoritedProjects[0].id} projectID={unfavoritedProjects[0].id} name={unfavoritedProjects[0].name} defaultView={unfavoritedProjects[0].defaultView} />
+
                   {!isUnfavoritedProjectsCollapsed &&
-                    unfavoritedProjects.map((project) => (
+                    unfavoritedProjects.slice(1).map((project) => (
                       <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
                     ))
                   }
                 </div>
 
-                <div className='w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text' />
+                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text ${unfavoritedProjects.length <= 1 ? 'hidden' : ''}`} />
               </div>
             )}
           </div>
