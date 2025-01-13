@@ -1,8 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
 import { useParams } from 'next/navigation'
-import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, Check, CalendarX, CalendarClock, CalendarCheck, CalendarMinus2 } from "lucide-react"
+import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2 } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import { statusConfig } from '@/utils/statusConfig'
