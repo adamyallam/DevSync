@@ -1,12 +1,11 @@
 'use client'
 import Link from 'next/link'
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Instagram, Twitter, Linkedin, Home, CircleCheck, X, MenuIcon, ChevronDown, ChevronUp } from 'lucide-react'
+import { useState } from 'react';
+import { Instagram, Twitter, Linkedin, Home, X, MenuIcon, ChevronDown } from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
-import { motion, AnimatePresence } from 'framer-motion'
 import ProjectLink from '../styledElements/ProjectLink';
 import { BouncingDots } from '../styledElements/LoadingElements';
 import CreateProjectForm from './pages/projects/CreateProjectForm';
@@ -15,14 +14,22 @@ export const Navbar = () => {
   const { isSidebarOpen, toggleSidebar, isCreateProjectFormOpen, toggleCreateProjectForm } = useNavbarUIContext();
   const { projects, loading } = useProjectsDataContext()
 
-  const [isProjectsCollapsed, setIsProjectsCollapsed] = useState(false)
+  const [isUnfavoritedProjectsCollapsed, setIsUnfavoritedProjectsCollapsed] = useState(false)
+  const [isFavoritedProjectsCollapsed, setIsFavoritedProjectsCollapsed] = useState(false)
 
   const favoritedProjects = projects?.filter(project => project.favorited === true)
   const unfavoritedProjects = projects?.filter(project => project.favorited === false)
-  const totalProjectLinks = (unfavoritedProjects?.length || 0) - 1;
 
-  const toggleProjectsTab = () => {
-    setIsProjectsCollapsed(!isProjectsCollapsed)
+  if (!favoritedProjects || !unfavoritedProjects) {
+    return null
+  }
+
+  const toggleUnfavoritedProjectsTab = () => {
+    setIsUnfavoritedProjectsCollapsed(!isUnfavoritedProjectsCollapsed)
+  }
+
+  const toggleFavoritedProjectsTab = () => {
+    setIsFavoritedProjectsCollapsed(!isFavoritedProjectsCollapsed)
   }
 
   const currentPath = usePathSegments(2);
@@ -34,28 +41,6 @@ export const Navbar = () => {
       return 'sidebar-highlighted';
     }
   }
-
-  const projectAnimation = {
-    hidden: { opacity: 0, y: -20 },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: index * 0.1,
-        duration: 0.2,
-        ease: "easeOut"
-      },
-    }),
-    exit: (index: number) => ({
-      opacity: 0,
-      y: -20,
-      transition: {
-        delay: (totalProjectLinks - index - 1) * 0.1,
-        duration: 0.2,
-        ease: "easeOut"
-      },
-    }),
-  };
 
   return (
     <div className='fixed top-0 left-0 right-0 z-20 bg-primary'>
@@ -76,15 +61,42 @@ export const Navbar = () => {
         <div className='bg-primary border-b border-undertone pt-2 pb-2'>
           <Link href='/dashboard/home' className={`flex items-center h-8 ${applySidebarClass('dashboard/home')}`}>
             <Home size={20} className='text-primary-text' strokeWidth={1.5} />
-
             <span className='ml-1 text-sm text-primary-text'>Home</span>
           </Link>
         </div>
 
         <div>
-          <div className='relative pb-3 pt-3'>
+          {/* Favorited Projects */}
+          {favoritedProjects.length ? (
+            <div className={`pt-3 pb-3`}>
+              <div className='flex items-center gap-1 ml-5'>
+                <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${favoritedProjects.length <= 1 ? '' : isFavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleFavoritedProjectsTab}>
+                  <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
+                </button>
+
+                <h1 className='font-semibold text-primary-text'>Favorited</h1>
+              </div>
+
+              <div className='flex flex-col w-full'>
+                <div className='w-full'>
+                  {!isFavoritedProjectsCollapsed &&
+                    favoritedProjects.map((project) => (
+                      <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
+                    ))
+                  }
+                </div>
+
+                <div className='w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text' />
+              </div>
+            </div>
+          ) : (
+            <div />
+          )}
+
+          {/* Unfavorited Projects */}
+          <div className='flex flex-col pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
-              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${isProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleProjectsTab}>
+              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${unfavoritedProjects.length <= 1 ? '' : isUnfavoritedProjectsCollapsed ? 'rotate-0' : `rotate-180`} duration-500 ease-in-out transition-transform`} onClick={toggleUnfavoritedProjectsTab}>
                 <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
               </button>
 
@@ -96,40 +108,34 @@ export const Navbar = () => {
                 <div className='ml-10 mt-3 mb-2'>
                   <BouncingDots color={'#D0E8E8'} />
                 </div>
-                <div className={`mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text`} />
+                <div className='w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text' />
               </div>
-            ) : !projects?.length ? (
+            ) : !unfavoritedProjects.length ? (
               <div className='w-full'>
                 <div className='w-full flex flex-col justify-center mt-1 hover:scale-105 transition-transform hover:cursor-pointer group'>
-                  <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-xs group-hover:font-semibold text-primary-text group-hover:text-secondary-text'>Create First Project</button>
-                  
-                  <div className='border-b w-1/2 self-center mt-1 group-hover:border-secondary-text' />
+                  <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-xs group-hover:font-semibold text-primary-text group-hover:text-secondary-text'>Create {favoritedProjects.length ? '' : 'First'} Project</button>
+
+                  <div className='border-b w-[80%] self-center mt-1 group-hover:border-secondary-text' />
                 </div>
               </div>
             ) : (
-              <div className='w-full'>
-                <ProjectLink key={projects[0].id} projectID={projects[0].id} name={projects[0].name} defaultView={projects[0].defaultView} />
-
-                <div className='w-full absolute'>
-                  <AnimatePresence>
-                    {!isProjectsCollapsed &&
-                      unfavoritedProjects?.slice(1).map((project, index) => (
-                        <motion.div key={String(project.id)} variants={projectAnimation} initial='hidden' animate='visible' exit='exit' custom={index} >
-                          <ProjectLink projectID={project.id} name={project.name} defaultView={project.defaultView} />
-                        </motion.div>
-                      ))
-                    }
-                  </AnimatePresence>
+              <div className='flex flex-col w-full'>
+                <div className='flex flex-col w-full'>
+                  {!isUnfavoritedProjectsCollapsed &&
+                    unfavoritedProjects.map((project) => (
+                      <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
+                    ))
+                  }
                 </div>
 
-                <div className={`${projects?.length <= 1 ? 'invisible' : ''} mt-1.5 ml-7 pl-1 w-[75%] border border-secondary-text transition-transform duration-500`} style={{ transform: isProjectsCollapsed ? 'translateY(0)' : `translateY(${(projects?.length || 0) * 32 - 32}px)` }} />
+                <div className='w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text' />
               </div>
             )}
           </div>
         </div>
         <div className='w-full flex flex-col mt-auto items-center border-t-2 border-undertone pb-4'>
           <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-primary-text border-2 border-gray-300 p-2 w-10/12 mt-4 hover:font-semibold hover:text-secondary-text hover:border-[#89979E] hover:scale-105 transition-transform'>Create Project</button>
-          
+
           <div className='flex mt-2 gap-2'>
             <button><Instagram strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
             <button><Twitter strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
