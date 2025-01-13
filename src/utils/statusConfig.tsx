@@ -4,7 +4,7 @@ import { Check, CalendarX, CalendarClock, CalendarMinus2, CalendarCheck } from "
 export type StatusKey = 'SetStatus' | 'OnTrack' | 'OffTrack' | 'AtRisk' | 'OnHold' | 'Complete';
 
 export const statusConfig: Record<StatusKey, { label: string; textColor: string; bgColor: string; secondBgColor: string; borderColor: string; icon: JSX.Element }> = {
-  SetStatus: { label: 'Set Status', textColor: 'text-secondary-text', bgColor: 'bg-selected', secondBgColor: 'border border-secondary-text', borderColor: 'border-t-secondary-text', icon: <div className="w-4 h-4 rounded-full border-[3px] border-secondary-text" /> },
+  SetStatus: { label: 'Set Status', textColor: 'text-secondary-text', bgColor: 'bg-button-hover', secondBgColor: 'border border-secondary-text', borderColor: 'border-t-secondary-text', icon: <div className="w-4 h-4 rounded-full border-[3px] border-secondary-text" /> },
   OnTrack: { label: 'On Track', textColor: 'text-[#48F701]', bgColor: 'bg-[#009903]', secondBgColor: 'bg-[#48F701]', borderColor: 'border-t-[#009903]', icon: <CalendarCheck size={21} strokeWidth={2} className="text-[#48F701]" /> },
   OffTrack: { label: 'Off Track', textColor: 'text-[#FF7D7A]', bgColor: 'bg-[#A32020]', secondBgColor: 'bg-[#FF7D7A]', borderColor: 'border-t-[#A32020]', icon: <CalendarX size={21} strokeWidth={2} className="text-[#FF7D7A]" /> },
   AtRisk: { label: 'At Risk', textColor: 'text-[#FDFF01]', bgColor: 'bg-[#D4BD02]', secondBgColor: 'bg-[#FDFF01]', borderColor: 'border-t-[#D4BD02]', icon: <CalendarClock size={21} strokeWidth={2} className="text-[#FDFF01]" /> },
