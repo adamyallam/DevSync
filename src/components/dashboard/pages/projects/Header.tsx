@@ -36,25 +36,22 @@ export const Header = () => {
 
   return (
     <div className='mt-16 w-full'>
-      <div className="flex">
-        <div className='flex gap-1 w-full'>
-          <div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div>
-          <AutoResizingInput textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
-          <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
-          <FavoritedButton favorited={project.favorited}/>
-          <StatusButton project={project} model='project' status={project.status} />
-        </div>
-
-
+      <div className='flex gap-1 w-full'>
+        <div><div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div></div>
+        <AutoResizingInput textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
+        <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
+        <FavoritedButton favorited={project.favorited} />
+        <StatusButton project={project} model='project' status={project.status} />
       </div>
-      <div className="absolute flex gap-2 right-0 top-[76px] mr-8">
-          <button className="flex">
-            <div className="border rounded-full border-red-600 bg-red-400 w-8 h-8 translate-x-[6px]" />
-            <div className="flex items-center justify-center border border-undertone rounded-full bg-primary w-8 h-8"><Ellipsis color="#6b6b6b" size={15} strokeWidth={3} /></div>
-          </button>
 
-          <button className="w-[80px] h-[35px] bg-secondary hover:bg-button-hover hover:scale-105 transition-transform outline-2 outline outline-primary rounded-sm text-white text-sm font-semibold"><div className='flex items-center justify-center gap-1'><Share2 size={12} strokeWidth={2.5} />Share</div></button>
-        </div>
+      <div className="absolute flex gap-2 right-0 top-[76px] mr-8">
+        <button className="flex">
+          <div className="border rounded-full border-red-600 bg-red-400 w-8 h-8 translate-x-[6px]" />
+          <div className="flex items-center justify-center border border-undertone rounded-full bg-primary w-8 h-8"><Ellipsis color="#6b6b6b" size={15} strokeWidth={3} /></div>
+        </button>
+
+        <button className="w-[80px] h-[35px] bg-secondary hover:bg-button-hover hover:scale-105 transition-transform outline-2 outline outline-primary rounded-sm text-white text-sm font-semibold"><div className='flex items-center justify-center gap-1'><Share2 size={12} strokeWidth={2.5} />Share</div></button>
+      </div>
       <div>
         <div className="flex gap-10 mt-3 pl-10 text-sm font-semibold border-b border-undertone">
           {[
