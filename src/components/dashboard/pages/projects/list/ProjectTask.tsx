@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) => {
-  const { projects, updateTaskDatabase } = useProjectsDataContext()
+  const { projects, updateTaskDatabase, updateProjectState } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
   const [taskMenuOpen, setTaskMenuOpen] = useState(false);
@@ -52,6 +52,24 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) =
     setTaskMenuOpen(true);
     setMenuPosition({ x: e.pageX, y: e.pageY });
   };
+
+  const deleteTask = async () => {
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/task`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: taskId }),
+      });
+
+      if (!res.ok) { throw new Error('Failed to update task') }
+
+      await updateProjectState(project.id, { tasks: project.tasks.filter((t) => t.id !== taskId) })
+    } catch (err) {
+      console.error(`Error deleting task ${taskId}`);
+      throw err
+    }
+  }
 
   return (
     <div ref={taskRef} className="w-full h-full" onContextMenu={handleContextMenu} onClick={() => setTaskMenuOpen(false)}>
@@ -92,15 +110,15 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) =
 
               <div className="absolute top-0 left-full border-2 rounded-md bg-primary border-undertone w-[90%] hidden group-hover:block">
                 <div className="flex flex-col items-start">
-                  <button onClick={() => updateTaskDatabase(task, project, 'completed', true)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleCheck size={16} strokeWidth={1.5}/> Complete</button>
-                  <button onClick={() => updateTaskDatabase(task, project, 'completed', false)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleX size={16} strokeWidth={1.5}/> Incomplete</button>
+                  <button onClick={() => updateTaskDatabase(task, project, 'completed', true)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleCheck size={16} strokeWidth={1.5} /> Complete</button>
+                  <button onClick={() => updateTaskDatabase(task, project, 'completed', false)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleX size={16} strokeWidth={1.5} /> Incomplete</button>
                 </div>
               </div>
             </div>
 
             <div className="w-full h-full flex flex-col items-start">
               <button onClick={createTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><Plus size={17} strokeWidth={2.5} /> Add task</button>
-              <button className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete task</button>
+              <button onClick={deleteTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete task</button>
             </div>
           </div>
         </div>
