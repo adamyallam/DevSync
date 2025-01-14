@@ -68,7 +68,7 @@ const PriorityButton = ({ priority, project, task }: Props) => {
       </div>
 
       {priorityChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute top-full w-full mt-1 border-[4px] border-selected ${priorityDetails.borderColor} rounded-md bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 absolute top-full w-full mt-1 border-[4px] border-undertone ${priorityDetails.borderColor} rounded-md bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-[10px] text-secondary-text font-semibold">Update Priority:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.entries(priorityConfig).filter(([key]) => key !== 'SetPriority').map(([key, { label, textColor, secondBgColor }]) => {
