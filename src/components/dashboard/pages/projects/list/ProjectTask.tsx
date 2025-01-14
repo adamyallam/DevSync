@@ -1,5 +1,5 @@
 'use client'
-import { Check, CalendarClock, ChevronRight, Plus, CircleMinus, CircleCheck, CircleX } from "lucide-react"
+import { Check, CalendarClock, ChevronRight, Plus, CircleMinus, CircleCheck, CircleX, CirclePlus } from "lucide-react"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
@@ -117,7 +117,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) =
             </div>
 
             <div className="w-full h-full flex flex-col items-start">
-              <button onClick={createTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><Plus size={17} strokeWidth={2.5} /> Add task</button>
+              <button onClick={createTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CirclePlus size={17} strokeWidth={2} /> Add task</button>
               <button onClick={deleteTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete task</button>
             </div>
           </div>
