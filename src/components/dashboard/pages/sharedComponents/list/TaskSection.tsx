@@ -10,10 +10,11 @@ import ErrorMessage from "@/components/styledElements/ErrorMessage"
 interface Props {
   sectionTitle: string
   sectionId: number
-  createSection: () => void
+  createSection: () => void,
+  autoFocus?: boolean
 }
 
-export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSection }) => {
+export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSection, autoFocus }) => {
   const { projects, updateSectionDatabase, updateProjectState, showError, exitError } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
@@ -21,12 +22,12 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   const section = project?.sections?.find((section) => section.id === sectionId);
   const tasks = project?.tasks?.filter((task) => task.sectionID === sectionId);
 
+  const [autoFocusTask, setAutoFocusTask] = useState<boolean>(false);
   const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false)
   const [isSectionOpen, setIsSectionOpen] = useState(true)
-
   const [displayError, setDisplayError] = useState(false)
-  const errorTimeoutRef = useRef<number | null>(null);
 
+  const errorTimeoutRef = useRef<number | null>(null);
   const menuRef = useRef<HTMLDivElement>(null)
   const sectionMenuButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -60,6 +61,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       if (!res.ok) { throw new Error('Failed to update task') }
 
       await updateProjectState(project.id, { sections: project.sections.filter((s) => s.id !== sectionId) })
+      console.log("Task Deleted:", sectionId);
     } catch (err) {
       console.error(`Error deleting task ${sectionId}`);
       throw err
@@ -82,6 +84,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       const result = await res.json();
 
       updateProjectState(project.id, { tasks: [...project.tasks, result.task] });
+      setAutoFocusTask(true);
       console.log("Task Created:", result.task);
     } catch (error) {
       showError(setDisplayError, errorTimeoutRef)
@@ -92,9 +95,9 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   return (
     <div className="mt-6 pb-2 w-full">
       <div className="flex ml-8 mt-2 mb-2">
-        <button onClick={!tasks?.length ? () => {} : () => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
+        <button onClick={!tasks?.length ? () => { } : () => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
 
-        <AutoResizingInput initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
+        <AutoResizingInput autoFocus={autoFocus} initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
 
         <button onClick={createTask} className="text-secondary-text ml-2 hover:scale-110 hover:text-primary-text transition-transform"><Plus size={16} strokeWidth={3} /></button>
 
@@ -127,7 +130,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       {tasks && isSectionOpen ? (
         <div className="w-[96%] ml-8 border-undertone border-t-2">
           {tasks.map((task) => (
-            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} />
+            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} autoFocus={autoFocusTask}/>
           ))}
         </div>
       ) : (
