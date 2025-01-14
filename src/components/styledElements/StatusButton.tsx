@@ -77,7 +77,7 @@ const StatusButton = ({ status, model, project, task }: Props) => {
       </div>
 
       {statusChangeOpen && (
-        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 ${model === 'task' ? 'absolute top-full w-full mt-1' : 'w-[15%] h-[31%] absolute top-24'} border-[4px] border-selected ${statusDetails.borderColor} rounded-md bg-primary overflow-auto`}>
+        <div ref={menuRef} className={`cursor-default hover:cursor-pointer z-50 ${model === 'task' ? 'absolute top-full w-full mt-1' : 'w-[15%] h-[31%] absolute top-24'} border-[4px] border-undertone ${statusDetails.borderColor} rounded-md bg-primary overflow-auto`}>
           <span className="flex self-center ml-1.5 px-1 pt-2 text-[10px] text-secondary-text font-semibold">Update status:</span>
           <div className="flex flex-col pt-1 pb-2">
             {Object.entries(statusConfig).filter(([key]) => key !== 'Complete' && key !== 'SetStatus').map(([key, { label, bgColor, textColor, secondBgColor }]) => {
