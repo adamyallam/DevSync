@@ -11,10 +11,11 @@ import { useState, useEffect, useRef } from "react";
 interface Props {
   taskName: string,
   taskId: number,
-  createTask: () => void
+  createTask: () => void,
+  autoFocus?: boolean
 }
 
-export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) => {
+export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, autoFocus }) => {
   const { projects, updateTaskDatabase, updateProjectState } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
@@ -79,7 +80,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) =
             <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
           </button>
 
-          <AutoResizingInput initialWidth={150} maxGrowthWidth={444} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
+          <AutoResizingInput autoFocus={autoFocus} initialWidth={150} maxGrowthWidth={444} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
         </div>
 
         <div className={`flex items-center gap-2 border-r-2 border-undertone col-span-2 group`}>
