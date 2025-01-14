@@ -55,12 +55,12 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle }) => {
       <div className="flex ml-8 mt-2 mb-2">
         <button className="text-secondary-text hover:scale-110 hover:text-primary-text transition-transform"><ChevronDown size={18} strokeWidth={3} /></button>
         <AutoResizingInput initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
-        <button className="text-secondary-text ml-0.5 hover:scale-110 hover:text-primary-text transition-transform"><Plus size={16} strokeWidth={3} /></button>
+        <button onClick={createTask} className="text-secondary-text ml-0.5 hover:scale-110 hover:text-primary-text transition-transform"><Plus size={16} strokeWidth={3} /></button>
       </div>
       {tasks ? (
         <div className="w-[96%] ml-8 border-undertone border-t-2">
           {tasks.map((task) => (
-            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} />
+            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask}/>
           ))}
         </div>
       ) : (
