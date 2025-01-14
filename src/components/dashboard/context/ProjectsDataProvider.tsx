@@ -97,7 +97,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
       if (!res.ok) { throw new Error('Failed to update project') }
 
-      updateProjectState(project.id, { [property]: newValue });
+      await updateProjectState(project.id, { [property]: newValue });
     } catch (err) {
       console.error(`Error updating project ${property}`);
       throw err
@@ -119,7 +119,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
       if (!res.ok) { throw new Error('Failed to update section') }
 
-      updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
+      await updateProjectState(project.id, { sections: project.sections.map((s) => s.id === section.id ? { ...s, [property]: newValue } : s), });
     } catch (err) {
       console.error(`Error updating section ${property}`);
       throw err
@@ -141,7 +141,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
 
       if (!res.ok) { throw new Error('Failed to update task') }
 
-      updateProjectState(project.id, { tasks: project.tasks.map((t) => t.id === task.id ? { ...t, [property]: newValue } : t), });
+      await updateProjectState(project.id, { tasks: project.tasks.map((t) => t.id === task.id ? { ...t, [property]: newValue } : t), });
     } catch (err) {
       console.error(`Error updating task ${property}`);
       throw err
