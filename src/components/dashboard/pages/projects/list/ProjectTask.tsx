@@ -40,7 +40,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
     if (taskMenuOpen) {
       document.addEventListener("mousedown", handleOutsideClick);
     }
-    
+
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
@@ -57,7 +57,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
       <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
         <div className={`flex col-span-4 border-r-2 border-undertone`}>
           <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="mr-1 ml-5 hover:scale-110 transition-transform">
-            <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed || task.status === 'Complete' ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
+            <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
           </button>
 
           <AutoResizingInput initialWidth={150} maxGrowthWidth={444} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
@@ -77,7 +77,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
         </div>
       </div>
       {taskMenuOpen && (
-        <div ref={menuRef} className="absolute bg-black w-20 h-20"  style={{ top: menuPosition.y, left: menuPosition.x }}>
+        <div ref={menuRef} className="absolute bg-black w-20 h-20" style={{ top: menuPosition.y, left: menuPosition.x }}>
           <span className="text-white">random option</span>
         </div>
       )
