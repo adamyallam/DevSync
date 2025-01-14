@@ -70,7 +70,7 @@ export const Navbar = () => {
           {favoritedProjects.length ? (
             <div className={`pt-3 pb-3`}>
               <div className='flex items-center gap-1 ml-5'>
-                <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${favoritedProjects.length <= 1 ? '' : isFavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={favoritedProjects.length > 1 ? toggleFavoritedProjectsTab : () => { }}>
+                <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${isFavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={toggleFavoritedProjectsTab}>
                   <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
                 </button>
 
@@ -86,7 +86,7 @@ export const Navbar = () => {
                   }
                 </div>
 
-                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text ${favoritedProjects.length <= 1 ? 'hidden' : ''}`} />
+                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text`} />
               </div>
             </div>
           ) : (
@@ -96,7 +96,7 @@ export const Navbar = () => {
           {/* Unfavorited Projects */}
           <div className='flex flex-col pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
-              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${unfavoritedProjects.length <= 1 ? '' : isUnfavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={unfavoritedProjects.length > 1 ? toggleUnfavoritedProjectsTab : () => { }}>
+              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${!unfavoritedProjects.length ? '' : isUnfavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={!unfavoritedProjects.length ? () => {} : toggleUnfavoritedProjectsTab}>
                 <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
               </button>
 
@@ -128,7 +128,7 @@ export const Navbar = () => {
                   }
                 </div>
 
-                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text ${unfavoritedProjects.length <= 1 ? 'hidden' : ''}`} />
+                <div className={`w-[80%] h-[1.5px] self-center mt-1 bg-secondary-text`} />
               </div>
             )}
           </div>
