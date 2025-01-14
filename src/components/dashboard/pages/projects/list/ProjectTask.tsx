@@ -96,7 +96,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) =
         </div>
       </div>
       {taskMenuOpen && (
-        <div ref={menuRef} className="absolute z-50 h-auto w-[10%] bg-primary border-[3px] border-undertone rounded-md" style={{ top: menuPosition.y, left: menuPosition.x }}>
+        <div ref={menuRef} className="absolute z-50 h-auto w-[10%] bg-primary border-2 border-undertone rounded-md" style={{ top: menuPosition.y, left: menuPosition.x }}>
           <div className="flex flex-col items-start w-full h-full">
             <div className="border-b-2 border-undertone w-full h-full group">
               <div className="w-full flex items-center justify-between gap-1 text-primary-text p-2 text-sm hover:bg-selected hover:cursor-pointer">
