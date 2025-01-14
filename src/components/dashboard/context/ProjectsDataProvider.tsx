@@ -129,19 +129,29 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   const updateTaskDatabase = async (task: Task | null, project: Project | null, property: keyof Task, newValue: string | Status | Priority | boolean | Date) => {
     if (!task || newValue === task[property] || !project) return;
 
+    const updates: Partial<Task> = { [property]: newValue };
+
+    if (property === "completed") {
+      const completedValue = newValue as boolean;
+      updates.status = completedValue ? "Complete" : "SetStatus";
+    } else if (property === "status") {
+      const statusValue = newValue as Status;
+      updates.completed = statusValue === "Complete";
+    }
+
     try {
       const res = await fetch(`http://localhost:3000/api/task`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: task.id,
-          [property]: newValue,
+          ...updates
         }),
       });
 
       if (!res.ok) { throw new Error('Failed to update task') }
 
-      await updateProjectState(project.id, { tasks: project.tasks.map((t) => t.id === task.id ? { ...t, [property]: newValue } : t), });
+      await updateProjectState(project.id, { tasks: project.tasks.map((t) => t.id === task.id ? { ...t, ...updates } : t), });
     } catch (err) {
       console.error(`Error updating task ${property}`);
       throw err
