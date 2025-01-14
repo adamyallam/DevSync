@@ -8,12 +8,13 @@ interface AutoResizingInputProps {
   initialText?: string;
   maxGrowthWidth?: number;
   textStyles?: string;
+  autoFocus?: boolean;
   onConfirmChange?: (newName: string) => void;
 }
 
 //Input field that grows in size if characters do not fit within it's "Initial Width"
 
-export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textStyles, onConfirmChange }) => {
+export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWidth = 125, maxGrowthWidth, placeholder, initialText, textStyles, onConfirmChange, autoFocus = false }) => {
   const {showError, exitError} = useProjectsDataContext()
 
   const [text, setText] = useState(initialText || '')
@@ -70,6 +71,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
       <div className=''>
         <input
           type="text"
+          autoFocus={autoFocus}
           placeholder={placeholder}
           value={text}
           onChange={(e) => setText(e.target.value)}
