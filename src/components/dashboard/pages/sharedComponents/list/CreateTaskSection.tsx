@@ -4,8 +4,7 @@ import TaskSection from "./TaskSection"
 import { useParams } from "next/navigation"
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider"
 import { TaskSectionSkeletonLoader } from "@/components/styledElements/LoadingElements"
-import { useState } from "react"
-import { useRef } from "react"
+import { useState, useRef } from "react"
 import ErrorMessage from "@/components/styledElements/ErrorMessage"
 
 export const CreateTaskSection = () => {
@@ -14,6 +13,7 @@ export const CreateTaskSection = () => {
 
   const project = projects?.find((project) => project.id.toString() === id);
 
+  const [autoFocusSection, setAutoFocusSection] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState(false)
   const errorTimeoutRef = useRef<number | null>(null);
 
@@ -41,6 +41,8 @@ export const CreateTaskSection = () => {
       const result = await res.json();
 
       updateProjectState(project.id, { sections: [...project.sections, result.section] });
+      setAutoFocusSection(true);
+
       console.log("Section Created:", result.section);
     } catch (error) {
       showError(setDisplayError, errorTimeoutRef)
@@ -53,7 +55,7 @@ export const CreateTaskSection = () => {
     <div className="w-full">
       <div className="w-full">
         {project.sections.map((section) => (
-          <TaskSection key={String(section.id)} sectionId={section.id} sectionTitle={section.name || ''} createSection={createSection} />
+          <TaskSection key={String(section.id)} sectionId={section.id} sectionTitle={section.name || ''} createSection={createSection} autoFocus={autoFocusSection} />
         ))}
       </div>
 
