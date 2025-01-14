@@ -10,10 +10,11 @@ import { useState, useEffect, useRef } from "react";
 
 interface Props {
   taskName: string,
-  taskId: number
+  taskId: number,
+  createTask: () => void
 }
 
-export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
+export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask }) => {
   const { projects, updateTaskDatabase } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
@@ -91,14 +92,14 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
 
               <div className="absolute top-0 left-full border-2 rounded-md bg-primary border-undertone w-[90%] hidden group-hover:block">
                 <div className="flex flex-col items-start">
-                  <button className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleCheck size={16} strokeWidth={1.5}/> Complete</button>
-                  <button className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleX size={16} strokeWidth={1.5}/> Incomplete</button>
+                  <button onClick={() => updateTaskDatabase(task, project, 'completed', true)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleCheck size={16} strokeWidth={1.5}/> Complete</button>
+                  <button onClick={() => updateTaskDatabase(task, project, 'completed', false)} className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleX size={16} strokeWidth={1.5}/> Incomplete</button>
                 </div>
               </div>
             </div>
 
             <div className="w-full h-full flex flex-col items-start">
-              <button className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><Plus size={17} strokeWidth={2.5} /> Add task</button>
+              <button onClick={createTask} className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><Plus size={17} strokeWidth={2.5} /> Add task</button>
               <button className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete task</button>
             </div>
           </div>
