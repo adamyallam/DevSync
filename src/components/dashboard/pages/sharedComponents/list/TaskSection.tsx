@@ -23,7 +23,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
 
   const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false)
   const [isSectionOpen, setIsSectionOpen] = useState(true)
-  
+
   const [displayError, setDisplayError] = useState(false)
   const errorTimeoutRef = useRef<number | null>(null);
 
@@ -90,7 +90,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   };
 
   return (
-    <div className="mt-6 w-full">
+    <div className="mt-6 pb-4 w-full">
       <div className="flex ml-8 mt-2 mb-2">
         <button onClick={() => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
 
@@ -104,15 +104,19 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
           {isSectionMenuOpen && (
             <div ref={menuRef} className="absolute flex flex-col top-full bg-primary border-2 border-undertone rounded-md w-40 z-50">
               <div className="border-b-2 border-undertone w-full">
-                <button onClick={() => {setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev)}} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
-                  <ChevronDown size={17} strokeWidth={2.5} className={`mt-[2px] ${isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`} />
-                  {isSectionOpen ? 'Collapse' : 'Open'}
+                <button onClick={!tasks?.length ? createTask : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
+                  {!tasks?.length ? (
+                    <Plus size={17} strokeWidth={2.5} />
+                  ) : (
+                    <ChevronDown size={17} strokeWidth={2.5} className={`mt-[2px] ${isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`} />
+                  )}
+                  {!tasks?.length ? 'Add Task' : isSectionOpen ? 'Collapse' : 'Open'}
                 </button>
               </div>
 
               <div className="w-full flex flex-col items-start">
-                <button onClick={() => {setIsSectionMenuOpen((prev) => !prev), createSection()}} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CirclePlus size={17} strokeWidth={2} /> Add Section</button>
-                <button onClick={() => {setIsSectionMenuOpen((prev) => !prev), deleteSection()}} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete Section</button>
+                <button onClick={() => { setIsSectionMenuOpen((prev) => !prev), createSection() }} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CirclePlus size={17} strokeWidth={2} /> Add Section</button>
+                <button onClick={() => { setIsSectionMenuOpen((prev) => !prev), deleteSection() }} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete Section</button>
               </div>
             </div>
           )}
