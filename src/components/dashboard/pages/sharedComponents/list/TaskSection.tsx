@@ -90,9 +90,9 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   };
 
   return (
-    <div className="mt-6 pb-4 w-full">
+    <div className="mt-6 pb-2 w-full">
       <div className="flex ml-8 mt-2 mb-2">
-        <button onClick={() => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
+        <button onClick={!tasks?.length ? () => {} : () => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
 
         <AutoResizingInput initialWidth={115} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
 
