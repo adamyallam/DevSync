@@ -71,7 +71,7 @@ export const ProjectOverview = () => {
   return (
     <div className="relative flex flex-col ml-20 mt-8 h-full gap-2">
       <AutoResizingInput
-        textSize="text-lg"
+        textStyles="text-lg"
         initialWidth={200}
         maxGrowthWidth={725}
         onConfirmChange={(newName) => updateProjectDatabase(project, 'descriptionTitle', newName)}
@@ -87,7 +87,7 @@ export const ProjectOverview = () => {
           onFocus={() => setIsExpanded(true)}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={`resize-none text-sm w-4/5 h-auto max-h-[225px] ml-0.5 ${!isExpanded ? "max-h-[225px]" : "max-h-none"} overflow-hidden outline-none bg-secondary placeholder-secondary-text text-primary-text hover:outline hover:outline-2 hover:outline-undertone focus:outline-2 focus:outline-secondary-text rounded-sm p-1`}
+          className={`resize-none text-sm w-4/5 h-auto max-h-[225px] ml-0.5 ${!isExpanded ? "max-h-[225px]" : "max-h-none"} overflow-hidden outline outline-undertone bg-secondary placeholder-secondary-text text-primary-text hover:outline hover:outline-2 hover:outline-undertone focus:outline-2 focus:outline-secondary-text rounded-sm p-1`}
           placeholder="Type your description, welcome message, or project info here!"
           style={{ minHeight: "150px" }}
         />
@@ -102,28 +102,6 @@ export const ProjectOverview = () => {
 
         <div className="absolute bottom-1 left-2">
           <ErrorMessage displayError={displayError} exitError={() => exitError(setDisplayError, errorTimeoutRef)} />
-        </div>
-      </div>
-
-      <div className="h-full pb-10">
-        <h1 className="text-xl mt-10">Project Roles & Members</h1>
-
-        <div className="flex gap-16 ml-5">
-          <button className="flex items-center gap-3">
-            <div className="flex justify-center items-center border-2 border-dashed rounded-full border-gray-300 w-9 h-9 mt-6">
-              <Plus color="gray" size={18} strokeWidth={2} />
-            </div>
-            <span className="mt-6">Add Member</span>
-          </button>
-
-          <button className="flex items-center gap-2">
-            <div className="border-2 rounded-full border-red-400 bg-red-500 w-10 h-10 mt-6" />
-
-            <div className="flex flex-col items-start mt-6">
-              <span className="text-sm">Name Placeholder</span>
-              <span className="text-xs text-gray-400">Role Placeholder</span>
-            </div>
-          </button>
         </div>
       </div>
     </div>
