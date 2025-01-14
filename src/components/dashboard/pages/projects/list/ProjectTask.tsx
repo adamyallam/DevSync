@@ -1,5 +1,5 @@
 'use client'
-import { Check, CalendarClock, } from "lucide-react"
+import { Check, CalendarClock, ChevronRight, Plus, CircleMinus, CircleCheck, CircleX } from "lucide-react"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
@@ -77,8 +77,31 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId }) => {
         </div>
       </div>
       {taskMenuOpen && (
-        <div ref={menuRef} className="absolute bg-black w-20 h-20" style={{ top: menuPosition.y, left: menuPosition.x }}>
-          <span className="text-white">random option</span>
+        <div ref={menuRef} className="absolute z-50 h-auto w-[10%] bg-primary border-[3px] border-undertone rounded-md" style={{ top: menuPosition.y, left: menuPosition.x }}>
+          <div className="flex flex-col items-start w-full h-full">
+            <div className="border-b-2 border-undertone w-full h-full group">
+              <div className="w-full flex items-center justify-between gap-1 text-primary-text p-2 text-sm hover:bg-selected hover:cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <Check size={17} strokeWidth={2.5} className="mt-[2px]" />
+                  Mark as
+                </div>
+
+                <ChevronRight size={18} strokeWidth={2.5} />
+              </div>
+
+              <div className="absolute top-0 left-full border-2 rounded-md bg-primary border-undertone w-[90%] hidden group-hover:block">
+                <div className="flex flex-col items-start">
+                  <button className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleCheck size={16} strokeWidth={1.5}/> Complete</button>
+                  <button className="w-full flex items-center gap-1 text-primary-text text-xs p-2 hover:bg-selected"><CircleX size={16} strokeWidth={1.5}/> Incomplete</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full h-full flex flex-col items-start">
+              <button className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><Plus size={17} strokeWidth={2.5} /> Add task</button>
+              <button className="w-full h-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete task</button>
+            </div>
+          </div>
         </div>
       )
       }
