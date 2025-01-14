@@ -159,7 +159,7 @@ export const TaskSectionSkeletonLoader = () => {
     <div className="animate-pulse">
       {[...Array(4)].map((_, index) => (
         <div key={index}>
-          <div className="mt-6 w-full">
+          <div className="mt-6 pb-4 w-full">
             <div className="flex ml-8 mt-2 mb-2">
               <div className="h-4 w-4 bg-gray-300 rounded"></div>
               <div className="ml-2 h-6 w-[115px] bg-gray-300 rounded"></div>
