@@ -79,10 +79,8 @@ export const Navbar = () => {
 
               <div className='flex flex-col w-full'>
                 <div className='w-full'>
-                  <ProjectLink key={favoritedProjects[0].id} projectID={favoritedProjects[0].id} name={favoritedProjects[0].name} defaultView={favoritedProjects[0].defaultView} />
-
                   {!isFavoritedProjectsCollapsed &&
-                    favoritedProjects.slice(1).map((project) => (
+                    favoritedProjects.map((project) => (
                       <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
                     ))
                   }
@@ -123,10 +121,8 @@ export const Navbar = () => {
             ) : (
               <div className='flex flex-col w-full'>
                 <div className='flex flex-col w-full'>
-                  <ProjectLink key={unfavoritedProjects[0].id} projectID={unfavoritedProjects[0].id} name={unfavoritedProjects[0].name} defaultView={unfavoritedProjects[0].defaultView} />
-
                   {!isUnfavoritedProjectsCollapsed &&
-                    unfavoritedProjects.slice(1).map((project) => (
+                    unfavoritedProjects.map((project) => (
                       <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} />
                     ))
                   }
