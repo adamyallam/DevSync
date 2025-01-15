@@ -2,7 +2,7 @@
 import { ChevronDown } from "lucide-react"
 
 // Component Imports
-import AddTaskHeaderButton from "@/components/styledElements/AddTaskHeaderButton";
+import AddSectionButton from "@/components/styledElements/AddSectionButton";
 
 export const UserTasksManager = () => { 
 
