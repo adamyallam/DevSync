@@ -48,8 +48,8 @@ model Task {
   project   Project @relation(fields: [projectID], references: [id], onDelete: Cascade)
   section   Section @relation(fields: [sectionID], references: [id], onDelete: Cascade)
 
-  name        String?   @default("") @db.VarChar(60)
-  description String?   @default("New task") @db.VarChar(300)
+  name        String?   @default("")
+  description String?   @default("New task")
   status      Status?   @default(SetStatus)
   priority    Priority? @default(SetPriority)
   completed   Boolean?  @default(false)
@@ -64,7 +64,7 @@ model Section {
   project   Project @relation(fields: [projectID], references: [id], onDelete: Cascade)
   tasks     Task[]
 
-  name        String?   @default("") @db.VarChar(60)
+  name        String?   @default("")
   description String?   @db.VarChar(300)
   status      Status?   @default(SetStatus)
   dueDate     DateTime?
