@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2 } from "lucide-react"
+import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, CircleMinus, CirclePlus, SquarePen } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import { statusConfig } from '@/utils/statusConfig'
@@ -9,25 +9,36 @@ import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
 import FavoritedButton from '@/components/styledElements/FavoritedButton'
+import { useState, useRef, useEffect } from 'react'
 
 export const Header = () => {
   const { id } = useParams()
   const { projects, loading, updateProjectDatabase } = useProjectsDataContext()
   const projectView = usePathSegments(1)
 
+  const [projectMenuOpen, setProjectMenuOpen] = useState(false)
+
+  const projectMenuRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+
   const project = projects?.find((project) => project.id.toString() === id);
 
-  if (loading) {
-    return (
-      <div className=''>
-        <HeaderSkeletonLoader />
-      </div>
-    )
-  }
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (projectMenuRef.current && !projectMenuRef.current.contains(event.target as Node) && menuButtonRef.current && !menuButtonRef.current.contains(event.target as Node)) {
+        setProjectMenuOpen(false);
+      }
+    };
+    if (projectMenuOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [projectMenuOpen]);
 
-  if (!project) {
-    return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
-  }
+  if (loading) return <HeaderSkeletonLoader />
+  if (!project) return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
 
   const statusStyles = statusConfig[project.status] || {
     bgColor: 'bg-gray-300',
@@ -39,19 +50,21 @@ export const Header = () => {
       <div className='flex gap-1 w-full'>
         <div><div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div></div>
         <AutoResizingInput textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
-        <button className='text-secondary-text mr-1'><ChevronDown strokeWidth={2} size={20} /></button>
+        <div className='relative flex flex-col justify-center items-center'>
+          <button ref={menuButtonRef} onClick={() => { setProjectMenuOpen((prev) => !prev) }} className='text-secondary-text mr-1 hover:text-primary-text hover:scale-[1.15] transition-transform'><Ellipsis strokeWidth={2} size={20} /></button>
+          {projectMenuOpen && (
+            <div ref={projectMenuRef} className='absolute top-8 z-50 bg-primary border-undertone border-2 w-44 rounded-md'>
+              <div className='w-full h-full flex flex-col border-b-2 border-undertone'>
+                <button onClick={() => { setProjectMenuOpen((prev) => !prev) }} className='flex items-center gap-1 w-full p-2 text-primary-text text-sm hover:bg-selected'><SquarePen size={15} strokeWidth={2} /> Change name</button>
+              </div>
+              <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CirclePlus size={16} strokeWidth={2} /> Create project</button>
+              <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CircleMinus size={16} strokeWidth={2} /> Delete Project</button>
+            </div>
+          )}
+        </div>
         <FavoritedButton favorited={project.favorited} />
         <StatusButton project={project} model='project' status={project.status} />
       </div>
-
-      {/* <div className="absolute flex gap-2 right-0 top-[76px] mr-8">
-        <button className="flex">
-          <div className="border rounded-full border-red-600 bg-red-400 w-8 h-8 translate-x-[6px]" />
-          <div className="flex items-center justify-center border border-undertone rounded-full bg-primary w-8 h-8"><Ellipsis color="#6b6b6b" size={15} strokeWidth={3} /></div>
-        </button>
-
-        <button className="w-[80px] h-[35px] bg-secondary hover:bg-button-hover hover:scale-105 transition-transform outline-2 outline outline-primary rounded-sm text-white text-sm font-semibold"><div className='flex items-center justify-center gap-1'><Share2 size={12} strokeWidth={2.5} />Share</div></button>
-      </div> */}
       <div>
         <div className="flex gap-10 mt-3 pl-10 text-sm font-semibold border-b border-undertone">
           {[
