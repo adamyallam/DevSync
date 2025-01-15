@@ -107,7 +107,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
           {isSectionMenuOpen && (
             <div ref={menuRef} className="absolute flex flex-col top-full bg-primary border-2 border-undertone rounded-md w-40 z-50">
               <div className="border-b-2 border-undertone w-full">
-                <button onClick={!tasks?.length ? createTask : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
+                <button onClick={!tasks?.length ? () => { createTask(), setIsSectionMenuOpen((prev) => !prev)} : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
                   {!tasks?.length ? (
                     <Plus size={17} strokeWidth={2.5} />
                   ) : (
@@ -130,7 +130,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       {tasks && isSectionOpen ? (
         <div className="w-[96%] ml-8 border-undertone border-t-2">
           {tasks.map((task) => (
-            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} autoFocus={autoFocusTask}/>
+            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} autoFocus={autoFocusTask} />
           ))}
         </div>
       ) : (
