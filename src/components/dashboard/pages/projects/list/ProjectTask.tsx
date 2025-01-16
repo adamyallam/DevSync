@@ -100,11 +100,11 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
                     Mark {task.completed ? 'Incomplete' : 'Complete'}
                   </button>
                 </div>
+                <button onClick={() => { createTask(), setTaskMenuOpen((prev) => !prev) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"><CirclePlus size={15} strokeWidth={2} /> Add task</button>
               </div>
 
               <div className="w-full h-full flex flex-col items-start">
-                <button onClick={() => { createTask(), setTaskMenuOpen((prev) => !prev) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"><CirclePlus size={15} strokeWidth={2} /> Add task</button>
-                <button onClick={()=> {deleteTask(), setTaskMenuOpen((prev) => !prev)}} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"><CircleMinus size={15} strokeWidth={2} />Delete task</button>
+                <button onClick={() => { deleteTask(), setTaskMenuOpen((prev) => !prev) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold"><CircleMinus size={15} strokeWidth={2} />Delete task</button>
               </div>
             </div>
           </div>
