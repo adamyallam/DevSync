@@ -11,14 +11,11 @@ import StatusButton from '@/components/styledElements/StatusButton'
 import FavoritedButton from '@/components/styledElements/FavoritedButton'
 import { useState, useRef, useEffect } from 'react'
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext'
+import useMenuClose from '@/utils/hooks/useMenuClose'
 
 export const Header = () => {
   const { projects, loading, updateProjectDatabase, removeProject } = useProjectsDataContext()
   const { toggleCreateProjectForm } = useNavbarUIContext()
-
-  const { id } = useParams()
-  const router = useRouter()
-  const projectView = usePathSegments(1)
 
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
   const [focusProjectName, setFocusProjectName] = useState(false)
@@ -26,21 +23,12 @@ export const Header = () => {
   const projectMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
 
-  const project = projects?.find((project) => project.id.toString() === id);
+  const { id } = useParams()
+  const router = useRouter()
+  const projectView = usePathSegments(1)
+  useMenuClose(projectMenuRef, menuButtonRef, projectMenuOpen, setProjectMenuOpen)
 
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (projectMenuRef.current && !projectMenuRef.current.contains(event.target as Node) && menuButtonRef.current && !menuButtonRef.current.contains(event.target as Node)) {
-        setProjectMenuOpen(false);
-      }
-    };
-    if (projectMenuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [projectMenuOpen]);
+  const project = projects?.find((project) => project.id.toString() === id);
 
   if (loading) return <HeaderSkeletonLoader />
   if (!project) return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;

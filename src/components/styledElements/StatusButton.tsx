@@ -1,10 +1,11 @@
 'use client'
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { Check } from "lucide-react";
 import { statusConfig, StatusKey } from "@/utils/statusConfig";
 import ErrorMessage from "./ErrorMessage";
 import { Project, Task } from "../dashboard/context/ProjectsDataProvider";
+import useMenuClose from "@/utils/hooks/useMenuClose";
 
 interface Props {
   status: string;
@@ -23,6 +24,8 @@ const StatusButton = ({ status, model, project, task }: Props) => {
   const errorTimeoutRef = useRef<number | null>(null);
   const statusButtonRef = useRef<HTMLButtonElement>(null)
 
+  useMenuClose(menuRef, statusButtonRef, statusChangeOpen, setStatusChangeOpen)
+
   if (!project) {
     return null
   }
@@ -33,21 +36,6 @@ const StatusButton = ({ status, model, project, task }: Props) => {
     bgColor: 'bg-gray-100',
     textColor: 'text-gray-700',
   };
-
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) && statusButtonRef.current && !statusButtonRef.current.contains(event.target as Node)) {
-        setStatusChangeOpen(false);
-      }
-    };
-    if (statusChangeOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [statusChangeOpen]);
-
 
   const changeStatus = async (newStatus: string) => {
     setStatusChangeOpen(false);

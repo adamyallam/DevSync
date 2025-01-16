@@ -1,13 +1,13 @@
 'use client'
-import { Check, CalendarClock, ChevronRight, Plus, CircleMinus, CircleCheck, CircleX, CirclePlus, Ellipsis } from "lucide-react"
+import { Check, CalendarClock, CircleMinus, CircleCheck, CircleX, CirclePlus, Ellipsis } from "lucide-react"
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import { useParams } from "next/navigation";
 import DatePickerField from "@/components/styledElements/DatePickerField";
 import StatusButton from "@/components/styledElements/StatusButton";
 import PriorityButton from "@/components/styledElements/PriorityButton";
-import { useState, useEffect, useRef } from "react";
-import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
+import { useState, useRef } from "react";
+import useMenuClose from "@/utils/hooks/useMenuClose";
 
 interface Props {
   taskName: string,
@@ -25,26 +25,15 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   const menuRef = useRef<HTMLDivElement>(null);
   const ellipsisButtonRef = useRef<HTMLButtonElement>(null);
 
+  useMenuClose(menuRef, ellipsisButtonRef, taskMenuOpen, setTaskMenuOpen)
+
+
   const project = projects?.find((project) => project.id.toString() === id);
   const task = project?.tasks?.find((task) => task.id === taskId);
 
   if (!project || !task) {
     return <div className='mt-5 ml-8 text-2xl'>No task found</div>;
   }
-
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) && ellipsisButtonRef.current && !ellipsisButtonRef.current.contains(event.target as Node)) {
-        setTaskMenuOpen(false);
-      }
-    };
-    if (taskMenuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [taskMenuOpen]);
 
   const deleteTask = async () => {
 

@@ -4,8 +4,9 @@ import ProjectTask from '@/components/dashboard/pages/projects/list/ProjectTask'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider"
 import { useParams } from "next/navigation"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import ErrorMessage from "@/components/styledElements/ErrorMessage"
+import useMenuClose from "@/utils/hooks/useMenuClose"
 
 interface Props {
   sectionTitle: string
@@ -31,23 +32,12 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   const menuRef = useRef<HTMLDivElement>(null)
   const sectionMenuButtonRef = useRef<HTMLButtonElement>(null)
 
+  useMenuClose(menuRef, sectionMenuButtonRef, isSectionMenuOpen, setIsSectionMenuOpen)
+
+
   if (!project || !section) {
     return <div className='mt-5 ml-8 text-2xl'>Can't retrieve data</div>;
   }
-
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) && sectionMenuButtonRef.current && !sectionMenuButtonRef.current.contains(event.target as Node)) {
-        setIsSectionMenuOpen(false);
-      }
-    };
-    if (isSectionMenuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isSectionMenuOpen]);
 
   const deleteSection = async () => {
 
@@ -107,7 +97,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
           {isSectionMenuOpen && (
             <div ref={menuRef} className="absolute flex flex-col top-full bg-primary border-2 border-undertone rounded-md w-40 z-50">
               <div className="border-b-2 border-undertone w-full">
-                <button onClick={!tasks?.length ? () => { createTask(), setIsSectionMenuOpen((prev) => !prev)} : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
+                <button onClick={!tasks?.length ? () => { createTask(), setIsSectionMenuOpen((prev) => !prev) } : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
                   {!tasks?.length ? (
                     <Plus size={17} strokeWidth={2.5} />
                   ) : (

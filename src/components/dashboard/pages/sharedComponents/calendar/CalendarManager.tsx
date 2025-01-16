@@ -1,35 +1,22 @@
 'use client'
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-
 import { getStartOfWeek, monthsOfYear } from "@/utils/dateFunctions/getDateFunctions";
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
+import useMenuClose from "@/utils/hooks/useMenuClose";
 
 const CalendarManager = () => {
   // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
   const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
 
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const startOfWeek = getStartOfWeek();
 
   const calendarViewButtonRef = useRef<HTMLButtonElement>(null)
   const calendarViewMenuRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (calendarViewMenuRef.current && !calendarViewMenuRef.current.contains(event.target as Node) && calendarViewButtonRef.current && !calendarViewButtonRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
+  useMenuClose(calendarViewMenuRef, calendarViewButtonRef, isOpen, setIsOpen)
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isOpen]);
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);

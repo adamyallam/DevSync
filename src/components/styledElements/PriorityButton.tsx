@@ -1,10 +1,10 @@
 'use client'
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Project, Task } from "../dashboard/context/ProjectsDataProvider";
 import { priorityConfig, PriorityKey } from "@/utils/priorityConfig";
 import ErrorMessage from "./ErrorMessage";
-import { Check } from "lucide-react";
+import useMenuClose from "@/utils/hooks/useMenuClose";
 
 interface Props {
   priority: string,
@@ -18,9 +18,11 @@ const PriorityButton = ({ priority, project, task }: Props) => {
   const [displayError, setDisplayError] = useState(false)
   const [priorityChangeOpen, setPriorityChangeOpen] = useState(false)
 
-    const menuRef = useRef<HTMLDivElement>(null);
-    const errorTimeoutRef = useRef<number | null>(null);
-    const priorityButtonRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null);
+  const errorTimeoutRef = useRef<number | null>(null);
+  const priorityButtonRef = useRef<HTMLButtonElement>(null)
+
+  useMenuClose(menuRef, priorityButtonRef, priorityChangeOpen, setPriorityChangeOpen)
 
   if (!project) {
     return null
@@ -31,31 +33,17 @@ const PriorityButton = ({ priority, project, task }: Props) => {
     textColor: 'text-gray-700',
   };
 
-    useEffect(() => {
-      const handleOutsideClick = (event: MouseEvent) => {
-        if (menuRef.current && !menuRef.current.contains(event.target as Node) && priorityButtonRef.current && !priorityButtonRef.current.contains(event.target as Node)) {
-          setPriorityChangeOpen(false);
-        }
-      };
-      if (priorityChangeOpen) {
-        document.addEventListener("mousedown", handleOutsideClick);
-      }
-      return () => {
-        document.removeEventListener("mousedown", handleOutsideClick);
-      };
-    }, [priorityChangeOpen]);
-  
-    const changePriority = async (newPriority: string) => {
-      if (!project || !task) return;
-      setPriorityChangeOpen(false);
-  
-      try {
-        await updateTaskDatabase(task, project, 'priority', newPriority);
-  
-      } catch {
-        showError(setDisplayError, errorTimeoutRef)
-      }
-    };
+  const changePriority = async (newPriority: string) => {
+    if (!project || !task) return;
+    setPriorityChangeOpen(false);
+
+    try {
+      await updateTaskDatabase(task, project, 'priority', newPriority);
+
+    } catch {
+      showError(setDisplayError, errorTimeoutRef)
+    }
+  };
 
   return (
     <div className={`relative w-full flex flex-col justify-center`}>
