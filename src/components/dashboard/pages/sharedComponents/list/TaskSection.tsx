@@ -11,10 +11,10 @@ interface Props {
   sectionTitle: string
   sectionId: number
   createSection: () => void,
-  autoFocus?: boolean
+  focusSection?: boolean
 }
 
-export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSection, autoFocus }) => {
+export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSection, focusSection }) => {
   const { projects, updateSectionDatabase, updateProjectState, showError, exitError } = useProjectsDataContext()
   const { id } = useParams<{ id: string }>()
 
@@ -22,7 +22,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
   const section = project?.sections?.find((section) => section.id === sectionId);
   const tasks = project?.tasks?.filter((task) => task.sectionID === sectionId);
 
-  const [autoFocusTask, setAutoFocusTask] = useState<boolean>(false);
+  const [focusTask, setFocusTask] = useState<boolean>(false);
   const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false)
   const [isSectionOpen, setIsSectionOpen] = useState(true)
   const [displayError, setDisplayError] = useState(false)
@@ -84,7 +84,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       const result = await res.json();
 
       updateProjectState(project.id, { tasks: [...project.tasks, result.task] });
-      setAutoFocusTask(true);
+      setFocusTask(true);
       console.log("Task Created:", result.task);
     } catch (error) {
       showError(setDisplayError, errorTimeoutRef)
@@ -97,7 +97,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       <div className="flex ml-8 mt-2 mb-2">
         <button onClick={!tasks?.length ? () => { } : () => setIsSectionOpen((prev) => !prev)} className={`text-secondary-text hover:scale-110 hover:text-primary-text ${!tasks?.length ? '' : isSectionOpen ? 'rotate-0' : '-rotate-90'} duration-300 transition-transform`}><ChevronDown size={18} strokeWidth={3} /></button>
 
-        <AutoResizingInput autoFocus={autoFocus} initialWidth={115} maxGrowthWidth={1000} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
+        <AutoResizingInput focusInput={focusSection} initialWidth={115} maxGrowthWidth={1000} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
 
         <button onClick={createTask} className="text-secondary-text ml-2 hover:scale-110 hover:text-primary-text transition-transform"><Plus size={16} strokeWidth={3} /></button>
 
@@ -130,7 +130,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
       {tasks && isSectionOpen ? (
         <div className="w-[96%] ml-8 border-undertone border-t-2">
           {tasks.map((task) => (
-            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} autoFocus={autoFocusTask} />
+            <ProjectTask key={String(task.id)} taskId={task.id} taskName={task.name || ''} createTask={createTask} focusTask={focusTask} />
           ))}
         </div>
       ) : (

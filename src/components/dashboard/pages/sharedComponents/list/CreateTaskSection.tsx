@@ -13,7 +13,7 @@ export const CreateTaskSection = () => {
 
   const project = projects?.find((project) => project.id.toString() === id);
 
-  const [autoFocusSection, setAutoFocusSection] = useState<boolean>(false);
+  const [focusSection, setFocusSection] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState(false)
   const errorTimeoutRef = useRef<number | null>(null);
 
@@ -41,7 +41,7 @@ export const CreateTaskSection = () => {
       const result = await res.json();
 
       updateProjectState(project.id, { sections: [...project.sections, result.section] });
-      setAutoFocusSection(true);
+      setFocusSection(true);
 
       console.log("Section Created:", result.section);
     } catch (error) {
@@ -55,7 +55,7 @@ export const CreateTaskSection = () => {
     <div className="w-full">
       <div className="w-full">
         {project.sections.map((section) => (
-          <TaskSection key={String(section.id)} sectionId={section.id} sectionTitle={section.name || ''} createSection={createSection} autoFocus={autoFocusSection} />
+          <TaskSection key={String(section.id)} sectionId={section.id} sectionTitle={section.name || ''} createSection={createSection} focusSection={focusSection} />
         ))}
       </div>
 
