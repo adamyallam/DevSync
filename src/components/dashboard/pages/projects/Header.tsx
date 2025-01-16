@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, CircleMinus, CirclePlus, SquarePen } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
@@ -10,10 +10,14 @@ import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElement
 import StatusButton from '@/components/styledElements/StatusButton'
 import FavoritedButton from '@/components/styledElements/FavoritedButton'
 import { useState, useRef, useEffect } from 'react'
+import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext'
 
 export const Header = () => {
+  const { projects, loading, updateProjectDatabase, removeProject } = useProjectsDataContext()
+  const { toggleCreateProjectForm } = useNavbarUIContext()
+
   const { id } = useParams()
-  const { projects, loading, updateProjectDatabase } = useProjectsDataContext()
+  const router = useRouter()
   const projectView = usePathSegments(1)
 
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
@@ -41,6 +45,25 @@ export const Header = () => {
   if (loading) return <HeaderSkeletonLoader />
   if (!project) return <div className='mt-16 ml-8 text-2xl'>Project not found</div>;
 
+  const deleteProject = async () => {
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/project`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: project.id }),
+      });
+
+      if (!res.ok) { throw new Error('Failed to delete project') }
+
+      router.push('/dashboard/home');
+      await removeProject(project.id)
+    } catch (err) {
+      console.error(`Error deleting task ${id}`);
+      throw err
+    }
+  }
+
   const statusStyles = statusConfig[project.status] || {
     bgColor: 'bg-gray-300',
     icon: <div className="w-4 h-4 rounded-full bg-red-500" />,
@@ -56,10 +79,10 @@ export const Header = () => {
           {projectMenuOpen && (
             <div ref={projectMenuRef} className='absolute top-8 z-50 bg-primary border-undertone border-2 w-44 rounded-md'>
               <div className='w-full h-full flex flex-col border-b-2 border-undertone'>
-                <button onClick={() => { setProjectMenuOpen((prev) => !prev), setFocusProjectName((prev) => !prev) }} className='flex items-center gap-1 w-full p-2 text-primary-text text-sm hover:bg-selected'><SquarePen size={15} strokeWidth={2} /> Change name</button>
+                <button onClick={() => { setProjectMenuOpen(false), setFocusProjectName((prev) => !prev) }} className='flex items-center gap-1 w-full p-2 text-primary-text text-sm hover:bg-selected'><SquarePen size={15} strokeWidth={2} /> Change name</button>
+                <button onClick={() => { setProjectMenuOpen(false), toggleCreateProjectForm(true) }} className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CirclePlus size={16} strokeWidth={2} /> Create project</button>
               </div>
-              <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CirclePlus size={16} strokeWidth={2} /> Create project</button>
-              <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CircleMinus size={16} strokeWidth={2} /> Delete Project</button>
+              <button onClick={() => { setProjectMenuOpen(false), deleteProject() }} className='flex w-full h-full items-center gap-1 p-2 text-red-400 text-sm hover:bg-selected font-semibold'><CircleMinus size={16} strokeWidth={2} /> Delete Project</button>
             </div>
           )}
         </div>
@@ -88,7 +111,6 @@ export const Header = () => {
           ))}
         </div>
       </div>
-
     </div>
   )
 }
