@@ -47,7 +47,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
 
   const toggleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    setContextMenuPosition({x: isSidebarOpen ? e.clientX - 270 : e.clientX - 30, y: 15})
+    setContextMenuPosition({x: isSidebarOpen ? e.clientX - 270 : e.clientX - 30, y: e.clientY - 250 })
     setContextMenuOpen(true);
   };
 
@@ -92,7 +92,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
         <StatusButton project={project} task={task} model="task" status={task.status || 'No Status'} />
         <button ref={ellipsisButtonRef} onClick={toggleMenu} className="text-secondary-text hover:text-primary-text hover:scale-110 transition-transform mr-2"><Ellipsis size={20} strokeWidth={2.5} /></button>
         {(taskMenuOpen || contextMenuOpen) && (
-          <div ref={menuRef} className={`absolute z-50 bg-primary border-2 border-undertone rounded-md top-[30px] ${contextMenuOpen ? 'left-0' : 'right-0'}`} style={taskMenuOpen ? {} : { top: contextMenuPosition.y, left: contextMenuPosition.x }}>
+          <div ref={menuRef} className={`absolute z-50 bg-primary border-2 border-undertone rounded-md ${contextMenuOpen ? '' : 'right-0 top-[30px]'}`} style={taskMenuOpen ? {} : { top: contextMenuPosition.y, left: contextMenuPosition.x }}>
             <div className="flex flex-col items-start w-full h-full">
               <div className="border-b-2 border-undertone w-full h-full">
                 <div className="w-full flex items-center justify-between text-primary-text p-2 text-sm hover:bg-selected">
