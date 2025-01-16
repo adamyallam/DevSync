@@ -10,6 +10,7 @@ type ProjectsContextType = {
   projects: Project[] | null;
   loading: boolean;
   addProject: (project: Project) => void;
+  removeProject: (projectId: number) => void
   updateProjectState: (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status }>) => void;
   updateProjectDatabase: (project: Project | null, property: keyof Project, newValue: string | Status | boolean) => void;
   updateSectionDatabase: (section: Section | null, project: Project | null, property: keyof Section, newValue: string | Status | boolean) => void;
@@ -73,6 +74,10 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   const addProject = (project: Project) => {
     setProjects((prevProjects) => [...prevProjects, project]);
   };
+
+  const removeProject = (projectId: number) => {
+    setProjects((prevProjects) => prevProjects.filter((project) => project.id !== projectId));
+  }
 
   const updateProjectState = (projectId: number, updates: Partial<{ sections: Section[], tasks: Task[], name: string; description: string, descriptionTitle: string, favorited: boolean, status: Status, priority: Priority }>) => {
     setProjects((prevProjects) =>
@@ -159,7 +164,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   }
 
   return (
-    <ProjectsDataContext.Provider value={{ projects, loading, addProject, updateProjectDatabase, updateSectionDatabase, updateTaskDatabase, showError, exitError, updateProjectState }}>
+    <ProjectsDataContext.Provider value={{ projects, loading, addProject, removeProject, updateProjectDatabase, updateSectionDatabase, updateTaskDatabase, showError, exitError, updateProjectState }}>
       {children}
     </ProjectsDataContext.Provider>
   );
