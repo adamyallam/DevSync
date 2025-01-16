@@ -8,6 +8,7 @@ import StatusButton from "@/components/styledElements/StatusButton";
 import PriorityButton from "@/components/styledElements/PriorityButton";
 import { useState, useRef } from "react";
 import useMenuClose from "@/utils/hooks/useMenuClose";
+import useNavbarUIContext from "@/utils/hooks/context/useNavbarUIContext";
 
 interface Props {
   taskName: string,
@@ -18,15 +19,18 @@ interface Props {
 
 export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, focusTask }) => {
   const { projects, updateTaskDatabase, updateProjectState } = useProjectsDataContext()
+  const {isSidebarOpen} = useNavbarUIContext()
   const { id } = useParams<{ id: string }>()
 
   const [taskMenuOpen, setTaskMenuOpen] = useState(false);
+  const [contextMenuOpen, setContextMenuOpen] = useState(false)
+  const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
 
   const menuRef = useRef<HTMLDivElement>(null);
   const ellipsisButtonRef = useRef<HTMLButtonElement>(null);
 
+  useMenuClose(menuRef, ellipsisButtonRef, contextMenuOpen, setContextMenuOpen)
   useMenuClose(menuRef, ellipsisButtonRef, taskMenuOpen, setTaskMenuOpen)
-
 
   const project = projects?.find((project) => project.id.toString() === id);
   const task = project?.tasks?.find((task) => task.id === taskId);
@@ -34,6 +38,18 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   if (!project || !task) {
     return <div className='mt-5 ml-8 text-2xl'>No task found</div>;
   }
+  
+  const toggleMenu = (e: React.MouseEvent) => {
+    e.stopPropagation
+    setContextMenuOpen(false)
+    setTaskMenuOpen((prev) => !prev)
+  }
+
+  const toggleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setContextMenuPosition({x: isSidebarOpen ? e.clientX - 270 : e.clientX - 30, y: 15})
+    setContextMenuOpen(true);
+  };
 
   const deleteTask = async () => {
 
@@ -54,7 +70,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   }
 
   return (
-    <div className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
+    <div onContextMenu={toggleContextMenu} className={`${contextMenuOpen ? 'relative' : ''} grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
       <div className={`flex col-span-4 border-r-2 border-undertone`}>
         <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="mr-1 ml-5 hover:scale-110 transition-transform">
           <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
@@ -72,11 +88,11 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
         <PriorityButton project={project} task={task} priority={task.priority || 'No Priority'} />
       </div>
 
-      <div className={`relative w-full flex items-center col-span-2`}>
+      <div className={`${taskMenuOpen ? 'relative' : ''} w-full flex items-center col-span-2`}>
         <StatusButton project={project} task={task} model="task" status={task.status || 'No Status'} />
-        <button ref={ellipsisButtonRef} onClick={() => setTaskMenuOpen((prev) => !prev)} className="text-secondary-text hover:text-primary-text hover:scale-110 transition-transform mr-2"><Ellipsis size={20} strokeWidth={2.5} /></button>
-        {taskMenuOpen && (
-          <div ref={menuRef} className="absolute z-50 bg-primary border-2 border-undertone rounded-md top-[30px] right-0">
+        <button ref={ellipsisButtonRef} onClick={toggleMenu} className="text-secondary-text hover:text-primary-text hover:scale-110 transition-transform mr-2"><Ellipsis size={20} strokeWidth={2.5} /></button>
+        {(taskMenuOpen || contextMenuOpen) && (
+          <div ref={menuRef} className={`absolute z-50 bg-primary border-2 border-undertone rounded-md top-[30px] ${contextMenuOpen ? 'left-0' : 'right-0'}`} style={taskMenuOpen ? {} : { top: contextMenuPosition.y, left: contextMenuPosition.x }}>
             <div className="flex flex-col items-start w-full h-full">
               <div className="border-b-2 border-undertone w-full h-full">
                 <div className="w-full flex items-center justify-between text-primary-text p-2 text-sm hover:bg-selected">
