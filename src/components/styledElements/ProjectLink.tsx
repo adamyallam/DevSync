@@ -5,6 +5,9 @@ import { statusConfig } from '@/utils/statusConfig';
 import { Status } from '@prisma/client';
 import useMenuClose from '@/utils/hooks/useMenuClose';
 import { useState, useRef } from 'react';
+import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
+import { useParams, useRouter } from 'next/navigation'
 
 interface Props {
   name: string;
@@ -14,14 +17,16 @@ interface Props {
 }
 
 export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, status }) => {
-  const currentPath = usePathSegments(2);
+  const { toggleCreateProjectForm } = useNavbarUIContext()
+  const { removeProject } = useProjectsDataContext()
+  const router = useRouter()
+  const { id } = useParams()
 
   const [contextMenuOpen, setContextMenuOpen] = useState(false)
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
 
   const menuRef = useRef<HTMLDivElement>(null)
   const projectIconRef = useRef<HTMLDivElement>(null)
-
 
   const statusStyles = statusConfig[status] || {
     bgColor: 'bg-gray-300',
@@ -44,11 +49,34 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
   };
 
   function applySidebarClass(...pagePaths: string[]) {
+    const currentPath = usePathSegments(2);
 
     if (pagePaths.includes(currentPath)) {
       return 'sidebar-selected';
     } else {
       return 'sidebar-highlighted';
+    }
+  }
+
+  const deleteProject = async () => {
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/project`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: projectID }),
+      });
+
+      if (!res.ok) { throw new Error('Failed to delete project') }
+
+      if (Number(id) === projectID) {
+        router.push('/dashboard/home');
+      }
+
+      await removeProject(projectID)
+    } catch (err) {
+      console.error(`Error deleting task ${projectID}`);
+      throw err
     }
   }
 
@@ -76,9 +104,9 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
         <div ref={menuRef} className={`absolute z-50 bg-primary border-2 border-undertone rounded-md`} style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}>
           <div className="flex flex-col items-start w-full h-full">
             <div className="w-full h-full flex flex-col items-start">
-              <button className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"> Create Project</button>
+              <button onClick={() => { toggleCreateProjectForm(true), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"> Create Project</button>
               <div className='bg-undertone w-full h-[1px]' />
-              <button className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold">Delete Project</button>
+              <button onClick={() => {deleteProject(), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold">Delete Project</button>
             </div>
           </div>
         </div>
