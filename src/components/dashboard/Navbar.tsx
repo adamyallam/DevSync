@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React from 'react';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Instagram, Twitter, Linkedin, Home, X, MenuIcon, ChevronDown } from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
@@ -11,6 +12,7 @@ import { BouncingDots } from '../styledElements/LoadingElements';
 import CreateProjectForm from './pages/projects/CreateProjectForm';
 
 export const Navbar = () => {
+  const { data: session } = useSession()
   const { isSidebarOpen, toggleSidebar, isCreateProjectFormOpen, toggleCreateProjectForm } = useNavbarUIContext();
   const { projects, loading } = useProjectsDataContext()
 
@@ -19,6 +21,10 @@ export const Navbar = () => {
 
   const favoritedProjects = projects?.filter(project => project.favorited === true)
   const unfavoritedProjects = projects?.filter(project => project.favorited === false)
+
+
+  const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
+
 
   if (!favoritedProjects || !unfavoritedProjects) {
     return null
@@ -51,10 +57,10 @@ export const Navbar = () => {
             {isSidebarOpen ? <X /> : <MenuIcon />}
           </button>
 
-          <button className='border bg-white rounded-full w-16 h-7'>Create</button>
+          <button onClick={() => toggleCreateProjectForm(true)} className='flex justify-center border-2 text-sm text-primary-text border-primary-text rounded-full p-[1px] pl-2 pr-2 hover:scale-105 hover:text-secondary-text hover:border-secondary-text transition-transform'>Create</button>
         </div>
 
-        <button className='border bg-white rounded-full w-8 h-8 mr-2'>PFP</button>
+        <button className='border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
       </div>
       {/* Sidebar */}
       <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-primary text-primary-text w-60 transition-transform duration-300 border-r-2 border-undertone ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
@@ -81,7 +87,7 @@ export const Navbar = () => {
                 <div className='w-full'>
                   {!isFavoritedProjectsCollapsed &&
                     favoritedProjects.map((project) => (
-                      <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} status={project.status}/>
+                      <ProjectLink key={project.id} projectID={project.id} name={project.name} defaultView={project.defaultView} status={project.status} />
                     ))
                   }
                 </div>
@@ -96,7 +102,7 @@ export const Navbar = () => {
           {/* Unfavorited Projects */}
           <div className='flex flex-col pb-3 pt-3'>
             <div className='flex items-center gap-1 ml-5'>
-              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${!unfavoritedProjects.length ? '' : isUnfavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={!unfavoritedProjects.length ? () => {} : toggleUnfavoritedProjectsTab}>
+              <button className={`flex items-center justify-center rounded-sm w-3.5 h-3.5 hover:scale-125 ${!unfavoritedProjects.length ? '' : isUnfavoritedProjectsCollapsed ? '-rotate-90' : `rotate-0`} duration-500 ease-in-out transition-transform`} onClick={!unfavoritedProjects.length ? () => { } : toggleUnfavoritedProjectsTab}>
                 <ChevronDown size={16} strokeWidth={4} className='text-secondary-text hover:text-primary-text' />
               </button>
 
