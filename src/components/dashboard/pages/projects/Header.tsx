@@ -17,6 +17,7 @@ export const Header = () => {
   const projectView = usePathSegments(1)
 
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
+  const [focusProjectName, setFocusProjectName] = useState(false)
 
   const projectMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
@@ -49,13 +50,13 @@ export const Header = () => {
     <div className='mt-16 w-full'>
       <div className='flex gap-1 w-full'>
         <div><div className={`flex items-center justify-center border-2 border-primary ${statusStyles.bgColor} w-8 h-8 rounded-md ml-8`}>{statusStyles.icon} </div></div>
-        <AutoResizingInput textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
+        <AutoResizingInput setFocusInput={setFocusProjectName} focusInput={focusProjectName} textStyles='text-lg font-bold' initialWidth={125} initialText={project.name} maxGrowthWidth={750} onConfirmChange={(newName) => updateProjectDatabase(project, 'name', newName)} />
         <div className='relative flex flex-col justify-center items-center'>
           <button ref={menuButtonRef} onClick={() => { setProjectMenuOpen((prev) => !prev) }} className='text-secondary-text mr-1 hover:text-primary-text hover:scale-[1.15] transition-transform'><Ellipsis strokeWidth={2} size={20} /></button>
           {projectMenuOpen && (
             <div ref={projectMenuRef} className='absolute top-8 z-50 bg-primary border-undertone border-2 w-44 rounded-md'>
               <div className='w-full h-full flex flex-col border-b-2 border-undertone'>
-                <button onClick={() => { setProjectMenuOpen((prev) => !prev) }} className='flex items-center gap-1 w-full p-2 text-primary-text text-sm hover:bg-selected'><SquarePen size={15} strokeWidth={2} /> Change name</button>
+                <button onClick={() => { setProjectMenuOpen((prev) => !prev), setFocusProjectName((prev) => !prev) }} className='flex items-center gap-1 w-full p-2 text-primary-text text-sm hover:bg-selected'><SquarePen size={15} strokeWidth={2} /> Change name</button>
               </div>
               <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CirclePlus size={16} strokeWidth={2} /> Create project</button>
               <button className='flex w-full h-full items-center gap-1 p-2 text-primary-text text-sm hover:bg-selected'><CircleMinus size={16} strokeWidth={2} /> Delete Project</button>
