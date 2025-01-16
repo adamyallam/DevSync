@@ -47,7 +47,16 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
 
   const toggleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    setContextMenuPosition({x: isSidebarOpen ? e.clientX - 270 : e.clientX - 30, y: e.clientY - 250 })
+
+    const menuWidth = 200;
+    const screenWidth = window.innerWidth;
+
+    const doesMenuOverflow = e.clientX + menuWidth > screenWidth
+
+    const xPosition = doesMenuOverflow ? e.clientX - menuWidth : e.clientX;
+    const yPosition = e.clientY - 250;
+
+    setContextMenuPosition({x: isSidebarOpen ? doesMenuOverflow ? xPosition - 190 : xPosition - 270 : doesMenuOverflow ? xPosition + 50 : xPosition - 30, y: yPosition })
     setContextMenuOpen(true);
   };
 
