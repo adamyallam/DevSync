@@ -1,22 +1,32 @@
 // Component Imports
 import Slogan from '@/components/main/home/Slogan'
-import GoToDashboard from '../components/main/home/GoToDashboard'
-import GetStartedImages from '@/components/main/home/GetStartedImages'
-import Footer from '@/components/main/footer/Footer'
 import TopBar from '@/components/main/navbar/TopBar'
 import DropMenu from '@/components/main/navbar/DropMenu'
+import GoToDashboard from '@/components/main/home/GoToDashboard'
 
 
 const App = () => {
 
   return (
-    <div>
+    <div className='w-full h-full'>
       <DropMenu />
       <TopBar />
-      <Slogan />
-      <GoToDashboard />
-      <GetStartedImages />
-      <Footer />
+      <div className='mt-24'>
+        <Slogan />
+      </div>
+
+      <div className='flex justify-center'>
+        <div className="bg-primary w-[90%] h-[1.5px] mt-7" />
+      </div>
+
+      <div className='mt-7'>
+        <GoToDashboard />
+      </div>
+
+      <div className='flex justify-center mt-7'>
+        <div className="bg-primary w-[90%] h-[1.5px] mt-7" />
+      </div>
+
     </div>
   )
 }

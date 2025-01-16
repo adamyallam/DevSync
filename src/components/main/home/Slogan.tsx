@@ -1,20 +1,13 @@
 'use client'
 
-export default function Slogan(){
+export default function Slogan() {
 
   return (
-    <div className='mt-24'>
-      <div className='grid grid-cols-1 grid-rows-3 gap-2 mt-'>
-        <div className='flex justify-center'>
-          <h1 className='text-3xl'>SLOGAN</h1>
-        </div>
-        <div className='flex justify-center text-center'>
-          <h1>Brief description of what app does and the usage</h1>
-        </div>
-        <div className='flex justify-center'>
-        <button className='border-2 border-black p-1 '>Get Started</button>
-        </div>
+    <div className='flex flex-col items-center justify-center'>
+      <div className="w-[50%] flex justify-center p-2">
+        <h1 className="text-2xl font-bold text-primary-text">Welcome to DevSync</h1>
       </div>
+      <span className="text-primary-text">A simple solution to organizing dev projects</span>
     </div>
   )
 }

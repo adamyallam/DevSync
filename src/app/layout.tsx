@@ -12,8 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-  
+      <body className="bg-secondary w-full h-full">
         <main>{children}</main>
       </body>
     </html>
