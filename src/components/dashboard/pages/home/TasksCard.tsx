@@ -37,16 +37,8 @@ export const TasksCard = () => {
         </div>
       </div>
 
-      <button className="flex items-center gap-1 text-sm font-semibold mt-3 ml-6 text-secondary-text pb-3 opacity-80 hover:opacity-100 hover:scale-105 transition-transform">
-        <Plus size={16} strokeWidth={3} />
-        Create Task
-      </button>
       <div className="flex flex-col text-primary-text font-semibold">
-        <button className="flex justify-start ml-5 p-1 w-11/12 border-t-2 border-b-2 border-undertone">Task</button>
-        <button className="flex justify-start ml-5 p-1 w-11/12 border-b-2 border-undertone">Task</button>
-        <button className="flex justify-start ml-5 p-1 w-11/12 border-b-2 border-undertone">Task</button>
-        <button className="flex justify-start ml-5 p-1 w-11/12 border-b-2 border-undertone">Task</button>
-        <button className="flex justify-start ml-5 p-1 w-11/12 border-b-2 border-undertone">Task</button>
+
       </div>
     </div>
   )
