@@ -14,7 +14,6 @@ export default function pagesLayout({
         <TopBar />
         <DropMenu />
         {children}
-        <Footer />
       </section>
     )
   }
