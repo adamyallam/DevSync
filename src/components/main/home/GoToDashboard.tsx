@@ -34,7 +34,7 @@ export default function GoToDashboard() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <Link href={'/dashboard/home'} className="text-primary-text text-lg font-semibold hover:cursor-pointer hover:text-secondary-text transition-all border-b-[3px] p-2 border-undertone hover:border-highlighted">The dashboard is where it all begins</Link>
+      <Link href={'/dashboard/home'} className="text-primary-text text-lg font-semibold hover:cursor-pointer hover:text-secondary-text transition-all hover:border-b-[3px] pt-2 border-highlighted">The dashboard is where it all begins</Link>
 
       <div className="flex justify-evenly w-full mt-10">
 
