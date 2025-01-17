@@ -18,7 +18,7 @@ interface Props {
 
 export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, status }) => {
   const { toggleCreateProjectForm } = useNavbarUIContext()
-  const { removeProject } = useProjectsDataContext()
+  const { removeProject, updateProjectDatabase, projects } = useProjectsDataContext()
   const router = useRouter()
   const { id } = useParams()
 
@@ -27,6 +27,8 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
 
   const menuRef = useRef<HTMLDivElement>(null)
   const projectIconRef = useRef<HTMLDivElement>(null)
+
+  const project = projects?.find((project) => project.id === projectID);
 
   const statusStyles = statusConfig[status] || {
     bgColor: 'bg-gray-300',
@@ -80,6 +82,8 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
     }
   }
 
+  if (!project) return null
+
   return (
     <div>
       <Link onContextMenu={toggleContextMenu} href={`/dashboard/projects/${projectID}/${defaultView}`} className={`flex items-center h-8 ${applySidebarClass(`${projectID}/overview`, `${projectID}/list`, `${projectID}/board`, `${projectID}/calendar`, `${projectID}/files`)}`}>
@@ -105,8 +109,9 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
           <div className="flex flex-col items-start w-full h-full">
             <div className="w-full h-full flex flex-col items-start">
               <button onClick={() => { toggleCreateProjectForm(true), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"> Create Project</button>
+              <button onClick={() => { updateProjectDatabase(project, 'favorited', !project.favorited), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2">{project.favorited ? 'Unfavorite' : 'Favorite'}</button>
               <div className='bg-undertone w-full h-[1px]' />
-              <button onClick={() => {deleteProject(), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold">Delete Project</button>
+              <button onClick={() => { deleteProject(), setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold">Delete Project</button>
             </div>
           </div>
         </div>
