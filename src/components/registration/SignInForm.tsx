@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 
 const SignInForm = () => {
     const router = useRouter()
@@ -30,29 +31,29 @@ const SignInForm = () => {
     }
 
     return (
-      <div className='flex justify-center bg-gradient-to-tr from-orange-500 to-gray-600 via-secondary items-center h-screen'>
+      <div className='flex justify-center bg-gradient-to-tr from-primary to-secondary via-selected items-center h-screen'>
         <form onSubmit={handleSubmit}>
-          <div className='flex flex-col gap-2 p-16 rounded-lg border-2 border-primary'>
-            <h2 className="flex text-primary text-5xl mb-6 justify-center pb-5 border-b-2 border-primary">Signin</h2>
-              <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
+          <div className='flex flex-col gap-2 p-16 rounded-lg border-2 hover:border-4 hover:cursor-pointer transition-all border-undertone'>
+            <h2 className="flex text-primary-text text-5xl mb-6 justify-center pb-5 border-b-2 border-undertone">Signin</h2>
+              <input className="rounded-sm text-primary-text bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
                 required
                 type="text"
                 placeholder='Email'
                 value={signInData.email}
                 onChange={(e) => {setSignInData({...signInData, email: e.target.value})}}
                 />
-              <input className="rounded-sm bg-white placeholder-primary w-80 p-2 pb-1 text-sm bg-opacity-40"
+              <input className="rounded-sm text-primary-text bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
                 required
                 type="text"
                 placeholder='Password'
                 value={signInData.password}
                 onChange={(e) => {setSignInData({...signInData, password: e.target.value})}}
                 />
-            <button className='flex justify-center border-2 p-1 text-primary' disabled={signingIn}>
+            <button className='flex justify-center border-2 border-primary-text p-1 text-primary-text w-[80%] self-center mt-2 hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-all' disabled={signingIn}>
               {signingIn && <span>Signing In</span>}
               {!signingIn && <span>Sign In</span>}
             </button>
-            <p className='flex text-primary justify-center'>Forgot Username or Password?</p>
+            <span className='flex text-primary-text justify-center gap-1'>Don't have an account? <Link href={'signup'} className='text-blue-400 border-blue-400 hover:border-b'>Sign up</Link></span>
           </div>
         </form>
       </div>
