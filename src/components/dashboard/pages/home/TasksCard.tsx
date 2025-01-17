@@ -16,6 +16,10 @@ export const TasksCard = () => {
 
   const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
 
+  const hasIncompleteTasks = projects?.some((project) =>
+    project.tasks.some((task) => !task.completed)
+  );
+
   const toggleProjectCollapse = (projectId: number) => {
     setIsProjectCollapsed((prev) => ({
       ...prev,
@@ -73,10 +77,10 @@ export const TasksCard = () => {
           <div className="flex justify-center mt-24">
             <BouncingDots color="#DBDADA" size={15} />
           </div>
-        ) : !projects?.length ? (
-          <div className="flex flex-col items-center p-5">
-            <span className="text-primary-text">You have no tasks!</span>
-            <span className="text-primary-text">When you create some, they will appear here!</span>
+        ) : !hasIncompleteTasks ? (
+          <div className="flex flex-col items-center p-5 gap-2">
+            <span className="text-primary-text font-semibold">You completed all your tasks!</span>
+            <span className="text-primary-text text-sm">When there are new tasks to complete they will show up here</span>
           </div>
         ) : (
           <div>
