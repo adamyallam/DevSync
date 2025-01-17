@@ -50,7 +50,7 @@ const SignInForm = () => {
                 onChange={(e) => {setSignInData({...signInData, password: e.target.value})}}
                 />
             <button className='flex justify-center border-2 border-primary-text p-1 text-primary-text w-[80%] self-center mt-2 hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-all' disabled={signingIn}>
-              {signingIn && <span>Signing In</span>}
+              {signingIn && <span>Signing In...</span>}
               {!signingIn && <span>Sign In</span>}
             </button>
             <span className='flex text-primary-text justify-center gap-1'>Don't have an account? <Link href={'signup'} className='text-blue-400 border-blue-400 hover:border-b'>Sign up</Link></span>
