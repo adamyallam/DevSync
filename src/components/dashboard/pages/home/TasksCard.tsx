@@ -11,7 +11,7 @@ export const TasksCard = () => {
   const { projects, loading, updateTaskDatabase } = useProjectsDataContext()
   const { data: session } = useSession()
 
-  const [taskView, setTaskView] = useState('Upcoming')
+  const [taskView, setTaskView] = useState('Incomplete')
   const [isProjectCollapsed, setIsProjectCollapsed] = useState<Record<string, boolean>>({})
 
   const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
@@ -27,7 +27,24 @@ export const TasksCard = () => {
     }));
   };
 
-  if (!projects) return null
+  const filteredProjects = projects?.map((project) => ({
+    ...project,
+    tasks: project.tasks.filter((task) => {
+      if (taskView === 'Incomplete') return !task.completed
+      if (taskView === 'Upcoming') {
+        const oneWeekFromNow = new Date();
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+        return !task.completed && task.dueDate && new Date(task.dueDate) <= oneWeekFromNow;
+      }
+      if (taskView === 'Overdue') {
+        return !task.completed && task.dueDate && new Date(task.dueDate) < new Date();
+      }
+      if (taskView === 'Completed') return task.completed;
+      return false;
+    }),
+  })).filter((project) => project.tasks.length > 0);
+
+  if (!projects || !filteredProjects) return null;
 
   return (
     <div className="w-550 h-96 border-2 border-undertone rounded-lg shadow-sm flex flex-col overflow-hidden">
@@ -42,6 +59,7 @@ export const TasksCard = () => {
 
             <div className="flex gap-6">
               {[
+                { name: 'Incomplete' },
                 { name: 'Upcoming' },
                 { name: 'Overdue' },
                 { name: 'Completed' },
@@ -51,13 +69,7 @@ export const TasksCard = () => {
                     <span className="invisible absolute scale-105 font-semibold text-xs">
                       {name}
                     </span>
-                    <button
-                      onClick={() => setTaskView(name)}
-                      className={`${taskView === name
-                        ? 'scale-110 font-semibold'
-                        : 'hover:scale-110 hover:font-semibold transition-all'
-                        } text-xs`}
-                    >
+                    <button onClick={() => setTaskView(name)} className={`${taskView === name ? 'scale-110 font-semibold' : 'hover:scale-110 hover:font-semibold transition-all'} text-xs`}>
                       {name}
                     </button>
                   </div>
@@ -77,14 +89,14 @@ export const TasksCard = () => {
           <div className="flex justify-center mt-24">
             <BouncingDots color="#DBDADA" size={15} />
           </div>
-        ) : !hasIncompleteTasks ? (
+        ) : filteredProjects.length === 0 ? (
           <div className="flex flex-col items-center p-5 gap-2">
-            <span className="text-primary-text font-semibold">You completed all your tasks!</span>
-            <span className="text-primary-text text-sm">When there are new tasks to complete they will show up here</span>
+            <span className="text-primary-text font-semibold">{taskView === 'Completed' ? "You haven't completed any tasks yet!" : `You completed all your ${taskView === 'Upcoming' ? 'upcoming' : ''} ${taskView === 'Overdue' ? 'overdue' : ''} tasks!`}</span>
+            <span className="text-primary-text text-sm">{taskView === 'Completed' ? 'When you complete tasks they will show up here' : 'When there are new tasks to complete they will show up here'}</span>
           </div>
         ) : (
           <div>
-            {projects.filter((project) => project.tasks.some((task) => !task.completed)).map((project) => (
+            {filteredProjects.map((project) => (
               <div key={project.id} className="flex flex-col pb-4">
                 <div className="flex gap-1 items-center pb-1">
                   <button onClick={() => toggleProjectCollapse(project.id)} className={`${isProjectCollapsed[project.id] ? '-rotate-90' : 'rotate-0'} hover:scale-110 text-secondary-text hover:text-primary-text duration-500 ease-in-out transition-transform`}>
@@ -96,7 +108,7 @@ export const TasksCard = () => {
                 </div>
 
                 <div className={`${isProjectCollapsed[project.id] ? 'hidden' : ''} mt-2`}>
-                  {project.tasks.filter((task) => !task.completed).map((task, index) => (
+                  {project.tasks.map((task, index) => (
                     <div key={task.id} className={`flex flex-col border-t border-undertone w-full ${index === project.tasks.filter((task) => !task.completed).length - 1 ? '' : 'border-b'}`}>
                       <div className="flex gap-2 p-2 items-center justify-between hover:bg-selected group">
                         <div className="flex gap-1">
@@ -112,7 +124,7 @@ export const TasksCard = () => {
                         </div>
 
                         <div>
-                          <DatePickerField datePickerStyles="group-hover:bg-selected w-[55%] px-1 text-sm bg-secondary text-primary-text hover:cursor-pointer outline-none hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text rounded-sm" selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
+                          <DatePickerField dateFormat="MMMM d" datePickerStyles="group-hover:bg-selected w-[55%] px-1 text-sm bg-secondary text-primary-text hover:cursor-pointer outline-none hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text rounded-sm" selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
                         </div>
                       </div>
                     </div>
