@@ -58,7 +58,7 @@ export const Navbar = () => {
           <button onClick={() => toggleCreateProjectForm(true)} className='flex justify-center border-2 text-sm text-primary-text border-primary-text rounded-full p-[1px] pl-2 pr-2 hover:scale-105 hover:text-secondary-text hover:border-secondary-text transition-transform'>Create</button>
         </div>
 
-        <button className='border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
+        <button className='w-9 h-9 border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
       </div>
       {/* Sidebar */}
       <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-primary text-primary-text w-60 transition-transform duration-300 border-r-2 border-undertone ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
