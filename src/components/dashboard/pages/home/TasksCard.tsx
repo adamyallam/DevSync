@@ -80,7 +80,7 @@ export const TasksCard = () => {
           </div>
         ) : (
           <div>
-            {projects.map((project) => (
+            {projects.filter((project) => project.tasks.some((task) => !task.completed)).map((project) => (
               <div key={project.id} className="flex flex-col pb-4">
                 <div className="flex gap-1 items-center pb-1">
                   <button onClick={() => toggleProjectCollapse(project.id)} className={`${isProjectCollapsed[project.id] ? '-rotate-90' : 'rotate-0'} hover:scale-110 text-secondary-text hover:text-primary-text duration-500 ease-in-out transition-transform`}>
