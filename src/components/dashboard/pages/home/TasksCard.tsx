@@ -7,7 +7,6 @@ import { Check, ChevronDown } from "lucide-react";
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput";
 import DatePickerField from "@/components/styledElements/DatePickerField";
 
-
 export const TasksCard = () => {
   const { projects, loading, updateTaskDatabase } = useProjectsDataContext()
   const { data: session } = useSession()
@@ -80,9 +79,9 @@ export const TasksCard = () => {
             <span className="text-primary-text">When you create some, they will appear here!</span>
           </div>
         ) : (
-          <>
+          <div>
             {projects.map((project) => (
-              <div className="flex flex-col pb-5">
+              <div key={project.id} className="flex flex-col pb-4">
                 <div className="flex gap-1 items-center pb-1">
                   <button onClick={() => toggleProjectCollapse(project.id)} className={`${isProjectCollapsed[project.id] ? '-rotate-90' : 'rotate-0'} hover:scale-110 text-secondary-text hover:text-primary-text duration-500 ease-in-out transition-transform`}>
                     <ChevronDown size={16} strokeWidth={3} />
@@ -94,21 +93,22 @@ export const TasksCard = () => {
 
                 <div className={`${isProjectCollapsed[project.id] ? 'hidden' : ''} mt-2`}>
                   {project.tasks.filter((task) => !task.completed).map((task, index) => (
-                    <div className={`flex flex-col border-t border-undertone w-full ${index === project.tasks.filter((task) => !task.completed).length - 1 ? '' : 'border-b'}`}>
-                      <div className="flex gap-2 p-2 items-center justify-between">
-                        <div className="flex">
+                    <div key={task.id} className={`flex flex-col border-t border-undertone w-full ${index === project.tasks.filter((task) => !task.completed).length - 1 ? '' : 'border-b'}`}>
+                      <div className="flex gap-2 p-2 items-center justify-between hover:bg-selected group">
+                        <div className="flex gap-1">
                           <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="ml-3 hover:scale-110 transition-transform">
                             <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}>
                               <Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" />
                             </div>
                           </button>
+
                           <span className="text-primary-text text-sm">
                             <AutoResizingInput textStyles="text-sm" initialWidth={150} maxGrowthWidth={275} initialText={task.name || ''} placeholder="Name..." onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
                           </span>
                         </div>
 
                         <div>
-                          <DatePickerField datePickerStyles="w-[55%] px-1 text-sm bg-secondary text-primary-text hover:cursor-pointer outline-none hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text rounded-sm" selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }}/>
+                          <DatePickerField datePickerStyles="group-hover:bg-selected w-[55%] px-1 text-sm bg-secondary text-primary-text hover:cursor-pointer outline-none hover:outline hover:outline-2 hover:outline-primary focus:outline focus:outline-2 focus:outline-secondary-text rounded-sm" selectedDate={task.dueDate} onDateChange={(newDate) => { if (newDate) { updateTaskDatabase(task, project, 'dueDate', newDate) } else { console.error('Invalid date selected: null') } }} />
                         </div>
                       </div>
                     </div>
@@ -118,7 +118,7 @@ export const TasksCard = () => {
                 <div className="bg-secondary-text w-full h-[2px] ml-1 mt-[2px]" />
               </div>
             ))}
-          </>
+          </div>
         )}
       </div>
     </div>
