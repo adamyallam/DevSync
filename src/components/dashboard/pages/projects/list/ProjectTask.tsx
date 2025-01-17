@@ -19,7 +19,7 @@ interface Props {
 
 export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, focusTask }) => {
   const { projects, updateTaskDatabase, updateProjectState } = useProjectsDataContext()
-  const {isSidebarOpen} = useNavbarUIContext()
+  const { isSidebarOpen } = useNavbarUIContext()
   const { id } = useParams<{ id: string }>()
 
   const [taskMenuOpen, setTaskMenuOpen] = useState(false);
@@ -38,7 +38,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   if (!project || !task) {
     return <div className='mt-5 ml-8 text-2xl'>No task found</div>;
   }
-  
+
   const toggleMenu = (e: React.MouseEvent) => {
     e.stopPropagation
     setContextMenuOpen(false)
@@ -48,15 +48,21 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   const toggleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
 
-    const menuWidth = 200;
+    const menuSize = 200;
     const screenWidth = window.innerWidth;
 
-    const doesMenuOverflow = e.clientX + menuWidth > screenWidth
+    const doesMenuOverflow = e.clientX + menuSize > screenWidth
 
-    const xPosition = doesMenuOverflow ? e.clientX - menuWidth : e.clientX;
-    const yPosition = e.clientY - 250;
+    const xPosition = doesMenuOverflow ? e.clientX - menuSize : e.clientX;
+    const yPosition = e.clientY;
 
-    setContextMenuPosition({x: isSidebarOpen ? doesMenuOverflow ? xPosition - 190 : xPosition - 270 : doesMenuOverflow ? xPosition + 50 : xPosition - 30, y: yPosition })
+    setContextMenuPosition({
+      x: isSidebarOpen ?
+        doesMenuOverflow ? xPosition + 80 : xPosition
+        :
+        doesMenuOverflow ? xPosition + 80 : xPosition,
+      y: yPosition
+    })
     setContextMenuOpen(true);
   };
 
@@ -79,7 +85,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   }
 
   return (
-    <div onContextMenu={toggleContextMenu} className={`${contextMenuOpen ? 'relative' : ''} grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
+    <div onContextMenu={toggleContextMenu} className={`grid grid-cols-10 grid-rows-1 border-b-2 border-undertone gap-2 h-10 hover:bg-selected group`}>
       <div className={`flex col-span-4 border-r-2 border-undertone`}>
         <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="mr-1 ml-5 hover:scale-110 transition-transform">
           <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
@@ -105,7 +111,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
             <div className="flex flex-col items-start w-full h-full">
               <div className="border-b-2 border-undertone w-full h-full">
                 <div className="w-full flex items-center justify-between text-primary-text p-2 text-sm hover:bg-selected">
-                  <button onClick={() => { updateTaskDatabase(task, project, 'completed', !task.completed), setTaskMenuOpen((prev) => !prev) }} className="flex items-center gap-1 text-xs">
+                  <button onClick={() => { updateTaskDatabase(task, project, 'completed', !task.completed), taskMenuOpen ? setTaskMenuOpen(false) : setContextMenuOpen(false) }} className="flex items-center gap-1 text-xs">
                     {task.completed ? (
                       <CircleX size={15} strokeWidth={2} />
                     ) : (
@@ -114,11 +120,11 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
                     Mark {task.completed ? 'Incomplete' : 'Complete'}
                   </button>
                 </div>
-                <button onClick={() => { createTask(), setTaskMenuOpen((prev) => !prev) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"><CirclePlus size={15} strokeWidth={2} /> Add task</button>
+                <button onClick={() => { createTask(), taskMenuOpen ? setTaskMenuOpen(false) : setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-primary-text text-xs hover:bg-selected p-2"><CirclePlus size={15} strokeWidth={2} /> Add task</button>
               </div>
 
               <div className="w-full h-full flex flex-col items-start">
-                <button onClick={() => { deleteTask(), setTaskMenuOpen((prev) => !prev) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold"><CircleMinus size={15} strokeWidth={2} />Delete task</button>
+                <button onClick={() => { deleteTask(), taskMenuOpen ? setTaskMenuOpen(false) : setContextMenuOpen(false) }} className="w-full h-full flex items-center gap-1 text-red-400 text-xs hover:bg-selected p-2 font-semibold"><CircleMinus size={15} strokeWidth={2} />Delete task</button>
               </div>
             </div>
           </div>
