@@ -1,10 +1,13 @@
 'use client'
 import { useState } from "react"
-import { Plus } from "lucide-react"
+import { useSession } from 'next-auth/react';
 
 // Component Imports
 
 export const TasksCard = () => {
+  const { data: session } = useSession()
+
+  const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
 
   const [taskView, setTaskView] = useState('Upcoming')
 
@@ -13,7 +16,7 @@ export const TasksCard = () => {
 
       <div className="border-b-2 border-undertone">
         <div className="flex items-center mt-5 ml-12 pb-3">
-          <div className="w-10 h-10 border-2 border-undertone bg-gray-200 rounded-full"></div>
+          <button className='border-2 border-primary-text rounded-full w-10 h-10 p-1 text-lg text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
 
           <div className="flex flex-col gap-2 ml-5 text-primary-text">
             <h1 className="text-lg font-semibold">My Tasks</h1>
