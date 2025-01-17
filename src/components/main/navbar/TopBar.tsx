@@ -4,11 +4,17 @@ import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import LogoBig from 'src/assets/imgs/LogoBig.png'
+import { useSession } from 'next-auth/react';
+
 
 
 export default function TopBar() {
+  const { data: session } = useSession()
+
   const router = useRouter();
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,8 +41,16 @@ export default function TopBar() {
         </div>
       </div>
       <div className='flex items-center gap-4 mr-3'>
-        <button className='border-2 border-primary-text text-primary-text hover:scale-105 hover:border-secondary-text hover:text-secondary-text p-1 h-8 transition-transform text-sm rounded-sm' onClick={() => router.push('user/registration/signin')}>Sign in</button>
-        <button className='border-2 border-primary-text text-primary-text hover:scale-105 hover:border-secondary-text hover:text-secondary-text p-1 h-8 transition-transform text-sm rounded-sm' onClick={() => router.push('user/registration/signup')}>Sign up</button>
+        {session ? (
+          <div>
+            <button className='border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-2 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
+          </div>
+        ) : (
+          <div className='flex gap-4'>
+            <button className='border-2 border-primary-text text-primary-text hover:scale-105 hover:border-secondary-text hover:text-secondary-text p-1 h-8 transition-transform text-sm rounded-sm' onClick={() => router.push('user/registration/signin')}>Sign in</button>
+            <button className='border-2 border-primary-text text-primary-text hover:scale-105 hover:border-secondary-text hover:text-secondary-text p-1 h-8 transition-transform text-sm rounded-sm' onClick={() => router.push('user/registration/signup')}>Sign up</button>
+          </div>
+        )}
       </div>
     </div>
   )
