@@ -97,7 +97,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
           {isSectionMenuOpen && (
             <div ref={menuRef} className="absolute flex flex-col top-full bg-primary border-2 border-undertone rounded-md w-40 z-50">
               <div className="border-b-2 border-undertone w-full">
-                <button onClick={!tasks?.length ? () => { createTask(), setIsSectionMenuOpen((prev) => !prev) } : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
+                <button onClick={!tasks?.length ? () => { createTask(), setIsSectionMenuOpen(false) } : () => { setIsSectionMenuOpen((prev) => !prev), setIsSectionOpen((prev) => !prev) }} className="flex w-full items-center gap-2 text-primary-text p-2 text-sm hover:bg-selected">
                   {!tasks?.length ? (
                     <Plus size={17} strokeWidth={2.5} />
                   ) : (
@@ -105,11 +105,12 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
                   )}
                   {!tasks?.length ? 'Add Task' : isSectionOpen ? 'Collapse' : 'Open'}
                 </button>
+
+                <button onClick={() => { setIsSectionMenuOpen(false), createSection() }} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CirclePlus size={17} strokeWidth={2} /> Add Section</button>
               </div>
 
               <div className="w-full flex flex-col items-start">
-                <button onClick={() => { setIsSectionMenuOpen((prev) => !prev), createSection() }} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CirclePlus size={17} strokeWidth={2} /> Add Section</button>
-                <button onClick={() => { setIsSectionMenuOpen((prev) => !prev), deleteSection() }} className="w-full flex items-center gap-2 text-primary-text text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete Section</button>
+                <button onClick={() => { setIsSectionMenuOpen(false), deleteSection() }} className="w-full flex items-center gap-2 text-red-400 text-sm hover:bg-selected p-2"><CircleMinus size={17} strokeWidth={2} />Delete Section</button>
               </div>
             </div>
           )}
