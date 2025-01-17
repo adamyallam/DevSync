@@ -23,15 +23,15 @@ export const UserWelcome = () => {
       <div className='flex justify-center'>
         <div className='p-4 mt-4 w-[500px] bg-primary rounded-full text-primary-text'>
           <div className='grid grid-rows-1 grid-cols-3 justify-center divide-x divide-secondary-text'>
-            <span className='flex justify-center text-sm'>Projects: {projects.length || ''}</span>
-            <span className='flex justify-center text-sm'>Total Tasks: {allTasks.length || ''}</span>
-            <span className='flex justify-center text-sm'>Tasks Completed: {completedTasks.length || ''}</span>
+            <span className='flex justify-center text-sm'>Projects: {projects.length || '0'}</span>
+            <span className='flex justify-center text-sm'>Total Tasks: {allTasks.length || '0'}</span>
+            <span className='flex justify-center text-sm'>Tasks Completed: {completedTasks.length || '0'}</span>
           </div>
         </div>
       </div>
     </div>
   )
-}
+} 
 
 
 export default UserWelcome
