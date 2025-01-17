@@ -38,12 +38,14 @@ export default function GoToDashboard() {
 
       <div className="flex justify-evenly w-full mt-10">
 
-        <div className="flex flex-col items-center justify-center border-4 border-undertone w-[35%] h-80 p-5 hover:border-2 hover:cursor-pointer transition-all rounded-md">
-          <div className="flex flex-col items-center gap-3 w-full">
-            <Link className="flex items-center justify-center gap-2 text-primary-text font-semibold border-2 border-primary-text w-[70%] p-3 hover:text-secondary-text hover:border-secondary-text transition-all" href={'dashboard/home'}>Go to dashboard <ArrowRight size={18} strokeWidth={3} /></Link>
+        <div className="flex flex-col items-center justify-center border-4 border-undertone w-[35%] h-80 p-5 hover:border-2 hover:cursor-pointer transition-all rounded-md group">
+          <div className="flex flex-col items-center gap-3 w-full rounded-sm">
+            <div className="bg-undertone w-[80%] h-[2px] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-500 ease-in-out mb-3" />
 
+            <Link className="flex items-center justify-center gap-2 text-primary-text font-semibold border-2 border-primary-text w-[70%] p-3 hover:text-secondary-text hover:border-secondary-text transition-all" href={'dashboard/home'}>Go to dashboard <ArrowRight size={18} strokeWidth={3} /></Link>
             <span className="text-primary-text">Continue working on your projects</span>
-          </div>
+
+            <div className="bg-undertone w-[80%] h-[2px] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-500 ease-in-out mt-3" />          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-lg border-4 border-undertone p-5 w-[35%] h-80 hover:border-2 hover:cursor-pointer transition-all">
