@@ -22,9 +22,7 @@ export const Navbar = () => {
   const favoritedProjects = projects?.filter(project => project.favorited === true)
   const unfavoritedProjects = projects?.filter(project => project.favorited === false)
 
-
   const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
-
 
   if (!favoritedProjects || !unfavoritedProjects) {
     return null
