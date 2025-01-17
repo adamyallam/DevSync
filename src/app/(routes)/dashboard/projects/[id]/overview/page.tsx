@@ -13,9 +13,9 @@ export default async function overview() {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <StatusLog />
-      </div>
+      </div> */}
     </div>
   )
 
