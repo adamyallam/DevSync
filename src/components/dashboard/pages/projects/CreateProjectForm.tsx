@@ -103,6 +103,7 @@ const CreateProjectForm = () => {
 
                   <input className={`pl-1 p-4 h-[10%] w-full border-b-4 bg-primary outline-none ${isNameValid && !projectData.name ? "border-red-500" : projectData.name ? "border-primary-text" : "border-undertone"} focus:border-primary-text hover:border-primary-text`}
                     placeholder='Name'
+                    autoFocus={true}
                     value={projectData.name}
                     onChange={(e) => updateProjectData('name', e.target.value)}
                   />
