@@ -95,7 +95,7 @@ const CalendarManager = () => {
           </button>
 
           {isOpen && (
-            <div ref={calendarViewMenuRef} className="absolute w-24 bg-primary border-2 border-selected rounded-md shadow-md z-10">
+            <div ref={calendarViewMenuRef} className="absolute w-24 bg-primary border-2 border-undertone rounded-md shadow-md z-10">
 
               <button onClick={() => handleOptionClick('Week')}
                 className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs`}>
@@ -105,7 +105,7 @@ const CalendarManager = () => {
               </button>
 
               <button onClick={() => handleOptionClick('Month')}
-                className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs border-t border-t-selected`}>
+                className={`block w-full text-left px-4 py-1 hover:bg-highlighted text-xs border-t border-t-undertone`}>
                 <div className="flex items-center justify-center gap-1 text-primary-text">
                   <div className="flex gap-1 items-center"><Check className={`${weekOrMonth === 'Month' ? '' : 'hidden'}`} size={12} strokeWidth={3} />Month</div>
                 </div>
