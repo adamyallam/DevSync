@@ -32,7 +32,7 @@ export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center z-20">
+    <div className="flex flex-col items-center justify-center">
       <button disabled={isDisabled} onClick={toggleFavorite}>
         <Star className={`scale-95 hover:scale-105 transition-transform ${favorited ? 'fill-[#FFD737] text-[#FFD737]' : 'text-secondary-text'}`} strokeWidth={1.5} size={21} />
       </button>
