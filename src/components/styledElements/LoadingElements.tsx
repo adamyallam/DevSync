@@ -179,3 +179,46 @@ export const TaskSectionSkeletonLoader = () => {
     </div>
   )
 }
+
+export const BoardTaskSkeleton: React.FC = () => {
+  return (
+    <div className="pb-2">
+      <div className="flex flex-col justify-evenly border border-undertone rounded-lg w-60 h-24 animate-pulse">
+        <div className="flex items-center justify-between gap-1">
+          <div className="flex items-center gap-2">
+            <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
+            <div className="h-4 w-[110px] bg-gray-300 rounded"></div>
+          </div>
+          <div className="h-5 w-5 bg-gray-300 rounded-full mr-2"></div>
+        </div>
+        <div className="h-4 w-[90%] bg-gray-300 rounded mx-auto"></div>
+        <div className="h-4 w-[80%] bg-gray-300 rounded mx-auto"></div>
+      </div>
+    </div>
+  );
+};
+
+export const BoardSectionSkeleton: React.FC = () => {
+  return (
+    <div className="flex flex-col mt-5 ml-2 border rounded-lg border-undertone min-w-[270px] h-[calc(100%-40px)] animate-pulse">
+      <div className="flex justify-between mb-3 border-b border-undertone p-3">
+        <div className="h-5 w-[115px] bg-gray-300 rounded"></div>
+        <div className="flex gap-2">
+          <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
+          <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center h-full overflow-auto">
+        <div className="flex flex-col items-center w-[96%] gap-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <BoardTaskSkeleton key={index} />
+          ))}
+        </div>
+        <div className="flex items-center pb-2">
+          <div className="h-4 w-4 bg-gray-300 rounded-full"></div>
+          <div className="h-4 w-16 bg-gray-300 rounded ml-2"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
