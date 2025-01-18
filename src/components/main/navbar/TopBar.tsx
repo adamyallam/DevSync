@@ -43,7 +43,7 @@ export default function TopBar() {
       <div className='flex items-center gap-4 mr-3'>
         {session ? (
           <div>
-            <button className='border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-2 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
+            <button className='border-2 border-primary-text rounded-full w-9 h-9 p-1 text-sm text-primary-text mr-2 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
           </div>
         ) : (
           <div className='flex gap-4'>
