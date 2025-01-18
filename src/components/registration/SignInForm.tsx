@@ -44,7 +44,7 @@ const SignInForm = () => {
                 />
               <input className="rounded-sm text-primary-text bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
                 required
-                type="text"
+                type="password"
                 placeholder='Password'
                 value={signInData.password}
                 onChange={(e) => {setSignInData({...signInData, password: e.target.value})}}

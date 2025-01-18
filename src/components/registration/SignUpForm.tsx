@@ -76,7 +76,7 @@ const SignUpForm = () => {
           />
           <input className="text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
             required
-            type="text"
+            type="password"
             placeholder='Password'
             value={userData.password}
             onChange={(e) => { setUserData({ ...userData, password: e.target.value }) }}
