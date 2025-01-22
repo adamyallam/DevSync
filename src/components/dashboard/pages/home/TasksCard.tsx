@@ -16,10 +16,6 @@ export const TasksCard = () => {
 
   const userInitials = session ? session?.firstName.trim()[0] + session?.lastName.trim()[0] : 'A'
 
-  const hasIncompleteTasks = projects?.some((project) =>
-    project.tasks.some((task) => !task.completed)
-  );
-
   const toggleProjectCollapse = (projectId: number) => {
     setIsProjectCollapsed((prev) => ({
       ...prev,
