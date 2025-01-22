@@ -60,7 +60,7 @@ export const BoardTask: React.FC<Props> = ({ taskName, taskId, createTask, focus
             <button onClick={() => updateTaskDatabase(task, project, 'completed', !task.completed)} className="ml-3 hover:scale-110 transition-transform">
               <div className={`flex items-center justify-center w-[19px] h-[19px] border-2 rounded-full border-green-700 ${task.completed ? 'bg-green-600' : ''} transition-colors`}><Check className="ml-[1px] mt-[1px]" size={10} strokeWidth={3} color="white" /></div>
             </button>
-            <AutoResizingInput focusInput={focusTask} initialWidth={110} maxGrowthWidth={200} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
+            <AutoResizingInput focusInput={focusTask} initialWidth={110} maxGrowthWidth={170} placeholder="Name" initialText={taskName} textStyles="text-sm" onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
           </div>
 
           <div className="flex flex-col relative items-center">
