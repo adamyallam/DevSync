@@ -1,35 +1,58 @@
 'use client'
-import { parseISO } from 'date-fns';
-
+import { parseISO, format } from 'date-fns';
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 import areDatesEqual from "@/utils/dateFunctions/areDatesEqual";
 import { daysOfWeek, getStartOfWeek } from "@/utils/dateFunctions/getDateFunctions";
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
+import { useParams } from 'next/navigation';
+import CalendarTask from './CalendarTask';
+import { WeeklyCalendarSkeleton } from '@/components/styledElements/LoadingElements';
 
 export const WeeklyCalendar = () => {
-  // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
-  const { isWeekendShowing, calendarTasks, fullCalendar, calendarDate, getTaskCount, addTaskButton} = useCalendarUIContext();
+  const { projects, loading } = useProjectsDataContext()
+  const { isWeekendShowing, fullCalendar, calendarDate } = useCalendarUIContext();
+  const { id } = useParams<{ id: string }>()
 
-  const weekStartEnd = {start: 0, end: 0}
+  const project = projects?.find((project) => project.id.toString() === id);
+  const tasks = project?.tasks
 
+  const weekStartEnd = { start: 0, end: 0 }
+
+  if (loading) return <WeeklyCalendarSkeleton />
+  if (!project || !tasks) return <div className=''>Can't retrieve data</div>;
+  
   function setWeekStartEnd() {
     const startOfWeek = getStartOfWeek(calendarDate);
-    
-    const matchingIndex = fullCalendar.findIndex(dateString => 
+
+    const matchingIndex = fullCalendar.findIndex(dateString =>
       areDatesEqual(startOfWeek, parseISO(dateString))
     );
-    
+
     if (matchingIndex !== -1) {
       weekStartEnd.start = matchingIndex;
       weekStartEnd.end = matchingIndex + 7;
     }
   }
-  
+
   setWeekStartEnd();
 
+  const getTaskCount = (date: string) => {
+    const taskCount = tasks?.filter((task) => { return task.dueDate && format(new Date(task.dueDate), 'yyyy-MM-dd') === date }).length || 0;
+
+    return (
+      <div className="flex justify-center text-primary-text text-xs items-center bg-primary rounded-full h-5 w-5 font-semibold">
+        <span className="mb-0.5">{taskCount}</span>
+      </div>
+    );
+  };
+
   return (
-    // Maps through a week of the fullCalendar array
     fullCalendar.slice(weekStartEnd.start, weekStartEnd.end).map((dateString, index) => {
-      const currentDay = areDatesEqual(new Date(), parseISO(dateString))
+      const parsedDate = parseISO(dateString);
+      const formattedDate = format(parsedDate, 'yyyy-MM-dd');
+      const currentDay = areDatesEqual(new Date(), parsedDate)
+
+      const tasksByDate = tasks?.filter((task) => { return task.dueDate && format(new Date(task.dueDate), 'yyyy-MM-dd') === formattedDate }).map((task) => <CalendarTask key={String(task.id)} taskName={task.name || ''} taskId={task.id} />)
 
       return (
         <div key={index} className={`border border-undertone flex flex-col h-full ${isWeekendShowing ? `w-full` : `${index === 0 || index === 6 ? 'w-1/4' : 'w-full'}`}`}>
@@ -41,13 +64,11 @@ export const WeeklyCalendar = () => {
           </div>
 
           <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center w-full h-full bg-[#B8B7B7] pt-4 pb-2">
-            {isWeekendShowing ? // Determines if the tasks or a task count should display
-              ( calendarTasks[dateString]?.map((task) => task) ) 
-              : 
-              ( index === 0 || index === 6 ? ( getTaskCount(dateString) ) : ( calendarTasks[dateString]?.map((task) => task) ) )
+            {isWeekendShowing ?
+              (tasksByDate)
+              :
+              (index === 0 || index === 6 ? (getTaskCount(dateString)) : (tasksByDate))
             }
-            
-            {(index !== 0 && index !== 6) || isWeekendShowing ? addTaskButton(dateString) : null}
           </div>
         </div>
       )
