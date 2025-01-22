@@ -44,7 +44,7 @@ export const TasksCard = () => {
 
   return (
     <div className="w-550 h-96 border-2 border-undertone rounded-lg shadow-sm flex flex-col overflow-hidden">
-      <div className="border-b-2 border-undertone sticky top-0 bg-secondary z-10">
+      <div className="border-b-2 border-undertone sticky top-0 bg-secondary">
         <div className="flex items-center mt-5 ml-12 pb-3">
           <button className="border-2 border-primary-text rounded-full w-10 h-10 p-1 text-lg text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform">
             {userInitials}
