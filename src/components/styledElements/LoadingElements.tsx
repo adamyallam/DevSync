@@ -1,5 +1,6 @@
 'use client'
 import React from "react"
+import useCalendar from "@/utils/hooks/useCalendar"
 
 interface Props {
   color: string
@@ -217,6 +218,76 @@ export const BoardSectionSkeleton: React.FC = () => {
         <div className="flex items-center pb-2">
           <div className="h-4 w-4 bg-gray-300 rounded-full"></div>
           <div className="h-4 w-16 bg-gray-300 rounded ml-2"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const WeeklyCalendarSkeleton = () => {
+  const fullCalendar = useCalendar();
+
+  return (
+    <div className="flex h-full w-full">
+      {fullCalendar.slice(0, 7).map((_, index) => (
+        <div
+          key={index}
+          className={`border border-undertone flex flex-col h-full ${index === 0 || index === 6 ? 'w-1/4' : 'w-full'
+            } animate-pulse`}
+        >
+          {/* Header */}
+          <div className="min-h-[4.75rem] p-2 border-b-[5px] border-primary text-start bg-gray-200">
+            {/* Day Label Placeholder */}
+            <div className="text-xs bg-gray-300 h-4 w-10 rounded"></div>
+            {/* Date Circle Placeholder */}
+            <div className="mt-1 bg-gray-300 h-8 w-8 rounded-md"></div>
+          </div>
+
+          {/* Tasks */}
+          <div className="flex flex-col overflow-x-hidden overflow-y-auto items-center w-full h-full bg-[#B8B7B7] pt-4 pb-2 gap-2">
+            {Array(3)
+              .fill(null)
+              .map((_, taskIndex) => (
+                <div
+                  key={taskIndex}
+                  className="w-4/5 h-6 bg-gray-300 rounded-md"
+                ></div>
+              ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const CalendarManagerSkeleton = () => {
+  return (
+    <div className="pt-3 pb-3 flex justify-between animate-pulse">
+      {/* Left Section */}
+      <div className="flex items-center ml-8">
+        {/* Today Button */}
+        <div className="w-14 h-7 bg-gray-300 rounded-sm"></div>
+
+        {/* Navigation Buttons */}
+        <div className="flex items-center gap-2 ml-3">
+          <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
+          <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
+        </div>
+
+        {/* Month and Year */}
+        <div className="ml-2 w-32 h-5 bg-gray-300 rounded"></div>
+      </div>
+
+      {/* Right Section */}
+      <div className="flex mr-8 gap-5">
+        {/* Dropdown Button */}
+        <div className="relative gap-4 self-center">
+          <div className="flex items-center w-24 h-7 bg-gray-300 rounded-sm"></div>
+        </div>
+
+        {/* Weekends Button */}
+        <div className="flex items-center gap-1">
+          <div className="w-20 h-5 bg-gray-300 rounded"></div>
         </div>
       </div>
     </div>
