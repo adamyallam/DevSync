@@ -1,31 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
+import AutoResizingInput from '@/components/styledElements/AutoResizingInput';
+import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
+import { useParams } from 'next/navigation';
+import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
+import useCalendarUIContext from '@/utils/hooks/context/useCalendarUIContext';
 
-interface CalendarTaskProps {
-  parentClassName?: string;
-  inputClassName?: string;
-  spanClassName?: string;
-  placeholder?: string;
-  initialState?: string;
-  maxGrowth?: number;
+interface Props {
+  taskName: string,
+  taskId: number,
+  createTask?: () => void,
+  focusTask?: boolean
 }
 
+export const CalendarTask: React.FC<Props> = ({ taskName, taskId, createTask, focusTask }) => {
+  const { projects, updateTaskDatabase } = useProjectsDataContext()
+  const { isSidebarOpen } = useNavbarUIContext()
+  const {isWeekendShowing, weekOrMonth } = useCalendarUIContext()
+  const { id } = useParams<{ id: string }>()
 
-export const CalendarTask: React.FC<CalendarTaskProps> = ({ parentClassName, inputClassName, spanClassName, placeholder, initialState }) => {
-  const [text, setText] = useState(`${initialState || ''}`)
+  const project = projects?.find((project) => project.id.toString() === id);
+  const task = project?.tasks?.find((task) => task.id === taskId);
+
+  if (!project || !task) return <div className='border-2 border-primary'>No task found</div>;
 
   return (
-    <div className={`${parentClassName ? parentClassName : 'w-full pb-2'}`}>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        className={`${inputClassName ? inputClassName : 'px-1 py-1 text-md w-full'}`}
-      />
-
-      <span className={`absolute top-0 left-0 invisible whitespace-pre pr-2 ${spanClassName ? spanClassName : 'text-md w-full'} `}>
-        {text}
-      </span>
+    <div className='pb-2'>
+      <AutoResizingInput initialWidth={150} maxGrowthWidth={isSidebarOpen ? (isWeekendShowing ? 165 : 215) : (isWeekendShowing ? 190 : 255)} placeholder='Name...' centerText={true} initialText={taskName} textStyles={weekOrMonth === 'Week' ? 'text-sm' : 'text-xs'} onConfirmChange={(newName) => updateTaskDatabase(task, project, 'name', newName)} />
     </div>
   );
 };
