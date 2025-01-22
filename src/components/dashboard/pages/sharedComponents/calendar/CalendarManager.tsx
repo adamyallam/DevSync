@@ -4,9 +4,11 @@ import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { getStartOfWeek, monthsOfYear } from "@/utils/dateFunctions/getDateFunctions";
 import useCalendarUIContext from "@/utils/hooks/context/useCalendarUIContext";
 import useMenuClose from "@/utils/hooks/useMenuClose";
+import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
+import { CalendarManagerSkeleton } from "@/components/styledElements/LoadingElements";
 
 const CalendarManager = () => {
-  // All states, functions and arrays handled within the CalendarUIProvider imported using useCalendarUIContext
+  const { loading } = useProjectsDataContext()
   const { isWeekendShowing, setIsWeekendShowing, weekOrMonth, setWeekOrMonth, calendarDate, setCalendarDate } = useCalendarUIContext();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const CalendarManager = () => {
 
   useMenuClose(calendarViewMenuRef, calendarViewButtonRef, isOpen, setIsOpen)
 
+  if (loading) return <CalendarManagerSkeleton />
 
   const handleOptionClick = (option: string) => {
     setWeekOrMonth(option);
