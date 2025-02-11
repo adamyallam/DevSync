@@ -34,7 +34,7 @@ export const AutoResizingInput: React.FC<AutoResizingInputProps> = ({ initialWid
     if (setFocusInput) {
       setFocusInput(false)
     }
-  }, [focusInput])
+  }, [focusInput, setFocusInput])
 
   useEffect(() => {
     if (inputRef.current && spanRef.current) {

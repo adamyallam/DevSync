@@ -27,6 +27,16 @@ export const Navbar = () => {
 
   useMenuClose(logoutMenu, logoutMenuButton, logoutOpen, setLogoutOpen)
 
+  const currentPath = usePathSegments(2);
+  function applySidebarClass(...pagePaths: string[]) {
+
+    if (pagePaths.includes(currentPath)) {
+      return 'sidebar-selected';
+    } else {
+      return 'sidebar-highlighted';
+    }
+  }
+
   const favoritedProjects = projects?.filter(project => project.favorited === true)
   const unfavoritedProjects = projects?.filter(project => project.favorited === false)
 
@@ -42,16 +52,6 @@ export const Navbar = () => {
 
   const toggleFavoritedProjectsTab = () => {
     setIsFavoritedProjectsCollapsed(!isFavoritedProjectsCollapsed)
-  }
-
-  const currentPath = usePathSegments(2);
-  function applySidebarClass(...pagePaths: string[]) {
-
-    if (pagePaths.includes(currentPath)) {
-      return 'sidebar-selected';
-    } else {
-      return 'sidebar-highlighted';
-    }
   }
 
   return (

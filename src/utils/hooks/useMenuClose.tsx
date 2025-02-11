@@ -13,6 +13,6 @@ export default function useMenuClose(menuRef: RefObject<HTMLElement>, buttonRef:
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [menuOpenState]);
+  }, [menuOpenState, buttonRef, menuRef, setMenuOpenState]);
 
 }

@@ -28,6 +28,16 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
   const menuRef = useRef<HTMLDivElement>(null)
   const projectIconRef = useRef<HTMLDivElement>(null)
 
+  const currentPath = usePathSegments(2);
+  function applySidebarClass(...pagePaths: string[]) {
+
+    if (pagePaths.includes(currentPath)) {
+      return 'sidebar-selected';
+    } else {
+      return 'sidebar-highlighted';
+    }
+  }
+
   const project = projects?.find((project) => project.id === projectID);
 
   const statusStyles = statusConfig[status] || {
@@ -49,16 +59,6 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
     setContextMenuPosition({ x: xPosition, y: yPosition })
     setContextMenuOpen(true);
   };
-
-  function applySidebarClass(...pagePaths: string[]) {
-    const currentPath = usePathSegments(2);
-
-    if (pagePaths.includes(currentPath)) {
-      return 'sidebar-selected';
-    } else {
-      return 'sidebar-highlighted';
-    }
-  }
 
   const deleteProject = async () => {
 
