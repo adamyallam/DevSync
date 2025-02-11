@@ -2,14 +2,16 @@
 import Link from 'next/link'
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Instagram, Twitter, Linkedin, Home, X, MenuIcon, ChevronDown } from 'lucide-react'
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
+import useMenuClose from '@/utils/hooks/useMenuClose';
 import ProjectLink from '../styledElements/ProjectLink';
 import { BouncingDots } from '../styledElements/LoadingElements';
 import CreateProjectForm from './pages/projects/CreateProjectForm';
+import { signOut } from 'next-auth/react';
 
 export const Navbar = () => {
   const { data: session } = useSession()
@@ -18,6 +20,12 @@ export const Navbar = () => {
 
   const [isUnfavoritedProjectsCollapsed, setIsUnfavoritedProjectsCollapsed] = useState(false)
   const [isFavoritedProjectsCollapsed, setIsFavoritedProjectsCollapsed] = useState(false)
+  const [logoutOpen, setLogoutOpen] = useState(false);
+
+  const logoutMenu = useRef<HTMLDivElement>(null)
+  const logoutMenuButton = useRef<HTMLButtonElement>(null)
+
+  useMenuClose(logoutMenu, logoutMenuButton, logoutOpen, setLogoutOpen)
 
   const favoritedProjects = projects?.filter(project => project.favorited === true)
   const unfavoritedProjects = projects?.filter(project => project.favorited === false)
@@ -58,7 +66,14 @@ export const Navbar = () => {
           <button onClick={() => toggleCreateProjectForm(true)} className='flex justify-center border-2 text-sm text-primary-text border-primary-text rounded-full p-[1px] pl-2 pr-2 hover:scale-105 hover:text-secondary-text hover:border-secondary-text transition-transform'>Create</button>
         </div>
 
-        <button className='w-9 h-9 border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
+        <div className='relative flex flex-col'>
+          <button ref={logoutMenuButton} onClick={() => setLogoutOpen(prev => !prev)} className='w-8 h-8 border-2 border-primary-text rounded-full p-1 text-sm text-primary-text mr-3 hover:scale-105 hover:border-secondary-text hover:text-secondary-text transition-transform'>{userInitials}</button>
+          {logoutOpen && (
+            <div ref={logoutMenu} className='absolute right-[1px] top-10 bg-primary hover:bg-secondary rounded-md shadow-xl p-2'>
+              <button onClick={() => signOut()} className='flex text-sm text-primary-text transition-colors'>Logout</button>
+            </div>
+          )}
+        </div>
       </div>
       {/* Sidebar */}
       <div className={`flex flex-col fixed left-0 bottom-0 top-12 bg-primary text-primary-text w-60 transition-transform duration-300 border-r-2 border-undertone ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-x-hidden overflow-y-auto`}>
