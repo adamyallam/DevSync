@@ -11,7 +11,7 @@ import StatusButton from '@/components/styledElements/StatusButton'
 import { useState, useRef } from 'react'
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext'
 import useMenuClose from '@/utils/hooks/useMenuClose'
-import FavoritedButton from '@/components/styledElements/FavoritedButton'
+import FavoritedButtons from '@/components/styledElements/FavoritedButtons'
 
 export const Header = () => {
   const { projects, loading, updateProjectDatabase, removeProject } = useProjectsDataContext()
@@ -74,7 +74,7 @@ export const Header = () => {
             </div>
           )}
         </div>
-        <FavoritedButton favorited={project.favorited} />
+        <FavoritedButtons favorited={project.favorited} />
         <StatusButton project={project} model='project' status={project.status} />
       </div>
       <div>
