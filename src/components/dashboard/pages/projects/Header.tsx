@@ -8,7 +8,7 @@ import { statusConfig } from '@/utils/statusConfig'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext'
 import useMenuClose from '@/utils/hooks/useMenuClose'
 import FavoritedButton from '@/components/styledElements/FavoritedButton'

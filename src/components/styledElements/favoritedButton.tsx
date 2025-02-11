@@ -1,13 +1,13 @@
 'use client'
 import { useParams } from "next/navigation";
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import { Star } from "lucide-react";
 import useProjectsDataContext from "@/utils/hooks/context/useProjectDataProvider";
 import ErrorMessage from "./ErrorMessage";
 
-interface Props {favorited: boolean;}
+interface Props { favorited: boolean; }
 
-export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
+const FavoritedButton: React.FC<Props> = ({ favorited }) => {
   const { id } = useParams()
   const { projects, updateProjectDatabase, exitError, showError } = useProjectsDataContext()
 
@@ -24,7 +24,7 @@ export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
 
     try {
       await updateProjectDatabase(project, 'favorited', !favorited)
-    } catch { 
+    } catch {
       showError(setDisplayError, errorTimeoutRef)
     } finally {
       setIsDisabled(false);
@@ -43,4 +43,4 @@ export const FavoritedButton: React.FC<Props> = ({ favorited }) => {
   );
 };
 
-export default FavoritedButton
+export default FavoritedButton;
