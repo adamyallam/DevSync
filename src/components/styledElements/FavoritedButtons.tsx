@@ -7,7 +7,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface Props { favorited: boolean; }
 
-const FavoritedButton: React.FC<Props> = ({ favorited }) => {
+const FavoritedButtons: React.FC<Props> = ({ favorited }) => {
   const { id } = useParams()
   const { projects, updateProjectDatabase, exitError, showError } = useProjectsDataContext()
 
@@ -43,4 +43,4 @@ const FavoritedButton: React.FC<Props> = ({ favorited }) => {
   );
 };
 
-export default FavoritedButton;
+export default FavoritedButtons;
