@@ -1,17 +1,17 @@
 'use client'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { ChevronDown, Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, CircleMinus, CirclePlus, SquarePen } from "lucide-react"
+import { Ellipsis, PanelsTopLeft, ListOrdered, SquareKanban, Calendar, Share2, CircleMinus, CirclePlus, SquarePen } from "lucide-react"
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider'
 import { usePathSegments } from '@/utils/hooks/usePathSegments'
 import { statusConfig } from '@/utils/statusConfig'
 import AutoResizingInput from "@/components/styledElements/AutoResizingInput"
 import { HeaderSkeletonLoader } from '@/components/styledElements/LoadingElements'
 import StatusButton from '@/components/styledElements/StatusButton'
-import FavoritedButton from '@/components/styledElements/FavoritedButton'
 import { useState, useRef, useEffect } from 'react'
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext'
 import useMenuClose from '@/utils/hooks/useMenuClose'
+import FavoritedButton from '@/components/styledElements/FavoritedButton'
 
 export const Header = () => {
   const { projects, loading, updateProjectDatabase, removeProject } = useProjectsDataContext()
