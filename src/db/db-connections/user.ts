@@ -1,10 +1,9 @@
 import prisma from '@/db/prisma'
-import { getEndOfNextMonth } from '@/utils/dateFunctions/getDateFunctions';
 
 //All User related functions
 
 // function for creating a user
-export async function createUser(userData: { firstName: string, lastName: string, username: string, email: string, password: string }) {
+async function createUser(userData: { firstName: string, lastName: string, username: string, email: string, password: string }) {
   try {
     const user = await prisma.user.create({
       data: {
@@ -21,7 +20,7 @@ export async function createUser(userData: { firstName: string, lastName: string
 }
 
 // function for deleting a user
-export async function deleteUser(userId: { id: number }) {
+async function deleteUser(userId: { id: number }) {
   const deletedUser = await prisma.user.delete({
     where: userId
   })
@@ -29,7 +28,7 @@ export async function deleteUser(userId: { id: number }) {
 }
 
 //function for updating a user
-export async function updateUser(userId: { id: number }, updatedInfo: object) {
+async function updateUser(userId: { id: number }, updatedInfo: object) {
   const updatedUser = await prisma.user.update({
     where: userId,
     data: updatedInfo
@@ -38,7 +37,7 @@ export async function updateUser(userId: { id: number }, updatedInfo: object) {
 }
 
 //function for reading one user
-export async function readUser(id: number) {
+async function readUser(id: number) {
   const user = await prisma.user.findUnique({
     where: { id }
   })
@@ -50,10 +49,10 @@ export async function readUser(id: number) {
 }
 
 //function for reading all users
-export async function readAllUsers() {
+async function readAllUsers() {
   const users = await prisma.user.findMany()
   console.log("All users were read!", users)
 }
 
 
-export default { createUser, deleteUser, updateUser, readUser, readAllUsers };
+export { createUser, deleteUser, updateUser, readUser, readAllUsers };

@@ -1,7 +1,7 @@
 import prisma from '@/db/prisma'
 
 // function for creating a section
-export async function createSection(projectId: number) {
+async function createSection(projectId: number) {
   try {
     const section = await prisma.section.create({
       data: {
@@ -20,7 +20,7 @@ export async function createSection(projectId: number) {
 }
 
 // function for deleting a section
-export async function deleteSection(sectionId: {id: number}) {
+async function deleteSection(sectionId: {id: number}) {
   const deletedsection = await prisma.section.delete({
     where: sectionId
   })
@@ -28,7 +28,7 @@ export async function deleteSection(sectionId: {id: number}) {
 }
 
 //function for updating a section
-export async function updateSection(sectionId: {id: number}, fieldsToUpdate: object) {
+async function updateSection(sectionId: {id: number}, fieldsToUpdate: object) {
   const updatedsection = await prisma.section.update({
     where: sectionId,
     data: fieldsToUpdate
@@ -39,7 +39,7 @@ export async function updateSection(sectionId: {id: number}, fieldsToUpdate: obj
 }
 
 //function for reading a section
-export async function readSection(id: number) {
+async function readSection(id: number) {
   const section = await prisma.section.findUnique({
     where: { id }
   })
@@ -51,10 +51,10 @@ export async function readSection(id: number) {
 }
 
 //function for reading all sections
-export async function readAllSections() {
+async function readAllSections() {
   const sections = await prisma.section.findMany()
   console.log("All sections were read!", sections)
 }
 
 
-export default { createSection, deleteSection, updateSection, readSection, readAllSections };
+export { createSection, deleteSection, updateSection, readSection, readAllSections };

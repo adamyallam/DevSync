@@ -1,7 +1,7 @@
 import prisma from '@/db/prisma'
 
 // function for creating a project
-export async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string, defaultView?: string }) {
+async function createProject(userId: number, projectData: { name: string, description: string, dueDate: string, defaultView?: string }) {
   try {
     const project = await prisma.project.create({
       data: {
@@ -56,7 +56,7 @@ export async function createProject(userId: number, projectData: { name: string,
 }
 
 // function for deleting a project
-export async function deleteProject(projectId: { id: number }) {
+async function deleteProject(projectId: { id: number }) {
   const deletedProject = await prisma.project.delete({
     where: projectId
   })
@@ -65,7 +65,7 @@ export async function deleteProject(projectId: { id: number }) {
 
 
 //function for updating a project
-export async function updateProject(projectId: { id: number }, fieldsToUpdate: object) {
+async function updateProject(projectId: { id: number }, fieldsToUpdate: object) {
   const updatedProject = await prisma.project.update({
     where: projectId,
     data: fieldsToUpdate,
@@ -77,7 +77,7 @@ export async function updateProject(projectId: { id: number }, fieldsToUpdate: o
 
 
 //function for reading one project
-export async function readProject(id: number) {
+async function readProject(id: number) {
   const project = await prisma.project.findUnique({
     where: { id }
   })
@@ -89,7 +89,7 @@ export async function readProject(id: number) {
 }
 
 //function for reading all projects
-export async function readAllProjects(id: number) {
+async function readAllProjects(id: number) {
   try {
     const projects = await prisma.project.findMany({
       where: {
@@ -108,4 +108,4 @@ export async function readAllProjects(id: number) {
   }
 }
 
-export default { createProject, deleteProject, updateProject, readProject, readAllProjects };
+export { createProject, deleteProject, updateProject, readProject, readAllProjects };

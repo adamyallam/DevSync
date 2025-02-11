@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 
 // function for creating a comment
-export async function createComment(commentData: object) {
+async function createComment(commentData: object) {
     const comment = await prisma.comment.create({
         data: commentData
       })
@@ -14,7 +14,7 @@ export async function createComment(commentData: object) {
 }
 
 // function for deleting a comment
-export async function deleteComment(commentId: object) {
+async function deleteComment(commentId: object) {
   const deletedComment = await prisma.comment.delete({
     where: commentId
   })
@@ -23,7 +23,7 @@ export async function deleteComment(commentId: object) {
 }
 
 //function for updating a comment
-export async function updateComment(commentId: object, updatedInfo: object) {
+async function updateComment(commentId: object, updatedInfo: object) {
   const updatedComment = await prisma.comment.update({
     where: commentId,
     data: updatedInfo
@@ -33,7 +33,7 @@ export async function updateComment(commentId: object, updatedInfo: object) {
 }
 
 //function for reading a comment
-export async function readComment(id: number) {
+async function readComment(id: number) {
   const comment = await prisma.comment.findUnique({
     where: { id }
   })
@@ -46,11 +46,11 @@ export async function readComment(id: number) {
 }
 
 //function for reading all comments
-export async function readAllComments() {
+async function readAllComments() {
   const comments = await prisma.comment.findMany()
   console.log("All comments were read!", comments)
   await prisma.$disconnect()
 }
 
 
-export default {createComment, deleteComment, updateComment, readComment, readAllComments};
+export {createComment, deleteComment, updateComment, readComment, readAllComments};
