@@ -69,7 +69,7 @@ export const ProjectTask: React.FC<Props> = ({ taskName, taskId, createTask, foc
   const deleteTask = async () => {
 
     try {
-      const res = await fetch(`http://localhost:3000/api/task`, {
+      const res = await fetch(`/api/task`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: taskId }),

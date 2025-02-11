@@ -32,7 +32,7 @@ export const CreateBoardSection = () => {
   const createSection = async () => {
 
     try {
-      const res = await fetch("http://localhost:3000/api/section", {
+      const res = await fetch("/api/section", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

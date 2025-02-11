@@ -38,7 +38,7 @@ export const BoardSection: React.FC<Props> = ({ sectionTitle, sectionId, createS
   const deleteSection = async () => {
 
     try {
-      const res = await fetch(`http://localhost:3000/api/section`, {
+      const res = await fetch(`/api/section`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: sectionId }),
@@ -57,7 +57,7 @@ export const BoardSection: React.FC<Props> = ({ sectionTitle, sectionId, createS
   const createTask = async () => {
 
     try {
-      const res = await fetch("http://localhost:3000/api/task", {
+      const res = await fetch("/api/task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

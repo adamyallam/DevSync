@@ -37,7 +37,7 @@ export const BoardTask: React.FC<Props> = ({ taskName, taskId, createTask, focus
   const deleteTask = async () => {
 
     try {
-      const res = await fetch(`http://localhost:3000/api/task`, {
+      const res = await fetch(`/api/task`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: taskId }),

@@ -63,7 +63,7 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
   const deleteProject = async () => {
 
     try {
-      const res = await fetch(`http://localhost:3000/api/project`, {
+      const res = await fetch(`/api/project`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: projectID }),

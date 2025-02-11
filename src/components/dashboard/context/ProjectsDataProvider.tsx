@@ -32,7 +32,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/project");
+        const res = await fetch("/api/project");
         const data = await res.json();
 
         if (data.projects) {
@@ -91,7 +91,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     if (!project || newValue === project[property]) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/project`, {
+      const res = await fetch(`/api/project`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -113,7 +113,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     if (!section || newValue === section[property] || !project) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/section`, {
+      const res = await fetch(`/api/section`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -145,7 +145,7 @@ export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/task`, {
+      const res = await fetch(`/api/task`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
