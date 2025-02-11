@@ -19,7 +19,7 @@ export const WeeklyCalendar = () => {
   const weekStartEnd = { start: 0, end: 0 }
 
   if (loading) return <WeeklyCalendarSkeleton />
-  if (!project || !tasks) return <div className=''>Can't retrieve data</div>;
+  if (!project || !tasks) return <div className=''>Can&apos;t retrieve data</div>;
   
   function setWeekStartEnd() {
     const startOfWeek = getStartOfWeek(calendarDate);

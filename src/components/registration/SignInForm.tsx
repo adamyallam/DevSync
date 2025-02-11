@@ -53,7 +53,7 @@ const SignInForm = () => {
               {signingIn && <span>Signing In...</span>}
               {!signingIn && <span>Sign In</span>}
             </button>
-            <span className='flex text-primary-text justify-center gap-1'>Don't have an account? <Link href={'signup'} className='text-blue-400 border-blue-400 hover:border-b'>Sign up</Link></span>
+            <span className='flex text-primary-text justify-center gap-1'>Don&apos;t have an account? <Link href={'signup'} className='text-blue-400 border-blue-400 hover:border-b'>Sign up</Link></span>
           </div>
         </form>
       </div>

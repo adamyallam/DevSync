@@ -26,7 +26,7 @@ export const CreateBoardSection = () => {
   }
 
   if (!project || !project.sections) {
-    return <div className='mt-16 ml-8 text-2xl'>Can't retrieve data</div>;
+    return <div className='mt-16 ml-8 text-2xl'>Can&apos;t retrieve data</div>;
   }
 
   const createSection = async () => {

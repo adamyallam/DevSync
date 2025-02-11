@@ -36,7 +36,7 @@ export const TaskSection: React.FC<Props> = ({ sectionId, sectionTitle, createSe
 
 
   if (!project || !section) {
-    return <div className='mt-5 ml-8 text-2xl'>Can't retrieve data</div>;
+    return <div className='mt-5 ml-8 text-2xl'>Can&apos;t retrieve data</div>;
   }
 
   const deleteSection = async () => {

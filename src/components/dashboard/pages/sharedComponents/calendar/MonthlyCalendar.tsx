@@ -26,7 +26,7 @@ export const MonthlyCalendar = () => {
   };
 
   if (!project || !tasks) {
-    return <div className=''>Can't retrieve data</div>;
+    return <div className=''>Can&apos;t retrieve data</div>;
   }
 
   return (

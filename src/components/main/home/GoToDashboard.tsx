@@ -74,7 +74,7 @@ export default function GoToDashboard() {
                 {!signingIn && <span>Sign In</span>}
               </button>
               <div>
-                <span className='flex gap-1 text-primary-text justify-center'>Don't have an account? <Link href={'user/registration/signup'} className="text-blue-400 hover:border-b border-blue-400 transition-all">Sign up here</Link></span>
+                <span className='flex gap-1 text-primary-text justify-center'>Don&apos;t have an account? <Link href={'user/registration/signup'} className="text-blue-400 hover:border-b border-blue-400 transition-all">Sign up here</Link></span>
               </div>
             </div>
 
