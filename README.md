@@ -1,5 +1,5 @@
 # DevSync 📌
-A Project Tracker app built with Next.js, React, and TypeScript. This application allows users to create and manage projects, organize project tasks and view them in various formats, and more!
+A Project Tracker app built with Next.js, React, and TypeScript. This application allows users to create and manage projects, organize project tasks and view them in various formats, and more! [You can test out DevSync here!](https://devsync.adamyallam.com/)
 
 # 🚀 Features
 User Authentication (NextAuth + Prisma + MySQL)
@@ -44,3 +44,8 @@ Track progress and manage tasks easily
 
 # 🚀 Deployment
 To deploy, make sure your environment variables are correctly set for production. If deploying on Vercel or Netlify, you may need to configure the database and authentication settings accordingly.
+
+# 🔗 Connect with Me
+📧 Email: hello@adamyallam.com
+🐙 GitHub: [adamyallam](https://github.com/adamyallam)
+🚀 Portfolio: [adamyallam.com](https://adamyallam.com/)
