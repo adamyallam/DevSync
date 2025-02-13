@@ -5,7 +5,9 @@ A Project Tracker app built with Next.js, React, and TypeScript. This applicatio
 🔗 Live Demo: [Check out DevSync!](https://devsync.adamyallam.com/)
 
 📸 Screenshots:
+![Home](https://github.com/user-attachments/assets/c521a2a4-e986-4a77-9e8c-635725304435)
 
+![List View](https://github.com/user-attachments/assets/1a09d35b-ed21-4aaf-9af3-72021a16f3d2)
 
 
 # 🚀 Features
