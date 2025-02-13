@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth"
 import authOptions from "@/app/api/auth/[...nextauth]/authOptions"
 
 export const metadata = {
-  title: 'DevSync',
-  description: 'Web app that allows user's to track their project's progress',
+  title: "DevSync",
+  description: "Web app that allows developers to track their project's progress",
 }
 
 interface Props {
