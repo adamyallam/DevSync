@@ -21,25 +21,34 @@ Clone the repository:
 git clone https://github.com/adamyallam/DevSync.git
 
 Install dependencies:
+
 npm install
 
 Set up environment variables:
+
 Create a .env file and add:
 
 DATABASE_URL="mysql://user:password@host:port/database"
+
 NEXTAUTH_SECRET="your-secret"
+
 NEXTAUTH_URL="http://localhost:3000"
 
 Run database migrations:
+
 npx prisma migrate dev
 
 Start the development server:
+
 npm run dev
 
 # 🔧 Usage
 Sign up or log in
+
 Create a new project
+
 Add sections and tasks to organize work
+
 Track progress and manage tasks easily
 
 # 🚀 Deployment
@@ -47,5 +56,7 @@ To deploy, make sure your environment variables are correctly set for production
 
 # 🔗 Connect with Me
 📧 Email: hello@adamyallam.com
+
 🐙 GitHub: [adamyallam](https://github.com/adamyallam)
+
 🚀 Portfolio: [adamyallam.com](https://adamyallam.com/)
