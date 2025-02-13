@@ -3,30 +3,32 @@ A Project Tracker app built with Next.js, React, and TypeScript. This applicatio
 
 # 🚀 Features
 User Authentication (NextAuth + Prisma + MySQL)
+
 Create & Manage Projects (Add, edit, delete)
+
 Task Management (Organize tasks into sections)
+
 Real-time Updates
+
 Responsive UI (Tailwind CSS for styling)
+
 API Routes (CRUD operations using Next.js API routes)
 
 # 🛠️ Tech Stack
 Frontend: Next.js, React, TypeScript, Tailwind CSS
+
 Backend: Next.js API Routes, Prisma, MySQL
+
 Authentication: NextAuth
+
 Database: AWS RDS (MySQL)
 
 # 📦 Installation
-Clone the repository:
+Clone the repository: git clone https://github.com/adamyallam/DevSync.git
 
-git clone https://github.com/adamyallam/DevSync.git
+Install dependencies: npm install
 
-Install dependencies:
-
-npm install
-
-Set up environment variables:
-
-Create a .env file and add:
+Set up environment variables: Create a .env file and add:
 
 DATABASE_URL="mysql://user:password@host:port/database"
 
@@ -34,13 +36,9 @@ NEXTAUTH_SECRET="your-secret"
 
 NEXTAUTH_URL="http://localhost:3000"
 
-Run database migrations:
+Run database migrations: npx prisma migrate dev
 
-npx prisma migrate dev
-
-Start the development server:
-
-npm run dev
+Start the development server: npm run dev
 
 # 🔧 Usage
 Sign up or log in
