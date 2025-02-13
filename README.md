@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Project Tracker 📌
+A Project Tracker app built with Next.js, React, and TypeScript. This application allows users to create and manage projects, organize project tasks and view them in various formats, and more!
 
-## Getting Started
+🚀 Features
+User Authentication (NextAuth + Prisma + MySQL)
+Create & Manage Projects (Add, edit, delete)
+Task Management (Organize tasks into sections)
+Real-time Updates
+Responsive UI (Tailwind CSS for styling)
+API Routes (CRUD operations using Next.js API routes)
 
-First, run the development server:
+🛠️ Tech Stack
+Frontend: Next.js, React, TypeScript, Tailwind CSS
+Backend: Next.js API Routes, Prisma, MySQL
+Authentication: NextAuth
+Database: AWS RDS (MySQL)
 
-```bash
+📦 Installation
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/adamyallam/DevSync.git
+cd project-tracker
+
+Install dependencies:
+bash
+Copy
+Edit
+npm install
+# or
+yarn install
+
+Set up environment variables:
+
+Create a .env file and add:
+
+DATABASE_URL="mysql://user:password@host:port/database"
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+
+Run database migrations:
+npx prisma migrate dev
+
+Start the development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔧 Usage
+Sign up or log in
+Create a new project
+Add sections and tasks to organize work
+Track progress and manage tasks easily
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🚀 Deployment
+To deploy, make sure your environment variables are correctly set for production. If deploying on Vercel or Netlify, you may need to configure the database and authentication settings accordingly.
