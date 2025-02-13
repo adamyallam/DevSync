@@ -1,30 +1,45 @@
 # DevSync 📌
-A Project Tracker app built with Next.js, React, and TypeScript. This application allows users to create and manage projects, organize project tasks and view them in various formats, and more! [You can test out DevSync here!](https://devsync.adamyallam.com/)
+A Project Tracker app built with Next.js, React, and TypeScript. This application allows users to create and manage projects, organize project tasks and view them in various formats, and more!
+
+# 🎥 Demo & Screenshots
+🔗 Live Demo: [Check out DevSync!](https://devsync.adamyallam.com/)
+
+📸 Screenshots:
+
+
 
 # 🚀 Features
-User Authentication (NextAuth + Prisma + MySQL)
+✅ User Authentication (NextAuth + Prisma + MySQL)
 
-Create & Manage Projects (Add, edit, delete)
+✅ Create & Manage Projects (Add, edit, delete)
 
-Task Management (Organize tasks into sections)
+✅ Task Management (Organize tasks into sections)
 
-Real-time Updates
+✅ Multiple View Modes (List, Board, Calendar)
 
-Responsive UI (Tailwind CSS for styling)
+✅ Calendar View for Tasks (@fullcalendar/react integration)
 
-API Routes (CRUD operations using Next.js API routes)
+✅ Real-time Updates
+
+✅ Modern UI with Tailwind CSS + Tailwind Scrollbar
+
+✅ API Routes for Full CRUD Operations
 
 # 🛠️ Tech Stack
 Frontend: Next.js, React, TypeScript, Tailwind CSS
 
 Backend: Next.js API Routes, Prisma, MySQL
 
-Authentication: NextAuth
+Authentication: NextAuth with Prisma Adapter
 
 Database: AWS RDS (MySQL)
 
+UI Libraries: react-datepicker, Lucide Icons
+
+Date Handling: Date-fns
+
 # 📦 Installation
-Clone the repository: git clone https://github.com/adamyallam/DevSync.git
+Clone the repository: git clone https://github.com/adamyallam/DevSync.git > cd DevSync
 
 Install dependencies: npm install
 
