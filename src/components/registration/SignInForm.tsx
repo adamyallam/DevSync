@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const SignInForm = () => {
+  const router = useRouter()
   const [signingIn, setSigningIn] = useState(false)
   const [signInData, setSignInData] = useState({
     email: '',
@@ -30,7 +31,7 @@ const SignInForm = () => {
       setErrorMessage('Invalid email or password. Please try again.')
     } else {
       setSigningIn(false)
-      redirect('/dashboard/home')
+      router.push('/dashboard/home')
     }
   }
 
