@@ -29,9 +29,17 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials?.email }
-        })
+        let user;
+        
+        if (credentials?.email.includes('@')) {
+          user = await prisma.user.findUnique({
+            where: { email: credentials?.email }
+          });
+        } else {
+          user = await prisma.user.findUnique({
+            where: { username: credentials?.email }
+          });
+        }
 
 
         if (!user) {
@@ -59,20 +67,20 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = Number(user.id),
-        token.firstName = user.firstName,
-        token.lastName = user.lastName,
-        token.username = user.username,
-        token.email = user.email
+          token.firstName = user.firstName,
+          token.lastName = user.lastName,
+          token.username = user.username,
+          token.email = user.email
       }
       return token
     },
     async session({ session, token }) {
       if (token) {
         session.id = token.id,
-        session.firstName = token.firstName,
-        session.lastName = token.lastName,
-        session.username = token.username,
-        session.email = token.email
+          session.firstName = token.firstName,
+          session.lastName = token.lastName,
+          session.username = token.username,
+          session.email = token.email
       }
       return session
     }
