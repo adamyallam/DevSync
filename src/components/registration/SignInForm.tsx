@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 const SignInForm = () => {
-
   const [signingIn, setSigningIn] = useState(false)
   const [signInData, setSignInData] = useState({
     email: '',
@@ -30,6 +30,7 @@ const SignInForm = () => {
       setErrorMessage('Invalid email or password. Please try again.')
     } else {
       setSigningIn(false)
+      redirect('/dashboard/home')
     }
   }
 
@@ -42,7 +43,7 @@ const SignInForm = () => {
           <input className="rounded-sm text-primary-text bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
             required
             type="text"
-            placeholder='Email'
+            placeholder='Email or Username'
             value={signInData.email}
             onChange={(e) => { setSignInData({ ...signInData, email: e.target.value }) }}
           />

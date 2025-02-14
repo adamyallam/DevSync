@@ -3,8 +3,12 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 
 export default function GoToDashboard() {
+  const router = useRouter()
+  const { data: session } = useSession()
   const [signingIn, setSigningIn] = useState(false)
   const [signInData, setSignInData] = useState({
     email: '',
@@ -20,7 +24,6 @@ export default function GoToDashboard() {
     const newSignIn = await signIn('credentials', {
       ...signInData,
       redirect: false,
-      callbackUrl: '/dashboard/home',
     })
 
     if (newSignIn?.error) {
@@ -30,6 +33,7 @@ export default function GoToDashboard() {
       setErrorMessage('Invalid email or password. Please try again.')
     } else {
       setSigningIn(false)
+      router.push('/dashboard/home')
     }
   }
 
@@ -51,7 +55,10 @@ export default function GoToDashboard() {
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-lg border-4 border-undertone p-5 w-[35%] h-80 hover:border-2 hover:cursor-pointer transition-all">
-          <div className='flex flex-col gap-2 w-full h-full'>
+          {session ? (<div className="flex flex-col gap-2 w-full h-full items-center justify-center">
+            <h1 className="text-primary-text text-xl">You are already signed in</h1>
+            <Link href={'/dashboard/home'} className="text-blue-400 hover:text-blue-500 hover:underline text-lg">Go to Dashboard</Link>
+          </div>) : (<div className='flex flex-col gap-2 w-full h-full'>
 
             <h2 className="flex text-primary-text text-3xl justify-center border-b-2 border-undertone pb-3">Sign in</h2>
             {errorMessage && <p className="text-red-500 text-center">Invalid email or password. Please try again.</p>}
@@ -79,7 +86,7 @@ export default function GoToDashboard() {
               </div>
             </div>
 
-          </div>
+          </div>)}
         </form>
 
 
