@@ -10,10 +10,12 @@ const SignInForm = () => {
     email: '',
     password: '',
   })
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     setSigningIn(true)
+    setErrorMessage(null)
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
@@ -23,6 +25,8 @@ const SignInForm = () => {
     if (newSignIn?.error) {
       console.log(newSignIn.error)
       setSigningIn(false)
+      setSignInData({ email: '', password: '' })
+      setErrorMessage('Invalid email or password. Please try again.')
     } else {
       setSigningIn(false)
     }
@@ -30,9 +34,10 @@ const SignInForm = () => {
 
   return (
     <div className='flex justify-center bg-gradient-to-tr from-primary to-secondary via-selected items-center h-screen'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='relative'>
         <div className='flex flex-col gap-2 p-16 rounded-lg border-2 hover:border-4 hover:cursor-pointer transition-all border-undertone'>
           <h2 className="flex text-primary-text text-5xl mb-6 justify-center pb-5 border-b-2 border-undertone">Sign in</h2>
+          {errorMessage && <p className="text-red-500 text-center">Invalid email or password. Please try again.</p>}
           <input className="rounded-sm text-primary-text bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
             required
             type="text"

@@ -10,10 +10,12 @@ export default function GoToDashboard() {
     email: '',
     password: '',
   })
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     setSigningIn(true)
+    setErrorMessage(null)
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
@@ -23,6 +25,8 @@ export default function GoToDashboard() {
     if (newSignIn?.error) {
       console.log(newSignIn.error)
       setSigningIn(false)
+      setSignInData({ email: '', password: '' })
+      setErrorMessage('Invalid email or password. Please try again.')
     } else {
       setSigningIn(false)
     }
@@ -49,7 +53,7 @@ export default function GoToDashboard() {
           <div className='flex flex-col gap-2 w-full h-full'>
 
             <h2 className="flex text-primary-text text-3xl justify-center border-b-2 border-undertone pb-3">Sign in</h2>
-
+            {errorMessage && <p className="text-red-500 text-center">Invalid email or password. Please try again.</p>}
             <div className="flex flex-col gap-2 w-full h-full items-center justify-center">
               <input className="rounded-sm text-primary-text placeholder-primary-text self-center w-[75%] p-2 text-sm bg-highlighted"
                 required
