@@ -66,7 +66,7 @@ export default function GoToDashboard() {
               <input className="rounded-sm text-primary-text placeholder-primary-text self-center w-[75%] p-2 text-sm bg-highlighted"
                 required
                 type="text"
-                placeholder='Email'
+                placeholder='Email or Username'
                 value={signInData.email}
                 onChange={(e) => { setSignInData({ ...signInData, email: e.target.value }) }}
               />
