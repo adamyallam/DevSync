@@ -20,8 +20,7 @@ const SignInForm = () => {
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
-      redirect: false,
-      callbackUrl: '/dashboard/home',
+      redirect: false
     })
 
     if (newSignIn?.error) {
@@ -30,8 +29,8 @@ const SignInForm = () => {
       setSignInData({ email: '', password: '' })
       setErrorMessage('Invalid email or password. Please try again.')
     } else {
-      setSigningIn(false)
       router.push('/dashboard/home')
+      router.refresh()
     }
   }
 
