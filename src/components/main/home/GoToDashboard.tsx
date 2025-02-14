@@ -2,13 +2,9 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
 export default function GoToDashboard() {
-
-  const router = useRouter()
-
   const [signingIn, setSigningIn] = useState(false)
   const [signInData, setSignInData] = useState({
     email: '',
@@ -21,14 +17,14 @@ export default function GoToDashboard() {
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
-      redirect: false
+      callbackUrl: '/dashboard/home',
     })
 
     if (newSignIn?.error) {
       console.log(newSignIn.error)
       setSigningIn(false)
     } else {
-      router.push('/dashboard/home')
+      setSigningIn(false)
     }
   }
 
