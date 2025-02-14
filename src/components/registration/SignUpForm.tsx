@@ -15,31 +15,68 @@ const SignUpForm = () => {
   })
 
   const [loading, setLoading] = useState(false)
+  const [isEmailValid, setIsEmailValid] = useState(true)
+  const [isUsernameValid, setIsUsernameValid] = useState(true)
+  const [emailError, setEmailError] = useState('');
+  const [usernameError, setUsernameError] = useState('');
 
   const capitalizeName = (name: string) => {
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     return capitalizedName
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-    console.log(userData)
+  const validateUsername = (username: string) => {
+    const usernameRegex = /^[A-Za-z]+$/; // Only letters, no spaces
+    return usernameRegex.test(username);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const emailValid = validateEmail(userData.email);
+    const usernameValid = validateUsername(userData.username);
+    setIsEmailValid(emailValid);
+    setIsUsernameValid(usernameValid);
+    
+    if (!emailValid) {
+      setLoading(false);
+      setIsEmailValid(false);
+      return;
+    } else if (!usernameValid) {
+      setLoading(false);
+      setIsUsernameValid(false);
+      return;
+    }
+    
+    setLoading(true);
+    setEmailError('');
+    setUsernameError('');
 
     const res = await fetch("/api/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData)
-    })
+    });
 
     if (res.status === 201) {
-      router.push('signin')
+      router.push('signin');
     } else {
-      console.log('An error occured, please try again later')
-      setLoading(false)
+      const data = await res.json();
+      if (data.message.includes('email')) {
+        setEmailError('Email is unavailable');
+      }
+      if (data.message.includes('username')) {
+        setUsernameError('Username is unavailable');
+      }
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className='flex justify-center bg-gradient-to-tr from-primary to-secondary via-selected items-center h-screen'>
@@ -60,20 +97,25 @@ const SignUpForm = () => {
             value={userData.lastName}
             onChange={(e) => { setUserData({ ...userData, lastName: capitalizeName(e.target.value) }) }}
           />
-          <input className="text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
+          <input className={`text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70 ${!isUsernameValid ? 'border-2 border-red-500' : ''}`}
             required
             type="text"
             placeholder='Username'
             value={userData.username}
             onChange={(e) => { setUserData({ ...userData, username: e.target.value.toLowerCase() }) }}
           />
-          <input className="text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
+          {usernameError && <span className="text-red-500">{usernameError}</span>}
+          <input
+            className={`text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70 ${!isEmailValid ? 'border-2 border-red-500' : ''}`}
             required
             type="text"
             placeholder='Email'
             value={userData.email}
-            onChange={(e) => { setUserData({ ...userData, email: e.target.value }) }}
+            onChange={(e) => { 
+              setUserData({ ...userData, email: e.target.value });
+            }}
           />
+          {emailError && <span className="text-red-500">{emailError}</span>}
           <input className="text-primary-text rounded-sm bg-primary placeholder-secondary-text w-80 p-2 pb-1 text-sm bg-opacity-70"
             required
             type="password"
