@@ -40,9 +40,7 @@ export default function TopBar() {
         <div className='flex ml-24 gap-5 text-primary-text text-sm'>
           <Link className='hover:scale-105 hover:text-secondary-text transition-transform' href='/dashboard/home'>Dashboard</Link>
           <Link className='hover:scale-105 hover:text-secondary-text transition-transform' href='/pages/about'>About</Link>
-          <Link className='hover:scale-105 hover:text-secondary-text transition-transform' href='/pages/blog'>Blog</Link>
           <Link className='hover:scale-105 hover:text-secondary-text transition-transform' href='/pages/contact'>Contact</Link>
-          <Link className='hover:scale-105 hover:text-secondary-text transition-transform' href='/pages/faq'>FAQ</Link>
         </div>
       </div>
       <div className='flex items-center gap-4 mr-3'>
