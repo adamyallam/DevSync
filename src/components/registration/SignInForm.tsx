@@ -19,6 +19,7 @@ const SignInForm = () => {
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
+      redirect: false,
       callbackUrl: '/dashboard/home',
     })
 

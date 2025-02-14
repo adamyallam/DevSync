@@ -19,6 +19,7 @@ export default function GoToDashboard() {
 
     const newSignIn = await signIn('credentials', {
       ...signInData,
+      redirect: false,
       callbackUrl: '/dashboard/home',
     })
 
