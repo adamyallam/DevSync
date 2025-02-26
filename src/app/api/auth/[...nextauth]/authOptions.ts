@@ -30,13 +30,11 @@ export const authOptions: NextAuthOptions = {
         }
 
         let user;
-
+        
         if (credentials?.email.includes('@')) {
-          console.log("🟡 Searching for user with email:", credentials.email);
           user = await prisma.user.findUnique({
             where: { email: credentials?.email }
           });
-          console.log("🟢 User query result:", user);
         } else {
           user = await prisma.user.findUnique({
             where: { username: credentials?.email }
@@ -75,9 +73,9 @@ export const authOptions: NextAuthOptions = {
           token.username = user.username,
           token.email = user.email
 
-        if (user.email === "demouser@gmail.com") {
-          token.isDemo = true;
-        }
+         if (user.email === "demouser@gmail.com") {
+           token.isDemo = true;
+         }
       }
       return token
     },
@@ -89,7 +87,7 @@ export const authOptions: NextAuthOptions = {
           session.username = token.username,
           session.email = token.email
 
-        session.isDemo = token.isDemo || false;
+         session.isDemo = token.isDemo || false;
       }
       return session
     }
