@@ -31,7 +31,53 @@ export const POST = async (req: Request) => {
 
   try {
     if (session) {
-      const userId = session.id
+      if (session.isDemo) {
+        // Simulate project creation for demo users
+        const mockProject = {
+          id: `demo-project-id-${Date.now()}`,
+          name,
+          description,
+          dueDate,
+          status: "SetStatus",
+          favorited: false,
+          descriptionTitle: "Demo Overview",
+          sections: [
+            {
+              id: `demo-section-id-${Date.now()}`,
+              projectID: `demo-project-id-${Date.now()}`,
+              userId: session.id,
+              name: "Default Section",
+              tasks: [],
+              status: "SetStatus",
+              dueDate: null,
+              createdAt: new Date(),
+            }
+          ],
+          tasks: [
+            {
+              id: `demo-task-id-${Date.now()}`,
+              projectID: `demo-project-id-${Date.now()}`,
+              sectionID: `demo-section-id-${Date.now()}`,
+              userId: session.id,
+              name: "Default Task",
+              description: "This is a demo task",
+              status: "SetStatus",
+              priority: "SetPriority",
+              completed: false,
+              dueDate: null,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            }
+          ],
+          defaultView: defaultView || 'list',
+          userId: session.id
+        };
+        return NextResponse.json(
+          { message: 'Demo project created!', project: mockProject },
+          { status: 201 }
+        );
+      }
+      const userId = session.id;
       const projectData = { name, description, dueDate, defaultView: defaultView || 'list' };
 
       const newProject = await createProject(userId, projectData);
@@ -67,8 +113,16 @@ export const DELETE = async (req: Request) => {
       );
     }
 
-    const projectId = { id }
-    await deleteProject(projectId); 
+    if (session.isDemo) {
+      // Simulate project deletion for demo users
+      return NextResponse.json(
+        { message: `Demo project ${id} deleted!` },
+        { status: 200 }
+      );
+    }
+
+    const projectId = { id };
+    await deleteProject(projectId);
     return NextResponse.json(
       { message: `Project ${id} Deleted!` },
       { status: 200 }
@@ -76,7 +130,7 @@ export const DELETE = async (req: Request) => {
   } catch (err) {
     console.error('Error deleting project:', err);
     return NextResponse.json(
-      { message: 'Failed to DELETE' },
+      { message: 'Failed to DELETE', err },
       { status: 500 }
     );
   }
@@ -85,7 +139,7 @@ export const DELETE = async (req: Request) => {
 //API to UPDATE a project (invokes "updateProject")
 export const PATCH = async (req: Request) => {
   const { id, ...fieldsToUpdate } = await req.json();
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   if (!id || Object.keys(fieldsToUpdate).length === 0) {
     return NextResponse.json(
@@ -96,6 +150,14 @@ export const PATCH = async (req: Request) => {
 
   try {
     if (session) {
+      if (session.isDemo) {
+        // Simulate project update for demo users
+        const mockUpdatedProject = { id, ...fieldsToUpdate };
+        return NextResponse.json(
+          { message: `Demo project ${id} updated!`, project: mockUpdatedProject },
+          { status: 200 }
+        );
+      }
       const updatedProject = await updateProject({ id }, fieldsToUpdate);
       return NextResponse.json(
         { message: `Project ${id} updated!`, project: updatedProject },

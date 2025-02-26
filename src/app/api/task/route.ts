@@ -4,19 +4,40 @@ import authOptions from "../auth/[...nextauth]/authOptions"
 import { getServerSession } from 'next-auth'
 
 
-//API to add or "POST" a task (invokes "createtask")
+//API to add or "POST" a task (invokes "createTask")
 export const POST = async (req: Request) => {
   const { projectID, sectionID } = await req.json();
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   try {
     if (session) {
-      const task = await createTask(projectID, sectionID)
+      if (session.isDemo) {
+        // Simulate task creation for demo users
+        const mockTask = {
+          id: `demo-task-id-${Date.now()}`,
+          projectID,
+          sectionID,
+          userId: session.id,
+          name: "",
+          description: "This is a demo task",
+          status: "SetStatus",
+          priority: "SetPriority",
+          completed: false,
+          dueDate: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+        return NextResponse.json(
+          { message: 'Demo task created!', task: mockTask },
+          { status: 201 }
+        );
+      }
+      const task = await createTask(projectID, sectionID);
 
       return NextResponse.json(
         { message: 'New task created!', task: task },
         { status: 201 }
-      )
+      );
     } else {
       return NextResponse.json(
         { message: 'Unauthorized' },
@@ -27,36 +48,43 @@ export const POST = async (req: Request) => {
     return NextResponse.json(
       { message: 'Failed to POST', err },
       { status: 500 }
-    )
+    );
   }
 }
 
-//API to DELETE a task (invokes "deletetask")
+//API to DELETE a task (invokes "deleteTask")
 export const DELETE = async (req: Request) => {
   const { id } = await req.json();
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   try {
     if (session) {
-      const taskId = { id }
-      deleteTask(taskId)
+      if (session.isDemo) {
+        // Simulate task deletion for demo users
+        return NextResponse.json(
+          { message: `Demo task ${id} deleted!` },
+          { status: 200 }
+        );
+      }
+      const taskId = { id };
+      await deleteTask(taskId);
       return NextResponse.json(
-        { message: `task ${id} Deleted!` },
-        { status: 201 }
-      )
+        { message: `Task ${id} Deleted!` },
+        { status: 200 }
+      );
     }
   } catch (err) {
     return NextResponse.json(
       { message: 'Failed to DELETE', err },
       { status: 500 }
-    )
+    );
   }
 }
 
-//API to UPDATE a task (invokes "updatetask")
+//API to UPDATE a task (invokes "updateTask")
 export const PATCH = async (req: Request) => {
   const { id, ...fieldsToUpdate } = await req.json();
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   if (!id || Object.keys(fieldsToUpdate).length === 0) {
     return NextResponse.json(
@@ -67,17 +95,25 @@ export const PATCH = async (req: Request) => {
 
   try {
     if (session) {
-      const updatedTask = await updateTask({ id }, fieldsToUpdate)
+      if (session.isDemo) {
+        // Simulate task update for demo users
+        const mockUpdatedTask = { id, ...fieldsToUpdate };
+        return NextResponse.json(
+          { message: `Demo task ${id} updated!`, task: mockUpdatedTask },
+          { status: 200 }
+        );
+      }
+      const updatedTask = await updateTask({ id }, fieldsToUpdate);
       return NextResponse.json(
-        { message: `task ${id} updated!`, task: updatedTask },
-        { status: 201 }
-      )
+        { message: `Task ${id} updated!`, task: updatedTask },
+        { status: 200 }
+      );
     }
   } catch (err) {
     return NextResponse.json(
       { message: 'Failed to UPDATE', err },
       { status: 500 }
-    )
+    );
   }
 }
 
