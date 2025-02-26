@@ -71,7 +71,7 @@ export const ProjectLink: React.FC<Props> = ({ name, projectID, defaultView, sta
 
       if (!res.ok) { throw new Error('Failed to delete project') }
 
-      if (Number(id) === projectID) {
+      if (id === projectID.toString()) {
         router.push('/dashboard/home');
       }
 
