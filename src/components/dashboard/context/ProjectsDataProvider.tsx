@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useState, useEffect } from 'react';
 import { Status, Priority } from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
 export type Task = { id: number; sectionID: number, name: string | null; description: string | null; status: Status | null; priority: Priority | null, completed: boolean, dueDate: Date | null; createdAt: Date; updatedAt: Date; };
 export type Section = { id: number; tasks: Task[], name: string | null; description: string | null; status: Status | null; dueDate: Date | null; createdAt: Date; updatedAt: Date; };
@@ -26,28 +27,38 @@ interface Props {
 }
 
 export const ProjectsDataProvider: React.FC<Props> = ({ children }) => {
+  const { data: session } = useSession()
+  const isDemo = session?.isDemo
+
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch("/api/project");
-        const data = await res.json();
+    if (isDemo) {
+      // Load demo projects locally
+      const demoProjects: Project[] = [];
+      setProjects(demoProjects);
+      setLoading(false);
+    } else {
+      const fetchProjects = async () => {
+        try {
+          const res = await fetch("/api/project");
+          const data = await res.json();
 
-        if (data.projects) {
-          setProjects(data.projects);
-        } else {
-          console.error('No projects found')
+          if (data.projects) {
+            setProjects(data.projects);
+          } else {
+            console.error('No projects found')
+          }
+        } catch (err) {
+          return { message: 'failed to get projects', err }
+        } finally {
+          setLoading(false)
         }
-      } catch (err) {
-        return { message: 'failed to get projects', err }
-      } finally {
-        setLoading(false)
       }
-    }
 
-    fetchProjects();
+      fetchProjects();
+    }
   }, [])
 
   const showError = (setDisplayError: (value: boolean) => void, timeoutRef: React.MutableRefObject<number | null>) => {
