@@ -19,12 +19,7 @@ const About = () => {
                 <div className="w-3/4 flex flex-col items-center justify-center border-t-2 border-b-2 border-undertone p-4 mb-10">
                     <p className="text-center items-center justify-center text-md text-white mb-2">
                         I utilized various AI tools to aid me in producing DevSync.
-                        AI isn&apos;t perfect, and developers still need to use it carefully, but I believe it is
-                        the future of the development industry. Without it, developers will not be able to compete with
-                        those who do use it.
-                    </p>
-                    <p className="font-bold text-center items-center justify-center text-md text-white">
-                        With that being said, in honor of the help AI provided me, here is a completely over the top AI generated description of DevSync:
+                        I believe that AI is the future of the development industry, so in honor of that, here is a completely over the top AI generated description of DevSync:
                     </p>
                 </div>
                 <div className="w-3/4 flex flex-col items-center justify-center border-t-2 border-b-2 border-undertone p-4 mb-10">
