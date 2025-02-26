@@ -37,6 +37,33 @@ export default function GoToDashboard() {
     }
   }
 
+  const viewDemo = async (e: any) => {
+    e.preventDefault()
+    setSigningIn(true)
+    setErrorMessage(null)
+
+    const demoUser = {
+      email: "demouser@gmail.com",
+      password: "demo321",
+    }
+
+    const newSignIn = await signIn('credentials', {
+      ...demoUser,
+      redirect: false
+    })
+
+    if (newSignIn?.error) {
+      console.log(newSignIn.error)
+      setSigningIn(false)
+      setSignInData({ email: '', password: '' })
+      setErrorMessage('Invalid email or password. Please try again.')
+    } else {
+      router.push('/dashboard/home')
+      router.refresh()
+    }
+
+  }
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <Link href={'/dashboard/home'} className="text-primary-text text-lg font-semibold hover:cursor-pointer hover:text-secondary-text transition-all hover:border-b-[3px] pt-2 border-highlighted">The dashboard is where it all begins</Link>
@@ -47,8 +74,8 @@ export default function GoToDashboard() {
           <div className="flex flex-col items-center gap-3 w-full rounded-sm">
             <div className="bg-undertone w-[80%] h-[2px] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-500 ease-in-out mb-3" />
 
-            <Link className="flex items-center justify-center gap-2 text-primary-text font-semibold border-2 border-primary-text w-[70%] p-3 hover:text-secondary-text hover:border-secondary-text transition-all" href={'dashboard/home'}>Go to dashboard <ArrowRight size={18} strokeWidth={3} /></Link>
-            <span className="text-primary-text">Continue working on your projects</span>
+            <button onClick={viewDemo} className="flex items-center justify-center gap-2 text-primary-text font-semibold border-2 border-primary-text w-[70%] p-3 hover:text-secondary-text hover:border-secondary-text transition-all">View Demo<ArrowRight size={18} strokeWidth={3} /></button>
+            <span className="text-secondary-text text-center w-full">Note: Data will not be saved in demo mode.</span>
 
             <div className="bg-undertone w-[80%] h-[2px] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-500 ease-in-out mt-3" />
           </div>

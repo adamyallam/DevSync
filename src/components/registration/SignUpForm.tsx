@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
+import { signIn } from 'next-auth/react'
 
 const SignUpForm = () => {
   const router = useRouter()
@@ -43,7 +44,7 @@ const SignUpForm = () => {
     const usernameValid = validateUsername(userData.username);
     setIsEmailValid(emailValid);
     setIsUsernameValid(usernameValid);
-    
+
     if (!emailValid) {
       setLoading(false);
       setIsEmailValid(false);
@@ -53,7 +54,7 @@ const SignUpForm = () => {
       setIsUsernameValid(false);
       return;
     }
-    
+
     setLoading(true);
     setEmailError('');
     setUsernameError('');
@@ -77,6 +78,28 @@ const SignUpForm = () => {
       setLoading(false);
     }
   };
+
+  const viewDemo = async (e: any) => {
+    e.preventDefault()
+
+    const demoUser = {
+      email: "demouser@gmail.com",
+      password: "demo321",
+    }
+
+    const newSignIn = await signIn('credentials', {
+      ...demoUser,
+      redirect: false
+    })
+
+    if (newSignIn?.error) {
+      console.log(newSignIn.error)
+    } else {
+      router.push('/dashboard/home')
+      router.refresh()
+    }
+
+  }
 
   return (
     <div className='flex justify-center bg-gradient-to-tr from-primary to-secondary via-selected items-center h-screen'>
@@ -111,7 +134,7 @@ const SignUpForm = () => {
             type="text"
             placeholder='Email'
             value={userData.email}
-            onChange={(e) => { 
+            onChange={(e) => {
               setUserData({ ...userData, email: e.target.value });
             }}
           />
@@ -128,6 +151,12 @@ const SignUpForm = () => {
             {!loading && <span>Sign up</span>}
           </button>
           <span className='flex text-primary-text justify-center gap-1'>Already have an account? <Link href={'signin'} className='text-blue-400 border-blue-400 hover:border-b'>Sign in</Link></span>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          <button onClick={viewDemo} className='w-[80%] flex justify-center items-center rounded-sm text-primary-text text-md mt-4 border-2 border-primary-text p-1 hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-all'>
+            View Demo
+          </button>
+          <span className="text-secondary-text text-center mt-2">Note: Data will not be saved in demo mode</span>
         </div>
       </form>
     </div>

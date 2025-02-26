@@ -34,6 +34,33 @@ const SignInForm = () => {
     }
   }
 
+  const viewDemo = async (e: any) => {
+    e.preventDefault()
+    setSigningIn(true)
+    setErrorMessage(null)
+
+    const demoUser = {
+      email: "demouser@gmail.com",
+      password: "demo321",
+    }
+
+    const newSignIn = await signIn('credentials', {
+      ...demoUser,
+      redirect: false
+    })
+
+    if (newSignIn?.error) {
+      console.log(newSignIn.error)
+      setSigningIn(false)
+      setSignInData({ email: '', password: '' })
+      setErrorMessage('Invalid email or password. Please try again.')
+    } else {
+      router.push('/dashboard/home')
+      router.refresh()
+    }
+
+  }
+
   return (
     <div className='flex justify-center bg-gradient-to-tr from-primary to-secondary via-selected items-center h-screen'>
       <form onSubmit={handleSubmit} className='relative'>
@@ -59,6 +86,12 @@ const SignInForm = () => {
             {!signingIn && <span>Sign In</span>}
           </button>
           <span className='flex text-primary-text justify-center gap-1'>Don&apos;t have an account? <Link href={'signup'} className='text-blue-400 border-blue-400 hover:border-b'>Sign up</Link></span>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          <button onClick={viewDemo} className='w-[80%] flex justify-center items-center rounded-sm text-primary-text text-md mt-4 border-2 border-primary-text p-1 hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-all'>
+            View Demo
+          </button>
+          <span className="text-secondary-text text-center mt-2">Note: Data will not be saved in demo mode</span>
         </div>
       </form>
     </div>
