@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `task` MODIFY `name` VARCHAR(100) NULL DEFAULT '';
