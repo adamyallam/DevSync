@@ -31,10 +31,10 @@ DevSync is a personal project tracking application that allows users to create a
 - Tailwind CSS (for styling)
 
 ### Backend
-- MySQL (Database for data persistence)
+- PostgreSQL (Database for data persistence)
 - Prisma (ORM for database interactions)
 - NextAuth (Authentication handling)
-- AWS (Hosting MySQL database)
+- Supabase (Hosting PostgreSQL database)
 - API and Server Functions (Built into Next.js for backend logic)
 
 ## Installation & Setup
