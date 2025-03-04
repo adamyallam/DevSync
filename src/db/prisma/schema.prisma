@@ -6,36 +6,36 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Project {
-  id       Int       @id @default(autoincrement())
-  ownerID  Int
-  owner    User      @relation("ProjectOwner", fields: [ownerID], references: [id], onDelete: Cascade)
-  sections Section[]
-  tasks    Task[]
+  id                Int       @id @default(autoincrement())
+  ownerID           Int
+  owner             User      @relation("ProjectOwner", fields: [ownerID], references: [id], onDelete: Cascade)
+  sections          Section[] 
+  tasks             Task[] 
 
-  name             String    @db.VarChar(60)
-  descriptionTitle String    @default("Project description") @db.VarChar(60)
-  description      String    @db.VarChar(3000)
-  defaultView      String    @default("list")
-  status           Status?   @default(SetStatus)
-  favorited        Boolean   @default(false)
-  dueDate          DateTime?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  name              String    @db.Text
+  descriptionTitle  String    @default("Project description") @db.Text
+  description       String    @db.Text
+  defaultView       String    @default("list")
+  status            Status?   @default(SetStatus)
+  favorited         Boolean   @default(false)
+  dueDate           DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 }
 
 model User {
   id       Int       @id @default(autoincrement())
   projects Project[] @relation("ProjectOwner")
 
-  firstName String   @db.VarChar(40)
-  lastName  String   @db.VarChar(40)
-  username  String   @unique @db.VarChar(20)
-  email     String   @unique
+  firstName String   @db.Text
+  lastName  String   @db.Text
+  username  String   @unique @db.Text
+  email     String   @unique @db.Text
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,7 +66,7 @@ model Section {
   tasks     Task[]
 
   name        String?   @default("")
-  description String?   @db.VarChar(300)
+  description String?   @db.Text
   status      Status?   @default(SetStatus)
   dueDate     DateTime?
   createdAt   DateTime  @default(now())
