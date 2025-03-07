@@ -91,4 +91,5 @@ For any inquiries, feel free to reach out:
 - **Email**: hello@adamyallam.com
 - **Portfolio**: [adamyallam.com](https://adamyallam.com/)
 - **X**: [x.com/adamallam_tech](https://x.com/adamallam_tech)
+- **Linkedin**: [linkedin.com/adamyallam](https://www.linkedin.com/in/adamyallam/)
 - **GitHub**: [github.com/adamyallam](https://github.com/adamyallam)
