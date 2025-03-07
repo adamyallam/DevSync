@@ -1,7 +1,9 @@
 "use client"
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react';
-import {MenuIcon, X, Instagram, Twitter, Linkedin} from 'lucide-react'
+import {MenuIcon, X, Linkedin, Twitter} from 'lucide-react'
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import Image from 'next/image';
 import Logo from 'src/assets/imgs/Logo.png'
 
@@ -60,9 +62,9 @@ export default function DropMenu() {
 
         <div className='flex flex-col items-center bg-undertone p-2'>
           <div className='flex gap-2'>
-            <Instagram size={24} className='text-primary-text' strokeWidth={1.5} />
-            <Twitter size={24} className="text-primary-text" strokeWidth={1.5} />
-            <Linkedin size={24} className="text-primary-text" strokeWidth={1.5} />
+            <Link href="https://github.com/adamyallam"><FaGithub size={24} className='text-primary-text' strokeWidth={1.5} /></Link>
+            <Link href="https://x.com/adamallam_tech"><FaXTwitter size={24} className="text-primary-text" strokeWidth={1.5} /></Link>
+            <Link href="https://www.linkedin.com/in/adamyallam/"><Linkedin size={24} className="text-primary-text" strokeWidth={1.5} /></Link>
           </div>
           <p className=' text-primary-text'>Follow our socials!</p>
         </div>

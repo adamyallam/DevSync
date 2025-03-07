@@ -13,7 +13,7 @@ const contact = () => {
                 <p className="text-lg text-primary-text">hello@adamyallam.com</p>
                 <div className="flex gap-4 items-center justify-center mt-5">
                     <Link className="text-primary-text hover:scale-105 hover:text-blue-400 transition-all duration-300" href={'https://www.linkedin.com/in/adamyallam/'}><Linkedin size={30} /></Link>
-                    <Link className="text-primary-text hover:scale-105 hover:text-blue-400 transition-all duration-300" href={'https://x.com/adamallam__'}><FaXTwitter size={30} /></Link>
+                    <Link className="text-primary-text hover:scale-105 hover:text-blue-400 transition-all duration-300" href={'https://x.com/adamallam_tech'}><FaXTwitter size={30} /></Link>
                     <Link className="text-primary-text hover:scale-105 hover:text-blue-400 transition-all duration-300" href={'https://github.com/adamyallam'}><Github size={30} /></Link>
                 </div>
             </div>

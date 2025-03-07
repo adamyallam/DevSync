@@ -3,7 +3,9 @@ import Link from 'next/link'
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import { useState, useRef } from 'react';
-import { Instagram, Twitter, Linkedin, Home, X, MenuIcon, ChevronDown } from 'lucide-react'
+import { Linkedin, Home, X, MenuIcon, ChevronDown } from 'lucide-react'
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { usePathSegments } from '@/utils/hooks/usePathSegments';
 import useNavbarUIContext from '@/utils/hooks/context/useNavbarUIContext';
 import useProjectsDataContext from '@/utils/hooks/context/useProjectDataProvider';
@@ -156,9 +158,9 @@ export const Navbar = () => {
           <button onClick={() => toggleCreateProjectForm(!isCreateProjectFormOpen)} className='text-primary-text border-2 border-gray-300 p-2 w-10/12 mt-4 hover:font-semibold hover:text-secondary-text hover:border-[#89979E] hover:scale-105 transition-transform'>Create Project</button>
 
           <div className='flex mt-2 gap-2'>
-            <button><Instagram strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
-            <button><Twitter strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
-            <button><Linkedin strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></button>
+            <Link href="https://github.com/adamyallam"><FaGithub strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></Link>
+            <Link href="https://x.com/adamallam_tech"><FaXTwitter strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></Link>
+            <Link href="https://www.linkedin.com/in/adamyallam/"><Linkedin strokeWidth={1.5} className='h-6 text-primary-text hover:text-secondary-text hover:scale-105 transition-transform' /></Link>
           </div>
         </div>
       </div>

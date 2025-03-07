@@ -88,6 +88,7 @@ This project is licensed under the MIT License.
 
 For any inquiries, feel free to reach out:
 
-- **Portfolio**: [https://adamyallam.com/](https://adamyallam.com/)
 - **Email**: hello@adamyallam.com
+- **Portfolio**: [adamyallam.com](https://adamyallam.com/)
+- **X**: [x.com/adamallam_tech](https://x.com/adamallam_tech)
 - **GitHub**: [github.com/adamyallam](https://github.com/adamyallam)
