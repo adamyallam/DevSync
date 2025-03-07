@@ -26,6 +26,7 @@ const CreateProjectForm = () => {
   
   const [displayError, setDisplayError] = useState(false);
   const errorTimeoutRef = useRef<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateProjectData = (property: keyof ProjectData, newValue: string | Date | null) => {
     setProjectData((prevData) => ({
@@ -42,11 +43,13 @@ const CreateProjectForm = () => {
 
   const createProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true);
 
     setIsNameValid(true);
     setIsDescriptionValid(true);
 
     if (!projectData.name || !projectData.description) {
+      setIsLoading(false);
       return null;
     }
 
@@ -72,6 +75,8 @@ const CreateProjectForm = () => {
     } catch (error) {
       showError(setDisplayError, errorTimeoutRef)
       console.error("Error creating project:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -142,7 +147,17 @@ const CreateProjectForm = () => {
             </div>
 
             <div className='flex w-full h-[20%] justify-center'>
-              <button type='submit' className='text-primary-text border-2 border-gray-300 w-3/5 h-2/3 hover:font-semibold hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-transform'>Create Project</button>
+              <button 
+                type='submit' 
+                disabled={isLoading}
+                className={`text-primary-text border-2 border-gray-300 w-3/5 h-2/3 ${
+                  isLoading 
+                    ? 'opacity-50 cursor-not-allowed' 
+                    : 'hover:font-semibold hover:text-secondary-text hover:border-secondary-text hover:scale-105 transition-transform'
+                }`}
+              >
+                {isLoading ? 'Creating Project...' : 'Create Project'}
+              </button>
             </div>
           </form>
         )}
