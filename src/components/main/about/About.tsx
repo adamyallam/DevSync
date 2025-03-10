@@ -18,11 +18,11 @@ const About = () => {
                 </div>
                 <div className="w-3/4 flex flex-col items-center justify-center border-t-2 border-b-2 border-undertone p-4 mb-10">
                     <p className="text-center items-center justify-center text-md text-primary-text">
-                        DevSync is a web application meant to help developers manage their projects and tasks while keeping track of their progress. On the home section of DevSync's dashboard,
+                        DevSync is a web application meant to help developers manage their projects and tasks while keeping track of their progress. On the home section of DevSync&apos;s dashboard,
                         users can view all of their projects and the tasks associated with them. Users also have the option to filter through their tasks by incomplete, upcoming, overdue or completed; Projects can be filtered by favorited and unfavorited.
-                        In addition, the home page has a counter for the user's total number of projects, tasks, and completed tasks. As users create projects, they can navigate through them by favorited and unfavorited via the expandable sidebar.
+                        In addition, the home page has a counter for the user&apos;s total number of projects, tasks, and completed tasks. As users create projects, they can navigate through them by favorited and unfavorited via the expandable sidebar.
                         Within a project, users can create tasks and organize them into sections. Each task can be assigned a name, due date, priority and status. For a better view of the project,
-                        users can switch between a list, kanban, or calendar view of their project's tasks. To test out DevSync use the "View Demo" button on the app's home page or sign up for a free account and start tracking and organizing your projects!
+                        users can switch between a list, kanban, or calendar view of their project&apos;s tasks. To test out DevSync use the &quot;View Demo&quot; button on the app&apos;s home page or sign up for a free account and start tracking and organizing your projects!
                     </p>
                 </div>
             </div>
