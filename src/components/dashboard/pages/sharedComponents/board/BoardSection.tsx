@@ -80,7 +80,7 @@ export const BoardSection: React.FC<Props> = ({ sectionTitle, sectionId, createS
   return (
     <div className={`flex flex-col mt-5 ml-2 border rounded-lg border-undertone min-w-[270px] h-[calc(100%-40px)]`}>
       <div className="flex justify-between mb-3 border-b border-undertone p-3">
-        <AutoResizingInput focusInput={focusSection} initialWidth={115} maxGrowthWidth={1000} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
+        <AutoResizingInput focusInput={focusSection} initialWidth={115} maxGrowthWidth={200} initialText={sectionTitle} placeholder="Untitled Section" onConfirmChange={(newName) => updateSectionDatabase(section, project, 'name', newName)} />
 
         <div className="flex gap-2">
           <button className="text-secondary-text hover:scale-110 hover:text-primary-text transition-transform" onClick={() => createTask()}><Plus size={16} strokeWidth={2} /></button>
