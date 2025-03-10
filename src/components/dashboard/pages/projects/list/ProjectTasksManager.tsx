@@ -25,11 +25,11 @@ export const ProjectTasksManager = () => {
         </div>
 
         <div className={`flex justify-between items-center border-r-2 border-undertone col-span-2`}>
-          <p className="text-xs text-primary-text">Status</p>
+          <p className="text-xs text-primary-text">Priority</p>
         </div>
 
         <div className={`flex justify-between items-center col-span-2`}>
-          <p className="text-xs text-primary-text">Priority</p>
+          <p className="text-xs text-primary-text">Status</p>
         </div>
       </div>
     </div>
