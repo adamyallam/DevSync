@@ -7,13 +7,11 @@ import prisma from "@/db/prisma"
 
 //API to add or "POST" a user (invokes "createUser")
 export const POST = async (req: NextRequest) => {
-  const session = await getServerSession(authOptions);
 
   const { firstName, lastName, username, email, password } = await req.json();
   const hashedPassword = await hash(password, 10);
 
   try {
-    if (!session) {
       const userData = { firstName, lastName, username, email, password: hashedPassword };
 
       // Check if email already exists
@@ -35,7 +33,6 @@ export const POST = async (req: NextRequest) => {
       // Create the user with an associated project
       await createUser(userData);
       return NextResponse.json({ message: 'New user created with an initial project!' }, { status: 201 });
-    }
   } catch (err) {
     return NextResponse.json({ message: 'Failed to POST', err }, { status: 500 });
   }
@@ -43,19 +40,20 @@ export const POST = async (req: NextRequest) => {
 
 //API to DELETE a user (invokes "deleteUser")
 export const DELETE = async (req: Request) => {
+  const session = await getServerSession(authOptions);
   const { id } = await req.json();
 
-  // const session = await getServerSession(authOptions)
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized access' }, { status: 401 });
+  }
 
   try {
     const userId = { id }
-    // if (session?.user.id === userId.toString()) { 
     deleteUser(userId)
     return NextResponse.json(
       { message: `user ${id} Deleted!` },
       { status: 201 }
     )
-    // }
   } catch (err) {
     return NextResponse.json(
       { message: 'Failed to DELETE', err },
