@@ -1,6 +1,9 @@
 # DevSync
 
-DevSync is a personal project tracking application that allows users to create and manage projects, organize tasks within sections, and keep track of progress through various views. It is designed for individual users who need an efficient way to structure their work and stay on top of deadlines.
+DevSync is a solo developed application that allows users to create and manage projects, organize tasks within sections, and keep track of progress through various views. It is designed for individual users who need an efficient way to structure their work and stay on top of deadlines.
+
+## Notes
+This project was built entirely by me as a solo developer. One commit was made by [@zaidallam] to help fix a Tailwind config issue early in development.
 
 ## Features
 
