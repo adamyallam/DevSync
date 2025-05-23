@@ -1,28 +1,17 @@
 // Component Imports
-import Slogan from '@/components/main/home/Slogan'
 import TopBar from '@/components/main/navbar/TopBar'
 import DropMenu from '@/components/main/navbar/DropMenu'
-import GoToDashboard from '@/components/main/home/GoToDashboard'
+import HomeLanding from '@/components/main/home/HomeLanding'
 
 
 const App = () => {
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full flex flex-col'>
       <DropMenu />
       <TopBar />
-      <div className='mt-20'>
-        <Slogan />
-      </div>
 
-      <div className='flex justify-center'>
-        <div className="bg-primary w-[90%] h-[1.5px] mt-7" />
-      </div>
-
-      <div className='mt-7'>
-        <GoToDashboard />
-      </div>
-
+      <HomeLanding />
 
       <div className="fixed bottom-0 bg-primary w-full h-12" />
 
